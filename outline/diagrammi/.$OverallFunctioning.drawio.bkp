@@ -1,0 +1,56 @@
+<mxfile host="Electron">
+  <diagram name="Pagina-1" id="1Lfsd1nNJlAev-Qe1kBe">
+    <mxGraphModel dx="975" dy="535" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="4f6yAS53X1rAD600hHPa-12" edge="1" parent="1" source="4f6yAS53X1rAD600hHPa-19" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="145" y="40" />
+            </Array>
+            <mxPoint x="145" y="70" as="sourcePoint" />
+            <mxPoint x="200" y="40" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4f6yAS53X1rAD600hHPa-13" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="exports" vertex="1">
+          <mxGeometry height="30" width="60" x="140" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="4f6yAS53X1rAD600hHPa-17" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="__afl_area_ptr" vertex="1">
+          <mxGeometry height="30" width="90" x="200" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="4f6yAS53X1rAD600hHPa-18" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="__forkserver_start_ptr" vertex="1">
+          <mxGeometry height="30" width="130" x="190" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4f6yAS53X1rAD600hHPa-19" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="libforkserver.so" vertex="1">
+          <mxGeometry height="60" width="120" x="20" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="4f6yAS53X1rAD600hHPa-21" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="instrumentator" vertex="1">
+          <mxGeometry height="60" width="120" x="414" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="4f6yAS53X1rAD600hHPa-24" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="- Add forkserver.so dynamic dependency&lt;br&gt;- Add .mygot and .mydata sections&lt;br&gt;- Relocate __afl_area_ptr and&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;__forkserver_start_ptr into .mygot&amp;nbsp;" vertex="1">
+          <mxGeometry height="80" width="280" x="414" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="4f6yAS53X1rAD600hHPa-25" edge="1" parent="1" source="4f6yAS53X1rAD600hHPa-18" style="endArrow=classic;html=1;rounded=0;entryX=-0.001;entryY=0.621;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0;exitDx=0;exitDy=0;" target="4f6yAS53X1rAD600hHPa-24" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="350" y="30" />
+              <mxPoint x="350" y="150.02" />
+            </Array>
+            <mxPoint x="330" y="30" as="sourcePoint" />
+            <mxPoint x="350" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4f6yAS53X1rAD600hHPa-26" edge="1" parent="1" source="4f6yAS53X1rAD600hHPa-21" style="endArrow=classic;html=1;rounded=0;exitX=0.557;exitY=1.03;exitDx=0;exitDy=0;exitPerimeter=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="310" y="210" as="sourcePoint" />
+            <mxPoint x="480" y="104" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4f6yAS53X1rAD600hHPa-27" parent="1" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;flipH=1;labelPosition=right;verticalLabelPosition=middle;align=left;verticalAlign=middle;legacyAnchorPoints=0;" value="" vertex="1">
+          <mxGeometry height="60" width="20" x="640" y="110" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

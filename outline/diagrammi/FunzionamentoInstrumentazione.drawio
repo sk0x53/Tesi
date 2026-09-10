@@ -1,0 +1,102 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Pagina-1" id="ccB0ll7fbeLoN-A0Mt5h">
+    <mxGraphModel dx="1414" dy="727" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="EFE50MXXSsk8ZudieFY3-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Modify the ELF file with the new dependency, sections and relocation entry" vertex="1">
+          <mxGeometry height="60" width="160" x="180" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="EFE50MXXSsk8ZudieFY3-3" edge="1" parent="1" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="EFE50MXXSsk8ZudieFY3-2" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="120" y="260" as="sourcePoint" />
+            <mxPoint x="140" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="EFE50MXXSsk8ZudieFY3-4" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;div align=&quot;left&quot;&gt;Input file path + path to already compiled shared object&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="110" x="30" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="EFE50MXXSsk8ZudieFY3-7" edge="1" parent="1" source="EFE50MXXSsk8ZudieFY3-2" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="390" y="410" as="sourcePoint" />
+            <mxPoint x="410" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="EFE50MXXSsk8ZudieFY3-8" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Modified binary saved" vertex="1">
+          <mxGeometry height="30" width="90" x="410" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="EFE50MXXSsk8ZudieFY3-9" parent="1" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;labelPosition=left;verticalLabelPosition=middle;align=right;verticalAlign=middle;rotation=90;size=0.5;" value="" vertex="1">
+          <mxGeometry height="410" width="30" x="230" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="EFE50MXXSsk8ZudieFY3-10" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="step I" vertex="1">
+          <mxGeometry height="30" width="50" x="220" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="EFE50MXXSsk8ZudieFY3-43" edge="1" parent="1" source="EFE50MXXSsk8ZudieFY3-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="EFE50MXXSsk8ZudieFY3-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="EFE50MXXSsk8ZudieFY3-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="File parsing" vertex="1">
+          <mxGeometry height="60" width="100" x="405" y="342" as="geometry" />
+        </mxCell>
+        <mxCell id="EFE50MXXSsk8ZudieFY3-15" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Main address reconstruction and main instrumentation point found" vertex="1">
+          <mxGeometry height="30" width="160" x="254" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="EFE50MXXSsk8ZudieFY3-22" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Search for basic blocks that need to be instrumented" vertex="1">
+          <mxGeometry height="60" width="125" x="178" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="EFE50MXXSsk8ZudieFY3-23" edge="1" parent="1" source="EFE50MXXSsk8ZudieFY3-26" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="25" y="640" as="sourcePoint" />
+            <mxPoint x="505" y="500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="EFE50MXXSsk8ZudieFY3-24" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="List of basic blocks" vertex="1">
+          <mxGeometry height="30" width="110" x="310" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="EFE50MXXSsk8ZudieFY3-44" edge="1" parent="1" source="EFE50MXXSsk8ZudieFY3-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="EFE50MXXSsk8ZudieFY3-22">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="150.03" y="360.03" />
+              <mxPoint x="150.03" y="500.03" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="EFE50MXXSsk8ZudieFY3-27" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Initial instrumentation" vertex="1">
+          <mxGeometry height="60" width="100" x="170" y="342" as="geometry" />
+        </mxCell>
+        <mxCell id="EFE50MXXSsk8ZudieFY3-31" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="step II&amp;nbsp;" vertex="1">
+          <mxGeometry height="30" width="60" x="360" y="432" as="geometry" />
+        </mxCell>
+        <mxCell id="EFE50MXXSsk8ZudieFY3-32" parent="1" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;labelPosition=left;verticalLabelPosition=middle;align=right;verticalAlign=middle;rotation=-90;" value="" vertex="1">
+          <mxGeometry height="230" width="30" x="375" y="307" as="geometry" />
+        </mxCell>
+        <mxCell id="EFE50MXXSsk8ZudieFY3-34" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="step III" vertex="1">
+          <mxGeometry height="30" width="60" x="194" y="407" as="geometry" />
+        </mxCell>
+        <mxCell id="EFE50MXXSsk8ZudieFY3-36" parent="1" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;labelPosition=left;verticalLabelPosition=middle;align=right;verticalAlign=middle;rotation=-90;" value="" vertex="1">
+          <mxGeometry height="240" width="20" x="280" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="EFE50MXXSsk8ZudieFY3-37" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="step IV" vertex="1">
+          <mxGeometry height="30" width="60" x="260" y="565" as="geometry" />
+        </mxCell>
+        <mxCell id="EFE50MXXSsk8ZudieFY3-38" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="step V" vertex="1">
+          <mxGeometry height="30" width="60" x="460" y="535" as="geometry" />
+        </mxCell>
+        <mxCell id="EFE50MXXSsk8ZudieFY3-39" edge="1" parent="1" source="EFE50MXXSsk8ZudieFY3-22" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="EFE50MXXSsk8ZudieFY3-26" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="303" y="500" as="sourcePoint" />
+            <mxPoint x="505" y="500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="EFE50MXXSsk8ZudieFY3-26" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Instrumentation of each basic block in the list" vertex="1">
+          <mxGeometry height="60" width="135" x="420" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="EFE50MXXSsk8ZudieFY3-42" edge="1" parent="1" source="EFE50MXXSsk8ZudieFY3-8" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="EFE50MXXSsk8ZudieFY3-12" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="360" y="470" as="sourcePoint" />
+            <mxPoint x="410" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

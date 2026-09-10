@@ -1,0 +1,6 @@
+# environment variables:
+AFL_CUSTOM_INFO_PROGRAM=./patched
+AFL_CUSTOM_INFO_PROGRAM_ARGV=
+AFL_CUSTOM_INFO_OUT=./findings1//default
+# command line:
+'/home/tecnico/aflplusplus/afl-fuzz' '-i' '../inputs/' '-o' './findings1/' '-V' '86400' '--' './patched'
