@@ -1,0 +1,61 @@
+1. Nagy & Hicks — Full-speed Fuzzing: Reducing Fuzzing Overhead through Coverage-guided Tracing
+
+Questo è probabilmente il paper migliore da citare per la tua affermazione.
+
+Stefan Nagy, Matthew Hicks, “Full-speed Fuzzing: Reducing Fuzzing Overhead through Coverage-guided Tracing”, IEEE Symposium on Security and Privacy, 2019.
+
+Il paper parte proprio dall'osservazione che il code-coverage tracing è una fonte dominante di overhead nei coverage-guided fuzzer. Considera esplicitamente sia static instrumentation sia dynamic instrumentation.
+
+La parte particolarmente interessante è la valutazione sperimentale: sui benchmark considerati, riportano overhead rispetto all'esecuzione nativa di circa:
+
+AFL-Clang: 36%
+AFL-QEMU: 612%
+AFL-Dyninst: 518%
+
+mentre il loro approccio UnTracer scende sotto l'1% dopo un'ora di fuzzing.
+
+Quindi puoi sostenere qualcosa di molto forte del tipo:
+
+Coverage tracing can constitute a substantial source of runtime overhead in coverage-guided fuzzing, particularly when dynamic binary instrumentation is used for binary-only targets.
+
+E hai dati sperimentali per sostenerlo.
+
+2. Zhang et al. — PTfuzz: Guided Fuzzing With Processor Trace Feedback
+
+Un'altra citazione molto utile è:
+
+Guo et al./Zhang et al., “PTfuzz: Guided Fuzzing With Processor Trace Feedback”, IEEE Access, 2018.
+
+Questo paper confronta diversi meccanismi di feedback per fuzzing e dedica una discussione esplicita alla dynamic binary instrumentation.
+
+Gli autori osservano che DBI, tramite strumenti come PIN e DynamoRIO, permette binary-only fuzzing e fornisce feedback accurato, ma che:
+
+il principale problema della dynamic binary instrumentation è il considerable overhead.
+
+Inoltre distinguono DBI da QEMU e riportano per gli approcci QEMU-based un overhead nell'ordine di 2–5×.
+
+È una buona citazione se vuoi motivare perché cercare alternative hardware-assisted o statiche alla DBI.
+
+3. Chen et al. — PTrix: Efficient Hardware-Assisted Fuzzing for COTS Binary
+
+Molto interessante anche:
+
+Yaohui Chen et al., “PTrix: Efficient Hardware-Assisted Fuzzing for COTS Binary”, 2019.
+
+L'argomentazione è molto diretta: gli autori dicono che il binary-only mode di AFL, cioè QEMU-AFL, è tipicamente 2–5× più lento rispetto alla modalità con instrumentation disponibile a livello sorgente, e attribuiscono gran parte dello slowdown alla heavy dynamic instrumentation.
+
+Questo è particolarmente utile se nel tuo lavoro vuoi introdurre una motivazione del tipo:
+
+DBI → overhead → hardware-assisted tracing / Intel PT come possibile alternativa.
+
+4. Breaking Through Binaries: Compiler-quality Instrumentation for Better Binary-only Fuzzing
+
+Questo paper è ancora più esplicito nel confrontare le diverse tecniche di binary instrumentation:
+
+“Breaking Through Binaries: Compiler-quality Instrumentation for Better Binary-only Fuzzing”.
+
+Gli autori classificano DynamoRIO, PIN e QEMU come dynamic binary translators e osservano che raggiungono le peggiori performance nel contesto del fuzzing.
+
+Riportano inoltre risultati precedenti in cui l'overhead medio di AFL-QEMU è ben oltre il 600%, mentre altri binary instrumenters arrivano a overhead ancora più elevati.
+
+Questo è probabilmente il riferimento migliore se vuoi fare una motivazione generale dello stato dell'arte, piuttosto che parlare soltanto di AFL-QEMU.

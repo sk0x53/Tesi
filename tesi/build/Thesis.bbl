@@ -1,0 +1,47 @@
+\begin{thebibliography}{5}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Fioraldi et~al.(2020)Fioraldi, Maier, Ei{\ss}feldt, and
+  Heuse]{aflplusplus}
+A.~Fioraldi, D.~Maier, H.~Ei{\ss}feldt, and M.~Heuse.
+\newblock {AFL++} : Combining incremental steps of fuzzing research.
+\newblock In \emph{14th USENIX Workshop on Offensive Technologies (WOOT 20)}.
+  USENIX Association, Aug. 2020.
+\newblock URL
+  \url{https://www.usenix.org/conference/woot20/presentation/fioraldi}.
+
+\bibitem[Fioraldi et~al.(2022)Fioraldi, Maier, Zhang, and Balzarotti]{libafl}
+A.~Fioraldi, D.~C. Maier, D.~Zhang, and D.~Balzarotti.
+\newblock Libafl: A framework to build modular and reusable fuzzers.
+\newblock In \emph{Proceedings of the 2022 ACM SIGSAC Conference on Computer
+  and Communications Security}, pages 1051--1065, 2022.
+
+\bibitem[{LLVM Project}()]{libfuzzer}
+{LLVM Project}.
+\newblock libfuzzer -- a library for coverage-guided fuzz testing.
+\newblock \url{https://llvm.org/docs/LibFuzzer.html}.
+\newblock Accessed: 2026-09-11.
+
+\bibitem[Nagy et~al.(2021)Nagy, Nguyen-Tuong, Hiser, Davidson, and Hicks]{zafl}
+S.~Nagy, A.~Nguyen-Tuong, J.~D. Hiser, J.~W. Davidson, and M.~Hicks.
+\newblock Breaking through binaries: Compiler-quality instrumentation for
+  better binary-only fuzzing.
+\newblock In \emph{30th USENIX Security Symposium (USENIX Security 21)}, pages
+  1683--1700. USENIX Association, Aug. 2021.
+\newblock ISBN 978-1-939133-24-3.
+\newblock URL
+  \url{https://www.usenix.org/conference/usenixsecurity21/presentation/nagy}.
+
+\bibitem[Zhu et~al.(2022)Zhu, Wen, Camtepe, and Xiang]{Zhu2022}
+X.~Zhu, S.~Wen, S.~Camtepe, and Y.~Xiang.
+\newblock Fuzzing: A survey for roadmap.
+\newblock \emph{ACM Computing Surveys}, 54\penalty0 (11s):\penalty0 1--36, Jan.
+  2022.
+\newblock ISSN 1557-7341.
+\newblock \doi{10.1145/3512345}.
+
+\end{thebibliography}

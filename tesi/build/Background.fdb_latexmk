@@ -1,0 +1,14 @@
+# Fdb version 4
+["pdflatex"] 1789137385.53358 "/home/edoardo/materiale_tesi/Tesi/tesi/Background.tex" "build/Background.pdf" "Background" 1789137386.19765 2
+  "/home/edoardo/.miktex/texmfs/data/miktex/data/le/pdftex/pdflatex.fmt" 1789053069.24264 10226323 c6afd73d23bb4a39561fb0feab198ef1 ""
+  "/home/edoardo/.miktex/texmfs/install/fonts/tfm/public/cm/cmbx10.tfm" 1774884229.13948 1328 c834bbb027764024c09d3d2bf908b5f0 ""
+  "/home/edoardo/.miktex/texmfs/install/fonts/tfm/public/cm/cmti10.tfm" 1774884229.14792 1480 aa8e34af0eb6a2941b776984cf1dfdc4 ""
+  "/home/edoardo/.miktex/texmfs/install/fonts/tfm/public/cm/cmtt10.tfm" 1774884229.14863 768 1321e9409b4137d6fb428ac9dc956269 ""
+  "/home/edoardo/materiale_tesi/Tesi/tesi/Background.tex" 1789137383.40191 4868 7a31e291f6fa1283d4597110864299ef ""
+  "Background.tex" 1789137383.40191 4868 7a31e291f6fa1283d4597110864299ef ""
+  "build/Background.aux" 1789137377.53255 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  (generated)
+  "build/Background.aux"
+  "build/Background.log"
+  "build/Background.pdf"
+  (rewritten before read)

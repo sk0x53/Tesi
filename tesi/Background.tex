@@ -1,0 +1,50 @@
+
+\section{Fuzzing Background}
+    Fuzzing is nowaday a widely used approach for software testing and vulnerability assesment. 
+    Its main strenght derives from the fact that could rapidly produce various inputs to be fed into a target executable.
+    In general a fuzzer can be divided into the \textbf{Input Generator}, that is responsible of provide inputs to the \textbf{Executor} that execute them.
+    During the execution the \textbf{Defect Monitor} check if the input executed ends in a crash of the target.\\
+    In particular the Input Generator must choose which input provide to the executor between all the inputs in the \textit{Input Space}.
+    A subset of the \textit{Input Space} is represented by the \textit{Valid Input Space}.
+    A good Input Generator must choose inputs that are also valid inputs, because only by doing this there is a probability of find a vulnerability\cite{Zhu2022}.
+    So the need of a precise input selection and mutation arise, in order to discover as many edge cases as possible.\\
+    In order to do so, the Input Generator must gain some informations from the Executor. 
+    Depending on the amount of informations that the Input Generator has, fuzzing can be classified into 
+    \textit{White-box}, \textit{Black-box} or \textit{Grey-box}.
+    In Black-box fuzzing the fuzzer does not have any knowledge about the execution.[add citation of black box fuzzer]
+    In White-box fuzzing instead the source code must always be available and technique of Symbolic and Concolic execution are used.[add citation on white box fuzzer].
+    In Grey-box fuzzing instead the inputs are choosen using, for example, \textbf{Code Coverage} informations (i.e. number of lines of code visited during execution of the target).
+    This approach is called \textit{Coverage-Guided Grey-box fuzzing} and is based on prioritizing the inputs that discover new sections of code.
+    The best approach to Code Coverage, in terms of overhead and effectiveness, is \textbf{Edge Coverage} which keeps track of which edges in the \gls{CFG} are taken during execution.
+    The coverage informations are obtained through the instrumentation of the target application. 
+    Depending on the availability of the source code, the instrumentation could be added in different ways:
+    \begin{itemize}
+        \item The source code is available : In this case the instrumentation is added at \textit{Compile Time}
+        \item The source code is not available : In this case there are two different techniques to instrument the application:
+        \begin{itemize}
+            \item \textbf{\gls{SBI}} : The instrumentation is added before the target is executed but without having the source code, so relying on Binary Instrumentation techniques
+            \item \textbf{\gls{DBI}} : The instrumentation is added during the program execution
+        \end{itemize}
+    \end{itemize}
+
+\section{Problem Statement}
+    Coverage-Guided Grey-box fuzzing is one of the most effective techniques in automatic vulnerability disclosure on software, 
+    due to its capability of generating wide amount of inputs based on the feedback obtained through Code Coverage informations 
+    that guide the fuzzer towards unexplored regions of code and therefore find hidden vulnerabilities.
+    However the effectiveness of this approach strongly depends on the availability of the source code.
+    Infact both \gls{SBI} and \gls{DBI} have many limitations.
+    The main limitation of \gls{DBI} is represented by huge amount of overheads (higher than 600\% overheads according to \cite{zafl}) that makes the exploration of a substantial part of the valid input space almost impossible.[add citation to paper that state the high overheads]
+    Instead \gls{SBI} main difficulty is represented by the difficulty in modifying already compiled binaries.
+    There are several problems regarding Binary Rewriting such as Indirect Control Transfers (e.g. \texttt{call rax}), 
+    shift in binary sections or instructions that cause the need of rewrite the instructions that reference these sections and so on.\\
+    For these reasons the preferable technique nowaday is \textit{Compile time Edge Coverage instrumentation} with fuzzers such as 
+    AFL++ \cite{aflplusplus}, LibAFL \cite{libafl} o libFuzzer \cite{libfuzzer}.
+    However in practice, for industrial secrecy (i.e. proprietary software) or due to precompiled libraries, the applications are 
+    often closed source, and so Compile Time Edge Coverage instrumentation become unusable.\\
+    In these scenario binary only fuzzing is the only viable approach.
+    Since \gls{DBI} has prohibitive overheads by definition, in this thesis I will address the problem of statically instrument 
+    a binary with Edge Coverage instructions in a way that the instrumented binary is compatible with AFL++ .\\
+    AFL++ has been choosen as fuzzer due to its popularity and because represent the current state of the art implementing 
+    all the state of the art techniques disclosed by researchers in last years \cite{aflplusplus}.\\
+    The instrumentation must add as little overheads as possible with respect to compile time overheads and must 
+    preserve the correctness of the binary.

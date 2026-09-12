@@ -1,0 +1,14 @@
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{Abstract}{i}{chapter*.2}%
+\contentsline {chapter}{Abstract in lingua italiana}{iii}{chapter*.4}%
+\contentsline {chapter}{Contents\markboth {\MakeUppercase []{Contents}}{\MakeUppercase []{Contents}}}{v}{chapter*.6}%
+\vspace {2em}
+\contentsline {chapter}{\numberline {1}Background and Motivation}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Fuzzing Background}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Problem Statement}{2}{section.1.2}%
+\vspace {2em}
+\contentsline {chapter}{Bibliography\markboth {\MakeUppercase []{Bibliography}}{\MakeUppercase []{Bibliography}}}{5}{chapter*.9}%
+\vspace {2em}
+\contentsline {chapter}{List of Figures}{9}{chapter*.11}%
+\contentsline {chapter}{List of Tables}{11}{chapter*.13}%
+\contentsline {chapter}{Acknowledgements}{13}{chapter*.15}%
