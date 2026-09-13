@@ -76,7 +76,7 @@
     There are several problems regarding Binary Rewriting such as Indirect Control Transfers (e.g. \texttt{call rax}), 
     shift in binary sections or instructions that cause the need of rewrite the instructions that reference these sections and many others.\\
     For all these reasons the preferable technique nowaday is \textit{Compile time Edge Coverage instrumentation} with fuzzers such as 
-    AFL++ \cite{aflplusplus}, LibAFL \cite{libafl} o libFuzzer \cite{libfuzzer}.
+    AFL++, LibAFL \cite{libafl} o libFuzzer \cite{libfuzzer}.
     However in practice, for industrial secrecy (i.e. proprietary software) or due to precompiled libraries, the applications are 
     often closed source, and so Compile Time Edge Coverage instrumentation become unusable.\\
     In these scenario binary only fuzzing is the only viable approach.
@@ -91,9 +91,9 @@
     so a bigger portion of the valid input space could be visited.
 
     \section{State of the Art}
-        In this section I will disclose some of the current state of the art solutions in terms of binary only greybox fuzzing 
+        In this section I will disclose some of the current state of the art solutions in terms of binary only greybox fuzzing, 
         differentiating between \gls{SBI} and \gls{DBI} approaches.\\
-
+        
         \begin{itemize}
             \item \underline{\textbf{\gls{DBI}}}
             \begin{itemize}
@@ -125,5 +125,31 @@
                         RetroWrite's symbolized output is compiled through afl-gcc, caused by a mismatch between RetroWrite's
                         label-naming convention and afl-as's basic-block detection heuristics.
                         Finally, RetroWrite only works with PIE, non-stripped binaries.
+                    \item \textbf{AFL-Dyninst} \cite{Dyninst} : 
                 \end{itemize}
         \end{itemize}
+        Before proceding with the next section in which I will talk about different problems with each of the current 
+        state of the art solutions, I want to discuss the core functioning of AFL and AFL++, 
+        given its importance for understanding my approach.
+        \subsection{AFL Functioning}
+            As previously stated, AFL and especially AFL++ is one of the most used software for fuzzing binaries.
+            AFL++ represent the community based continuation of the initial AFL project.
+            The core functioning is virtually the same and consist in a \gls{SHM} region, shared between the fuzzer and the target.
+            The \gls{SHM} dimension could vary but the default one is of 65536 bytes.\\
+            Each ``cell'' of the  \gls{SHM} contains the number of times a given Edge in the \gls{CFG} has been 
+                taken during the execution of the target. Since the \gls{SHM} has 65536 ``cells'', each ``cell'' 
+                can contain a number from 0 to 255.
+            The ``cell'' position is computed with a specific hash function applied to the IDs of the two \gls{BB} 
+            that formed the edge. 
+            The main Edge Tracing update rule is summarized in \cref{alg:afl_style_update}. 
+            \begin{algorithm}
+                \caption{AFL Style SHM update rule}
+                \label{alg:afl_style_update}
+                \begin{algorithmic}[1]
+                    \STATE $idx \gets current\_bb\_id \oplus previous\_bb\_id$ \label{line:xor}
+                    \STATE $shared\_map[idx] \gets shared\_map[idx]+1$ \label{line:increment}
+                    \STATE $previous\_bb\_id \gets current\_bb\_id \gg 1$ \label{line:shift}
+                \end{algorithmic}
+            \end{algorithm}
+            The line \cref{line:shift} is used to avoid update the same \gls{SHM} location if an edge is traversed forward or backward.
+            

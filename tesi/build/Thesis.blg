@@ -8,45 +8,45 @@ Database file #1: Thesis_bibliography.bib
 Warning--entry type for "frida" isn't style-file defined
 --line 52 of file Thesis_bibliography.bib
 Warning--empty year in libfuzzer
-You've used 14 entries,
+You've used 15 entries,
             2773 wiz_defined-function locations,
-            685 strings with 7452 characters,
-and the built_in function-call counts, 6941 in all, are:
-= -- 631
-> -- 388
-< -- 11
-+ -- 135
-- -- 120
-* -- 517
-:= -- 1038
-add.period$ -- 60
-call.type$ -- 14
-change.case$ -- 82
-chr.to.int$ -- 13
-cite$ -- 29
-duplicate$ -- 309
-empty$ -- 572
-format.name$ -- 134
-if$ -- 1500
+            690 strings with 7535 characters,
+and the built_in function-call counts, 7244 in all, are:
+= -- 659
+> -- 398
+< -- 12
++ -- 139
+- -- 123
+* -- 530
+:= -- 1085
+add.period$ -- 64
+call.type$ -- 15
+change.case$ -- 86
+chr.to.int$ -- 14
+cite$ -- 31
+duplicate$ -- 324
+empty$ -- 604
+format.name$ -- 138
+if$ -- 1566
 int.to.chr$ -- 2
 int.to.str$ -- 1
 missing$ -- 7
-newline$ -- 94
-num.names$ -- 56
-pop$ -- 196
+newline$ -- 100
+num.names$ -- 60
+pop$ -- 208
 preamble$ -- 1
-purify$ -- 68
+purify$ -- 71
 quote$ -- 0
-skip$ -- 252
+skip$ -- 264
 stack$ -- 0
-substring$ -- 215
-swap$ -- 68
+substring$ -- 217
+swap$ -- 69
 text.length$ -- 4
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 154
+type$ -- 165
 warning$ -- 1
-while$ -- 55
+while$ -- 58
 width$ -- 0
-write$ -- 214
+write$ -- 228
 (There were 2 warnings)

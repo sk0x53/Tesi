@@ -72,6 +72,8 @@
 % PACKAGES FOR REFERENCES & BIBLIOGRAPHY
 \usepackage[colorlinks=true,linkcolor=black,anchorcolor=black,citecolor=black,filecolor=black,menucolor=black,runcolor=black,urlcolor=black]{hyperref} % Adds clickable links at references
 \usepackage{cleveref}
+\crefname{ALC@unique}{line}{lines}
+\Crefname{ALC@unique}{Line}{Lines}
 \usepackage[square, numbers, sort&compress]{natbib} % Square brackets, citing references with numbers, citations sorted by appearance in the text and compressed
 \bibliographystyle{abbrvnat} % You may use a different style adapted to your field
 
@@ -97,6 +99,7 @@
 %----------------------------------------------------------------------------
 %	ADD YOUR PACKAGES (be careful of package interaction)
 %----------------------------------------------------------------------------
+
 \usepackage{listings}
 
 \lstdefinestyle{asmstyle}{
@@ -143,7 +146,7 @@
 	title=Binary Instrumentation for Tracking Edge Coverage in Fuzzing,
 	name=Scandroglio Edoardo,
 	course=Computer Science and Engineering \\Ingegneria Informatica, % Study Programme (in Italian)
-	ID  =  XXXXXX,  % Student ID number (numero di matricola)
+	ID  =  216600,  % Student ID number (numero di matricola)
 	advisor= Prof. Name Surname, % Supervisor name
 	coadvisor={}, % Co-Supervisor name, remove this line if there is none
 	academicyear={2026-27},  % Academic Year
@@ -167,14 +170,14 @@
 
 % ABSTRACT IN ENGLISH
 \chapter*{Abstract} 
-\input{abstract.tex}
+\dots
 \\ 
 \\
 \textbf{Keywords:} key, words, go, here% Keywords
 
 % ABSTRACT IN ITALIAN
 \chapter*{Abstract in lingua italiana}
-\input{sommario.tex}
+\dots
 \\
 \\
 \textbf{Parole chiave:} qui, vanno, le, parole, chiave% Keywords (italian)
@@ -243,6 +246,7 @@
 % LIST OF TABLES
 \listoftables
 
+\listofalgorithms
 % % LIST OF SYMBOLS
 % % Write out the List of Symbols in this page
 % \chapter*{List of Symbols} % You have to include a chapter for your list of symbols (
