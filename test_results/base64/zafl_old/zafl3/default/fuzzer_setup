@@ -1,0 +1,7 @@
+# environment variables:
+AFL_CUSTOM_INFO_PROGRAM=./base64.zafl
+AFL_CUSTOM_INFO_PROGRAM_ARGV=-d
+AFL_CUSTOM_INFO_OUT=./findings3//default
+AFL_SKIP_BIN_CHECK=1
+# command line:
+'/home/tecnico/aflplusplus/afl-fuzz' '-i' '../inputs/' '-o' './findings3/' '-V' '86400' '--' './base64.zafl' '-d'

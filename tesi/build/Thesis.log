@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.10)  12 SEP 2026 14:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.10)  13 SEP 2026 16:57
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -380,159 +380,32 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \@vwid@roff=\dimen267
 )
 ==> First Aid for varwidth.sty applied!
-) (/home/edoardo/.miktex/texmfs/install/tex/latex/pgf/frontendlayer/tikz.sty (/home/edoardo/.miktex/texmfs/install/tex/latex/pgf/basiclayer/pgf.sty
-Package: pgf 2026-08-01 v3.1.12 (3.1.12)
- (/home/edoardo/.miktex/texmfs/install/tex/latex/pgf/basiclayer/pgfcore.sty (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/basiclayer/pgfcore.code.tex
-Package: pgfcore 2026-08-01 v3.1.12 (3.1.12)
- (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/math/pgfmath.code.tex (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/math/pgfmathutil.code.tex) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/math/pgfmathparser.code.tex
-\pgfmath@dimen=\dimen268
-\pgfmath@count=\count316
-\pgfmath@box=\box104
-\pgfmath@toks=\toks31
-\pgfmath@stack@operand=\toks32
-\pgfmath@stack@operation=\toks33
-) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/math/pgfmathfunctions.code.tex) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/math/pgfmathfunctions.random.code.tex) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/math/pgfmathfunctions.base.code.tex) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/math/pgfmathfunctions.round.code.tex) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics.code.tex) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/math/pgfmathcalc.code.tex) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/math/pgfmathfloat.code.tex
-\c@pgfmathroundto@lastzeros=\count317
-)) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/math/pgfint.code.tex) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
-File: pgfcorepoints.code.tex 2026-08-01 v3.1.12 (3.1.12)
-\pgf@picminx=\dimen269
-\pgf@picmaxx=\dimen270
-\pgf@picminy=\dimen271
-\pgf@picmaxy=\dimen272
-\pgf@pathminx=\dimen273
-\pgf@pathmaxx=\dimen274
-\pgf@pathminy=\dimen275
-\pgf@pathmaxy=\dimen276
-\pgf@xx=\dimen277
-\pgf@xy=\dimen278
-\pgf@yx=\dimen279
-\pgf@yy=\dimen280
-\pgf@zx=\dimen281
-\pgf@zy=\dimen282
-) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex
-File: pgfcorepathconstruct.code.tex 2026-08-01 v3.1.12 (3.1.12)
-\pgf@path@lastx=\dimen283
-\pgf@path@lasty=\dimen284
-) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex
-File: pgfcorepathusage.code.tex 2026-08-01 v3.1.12 (3.1.12)
-\pgf@shorten@end@additional=\dimen285
-\pgf@shorten@start@additional=\dimen286
-) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
-File: pgfcorescopes.code.tex 2026-08-01 v3.1.12 (3.1.12)
-\pgfpic=\box105
-\pgf@hbox=\box106
-\pgf@layerbox@main=\box107
-\pgf@picture@serial@count=\count318
-) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
-File: pgfcoregraphicstate.code.tex 2026-08-01 v3.1.12 (3.1.12)
-\pgflinewidth=\dimen287
-) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex
-File: pgfcoretransformations.code.tex 2026-08-01 v3.1.12 (3.1.12)
-\pgf@pt@x=\dimen288
-\pgf@pt@y=\dimen289
-\pgf@pt@temp=\dimen290
-) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
-File: pgfcorequick.code.tex 2026-08-01 v3.1.12 (3.1.12)
-) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex
-File: pgfcoreobjects.code.tex 2026-08-01 v3.1.12 (3.1.12)
-) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/basiclayer/pgfcorepathprocessing.code.tex
-File: pgfcorepathprocessing.code.tex 2026-08-01 v3.1.12 (3.1.12)
-) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
-File: pgfcorearrows.code.tex 2026-08-01 v3.1.12 (3.1.12)
-\pgfarrowsep=\dimen291
-) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
-File: pgfcoreshade.code.tex 2026-08-01 v3.1.12 (3.1.12)
-\pgf@max=\dimen292
-\pgf@sys@shading@range@num=\count319
-\pgf@shadingcount=\count320
-) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
-File: pgfcoreimage.code.tex 2026-08-01 v3.1.12 (3.1.12)
-) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
-File: pgfcoreexternal.code.tex 2026-08-01 v3.1.12 (3.1.12)
-\pgfexternal@startupbox=\box108
-) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
-File: pgfcorelayers.code.tex 2026-08-01 v3.1.12 (3.1.12)
-) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex
-File: pgfcoretransparency.code.tex 2026-08-01 v3.1.12 (3.1.12)
-) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex
-File: pgfcorepatterns.code.tex 2026-08-01 v3.1.12 (3.1.12)
-) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex
-File: pgfcorerdf.code.tex 2026-08-01 v3.1.12 (3.1.12)
-))) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
-File: pgfmoduleshapes.code.tex 2026-08-01 v3.1.12 (3.1.12)
-\pgfnodeparttextbox=\box109
-) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/modules/pgfmoduleplot.code.tex
-File: pgfmoduleplot.code.tex 2026-08-01 v3.1.12 (3.1.12)
-) (/home/edoardo/.miktex/texmfs/install/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
-Package: pgfcomp-version-0-65 2026-08-01 v3.1.12 (3.1.12)
-\pgf@nodesepstart=\dimen293
-\pgf@nodesepend=\dimen294
-) (/home/edoardo/.miktex/texmfs/install/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty
-Package: pgfcomp-version-1-18 2026-08-01 v3.1.12 (3.1.12)
-)) (/home/edoardo/.miktex/texmfs/install/tex/latex/pgf/utilities/pgffor.sty (/home/edoardo/.miktex/texmfs/install/tex/latex/pgf/utilities/pgfkeys.sty (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/utilities/pgfkeys.code.tex)) (/home/edoardo/.miktex/texmfs/install/tex/latex/pgf/math/pgfmath.sty (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/math/pgfmath.code.tex)) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/utilities/pgffor.code.tex
-Package: pgffor 2026-08-01 v3.1.12 (3.1.12)
-\pgffor@iter=\dimen295
-\pgffor@skip=\dimen296
-\pgffor@stack=\toks34
-\pgffor@toks=\toks35
-)) (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
-Package: tikz 2026-08-01 v3.1.12 (3.1.12)
- (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
-File: pgflibraryplothandlers.code.tex 2026-08-01 v3.1.12 (3.1.12)
-\pgf@plot@mark@count=\count321
-\pgfplotmarksize=\dimen297
-)
-\tikz@lastx=\dimen298
-\tikz@lasty=\dimen299
-\tikz@lastxsaved=\dimen300
-\tikz@lastysaved=\dimen301
-\tikz@lastmovetox=\dimen302
-\tikz@lastmovetoy=\dimen303
-\tikzleveldistance=\dimen304
-\tikzsiblingdistance=\dimen305
-\tikz@figbox=\box110
-\tikz@figbox@bg=\box111
-\tikz@tempbox=\box112
-\tikz@tempbox@bg=\box113
-\tikztreelevel=\count322
-\tikznumberofchildren=\count323
-\tikznumberofcurrentchild=\count324
-\tikz@fig@count=\count325
- (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/modules/pgfmodulematrix.code.tex
-File: pgfmodulematrix.code.tex 2026-08-01 v3.1.12 (3.1.12)
-\pgfmatrixcurrentrow=\count326
-\pgfmatrixcurrentcolumn=\count327
-\pgf@matrix@numberofcolumns=\count328
-)
-\tikz@expandcount=\count329
- (/home/edoardo/.miktex/texmfs/install/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
-File: tikzlibrarytopaths.code.tex 2026-08-01 v3.1.12 (3.1.12)
-))) (/home/edoardo/.miktex/texmfs/install/tex/latex/caption/subcaption.sty
+) (/home/edoardo/.miktex/texmfs/install/tex/latex/caption/subcaption.sty
 Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
 Package caption Info: New subtype `subfigure' on input line 238.
-\c@subfigure=\count330
+\c@subfigure=\count316
 Package caption Info: New subtype `subtable' on input line 238.
-\c@subtable=\count331
+\c@subtable=\count317
 ) (/home/edoardo/.miktex/texmfs/install/tex/latex/amscls/amsthm.sty
 Package: amsthm 2020/05/29 v2.20.6
-\thm@style=\toks36
-\thm@bodyfont=\toks37
-\thm@headfont=\toks38
-\thm@notefont=\toks39
-\thm@headpunct=\toks40
+\thm@style=\toks31
+\thm@bodyfont=\toks32
+\thm@headfont=\toks33
+\thm@notefont=\toks34
+\thm@headpunct=\toks35
 \thm@preskip=\skip55
 \thm@postskip=\skip56
 \thm@headsep=\skip57
-\dth@everypar=\toks41
+\dth@everypar=\toks36
 ) (/home/edoardo/.miktex/texmfs/install/tex/latex/thmtools/thmtools.sty
 Package: thmtools 2023/05/04 v0.76
-\thmt@toks=\toks42
-\c@thmt@dummyctr=\count332
+\thmt@toks=\toks37
+\c@thmt@dummyctr=\count318
  (/home/edoardo/.miktex/texmfs/install/tex/latex/thmtools/thm-patch.sty
 Package: thm-patch 2023/05/04 v0.76
  (/home/edoardo/.miktex/texmfs/install/tex/latex/thmtools/parseargs.sty
 Package: parseargs 2023/05/04 v0.76
-\@parsespec=\toks43
+\@parsespec=\toks38
 )) (/home/edoardo/.miktex/texmfs/install/tex/latex/thmtools/thm-kv.sty
 Package: thm-kv 2023/05/04 v0.76
 Package thm-kv Info: Theorem names will be uppercased on input line 42.
@@ -547,14 +420,14 @@ Package: thm-listof 2023/05/04 v0.76
 Package: thm-restate 2023/05/04 v0.76
 ) (/home/edoardo/.miktex/texmfs/install/tex/latex/thmtools/thm-amsthm.sty
 Package: thm-amsthm 2023/05/04 v0.76
-\thmt@style@headstyle=\toks44
+\thmt@style@headstyle=\toks39
 )) (/home/edoardo/.miktex/texmfs/install/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count333
-\float@exts=\toks45
-\float@box=\box114
-\@float@everytoks=\toks46
-\@floatcapt=\box115
+\c@float@type=\count319
+\float@exts=\toks40
+\float@box=\box104
+\@float@everytoks=\toks41
+\@floatcapt=\box105
 ) (/home/edoardo/.miktex/texmfs/install/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2026/05/19 v2.18d AMS math features
 \@mathmargin=\skip58
@@ -564,59 +437,59 @@ For additional information on amsmath, use the `?' option.
 Package: amstext 2024/11/17 v2.01 AMS text
  (/home/edoardo/.miktex/texmfs/install/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks47
-\ex@=\dimen306
+\@emptytoks=\toks42
+\ex@=\dimen268
 )) (/home/edoardo/.miktex/texmfs/install/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen307
+\pmbraise@=\dimen269
 ) (/home/edoardo/.miktex/texmfs/install/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
-\inf@bad=\count334
+\inf@bad=\count320
 LaTeX Info: Redefining \frac on input line 233.
-\uproot@=\count335
-\leftroot@=\count336
+\uproot@=\count321
+\leftroot@=\count322
 LaTeX Info: Redefining \overline on input line 398.
 LaTeX Info: Redefining \colon on input line 409.
-\classnum@=\count337
-\DOTSCASE@=\count338
+\classnum@=\count323
+\DOTSCASE@=\count324
 LaTeX Info: Redefining \ldots on input line 495.
 LaTeX Info: Redefining \dots on input line 498.
 LaTeX Info: Redefining \cdots on input line 619.
-\Mathstrutbox@=\box116
-\strutbox@=\box117
+\Mathstrutbox@=\box106
+\strutbox@=\box107
 LaTeX Info: Redefining \big on input line 721.
 LaTeX Info: Redefining \Big on input line 722.
 LaTeX Info: Redefining \bigg on input line 723.
 LaTeX Info: Redefining \Bigg on input line 724.
-\big@size=\dimen308
+\big@size=\dimen270
 LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
-\macc@depth=\count339
+\macc@depth=\count325
 LaTeX Info: Redefining \bmod on input line 904.
 LaTeX Info: Redefining \pmod on input line 909.
 LaTeX Info: Redefining \smash on input line 939.
 LaTeX Info: Redefining \relbar on input line 969.
 LaTeX Info: Redefining \Relbar on input line 970.
-\c@MaxMatrixCols=\count340
+\c@MaxMatrixCols=\count326
 \dotsspace@=\muskip17
-\c@parentequation=\count341
-\dspbrk@lvl=\count342
-\tag@help=\toks48
-\row@=\count343
-\column@=\count344
-\maxfields@=\count345
-\andhelp@=\toks49
-\eqnshift@=\dimen309
-\alignsep@=\dimen310
-\tagshift@=\dimen311
-\tagwidth@=\dimen312
-\totwidth@=\dimen313
-\lineht@=\dimen314
-\@envbody=\toks50
+\c@parentequation=\count327
+\dspbrk@lvl=\count328
+\tag@help=\toks43
+\row@=\count329
+\column@=\count330
+\maxfields@=\count331
+\andhelp@=\toks44
+\eqnshift@=\dimen271
+\alignsep@=\dimen272
+\tagshift@=\dimen273
+\tagwidth@=\dimen274
+\totwidth@=\dimen275
+\lineht@=\dimen276
+\@envbody=\toks45
 \multlinegap=\skip59
 \multlinetaggap=\skip60
-\mathdisplay@stack=\toks51
+\mathdisplay@stack=\toks46
 LaTeX Info: Redefining \[ on input line 2965.
 LaTeX Info: Redefining \] on input line 2966.
 ) (/home/edoardo/.miktex/texmfs/install/tex/latex/amsfonts/amssymb.sty
@@ -647,45 +520,45 @@ Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 Package: mathtools 2024/10/04 v1.31 mathematical typesetting tools
  (/home/edoardo/.miktex/texmfs/install/tex/latex/tools/calc.sty
 Package: calc 2025/03/01 v4.3b Infix arithmetic (KKT,FJ)
-\calc@Acount=\count346
-\calc@Bcount=\count347
-\calc@Adimen=\dimen315
-\calc@Bdimen=\dimen316
+\calc@Acount=\count332
+\calc@Bcount=\count333
+\calc@Adimen=\dimen277
+\calc@Bdimen=\dimen278
 \calc@Askip=\skip61
 \calc@Bskip=\skip62
 LaTeX Info: Redefining \setlength on input line 86.
 LaTeX Info: Redefining \addtolength on input line 87.
-\calc@Ccount=\count348
+\calc@Ccount=\count334
 \calc@Cskip=\skip63
 )
-\g_MT_multlinerow_int=\count349
-\l_MT_multwidth_dim=\dimen317
+\g_MT_multlinerow_int=\count335
+\l_MT_multwidth_dim=\dimen279
 \origjot=\skip64
-\l_MT_shortvdotswithinadjustabove_dim=\dimen318
-\l_MT_shortvdotswithinadjustbelow_dim=\dimen319
-\l_MT_above_intertext_sep=\dimen320
-\l_MT_below_intertext_sep=\dimen321
-\l_MT_above_shortintertext_sep=\dimen322
-\l_MT_below_shortintertext_sep=\dimen323
-\xmathstrut@box=\box118
-\xmathstrut@dim=\dimen324
+\l_MT_shortvdotswithinadjustabove_dim=\dimen280
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen281
+\l_MT_above_intertext_sep=\dimen282
+\l_MT_below_intertext_sep=\dimen283
+\l_MT_above_shortintertext_sep=\dimen284
+\l_MT_below_shortintertext_sep=\dimen285
+\xmathstrut@box=\box108
+\xmathstrut@dim=\dimen286
 )
-\l_EQ_equationtype_int=\count350
-\l_EQ_alignmentmode_int=\count351
-\l_EQ_totalwidth_dim=\dimen325
-\l_EQ_displaywidth_dim=\dimen326
-\l_EQ_temp_linewidth_dim=\dimen327
-\l_EQ_linewidth_dim=\dimen328
-\EmphEqdelimitershortfall=\dimen329
-\EmphEqdelimiterfactor=\count352
-\g_EQ_toptag_height_dim=\dimen330
-\g_EQ_bottomtag_depth_dim=\dimen331
-\g_EQ_toprow_height_dim=\dimen332
-\g_EQ_bottomrow_depth_dim=\dimen333
-\g_EQ_widesttag_dim=\dimen334
-\EQ_mathdisplay_box=\box119
-\EQ_tag_box=\box120
-\g_EQ_temprow_int=\count353
+\l_EQ_equationtype_int=\count336
+\l_EQ_alignmentmode_int=\count337
+\l_EQ_totalwidth_dim=\dimen287
+\l_EQ_displaywidth_dim=\dimen288
+\l_EQ_temp_linewidth_dim=\dimen289
+\l_EQ_linewidth_dim=\dimen290
+\EmphEqdelimitershortfall=\dimen291
+\EmphEqdelimiterfactor=\count338
+\g_EQ_toptag_height_dim=\dimen292
+\g_EQ_bottomtag_depth_dim=\dimen293
+\g_EQ_toprow_height_dim=\dimen294
+\g_EQ_bottomrow_depth_dim=\dimen295
+\g_EQ_widesttag_dim=\dimen296
+\EQ_mathdisplay_box=\box109
+\EQ_tag_box=\box110
+\g_EQ_temprow_int=\count339
 ) (/home/edoardo/.miktex/texmfs/install/tex/latex/base/fix-cm.sty
 Package: fix-cm 2020/11/24 v1.1t fixes to LaTeX
  (/home/edoardo/.miktex/texmfs/install/tex/latex/base/ts1enc.def
@@ -822,58 +695,58 @@ LaTeX Encoding Info:    Redeclaring text symbol \textdiv (encoding TS1) on input
 Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
  (/home/edoardo/.miktex/texmfs/install/tex/latex/tools/array.sty
 Package: array 2026/02/24 v2.7b Tabular extension package (FMi)
-\col@sep=\dimen335
-\ar@mcellbox=\box121
-\extrarowheight=\dimen336
-\NC@list=\toks52
+\col@sep=\dimen297
+\ar@mcellbox=\box111
+\extrarowheight=\dimen298
+\NC@list=\toks47
 \extratabsurround=\skip65
 \backup@length=\skip66
-\ar@cellbox=\box122
+\ar@cellbox=\box112
 )
-\TX@col@width=\dimen337
-\TX@old@table=\dimen338
-\TX@old@col=\dimen339
-\TX@target=\dimen340
-\TX@delta=\dimen341
-\TX@cols=\count354
-\TX@ftn=\toks53
+\TX@col@width=\dimen299
+\TX@old@table=\dimen300
+\TX@old@col=\dimen301
+\TX@target=\dimen302
+\TX@delta=\dimen303
+\TX@cols=\count340
+\TX@ftn=\toks48
 ) (/home/edoardo/.miktex/texmfs/install/tex/latex/tools/longtable.sty
 Package: longtable 2026-01-28 v4.27 Multi-page Table package (DPC)
 \LTleft=\skip67
 \LTright=\skip68
 \LTpre=\skip69
 \LTpost=\skip70
-\LTchunksize=\count355
-\LTcapwidth=\dimen342
-\LT@head=\box123
-\LT@firsthead=\box124
-\LT@foot=\box125
-\LT@lastfoot=\box126
-\LT@gbox=\box127
-\LT@cols=\count356
-\LT@rows=\count357
-\c@LT@tables=\count358
-\c@LT@chunks=\count359
-\LT@p@ftn=\toks54
+\LTchunksize=\count341
+\LTcapwidth=\dimen304
+\LT@head=\box113
+\LT@firsthead=\box114
+\LT@foot=\box115
+\LT@lastfoot=\box116
+\LT@gbox=\box117
+\LT@cols=\count342
+\LT@rows=\count343
+\c@LT@tables=\count344
+\c@LT@chunks=\count345
+\LT@p@ftn=\toks49
 ) (/home/edoardo/.miktex/texmfs/install/tex/latex/colortbl/colortbl.sty
 Package: colortbl 2026/05/01 v1.0l Color table columns (DPC)
 
 new hooks used!!
 \minrowclearance=\skip71
-\rownum=\count360
+\rownum=\count346
 ) (/home/edoardo/.miktex/texmfs/install/tex/latex/algorithms/algorithm.sty
 Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating environment
  (/home/edoardo/.miktex/texmfs/install/tex/latex/base/ifthen.sty
 Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
 )
-\@float@every@algorithm=\toks55
-\c@algorithm=\count361
+\@float@every@algorithm=\toks50
+\c@algorithm=\count347
 ) (/home/edoardo/.miktex/texmfs/install/tex/latex/algorithms/algorithmic.sty
 Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
-\c@ALC@unique=\count362
-\c@ALC@line=\count363
-\c@ALC@rem=\count364
-\c@ALC@depth=\count365
+\c@ALC@unique=\count348
+\c@ALC@line=\count349
+\c@ALC@rem=\count350
+\c@ALC@depth=\count351
 \ALC@tlm=\skip72
 \algorithmicindent=\skip73
 ) (/home/edoardo/.miktex/texmfs/install/tex/latex/hyperref/hyperref.sty
@@ -891,13 +764,13 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (/home/edoardo/.miktex/texmfs/install/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count366
+\c@section@level=\count352
 ) (/home/edoardo/.miktex/texmfs/install/tex/generic/stringenc/stringenc.sty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
 )
-\@linkdim=\dimen343
-\Hy@linkcounter=\count367
-\Hy@pagecounter=\count368
+\@linkdim=\dimen305
+\Hy@linkcounter=\count353
+\Hy@pagecounter=\count354
  (/home/edoardo/.miktex/texmfs/install/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2026-06-17 v7.01r Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
@@ -905,7 +778,7 @@ Now handling font encoding PD1 ...
 ) (/home/edoardo/.miktex/texmfs/install/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count369
+\Hy@SavedSpaceFactor=\count355
  (/home/edoardo/.miktex/texmfs/install/tex/latex/hyperref/puenc.def
 File: puenc.def 2026-06-17 v7.01r Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
@@ -919,21 +792,21 @@ Package hyperref Info: Plain pages OFF on input line 4214.
 Package hyperref Info: Backreferencing OFF on input line 4219.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4466.
-\c@Hy@tempcnt=\count370
+\c@Hy@tempcnt=\count356
  (/home/edoardo/.miktex/texmfs/install/tex/latex/url/url.sty
 \Urlmuskip=\muskip18
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4805.
-\XeTeXLinkMargin=\dimen344
+\XeTeXLinkMargin=\dimen306
  (/home/edoardo/.miktex/texmfs/install/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
  (/home/edoardo/.miktex/texmfs/install/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
-\Fld@menulength=\count371
-\Field@Width=\dimen345
-\Fld@charsize=\dimen346
+\Fld@menulength=\count357
+\Field@Width=\dimen307
+\Fld@charsize=\dimen308
 Package hyperref Info: Hyper figures OFF on input line 6091.
 Package hyperref Info: Link nesting OFF on input line 6096.
 Package hyperref Info: Hyper index ON on input line 6099.
@@ -941,15 +814,15 @@ Package hyperref Info: backreferencing OFF on input line 6106.
 Package hyperref Info: Link coloring ON on input line 6109.
 Package hyperref Info: Link coloring with OCG OFF on input line 6116.
 Package hyperref Info: PDF/A mode OFF on input line 6121.
-\Hy@abspage=\count372
-\c@Item=\count373
-\c@Hfootnote=\count374
+\Hy@abspage=\count358
+\c@Item=\count359
+\c@Hfootnote=\count360
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
  (/home/edoardo/.miktex/texmfs/install/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2026-06-17 v7.01r Hyperref driver for pdfTeX
-\Fld@listcount=\count375
-\c@bookmark@seq@number=\count376
+\Fld@listcount=\count361
+\c@bookmark@seq@number=\count362
  (/home/edoardo/.miktex/texmfs/install/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
  (/home/edoardo/.miktex/texmfs/install/tex/generic/uniquecounter/uniquecounter.sty
@@ -979,40 +852,40 @@ Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip75
 \bibsep=\skip76
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count377
+\c@NAT@ctr=\count363
 ) (/home/edoardo/.miktex/texmfs/install/tex/latex/pdfpages/pdfpages.sty
 Package: pdfpages 2026/03/30 v0.6h Insert pages of external PDF documents (AM)
-\AM@pagewidth=\dimen347
-\AM@pageheight=\dimen348
-\AM@fboxrule=\dimen349
+\AM@pagewidth=\dimen309
+\AM@pageheight=\dimen310
+\AM@fboxrule=\dimen311
  (/home/edoardo/.miktex/texmfs/install/tex/latex/pdfpages/pppdftex.def
 File: pppdftex.def 2026/03/30 v0.6h Pdfpages driver for pdfTeX (AM)
 )
-\pdfpages@includegraphics@status=\count378
-\AM@pagebox=\box128
-\AM@global@opts=\toks56
-\AM@pagecnt=\count379
-\AM@toc@title=\toks57
-\AM@lof@heading=\toks58
-\c@AM@survey=\count380
-\AM@templatesizebox=\box129
+\pdfpages@includegraphics@status=\count364
+\AM@pagebox=\box118
+\AM@global@opts=\toks51
+\AM@pagecnt=\count365
+\AM@toc@title=\toks52
+\AM@lof@heading=\toks53
+\c@AM@survey=\count366
+\AM@templatesizebox=\box119
 ) (/home/edoardo/.miktex/texmfs/install/tex/latex/tools/afterpage.sty
 Package: afterpage 2023/07/04 v1.08 After-Page Package (DPC)
-\AP@output=\toks59
-\AP@partial=\box130
-\AP@footins=\box131
+\AP@output=\toks54
+\AP@partial=\box120
+\AP@footins=\box121
 ) (/home/edoardo/.miktex/texmfs/install/tex/latex/lipsum/lipsum.sty (/home/edoardo/.miktex/texmfs/install/tex/latex/l3packages/l3keys2e/l3keys2e.sty (/home/edoardo/.miktex/texmfs/install/tex/latex/l3kernel/expl3.sty
 Package: expl3 2026-08-10 L3 programming layer (loader) 
  (/home/edoardo/.miktex/texmfs/install/tex/latex/l3kernel/l3backend-pdftex.def
 File: l3backend-pdftex.def 2026-08-10 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count381
+\l__color_backend_stack_int=\count367
 ))
 Package: l3keys2e 2025-10-09 LaTeX2e option processing using LaTeX3 keys
 )
 Package: lipsum 2021-09-20 v2.7 150 paragraphs of Lorem Ipsum dummy text
-\g__lipsum_par_int=\count382
-\l__lipsum_a_int=\count383
-\l__lipsum_b_int=\count384
+\g__lipsum_par_int=\count368
+\l__lipsum_a_int=\count369
+\l__lipsum_b_int=\count370
  (/home/edoardo/.miktex/texmfs/install/tex/latex/lipsum/lipsum.ltd.tex)) (/home/edoardo/.miktex/texmfs/install/tex/latex/fancyhdr/fancyhdr.sty
 Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
 \f@nch@headwidth=\skip77
@@ -1029,21 +902,21 @@ Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
 \f@nch@widthL=\skip88
 \f@nch@widthC=\skip89
 \f@nch@widthR=\skip90
-\@temptokenb=\toks60
+\@temptokenb=\toks55
 ) (/home/edoardo/.miktex/texmfs/install/tex/latex/fancyvrb/fancyvrb.sty
 Package: fancyvrb 2026/08/13 4.7 verbatim text (tvz,hv)
-\FV@CodeLineNo=\count385
+\FV@CodeLineNo=\count371
 \FV@InFile=\read4
-\FV@TabBox=\box132
-\c@FancyVerbLine=\count386
-\FV@StepNumber=\count387
+\FV@TabBox=\box122
+\c@FancyVerbLine=\count372
+\FV@StepNumber=\count373
 \FV@OutFile=\write4
 ) (/home/edoardo/.miktex/texmfs/install/tex/latex/glossaries/base/glossaries.sty
 Package: glossaries 2026/04/21 v5.1 (NLCT)
  (/home/edoardo/.miktex/texmfs/install/tex/latex/mfirstuc/mfirstuc.sty
 Package: mfirstuc 2025/04/03 v2.09 (NLCT)
-\@glsmfirst=\toks61
-\@glsmrest=\toks62
+\@glsmfirst=\toks56
+\@glsmrest=\toks57
 ) (/home/edoardo/.miktex/texmfs/install/tex/latex/xfor/xfor.sty
 Package: xfor 2009/02/05 v1.05 (NLCT)
 ) (/home/edoardo/.miktex/texmfs/install/tex/latex/tracklang/tracklang.sty
@@ -1057,56 +930,56 @@ Package: translator 2021-05-31 v1.12d Easy translation of strings in LaTeX
 File: glossaries-english.ldf 2014/11/23 v1.0
 ) (/home/edoardo/.miktex/texmfs/install/tex/latex/datatool/datatool-base.sty
 Package: datatool-base 2026/07/31 v3.4.4 (NLCT)
-\l__datatool_tmpa_int=\count388
-\l__datatool_tmpb_int=\count389
-\l__datatool_tmpc_int=\count390
-\l__datatool_tmpd_int=\count391
-\l__datatool_count_int=\count392
-\l__datatool_tmp_datatype_int=\count393
-\l__datatool_tmpa_dim=\dimen350
-\l__datatool_tmpb_dim=\dimen351
+\l__datatool_tmpa_int=\count374
+\l__datatool_tmpb_int=\count375
+\l__datatool_tmpc_int=\count376
+\l__datatool_tmpd_int=\count377
+\l__datatool_count_int=\count378
+\l__datatool_tmp_datatype_int=\count379
+\l__datatool_tmpa_dim=\dimen312
+\l__datatool_tmpb_dim=\dimen313
  (/home/edoardo/.miktex/texmfs/install/tex/latex/datatool/datatool-l3fp.def
 File: datatool-l3fp.def 2026/07/31 v3.4.4 (NLCT)
 )
-\@dtl@toks=\toks63
-\@dtl@tmpcount=\count394
+\@dtl@toks=\toks58
+\@dtl@tmpcount=\count380
 \dtl@tmplength=\skip91
-\l__datatool_measure_box=\box133
-\dtl@sortresult=\count395
+\l__datatool_measure_box=\box123
+\dtl@sortresult=\count381
  (/home/edoardo/.miktex/texmfs/install/tex/latex/datatool/datatool-utf8.ldf
 File: datatool-utf8.ldf 2026/07/31 v3.4.4 (NLCT)
 )
-\@dtl@datatype=\count396
-\c_datatool_unknown_int=\count397
-\l__datatool_year_int=\count398
-\l__datatool_month_int=\count399
-\l__datatool_day_int=\count400
-\l__datatool_hour_int=\count401
-\l__datatool_minute_int=\count402
-\l__datatool_second_int=\count403
-\l__datatool_tzhour_int=\count404
-\l__datatool_tzminute_int=\count405
-\l__datatool_julian_int=\count406
-\l__datatool_local_julian_int=\count407
-\l__datatool_prefix_int=\count408
-\l__datatool_suffix_int=\count409
-\@dtl@foreach@level=\count410
+\@dtl@datatype=\count382
+\c_datatool_unknown_int=\count383
+\l__datatool_year_int=\count384
+\l__datatool_month_int=\count385
+\l__datatool_day_int=\count386
+\l__datatool_hour_int=\count387
+\l__datatool_minute_int=\count388
+\l__datatool_second_int=\count389
+\l__datatool_tzhour_int=\count390
+\l__datatool_tzminute_int=\count391
+\l__datatool_julian_int=\count392
+\l__datatool_local_julian_int=\count393
+\l__datatool_prefix_int=\count394
+\l__datatool_suffix_int=\count395
+\@dtl@foreach@level=\count396
 
 
 Package tracklang Warning: No `datatool' support for dialect `english'  on input line 9924.
 
-\dtl@codeA=\count411
-\dtl@codeB=\count412
+\dtl@codeA=\count397
+\dtl@codeB=\count398
 )
-\gls@level=\count413
-\@gls@tmpb=\toks64
+\gls@level=\count399
+\@gls@tmpb=\toks59
 \gls@tmplen=\skip92
-\l__glossaries_tmpa_dim=\dimen352
-\l__glossaries_tmpb_dim=\dimen353
-\glskeylisttok=\toks65
-\glslabeltok=\toks66
-\glsshorttok=\toks67
-\glslongtok=\toks68
+\l__glossaries_tmpa_dim=\dimen314
+\l__glossaries_tmpb_dim=\dimen315
+\glskeylisttok=\toks60
+\glslabeltok=\toks61
+\glsshorttok=\toks62
+\glslongtok=\toks63
  (/home/edoardo/.miktex/texmfs/install/tex/latex/glossaries/styles/glossary-hypernav.sty
 Package: glossary-hypernav 2026/04/21 v5.1 (NLCT)
 ) (/home/edoardo/.miktex/texmfs/install/tex/latex/glossaries/styles/glossary-list.sty
@@ -1120,68 +993,68 @@ Package: glossary-long 2026/04/21 v5.1 (NLCT)
 Package: glossary-super 2026/04/21 v5.1 (NLCT)
  (/home/edoardo/.miktex/texmfs/install/tex/latex/supertabular/supertabular.sty
 Package: supertabular 2025/06/26 v4.2d the supertabular environment
-\c@tracingst=\count414
-\ST@wd=\dimen354
+\c@tracingst=\count400
+\ST@wd=\dimen316
 \ST@rightskip=\skip96
 \ST@leftskip=\skip97
 \ST@parfillskip=\skip98
-\ST@pageleft=\dimen355
-\ST@headht=\dimen356
-\ST@tailht=\dimen357
-\ST@pagesofar=\dimen358
-\ST@pboxht=\dimen359
-\ST@rowht=\dimen360
-\ST@prevht=\dimen361
-\ST@toadd=\dimen362
-\ST@dimen=\dimen363
-\ST@pbox=\box134
+\ST@pageleft=\dimen317
+\ST@headht=\dimen318
+\ST@tailht=\dimen319
+\ST@pagesofar=\dimen320
+\ST@pboxht=\dimen321
+\ST@rowht=\dimen322
+\ST@prevht=\dimen323
+\ST@toadd=\dimen324
+\ST@dimen=\dimen325
+\ST@pbox=\box124
 )) (/home/edoardo/.miktex/texmfs/install/tex/latex/glossaries/styles/glossary-tree.sty
 Package: glossary-tree 2026/04/21 v5.1 (NLCT)
-\l__glossaries_tree_max_known_level_int=\count415
-\l__glossaries_tree_offset_dim=\dimen364
-\l__glossaries_tree_namewidth_dim=\dimen365
-\l__glossaries_tree_symbolwidth_dim=\dimen366
-\l__glossaries_tree_prenamesym_width_dim=\dimen367
-\l__glossaries_tree_presubnamesym_width_dim=\dimen368
-\l__glossaries_tree_namewidth_padding_dim=\dimen369
-\l__glossaries_tree_symbolwidth_padding_dim=\dimen370
-\l__glossaries_tree_namesymbolwidth_dim=\dimen371
-\l__glossaries_tree_namesymbolwidth_padding_dim=\dimen372
-\l__glossaries_tree_level_int=\count416
+\l__glossaries_tree_max_known_level_int=\count401
+\l__glossaries_tree_offset_dim=\dimen326
+\l__glossaries_tree_namewidth_dim=\dimen327
+\l__glossaries_tree_symbolwidth_dim=\dimen328
+\l__glossaries_tree_prenamesym_width_dim=\dimen329
+\l__glossaries_tree_presubnamesym_width_dim=\dimen330
+\l__glossaries_tree_namewidth_padding_dim=\dimen331
+\l__glossaries_tree_symbolwidth_padding_dim=\dimen332
+\l__glossaries_tree_namesymbolwidth_dim=\dimen333
+\l__glossaries_tree_namesymbolwidth_padding_dim=\dimen334
+\l__glossaries_tree_level_int=\count402
 \glstreeindent=\skip99
 )) (/home/edoardo/.miktex/texmfs/install/tex/latex/enumitem/enumitem.sty
 Package: enumitem 2025/02/06 v3.11 Customized lists
 \labelindent=\skip100
-\enit@outerparindent=\dimen373
-\enit@toks=\toks69
-\enit@inbox=\box135
-\enit@count@id=\count417
-\enitdp@description=\count418
+\enit@outerparindent=\dimen335
+\enit@toks=\toks64
+\enit@inbox=\box125
+\enit@count@id=\count403
+\enitdp@description=\count404
 ) (Configuration_Files/config.tex
-\c@theorem=\count419
-\c@proposition=\count420
-\c@definition=\count421
-\c@algsubstate=\count422
+\c@theorem=\count405
+\c@proposition=\count406
+\c@definition=\count407
+\c@algsubstate=\count408
 ) (/home/edoardo/.miktex/texmfs/install/tex/latex/listings/listings.sty
-\lst@mode=\count423
-\lst@gtempboxa=\box136
-\lst@token=\toks70
-\lst@length=\count424
-\lst@currlwidth=\dimen374
-\lst@column=\count425
-\lst@pos=\count426
-\lst@lostspace=\dimen375
-\lst@width=\dimen376
-\lst@newlines=\count427
-\lst@lineno=\count428
-\lst@maxwidth=\dimen377
+\lst@mode=\count409
+\lst@gtempboxa=\box126
+\lst@token=\toks65
+\lst@length=\count410
+\lst@currlwidth=\dimen336
+\lst@column=\count411
+\lst@pos=\count412
+\lst@lostspace=\dimen337
+\lst@width=\dimen338
+\lst@newlines=\count413
+\lst@lineno=\count414
+\lst@maxwidth=\dimen339
  (/home/edoardo/.miktex/texmfs/install/tex/latex/listings/lstpatch.sty
 File: lstpatch.sty 2025/11/14 1.11b (Carsten Heinz)
 ) (/home/edoardo/.miktex/texmfs/install/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2025/11/14 1.11b (Carsten Heinz)
-\c@lstnumber=\count429
-\lst@skipnumbers=\count430
-\lst@framebox=\box137
+\c@lstnumber=\count415
+\lst@skipnumbers=\count416
+\lst@framebox=\box127
 ) (/home/edoardo/.miktex/texmfs/install/tex/latex/listings/listings.cfg
 File: listings.cfg 2025/11/14 1.11b listings configuration
 ))
@@ -1199,24 +1072,24 @@ Package glossaries Info: Writing glossary file Thesis.acn on input line 1.
 ) (/home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.aux)
 \openout1 = `Thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1264,26 +1137,26 @@ Package caption Info: supertabular package is loaded.
 Package caption Info: End \AtBeginDocument code.
  (/home/edoardo/.miktex/texmfs/install/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count431
-\scratchdimen=\dimen378
-\scratchbox=\box138
-\nofMPsegments=\count432
-\nofMParguments=\count433
-\everyMPshowfont=\toks71
-\MPscratchCnt=\count434
-\MPscratchDim=\dimen379
-\MPnumerator=\count435
-\makeMPintoPDFobject=\count436
-\everyMPtoPDFconversion=\toks72
+\scratchcounter=\count417
+\scratchdimen=\dimen340
+\scratchbox=\box128
+\nofMPsegments=\count418
+\nofMParguments=\count419
+\everyMPshowfont=\toks66
+\MPscratchCnt=\count420
+\MPscratchDim=\dimen341
+\MPnumerator=\count421
+\makeMPintoPDFobject=\count422
+\everyMPtoPDFconversion=\toks67
 ) (/home/edoardo/.miktex/texmfs/install/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (/home/edoardo/.miktex/texmfs/install/tex/latex/00miktex/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-LaTeX Info: Redefining \[ on input line 129.
-LaTeX Info: Redefining \] on input line 129.
-Package hyperref Info: Link coloring ON on input line 129.
+LaTeX Info: Redefining \[ on input line 127.
+LaTeX Info: Redefining \] on input line 127.
+Package hyperref Info: Link coloring ON on input line 127.
  (/home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.out) (/home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.out)
 \@outlinefile=\write8
 \openout8 = `Thesis.out'.
@@ -1297,7 +1170,7 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
-\c@lstlisting=\count437
+\c@lstlisting=\count423
 Package babel Info: Main language set to 'english'.
 Package epstopdf Info: Source file: <Images/02_ING_IND_INFORMAZIONE_COL_POSITIVO.eps>
 (epstopdf)                    date: 2026-09-10 16:57:41
@@ -1306,18 +1179,18 @@ Package epstopdf Info: Source file: <Images/02_ING_IND_INFORMAZIONE_COL_POSITIVO
 (epstopdf)                    date: 2026-09-10 17:12:13
 (epstopdf)                    size: 81882 bytes
 (epstopdf)             Command: <miktex-epstopdf --outfile=Images/02_ING_IND_INFORMAZIONE_COL_POSITIVO-eps-converted-to.pdf Images/02_ING_IND_INFORMAZIONE_COL_POSITIVO.eps>
-(epstopdf)             \includegraphics on input line 152.
+(epstopdf)             \includegraphics on input line 150.
 Package epstopdf Info: Output file is already uptodate.
-<Images/02_ING_IND_INFORMAZIONE_COL_POSITIVO-eps-converted-to.pdf, id=46, 493.845pt x 227.85126pt>
+<Images/02_ING_IND_INFORMAZIONE_COL_POSITIVO-eps-converted-to.pdf, id=54, 493.845pt x 227.85126pt>
 File: Images/02_ING_IND_INFORMAZIONE_COL_POSITIVO-eps-converted-to.pdf Graphic file (type pdf)
 <use Images/02_ING_IND_INFORMAZIONE_COL_POSITIVO-eps-converted-to.pdf>
-Package pdftex.def Info: Images/02_ING_IND_INFORMAZIONE_COL_POSITIVO-eps-converted-to.pdf  used on input line 152.
+Package pdftex.def Info: Images/02_ING_IND_INFORMAZIONE_COL_POSITIVO-eps-converted-to.pdf  used on input line 150.
 (pdftex.def)             Requested size: 302.73503pt x 150.052pt.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 152.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 150.
  (/home/edoardo/.miktex/texmfs/install/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 152.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 150.
  (/home/edoardo/.miktex/texmfs/install/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
@@ -1328,12 +1201,12 @@ Package epstopdf Info: Source file: <./Images/./raggiera_polimi.eps>
 (epstopdf)                    date: 2026-09-10 17:12:15
 (epstopdf)                    size: 40434 bytes
 (epstopdf)             Command: <miktex-epstopdf --outfile=./Images/./raggiera_polimi-eps-converted-to.pdf ./Images/./raggiera_polimi.eps>
-(epstopdf)             \includegraphics on input line 152.
+(epstopdf)             \includegraphics on input line 150.
 Package epstopdf Info: Output file is already uptodate.
-<./Images/./raggiera_polimi-eps-converted-to.pdf, id=48, 502.87875pt x 502.87875pt>
+<./Images/./raggiera_polimi-eps-converted-to.pdf, id=56, 502.87875pt x 502.87875pt>
 File: ./Images/./raggiera_polimi-eps-converted-to.pdf Graphic file (type pdf)
 <use ./Images/./raggiera_polimi-eps-converted-to.pdf>
-Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 152.
+Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 150.
 (pdftex.def)             Requested size: 418.25368pt x 418.24866pt.
  [1
 
@@ -1342,7 +1215,7 @@ Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used o
 
 
 {/home/edoardo/.miktex/texmfs/data/fonts/map/pdftex/pdftex.map} <./Images/./raggiera_polimi-eps-converted-to.pdf> <./Images/02_ING_IND_INFORMAZIONE_COL_POSITIVO-eps-converted-to.pdf>] [2] (abstract.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 1--176
+Underfull \hbox (badness 10000) in paragraph at lines 1--174
 
  []
 
@@ -1350,7 +1223,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1--176
 pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.178 \chapter*{Abstract in lingua italiana}
+l.176 \chapter*{Abstract in lingua italiana}
                                              [1
 
 
@@ -1359,7 +1232,7 @@ l.178 \chapter*{Abstract in lingua italiana}
 pdfTeX warning (ext4): destination with the same identifier (name{page.ii}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.178 \chapter*{Abstract in lingua italiana}
+l.176 \chapter*{Abstract in lingua italiana}
                                             
 Package epstopdf Info: Source file: <./Images/./raggiera_polimi.eps>
 (epstopdf)                    date: 2026-09-10 16:57:28
@@ -1368,16 +1241,16 @@ Package epstopdf Info: Source file: <./Images/./raggiera_polimi.eps>
 (epstopdf)                    date: 2026-09-10 17:12:15
 (epstopdf)                    size: 40434 bytes
 (epstopdf)             Command: <miktex-epstopdf --outfile=./Images/./raggiera_polimi-eps-converted-to.pdf ./Images/./raggiera_polimi.eps>
-(epstopdf)             \includegraphics on input line 178.
+(epstopdf)             \includegraphics on input line 176.
 Package epstopdf Info: Output file is already uptodate.
 File: ./Images/./raggiera_polimi-eps-converted-to.pdf Graphic file (type pdf)
 <use ./Images/./raggiera_polimi-eps-converted-to.pdf>
-Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 178.
+Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 176.
 (pdftex.def)             Requested size: 507.88533pt x 507.88051pt.
  [2
 
 ] (sommario.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 1--183
+Underfull \hbox (badness 10000) in paragraph at lines 1--181
 
  []
 
@@ -1391,11 +1264,11 @@ Package epstopdf Info: Source file: <./Images/./raggiera_polimi.eps>
 (epstopdf)                    date: 2026-09-10 17:12:15
 (epstopdf)                    size: 40434 bytes
 (epstopdf)             Command: <miktex-epstopdf --outfile=./Images/./raggiera_polimi-eps-converted-to.pdf ./Images/./raggiera_polimi.eps>
-(epstopdf)             \includegraphics on input line 190.
+(epstopdf)             \includegraphics on input line 188.
 Package epstopdf Info: Output file is already uptodate.
 File: ./Images/./raggiera_polimi-eps-converted-to.pdf Graphic file (type pdf)
 <use ./Images/./raggiera_polimi-eps-converted-to.pdf>
-Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 190.
+Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 188.
 (pdftex.def)             Requested size: 507.88533pt x 507.88051pt.
  [4
 
@@ -1413,11 +1286,11 @@ Package epstopdf Info: Source file: <./Images/./raggiera_polimi.eps>
 (epstopdf)                    date: 2026-09-10 17:12:15
 (epstopdf)                    size: 40434 bytes
 (epstopdf)             Command: <miktex-epstopdf --outfile=./Images/./raggiera_polimi-eps-converted-to.pdf ./Images/./raggiera_polimi.eps>
-(epstopdf)             \includegraphics on input line 192.
+(epstopdf)             \includegraphics on input line 190.
 Package epstopdf Info: Output file is already uptodate.
 File: ./Images/./raggiera_polimi-eps-converted-to.pdf Graphic file (type pdf)
 <use ./Images/./raggiera_polimi-eps-converted-to.pdf>
-Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 192.
+Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 190.
 (pdftex.def)             Requested size: 507.88533pt x 507.88051pt.
  [6
 
@@ -1427,7 +1300,18 @@ Chapter 1.
 
 
 
-]) [2] (/home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.bbl [3]
+]
+<./Images/CoverageGuidedGrayBoxFuzzing.png, id=141, 1095.09125pt x 613.29124pt>
+File: ./Images/CoverageGuidedGrayBoxFuzzing.png Graphic file (type png)
+<use ./Images/CoverageGuidedGrayBoxFuzzing.png>
+Package pdftex.def Info: ./Images/CoverageGuidedGrayBoxFuzzing.png  used on input line 34.
+(pdftex.def)             Requested size: 455.24411pt x 254.95094pt.
+ [2 <./Images/CoverageGuidedGrayBoxFuzzing.png>] [3]
+Underfull \hbox (badness 10000) in paragraph at lines 94--96
+
+ []
+
+[4]) (/home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.bbl [5]
 Package epstopdf Info: Source file: <./Images/./raggiera_polimi.eps>
 (epstopdf)                    date: 2026-09-10 16:57:28
 (epstopdf)                    size: 1813066 bytes
@@ -1441,29 +1325,21 @@ File: ./Images/./raggiera_polimi-eps-converted-to.pdf Graphic file (type pdf)
 <use ./Images/./raggiera_polimi-eps-converted-to.pdf>
 Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 1.
 (pdftex.def)             Requested size: 507.88533pt x 507.88051pt.
- [4
-
-]) [5
-
-]
-Package epstopdf Info: Source file: <./Images/./raggiera_polimi.eps>
-(epstopdf)                    date: 2026-09-10 16:57:28
-(epstopdf)                    size: 1813066 bytes
-(epstopdf)             Output file: <./Images/./raggiera_polimi-eps-converted-to.pdf>
-(epstopdf)                    date: 2026-09-10 17:12:15
-(epstopdf)                    size: 40434 bytes
-(epstopdf)             Command: <miktex-epstopdf --outfile=./Images/./raggiera_polimi-eps-converted-to.pdf ./Images/./raggiera_polimi.eps>
-(epstopdf)             \includegraphics on input line 229.
-Package epstopdf Info: Output file is already uptodate.
-File: ./Images/./raggiera_polimi-eps-converted-to.pdf Graphic file (type pdf)
-<use ./Images/./raggiera_polimi-eps-converted-to.pdf>
-Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 229.
-(pdftex.def)             Requested size: 507.88533pt x 507.88051pt.
  [6
 
 ]
-No file Thesis.acr.
-[7]
+Underfull \hbox (badness 10000) in paragraph at lines 48--53
+[]\T1/cmr/m/n/12 M. Heuse.  AFL-DynamoRIO.  [][]$\T1/cmtt/m/n/12 https : / / github . com / vanhauser-[]thc /
+ []
+
+[7
+
+]) [8] (/home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.acr) [9
+
+
+
+
+]
 Package epstopdf Info: Source file: <./Images/./raggiera_polimi.eps>
 (epstopdf)                    date: 2026-09-10 16:57:28
 (epstopdf)                    size: 1813066 bytes
@@ -1471,39 +1347,17 @@ Package epstopdf Info: Source file: <./Images/./raggiera_polimi.eps>
 (epstopdf)                    date: 2026-09-10 17:12:15
 (epstopdf)                    size: 40434 bytes
 (epstopdf)             Command: <miktex-epstopdf --outfile=./Images/./raggiera_polimi-eps-converted-to.pdf ./Images/./raggiera_polimi.eps>
-(epstopdf)             \includegraphics on input line 242.
+(epstopdf)             \includegraphics on input line 241.
 Package epstopdf Info: Output file is already uptodate.
 File: ./Images/./raggiera_polimi-eps-converted-to.pdf Graphic file (type pdf)
 <use ./Images/./raggiera_polimi-eps-converted-to.pdf>
-Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 242.
+Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 241.
 (pdftex.def)             Requested size: 507.88533pt x 507.88051pt.
- [8
+ [10
 
 ] (/home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.lof)
 \tf@lof=\write10
 \openout10 = `Thesis.lof'.
-
- [9
-
-]
-Package epstopdf Info: Source file: <./Images/./raggiera_polimi.eps>
-(epstopdf)                    date: 2026-09-10 16:57:28
-(epstopdf)                    size: 1813066 bytes
-(epstopdf)             Output file: <./Images/./raggiera_polimi-eps-converted-to.pdf>
-(epstopdf)                    date: 2026-09-10 17:12:15
-(epstopdf)                    size: 40434 bytes
-(epstopdf)             Command: <miktex-epstopdf --outfile=./Images/./raggiera_polimi-eps-converted-to.pdf ./Images/./raggiera_polimi.eps>
-(epstopdf)             \includegraphics on input line 245.
-Package epstopdf Info: Output file is already uptodate.
-File: ./Images/./raggiera_polimi-eps-converted-to.pdf Graphic file (type pdf)
-<use ./Images/./raggiera_polimi-eps-converted-to.pdf>
-Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 245.
-(pdftex.def)             Requested size: 507.88533pt x 507.88051pt.
- [10
-
-] (/home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.lot)
-\tf@lot=\write11
-\openout11 = `Thesis.lot'.
 
  [11
 
@@ -1515,15 +1369,19 @@ Package epstopdf Info: Source file: <./Images/./raggiera_polimi.eps>
 (epstopdf)                    date: 2026-09-10 17:12:15
 (epstopdf)                    size: 40434 bytes
 (epstopdf)             Command: <miktex-epstopdf --outfile=./Images/./raggiera_polimi-eps-converted-to.pdf ./Images/./raggiera_polimi.eps>
-(epstopdf)             \includegraphics on input line 260.
+(epstopdf)             \includegraphics on input line 244.
 Package epstopdf Info: Output file is already uptodate.
 File: ./Images/./raggiera_polimi-eps-converted-to.pdf Graphic file (type pdf)
 <use ./Images/./raggiera_polimi-eps-converted-to.pdf>
-Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 260.
+Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 244.
 (pdftex.def)             Requested size: 507.88533pt x 507.88051pt.
  [12
 
-] [13
+] (/home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.lot)
+\tf@lot=\write11
+\openout11 = `Thesis.lot'.
+
+ [13
 
 ]
 Package epstopdf Info: Source file: <./Images/./raggiera_polimi.eps>
@@ -1533,11 +1391,11 @@ Package epstopdf Info: Source file: <./Images/./raggiera_polimi.eps>
 (epstopdf)                    date: 2026-09-10 17:12:15
 (epstopdf)                    size: 40434 bytes
 (epstopdf)             Command: <miktex-epstopdf --outfile=./Images/./raggiera_polimi-eps-converted-to.pdf ./Images/./raggiera_polimi.eps>
-(epstopdf)             \includegraphics on input line 263.
+(epstopdf)             \includegraphics on input line 259.
 Package epstopdf Info: Output file is already uptodate.
 File: ./Images/./raggiera_polimi-eps-converted-to.pdf Graphic file (type pdf)
 <use ./Images/./raggiera_polimi-eps-converted-to.pdf>
-Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 263.
+Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 259.
 (pdftex.def)             Requested size: 507.88533pt x 507.88051pt.
  [14
 
@@ -1547,29 +1405,20 @@ LaTeX2e <2026-06-01>
 L3 programming layer <2026-08-10>
  ***********
 Package rerunfilecheck Info: File `Thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 817D15FF101EC11020FF56053161A8C7;1296.
+(rerunfilecheck)             Checksum: F60C719739B87574A29CDDC02E92FDDC;1643.
  ) 
 Here is how much of TeX's memory you used:
- 41397 strings out of 469353
- 815776 string characters out of 5458999
- 1367600 words of memory out of 5000000
- 69715 multiletter control sequences out of 15000+600000
- 644866 words of font info for 81 fonts, out of 8000000 for 9000
+ 32641 strings out of 469353
+ 622848 string characters out of 5458999
+ 1207086 words of memory out of 5000000
+ 61088 multiletter control sequences out of 15000+600000
+ 646740 words of font info for 84 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 94i,12n,94p,2534b,571s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-pdfTeX warning (dest): name{glo:DBI} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{glo:SBI} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{glo:CFG} has been referenced but does not exist, replaced by a fixed one
-
- </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ectt1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi864/ecbx1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi2500/ecbx1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecti1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi720/ecbx1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi1244/ecbx1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi720/ecxc1200.pk>
-Output written on /home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.pdf (22 pages, 269213 bytes).
+ 94i,12n,93p,2534b,749s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ectt1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi657/tcrm1000.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi657/ecrm1000.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi657/ecbx1000.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi864/ecbx1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi2500/ecbx1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecti1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi720/ecbx1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi1244/ecbx1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi720/ecxc1200.pk>
+Output written on /home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.pdf (22 pages, 369243 bytes).
 PDF statistics:
- 563 PDF objects out of 1000 (max. 8388607)
- 47 named destinations out of 1000 (max. 500000)
- 109 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 723 PDF objects out of 1000 (max. 8388607)
+ 68 named destinations out of 1000 (max. 500000)
+ 130 words of extra memory for PDF output out of 10000 (max. 10000000)
 

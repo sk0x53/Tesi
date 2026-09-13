@@ -43,8 +43,6 @@
 \usepackage{transparent} % Enables transparent images
 \usepackage{eso-pic} % For the background picture on the title page
 \usepackage[export]{adjustbox}
-\usepackage{tikz} % A package for high-quality hand-made figures.
-\usetikzlibrary{}
 \graphicspath{{./Images/}} % Directory of the images
 \usepackage{caption} % Coloured captions
 \usepackage{subcaption}
@@ -214,7 +212,7 @@
 % --------------------------------------------------------------------------
 \chapter{Background and Motivation}
 	\input{Background.tex}
-	
+
 %-------------------------------------------------------------------------
 %	BIBLIOGRAPHY
 %-------------------------------------------------------------------------
@@ -226,7 +224,7 @@
 %	APPENDICES
 %-------------------------------------------------------------------------
 
-\cleardoublepage
+\clearpage
 \addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
 % \appendix
 % \chapter{Appendix A}
@@ -234,9 +232,10 @@
 % An appendix contains supplementary material (figures, tables, data, codes, mathematical proofs, surveys, \dots)
 % which supplement the main results contained in the previous chapters.
 
-% \chapter{Appendix B}
+%\chapter{Appendix A}
 % It may be necessary to include another appendix to better organize the presentation of supplementary material.
-\printglossary[type=\acronymtype]
+\printglossary[type=\acronymtype,
+				title={List of Acronyms}]
 
 % LIST OF FIGURES
 \listoffigures
@@ -256,9 +255,6 @@
 %     \end{tabular}
 % \end{table}
 
-% ACKNOWLEDGEMENTS
-\chapter*{Acknowledgements}
-Here you may want to acknowledge someone.
 
 \cleardoublepage
 

@@ -26,25 +26,104 @@
             \item \textbf{\gls{DBI}} : The instrumentation is added during the program execution
         \end{itemize}
     \end{itemize}
+    Indipendently from the availability of the source code, \textit{Coverage-Guided Grey-box fuzzing} technique could be summarized
+    as seen in \cref{fig:coverageguidedfuzzing}.
+    \begin{figure}[h]
+        \caption{Generic diagram that describe Coverage-Guided Grey-box fuzzing workflow}
+        \centering
+        \includegraphics[width=\textwidth]{CoverageGuidedGrayBoxFuzzing.png}
+        \label{fig:coverageguidedfuzzing}
+    \end{figure}
+    \\Specifically for \textbf{Edge Coverage} the \cref{fig:coverageguidedfuzzing} could be described as follows:
+    \begin{enumerate}
+        \item \textbf{Seed Corpus} : Represent the set of inputs on which are computed the mutations. 
+            At the beginning is composed of user defined seeds but during fuzzing this set can grow if a specific mutation discover new edges not yet discovered.
+        \item \textbf{Input Generator} : Is composed of two main parts:
+            \begin{itemize}
+                \item \small \textbf{Seed Scheduling} : responsible of decide which seed in the corpus to mutate
+                \item \small \textbf{Mutation Scheduling} : responsible of decide which mutation or mutations apply to the selected seed
+            \end{itemize}
+        \item \textbf{Executor} : Is the component that actually execute the target binary. 
+            If the target binary has already been instrumented with Edge Coverage tracking instruction is executed as is, 
+            otherwise, in case of \gls{DBI} a dynamic translator must dynamically instrument the binary.
+        \item \textbf{Coverage Collection} : In case of Edge Coverage this part is represented by the data structure used 
+            in order to keep track of which edges between \gls{BB} has been taken and which are not.\\
+            These information are used, in some algoritms such as AFL++ \cite{aflplusplus} to guide Seed Scheduling, prioritizing 
+            inputs that, with the same level of coverage, are smaller in size and execution time.
+        \item \textbf{Defect Monitor} : this component check for exit status of the target to catch any crash or 
+            for an eventual timeout of the target or any other unexpected behavior of this.
+            If none of these conditions are met, which means that the target ends normally, the coverage is checked 
+            to see if the current input had discovered a new edge. 
+            In this case the input is added to the corpus.
+        \end{enumerate}
+\section{Binary Rewriting Background}
 
 \section{Problem Statement}
     Coverage-Guided Grey-box fuzzing is one of the most effective techniques in automatic vulnerability disclosure on software, 
     due to its capability of generating wide amount of inputs based on the feedback obtained through Code Coverage informations 
     that guide the fuzzer towards unexplored regions of code and therefore find hidden vulnerabilities.
-    However the effectiveness of this approach strongly depends on the availability of the source code.
+    Infact \textit{Black-box} fuzzing lack of a precise mutation strategy based on execution monitoring while 
+    \textit{White-box} fuzzing incur in high overheads given by Symbolic or Concolic execution.
+    Furthermore, the latter approach also requires the availability of the source code, not always available.
+    So \textit{Grey-box} fuzzing seems to be the most promising trade-off between precision of input mutation and overheads.
+    However, also \textit{Grey-box} fuzzing has its own drawback.
+    As matter of facts the effectiveness of this approach strongly depends on the availability of the source code.
     Infact both \gls{SBI} and \gls{DBI} have many limitations.
-    The main limitation of \gls{DBI} is represented by huge amount of overheads (higher than 600\% overheads according to \cite{zafl}) that makes the exploration of a substantial part of the valid input space almost impossible.[add citation to paper that state the high overheads]
+    The main limitation of \gls{DBI} is represented by huge amount of overheads (higher than 600\% overheads 
+    in case of AFL++ in QEMU-Mode according to \cite{zafl}) that makes the exploration of a substantial part 
+    of the valid input space almost impossible.
     Instead \gls{SBI} main difficulty is represented by the difficulty in modifying already compiled binaries.
     There are several problems regarding Binary Rewriting such as Indirect Control Transfers (e.g. \texttt{call rax}), 
-    shift in binary sections or instructions that cause the need of rewrite the instructions that reference these sections and so on.\\
-    For these reasons the preferable technique nowaday is \textit{Compile time Edge Coverage instrumentation} with fuzzers such as 
+    shift in binary sections or instructions that cause the need of rewrite the instructions that reference these sections and many others.\\
+    For all these reasons the preferable technique nowaday is \textit{Compile time Edge Coverage instrumentation} with fuzzers such as 
     AFL++ \cite{aflplusplus}, LibAFL \cite{libafl} o libFuzzer \cite{libfuzzer}.
     However in practice, for industrial secrecy (i.e. proprietary software) or due to precompiled libraries, the applications are 
     often closed source, and so Compile Time Edge Coverage instrumentation become unusable.\\
     In these scenario binary only fuzzing is the only viable approach.
-    Since \gls{DBI} has prohibitive overheads by definition, in this thesis I will address the problem of statically instrument 
-    a binary with Edge Coverage instructions in a way that the instrumented binary is compatible with AFL++ .\\
-    AFL++ has been choosen as fuzzer due to its popularity and because represent the current state of the art implementing 
-    all the state of the art techniques disclosed by researchers in last years \cite{aflplusplus}.\\
+    Although \gls{SBI} presents many challenges, it nonetheless proves to be the most fruitful area, 
+    given the low overheads.
+    In this thesis I will address the problem 
+    of statically instrument a binary with Edge Coverage instructions in a way that the instrumented binary is compatible with AFL++,  
+    which  has been choosen as fuzzer due to its popularity and because represent the current state of the art implementing 
+    most of the recent discovered techniques disclosed by researchers \cite{aflplusplus}.\\
     The instrumentation must add as little overheads as possible with respect to compile time overheads and must 
-    preserve the correctness of the binary.
+    preserve the correctness of the binary. This is important in fuzzing because less overheads means more executions per second, 
+    so a bigger portion of the valid input space could be visited.
+
+    \section{State of the Art}
+        In this section I will disclose some of the current state of the art solutions in terms of binary only greybox fuzzing 
+        differentiating between \gls{SBI} and \gls{DBI} approaches.\\
+
+        \begin{itemize}
+            \item \underline{\textbf{\gls{DBI}}}
+            \begin{itemize}
+                \item \textbf{AFL++ in QEMU/FRIDA mode}\cite{aflplusplus} : AFL++ in QEMU mode uses QEMU in \textit{User-mode Emulation}
+                    which consist in translating guest machine code (i.e. guest \gls{BB}) into an intermediate representation 
+                    called \gls{TB} and subsequently append the coverage tracing instructions at the end of it.
+                    This approach is based on emulating the entire CPU thanks to QEMU virtualized environment.\\
+                    Instead AFL++ in FRIDA mode \cite{aflplusplus-frida-mode} is based on a shared library injection in which is present a frida \cite{frida} component 
+                    called \textbf{Stalker} which intercept any \gls{BB} that is about to be executed , copy it into a \textbf{Code Cache} 
+                    and dynamically instrument the copy with coverage tracing instructions. 
+                    The execution control is then transferred to the copy, execute it, and then re-intercepted by \textbf{Stalker} at the end.
+                    Differenctly from QEMU mode doesn't emulate the CPU, but executed within the memory space of the target program.
+                
+                    \item \textbf{DynamoRIO/Pin}\cite{DynamoRIOPaper,PinPaper} : Both these approaches share the same base principle, called 
+                    \textbf{\gls{JIT} code caching}. This consist on take control of the thread when the target application starts, 
+                    and from that moment on every \gls{BB} is intercepted befor it is executed and is copied into a private \textbf{Code Cache}.
+                    The instrumentation is then added to the copy and the control is transferred to the code cache.
+                    The instrumentation process is more or less identical to FRIDA's Stalker mechanism, but are not optimized like this.
+                    Also in this case the implemented version uses AFL\cite{zalewski2017afl} as fuzzer \cite{heuse2018afldynamorio,heuse2018aflpin}.
+            \end{itemize}
+                \item \underline{\textbf{\gls{SBI}}}
+                \begin{itemize}
+                    \item \textbf{Retrowrite} \cite{retrowrite}: This tool performs symbolic lifting on the code, replacing every reference
+                        discovered during disassembly with a symbolic label. Doing this allows instructions to be added without
+                        modifying the references, achieving reassembleable assembly.
+                        While RetroWrite can add ASan instrumentation, it cannot natively add AFL-style edge coverage instructions.
+                        To do so, the lifted assembly must be instrumented with the afl-gcc tool in order to produce the patched binary.
+                        Moreover, community-reported issues \cite{retrowrite_issue28} document missing instrumentation points when
+                        RetroWrite's symbolized output is compiled through afl-gcc, caused by a mismatch between RetroWrite's
+                        label-naming convention and afl-as's basic-block detection heuristics.
+                        Finally, RetroWrite only works with PIE, non-stripped binaries.
+                \end{itemize}
+        \end{itemize}

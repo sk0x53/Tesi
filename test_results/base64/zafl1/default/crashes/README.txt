@@ -1,6 +1,6 @@
 Command line used to find this crash:
 
-/home/tecnico/aflplusplus/afl-fuzz -i ../inputs/ -o ./findings -V 86400 -- ./base64.zafl -d
+/home/tecnico/aflplusplus/afl-fuzz -i ../inputs/ -o ./findings1 -V 86400 -- ./base64.zafl -d
 
 If you can't reproduce a bug outside of afl-fuzz, be sure to set the same
 memory limit. The limit used for this fuzzing session was 0 B.

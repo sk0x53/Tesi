@@ -110,7 +110,7 @@
                             The Dyninst instrumentation engine works through trampolines, which degrade execution performance and introduce overhead
                             due to the required context switches.
                             Moreover, every trampoline call must preserve the context: registers and flags must be saved before the trampoline
-                            is entered and restored after it returns.
+                            is taken and restored after it returns.
                     \item \textbf{RetroWrite}: This tool performs symbolic lifting on the code, replacing every reference
                         discovered during disassembly with a symbolic label. Doing this allows instructions to be added without
                         modifying the references, achieving reassembleable assembly.
@@ -308,19 +308,19 @@ mov rax, QWORD PTR[rip + offset_to_saved_rax]
                             \multirow{4}{*}{base64} 
                             & execs\_per\_sec   & 398.49   & 444.98   & 351.77 
                                                 & 1703.45  & 1738.99  & 1842.27
-                                                & 2281.00  & 1772.18  & 1687.38\\
+                                                & 1577.45  & 1792.35  & 1749.11\\
                             \cline{2-11}
                             & execs\_done   & 34429329   & 38446221   & 30392855 
                                             & 147177902  & 150249117  & 159172058
-                                            & 197078290  & 153115984  & 145790015\\
+                                            & 136291378  & 154859292  & 151123034\\
                             \cline{2-11}
                             & edges\_found  & 690 & 690 & 690 
                                             & 358 & 370 & 358
-                                            & 640 & 640 & 640\\
+                                            & 640 & 672 & 672\\
                             \cline{2-11}
-                            & saved\_crashes    & 7  & 3  & 2 
-                                                & 12 & 41 & 11
-                                                & 11 & 8  & 13\\
+                            & saved\_crashes    & 7  & 3   & 2 
+                                                & 12 & 41  & 11
+                                                & 10 & 115 & 118\\
                             \thickhline
                             \multirow{4}{*}{md5sum} 
                             & execs\_per\_sec   & \textcolor{red}{x} & \textcolor{red}{x} & \textcolor{red}{x} 
@@ -342,11 +342,11 @@ mov rax, QWORD PTR[rip + offset_to_saved_rax]
                             \multirow{4}{*}{uniq} 
                             & execs\_per\_sec   & 567.81  & 576.57   & 577.17 
                                                 & 1758.61 & 1399.39  & 1864.43 
-                                                & 2023.72 & 1614.07  & 1885.92\\
+                                                & 1773.92 & 1559.98  & 1605.66\\
                             \cline{2-11}
                             & execs\_done   & 49058377  & 49815928   & 49867759 
                                             & 151943556 & 120907581  & 161086939 
-                                            & 174849429 & 139455948  & 162943673\\
+                                            & 153267103 & 134782333  & 138729055\\
                             \cline{2-11}
                             & edges\_found      & 473 & 473 & 473 
                                                 & 242 & 242 & 242
@@ -354,7 +354,7 @@ mov rax, QWORD PTR[rip + offset_to_saved_rax]
                             \cline{2-11}
                             & saved\_crashes    & 2 & 0 & 0 
                                                 & 0 & 0 & 0
-                                                & 0 & 0 & 0\\
+                                                & 0 & 1 & 0\\
                             \thickhline
                             \multirow{4}{*}{who} 
                             & execs\_per\_sec   & 225.11 & & 
@@ -392,8 +392,8 @@ mov rax, QWORD PTR[rip + offset_to_saved_rax]
                                                 & 8,256376 & 0,149747 
                                                 & 8,62092  & 1,718515\\
                             \hline
-                            avg\_execs\_per\_sec    & 1761.57 & 1913.52 
-                                                    & 1674.14 & 1841.24
+                            avg\_execs\_per\_sec    & 1761.57 & 1706.3 
+                                                    & 1674.14 & 1646.52
                                                     & \textcolor{red}{x}& 456.42\\
                             \hline
                     \end{tabular}
