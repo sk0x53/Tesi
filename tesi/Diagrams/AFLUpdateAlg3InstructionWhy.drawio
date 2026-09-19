@@ -1,0 +1,49 @@
+<mxfile host="Electron">
+  <diagram name="Pagina-1" id="0R38X29beu_uHz4eK8wm">
+    <mxGraphModel dx="808" dy="443" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="cVQlWPKlSXSPLk9jBE-C-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;A&lt;/b&gt;&lt;/font&gt;&lt;br&gt;(Body of the do-while)" vertex="1">
+          <mxGeometry height="80" width="80" x="440" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="cVQlWPKlSXSPLk9jBE-C-2" edge="1" parent="1" source="cVQlWPKlSXSPLk9jBE-C-1" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="560" y="420" as="sourcePoint" />
+            <mxPoint x="480" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cVQlWPKlSXSPLk9jBE-C-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;B&lt;/b&gt;&lt;/font&gt;&lt;br&gt;(Permanence Condition of th&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;e do-while)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="80" x="440" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="cVQlWPKlSXSPLk9jBE-C-4" edge="1" parent="1" source="cVQlWPKlSXSPLk9jBE-C-3" style="endArrow=classic;html=1;rounded=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="cVQlWPKlSXSPLk9jBE-C-1" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="460" y="440" />
+              <mxPoint x="400" y="440" />
+              <mxPoint x="400" y="120" />
+              <mxPoint x="480" y="120" />
+            </Array>
+            <mxPoint x="560" y="420" as="sourcePoint" />
+            <mxPoint x="440" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cVQlWPKlSXSPLk9jBE-C-5" edge="1" parent="1" source="cVQlWPKlSXSPLk9jBE-C-3" style="endArrow=classic;html=1;rounded=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" target="cVQlWPKlSXSPLk9jBE-C-6" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="480" y="560" as="sourcePoint" />
+            <mxPoint x="500" y="480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cVQlWPKlSXSPLk9jBE-C-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;C&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="440" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="cVQlWPKlSXSPLk9jBE-C-7" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Edge1" vertex="1">
+          <mxGeometry height="30" width="60" x="470" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="cVQlWPKlSXSPLk9jBE-C-8" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Edge2" vertex="1">
+          <mxGeometry height="30" width="60" x="390" y="280" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

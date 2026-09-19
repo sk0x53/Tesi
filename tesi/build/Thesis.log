@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.10)  13 SEP 2026 19:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.10)  19 SEP 2026 19:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1301,27 +1301,43 @@ Chapter 1.
 
 
 ]
-<./Images/CoverageGuidedGrayBoxFuzzing.png, id=151, 1095.09125pt x 613.29124pt>
+<./Images/CoverageGuidedGrayBoxFuzzing.png, id=160, 1095.09125pt x 613.29124pt>
 File: ./Images/CoverageGuidedGrayBoxFuzzing.png Graphic file (type png)
 <use ./Images/CoverageGuidedGrayBoxFuzzing.png>
-Package pdftex.def Info: ./Images/CoverageGuidedGrayBoxFuzzing.png  used on input line 34.
+Package pdftex.def Info: ./Images/CoverageGuidedGrayBoxFuzzing.png  used on input line 40.
 (pdftex.def)             Requested size: 455.24411pt x 254.95094pt.
  [2 <./Images/CoverageGuidedGrayBoxFuzzing.png>] [3]
-Underfull \hbox (badness 10000) in paragraph at lines 94--96
+Underfull \hbox (badness 10000) in paragraph at lines 101--103
 
  []
 
 [4]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 146.
- [5]) (/home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.bbl [6]
-Underfull \hbox (badness 10000) in paragraph at lines 48--53
-[]\T1/cmr/m/n/12 M. Heuse.  AFL-DynamoRIO.  [][]$\T1/cmtt/m/n/12 https : / / github . com / vanhauser-[]thc /
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 154.
+<./Images/AFLUpdateAlg3InstructionWhy.png, id=245, 171.64125pt x 430.60875pt>
+File: ./Images/AFLUpdateAlg3InstructionWhy.png Graphic file (type png)
+<use ./Images/AFLUpdateAlg3InstructionWhy.png>
+Package pdftex.def Info: ./Images/AFLUpdateAlg3InstructionWhy.png  used on input line 187.
+(pdftex.def)             Requested size: 100.0pt x 250.8768pt.
+ [5] [6
+pdfTeX warning (ext4): destination with the same identifier (name{figure.caption.9}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.204                 \item
+                            \textbf{forkserver} <./Images/AFLUpdateAlg3InstructionWhy.png>]
+<./Images/AFLPlusPlusForkserverFunctioning.png, id=289, 588.1975pt x 511.9125pt>
+File: ./Images/AFLPlusPlusForkserverFunctioning.png Graphic file (type png)
+<use ./Images/AFLPlusPlusForkserverFunctioning.png>
+Package pdftex.def Info: ./Images/AFLPlusPlusForkserverFunctioning.png  used on input line 217.
+(pdftex.def)             Requested size: 350.0pt x 304.61125pt.
+ [7]) (/home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.bbl [8 <./Images/AFLPlusPlusForkserverFunctioning.png>]
+Underfull \hbox (badness 1342) in paragraph at lines 9--15
+[]\T1/cmr/m/n/10.95 AFL++ con-trib-u-tors.  AFL++ Frida Mode.  [][]$\T1/cmtt/m/n/10.95 https : / / github . com / AFLplusplus /
  []
 
-[7
+[9
 
 
-]) [8] (/home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.acr) [9
+]) [10] (/home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.acr) [11
 
 
 
@@ -1340,13 +1356,13 @@ File: ./Images/./raggiera_polimi-eps-converted-to.pdf Graphic file (type pdf)
 <use ./Images/./raggiera_polimi-eps-converted-to.pdf>
 Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 244.
 (pdftex.def)             Requested size: 507.88533pt x 507.88051pt.
- [10
+ [12
 
 ] (/home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.lof)
 \tf@lof=\write10
 \openout10 = `Thesis.lof'.
 
- [11
+ [13
 
 ]
 Package epstopdf Info: Source file: <./Images/./raggiera_polimi.eps>
@@ -1362,13 +1378,13 @@ File: ./Images/./raggiera_polimi-eps-converted-to.pdf Graphic file (type pdf)
 <use ./Images/./raggiera_polimi-eps-converted-to.pdf>
 Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 247.
 (pdftex.def)             Requested size: 507.88533pt x 507.88051pt.
- [12
+ [14
 
 ] (/home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.lot)
 \tf@lot=\write11
 \openout11 = `Thesis.lot'.
 
- [13
+ [15
 
 ]
 Package epstopdf Info: Source file: <./Images/./raggiera_polimi.eps>
@@ -1384,13 +1400,13 @@ File: ./Images/./raggiera_polimi-eps-converted-to.pdf Graphic file (type pdf)
 <use ./Images/./raggiera_polimi-eps-converted-to.pdf>
 Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 249.
 (pdftex.def)             Requested size: 507.88533pt x 507.88051pt.
- [14
+ [16
 
 ] (/home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.loa)
 \tf@loa=\write12
 \openout12 = `Thesis.loa'.
 
- [15
+ [17
 
 ]
 Package epstopdf Info: Source file: <./Images/./raggiera_polimi.eps>
@@ -1406,7 +1422,7 @@ File: ./Images/./raggiera_polimi-eps-converted-to.pdf Graphic file (type pdf)
 <use ./Images/./raggiera_polimi-eps-converted-to.pdf>
 Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 263.
 (pdftex.def)             Requested size: 507.88533pt x 507.88051pt.
- [16
+ [18
 
 ] (/home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.aux)
  ***********
@@ -1414,20 +1430,20 @@ LaTeX2e <2026-06-01>
 L3 programming layer <2026-08-10>
  ***********
 Package rerunfilecheck Info: File `Thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 4AC243998E1F12C43E8835A8F97307C7;1925.
+(rerunfilecheck)             Checksum: 0E87EAD052533BBEDB675A56FEDD296B;1925.
  ) 
 Here is how much of TeX's memory you used:
- 32767 strings out of 469353
- 624873 string characters out of 5458999
- 1206344 words of memory out of 5000000
- 61204 multiletter control sequences out of 15000+600000
- 649033 words of font info for 87 fonts, out of 8000000 for 9000
+ 32854 strings out of 469353
+ 626951 string characters out of 5458999
+ 1212344 words of memory out of 5000000
+ 61267 multiletter control sequences out of 15000+600000
+ 653127 words of font info for 100 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 94i,12n,93p,2534b,749s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm1000.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ectt1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi657/tcrm1000.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi657/ecrm1000.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi657/ecbx1000.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi864/ecbx1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi2500/ecbx1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecti1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi720/ecbx1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi1244/ecbx1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi720/ecxc1200.pk></home/edoardo/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi12.pfb></home/edoardo/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr12.pfb></home/edoardo/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on /home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.pdf (24 pages, 413498 bytes).
+ 94i,12n,93p,2534b,887s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi657/ectt1000.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi657/ecti1000.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm1000.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ectt1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi657/tcrm1000.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi657/ecrm1000.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi657/ecbx1000.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi864/ecbx1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi2500/ecbx1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecti1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi720/ecbx1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi1244/ecbx1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi720/ecxc1200.pk></home/edoardo/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi10.pfb></home/edoardo/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi12.pfb></home/edoardo/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr10.pfb></home/edoardo/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr12.pfb></home/edoardo/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on /home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.pdf (26 pages, 529563 bytes).
 PDF statistics:
- 800 PDF objects out of 1000 (max. 8388607)
- 79 named destinations out of 1000 (max. 500000)
- 146 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1011 PDF objects out of 1200 (max. 8388607)
+ 99 named destinations out of 1000 (max. 500000)
+ 156 words of extra memory for PDF output out of 10000 (max. 10000000)
 

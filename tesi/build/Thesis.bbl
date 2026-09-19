@@ -1,4 +1,4 @@
-\begin{thebibliography}{15}
+\begin{thebibliography}{20}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -20,6 +20,13 @@ D.~Bruening, T.~Garnett, and S.~Amarasinghe.
 \newblock In \emph{International Symposium on Code Generation and Optimization,
   2003. CGO 2003.}, pages 265--275, 2003.
 \newblock \doi{10.1109/CGO.2003.1191551}.
+
+\bibitem[Böhme et~al.(2016)Böhme, Pham, and Roychoudhury]{Boehme2016}
+M.~Böhme, V.-T. Pham, and A.~Roychoudhury.
+\newblock Coverage-based greybox fuzzing as markov chain.
+\newblock In \emph{Proceedings of the 2016 ACM SIGSAC Conference on Computer
+  and Communications Security}, CCS16, pages 1032--1043. ACM, Oct. 2016.
+\newblock \doi{10.1145/2976749.2978428}.
 
 \bibitem[Dinesh et~al.(2020)Dinesh, Burow, Xu, and Payer]{retrowrite}
 S.~Dinesh, N.~Burow, D.~Xu, and M.~Payer.
@@ -43,6 +50,14 @@ A.~Fioraldi, D.~C. Maier, D.~Zhang, and D.~Balzarotti.
 \newblock Libafl: A framework to build modular and reusable fuzzers.
 \newblock In \emph{Proceedings of the 2022 ACM SIGSAC Conference on Computer
   and Communications Security}, pages 1051--1065, 2022.
+
+\bibitem[Godefroid et~al.(2012)Godefroid, Levin, and Molnar]{Godefroid2012}
+P.~Godefroid, M.~Y. Levin, and D.~Molnar.
+\newblock Sage: whitebox fuzzing for security testing.
+\newblock \emph{Communications of the ACM}, 55\penalty0 (3):\penalty0 40--44,
+  Mar. 2012.
+\newblock ISSN 1557-7317.
+\newblock \doi{10.1145/2093548.2093564}.
 
 \bibitem[Heuse(2018{\natexlab{a}})]{heuse2018afldynamorio}
 M.~Heuse.
@@ -74,12 +89,28 @@ C.-K. Luk, R.~Cohn, R.~Muth, H.~Patil, A.~Klauser, G.~Lowney, S.~Wallace, V.~J.
 \newblock \doi{10.1145/1064978.1065034}.
 \newblock URL \url{https://doi.org/10.1145/1064978.1065034}.
 
+\bibitem[Mallissery and Wu(2023)]{Mallissery2023}
+S.~Mallissery and Y.-S. Wu.
+\newblock Demystify the fuzzing methods: A comprehensive survey.
+\newblock \emph{ACM Computing Surveys}, 56\penalty0 (3):\penalty0 1--38, Oct.
+  2023.
+\newblock ISSN 1557-7341.
+\newblock \doi{10.1145/3623375}.
+
 \bibitem[Marsman1996(2021)]{retrowrite_issue28}
 Marsman1996.
 \newblock Missing some instrumentations when instrumenting binary with {AFL}.
 \newblock \url{https://github.com/HexHive/retrowrite/issues/28}, Aug. 2021.
 \newblock GitHub Issue \#28, HexHive/retrowrite repository. Accessed:
   2026-09-13.
+
+\bibitem[Miller et~al.(1990)Miller, Fredriksen, and So]{Miller1990}
+B.~P. Miller, L.~Fredriksen, and B.~So.
+\newblock An empirical study of the reliability of unix utilities.
+\newblock \emph{Communications of the ACM}, 33\penalty0 (12):\penalty0 32--44,
+  Dec. 1990.
+\newblock ISSN 1557-7317.
+\newblock \doi{10.1145/96267.96279}.
 
 \bibitem[Nagy et~al.(2021)Nagy, Nguyen-Tuong, Hiser, Davidson, and Hicks]{zafl}
 S.~Nagy, A.~Nguyen-Tuong, J.~D. Hiser, J.~W. Davidson, and M.~Hicks.
@@ -102,6 +133,13 @@ O.~A.~V. Ravn{\aa}s.
 \newblock Frida: Dynamic instrumentation toolkit for developers,
   reverse-engineers, and security researchers, 2026.
 \newblock URL \url{https://github.com/frida/frida}.
+
+\bibitem[Zalewski()]{afl_technical_details}
+M.~Zalewski.
+\newblock Technical "whitepaper" for afl-fuzz.
+\newblock
+  \url{https://github.com/google/AFL/blob/master/docs/technical_details.txt}.
+\newblock Accessed: 2026-09-19.
 
 \bibitem[Zalewski(2017)]{zalewski2017afl}
 M.~Zalewski.

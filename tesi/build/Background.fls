@@ -1,7 +1,0 @@
-PWD /home/edoardo/materiale_tesi/Tesi/tesi
-INPUT /home/edoardo/.miktex/texmfs/data/miktex/data/le/pdftex/pdflatex.fmt
-INPUT /home/edoardo/materiale_tesi/Tesi/tesi/Background.tex
-OUTPUT /home/edoardo/materiale_tesi/Tesi/tesi/build/Background.log
-INPUT /home/edoardo/.miktex/texmfs/install/fonts/tfm/public/cm/cmbx10.tfm
-INPUT /home/edoardo/.miktex/texmfs/install/fonts/tfm/public/cm/cmti10.tfm
-INPUT /home/edoardo/.miktex/texmfs/install/fonts/tfm/public/cm/cmtt10.tfm
