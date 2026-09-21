@@ -7,47 +7,51 @@ Reallocating 'name_of_file' (item size: 1) to 20 items.
 Database file #1: Thesis_bibliography.bib
 Warning--entry type for "frida" isn't style-file defined
 --line 52 of file Thesis_bibliography.bib
+Warning--empty year in aflplusplus_binary_only_targets
+Warning--empty year in afldyninst
+Warning--empty year in afldyninst
 Warning--empty year in libfuzzer
+Warning--empty journal in binaryrewriting
 Warning--empty year in afl_technical_details
-You've used 20 entries,
+You've used 25 entries,
             2773 wiz_defined-function locations,
-            732 strings with 8451 characters,
-and the built_in function-call counts, 9732 in all, are:
-= -- 905
-> -- 519
-< -- 15
-+ -- 180
-- -- 159
-* -- 738
-:= -- 1457
-add.period$ -- 88
-call.type$ -- 20
-change.case$ -- 113
-chr.to.int$ -- 19
-cite$ -- 42
-duplicate$ -- 436
-empty$ -- 808
-format.name$ -- 181
-if$ -- 2099
+            771 strings with 9785 characters,
+and the built_in function-call counts, 12627 in all, are:
+= -- 1180
+> -- 694
+< -- 19
++ -- 239
+- -- 213
+* -- 983
+:= -- 1894
+add.period$ -- 113
+call.type$ -- 25
+change.case$ -- 146
+chr.to.int$ -- 24
+cite$ -- 56
+duplicate$ -- 563
+empty$ -- 1017
+format.name$ -- 242
+if$ -- 2719
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 11
-newline$ -- 133
-num.names$ -- 80
-pop$ -- 257
+missing$ -- 16
+newline$ -- 166
+num.names$ -- 100
+pop$ -- 322
 preamble$ -- 1
-purify$ -- 93
+purify$ -- 121
 quote$ -- 0
-skip$ -- 346
+skip$ -- 450
 stack$ -- 0
-substring$ -- 321
-swap$ -- 90
-text.length$ -- 5
+substring$ -- 424
+swap$ -- 115
+text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 220
-warning$ -- 2
-while$ -- 82
+type$ -- 275
+warning$ -- 6
+while$ -- 104
 width$ -- 0
-write$ -- 309
-(There were 3 warnings)
+write$ -- 390
+(There were 7 warnings)

@@ -1,4 +1,4 @@
-\begin{thebibliography}{20}
+\begin{thebibliography}{25}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -13,6 +13,21 @@
   2026.
 \newblock Accessed: 2026-09-13.
 
+\bibitem[{AFL++ Developers}()]{aflplusplus_binary_only_targets}
+{AFL++ Developers}.
+\newblock Fuzzing binary-only targets.
+\newblock URL \url{https://aflplus.plus/docs/fuzzing_binary-only_targets/}.
+
+\bibitem[Andriesse et~al.(2016)Andriesse, Chen, van~der Veen, Slowinska, and
+  Bos]{andriesse2016}
+D.~Andriesse, X.~Chen, V.~van~der Veen, A.~Slowinska, and H.~Bos.
+\newblock An in-depth analysis of disassembly on full-scale x86/x64 binaries.
+\newblock In \emph{25th USENIX Security Symposium (USENIX Security 16)}, pages
+  583--600, Austin, TX, 2016. USENIX Association.
+\newblock ISBN 978-1-931971-32-4.
+\newblock URL
+  \url{https://www.usenix.org/conference/usenixsecurity16/technical-sessions/presentation/andriesse}.
+
 \bibitem[Bruening et~al.(2003)Bruening, Garnett, and
   Amarasinghe]{DynamoRIOPaper}
 D.~Bruening, T.~Garnett, and S.~Amarasinghe.
@@ -20,6 +35,14 @@ D.~Bruening, T.~Garnett, and S.~Amarasinghe.
 \newblock In \emph{International Symposium on Code Generation and Optimization,
   2003. CGO 2003.}, pages 265--275, 2003.
 \newblock \doi{10.1109/CGO.2003.1191551}.
+
+\bibitem[Buck and Hollingsworth(2000)]{Dyninst}
+B.~Buck and J.~K. Hollingsworth.
+\newblock An api for runtime code patching.
+\newblock \emph{The International Journal of High Performance Computing
+  Applications}, 14\penalty0 (4):\penalty0 317--329, 2000.
+\newblock \doi{10.1177/109434200001400404}.
+\newblock URL \url{https://doi.org/10.1177/109434200001400404}.
 
 \bibitem[Böhme et~al.(2016)Böhme, Pham, and Roychoudhury]{Boehme2016}
 M.~Böhme, V.-T. Pham, and A.~Roychoudhury.
@@ -58,6 +81,11 @@ P.~Godefroid, M.~Y. Levin, and D.~Molnar.
   Mar. 2012.
 \newblock ISSN 1557-7317.
 \newblock \doi{10.1145/2093548.2093564}.
+
+\bibitem[Heuse()]{afldyninst}
+M.~Heuse.
+\newblock Afl-dyninst, 2018.
+\newblock \emph{URL: https://github. com/vanhauser-thc/afl-dyninst}.
 
 \bibitem[Heuse(2018{\natexlab{a}})]{heuse2018afldynamorio}
 M.~Heuse.
@@ -122,17 +150,31 @@ S.~Nagy, A.~Nguyen-Tuong, J.~D. Hiser, J.~W. Davidson, and M.~Hicks.
 \newblock URL
   \url{https://www.usenix.org/conference/usenixsecurity21/presentation/nagy}.
 
-\bibitem[{Paradyn Tools Project}(2018)]{Dyninst}
-{Paradyn Tools Project}.
-\newblock {Dyninst API}.
-\newblock \url{https://dyninst.org/dyninst}, 2018.
-\newblock Accessed: 2026-09-13.
-
 \bibitem[Ravn{\aa}s(2026)]{frida}
 O.~A.~V. Ravn{\aa}s.
 \newblock Frida: Dynamic instrumentation toolkit for developers,
   reverse-engineers, and security researchers, 2026.
 \newblock URL \url{https://github.com/frida/frida}.
+
+\bibitem[Wenzl et~al.(2019)Wenzl, Merzdovnik, Ullrich, and
+  Weippl]{binaryrewriting}
+M.~Wenzl, G.~Merzdovnik, J.~Ullrich, and E.~Weippl.
+\newblock From hack to elaborate technique—a survey on binary rewriting.
+\newblock 52\penalty0 (3), 2019.
+\newblock ISSN 0360-0300.
+\newblock \doi{10.1145/3316415}.
+\newblock URL \url{https://doi.org/10.1145/3316415}.
+
+\bibitem[Xiao et~al.(2025)Xiao, Jiang, Zhao, Huang, Liu, and
+  Li]{SystemCallPatternTracing}
+J.~Xiao, P.~Jiang, Z.~Zhao, R.~Huang, J.~Liu, and D.~Li.
+\newblock Robust, efficient, and widely available greybox fuzzing for {COTS}
+  binaries with system call pattern feedback.
+\newblock In \emph{34th USENIX Security Symposium (USENIX Security 25)}, pages
+  6239--6258, Seattle, WA, Aug. 2025. USENIX Association.
+\newblock ISBN 978-1-939133-52-6.
+\newblock URL
+  \url{https://www.usenix.org/conference/usenixsecurity25/presentation/xiao-jifan}.
 
 \bibitem[Zalewski()]{afl_technical_details}
 M.~Zalewski.

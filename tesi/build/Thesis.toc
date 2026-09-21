@@ -6,13 +6,14 @@
 \contentsline {chapter}{\numberline {1}Background and Motivation}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Fuzzing Background}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Binary Rewriting Background}{3}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Problem Statement}{3}{section.1.3}%
-\contentsline {section}{\numberline {1.4}State of the Art}{4}{section.1.4}%
-\contentsline {subsection}{\numberline {1.4.1}AFL Functioning}{6}{subsection.1.4.1}%
+\contentsline {section}{\numberline {1.3}Problem Statement}{6}{section.1.3}%
+\contentsline {section}{\numberline {1.4}State of the Art}{7}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}AFL Functioning}{9}{subsection.1.4.1}%
+\contentsline {section}{\numberline {1.5}Goals and Challenges}{11}{section.1.5}%
 \vspace {2em}
-\contentsline {chapter}{Bibliography\markboth {\MakeUppercase []{Bibliography}}{\MakeUppercase []{Bibliography}}}{9}{chapter*.12}%
+\contentsline {chapter}{Bibliography\markboth {\MakeUppercase []{Bibliography}}{\MakeUppercase []{Bibliography}}}{13}{chapter*.14}%
 \vspace {2em}
-\contentsline {chapter}{List of Acronyms}{11}{chapter*.15}%
-\contentsline {chapter}{List of Figures}{13}{chapter*.17}%
-\contentsline {chapter}{List of Tables}{15}{chapter*.19}%
-\contentsline {chapter}{List of Algorithms\markboth {\MakeUppercase []{List of Algorithms}}{\MakeUppercase []{List of Algorithms}}}{17}{chapter*.21}%
+\contentsline {chapter}{List of Acronyms}{17}{chapter*.17}%
+\contentsline {chapter}{List of Figures}{19}{chapter*.19}%
+\contentsline {chapter}{List of Tables}{21}{chapter*.21}%
+\contentsline {chapter}{List of Algorithms\markboth {\MakeUppercase []{List of Algorithms}}{\MakeUppercase []{List of Algorithms}}}{23}{chapter*.23}%
