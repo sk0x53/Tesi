@@ -1,4 +1,4 @@
-\begin{thebibliography}{25}
+\begin{thebibliography}{26}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -73,6 +73,13 @@ A.~Fioraldi, D.~C. Maier, D.~Zhang, and D.~Balzarotti.
 \newblock Libafl: A framework to build modular and reusable fuzzers.
 \newblock In \emph{Proceedings of the 2022 ACM SIGSAC Conference on Computer
   and Communications Security}, pages 1051--1065, 2022.
+
+\bibitem[Gan et~al.(2018)Gan, Zhang, Qin, Tu, Li, Pei, and Chen]{CollAFL}
+S.~Gan, C.~Zhang, X.~Qin, X.~Tu, K.~Li, Z.~Pei, and Z.~Chen.
+\newblock Collafl: Path sensitive fuzzing.
+\newblock In \emph{2018 IEEE Symposium on Security and Privacy (SP)}, pages
+  679--696, 2018.
+\newblock \doi{10.1109/SP.2018.00040}.
 
 \bibitem[Godefroid et~al.(2012)Godefroid, Levin, and Molnar]{Godefroid2012}
 P.~Godefroid, M.~Y. Levin, and D.~Molnar.

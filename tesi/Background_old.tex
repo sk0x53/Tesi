@@ -1,0 +1,373 @@
+This chapter will focus on presenting the context of this thesis.
+In particular in \hyperref[sec:fuzz_background]{ Section 1.1} the foundamentals of fuzzing will be discussed with a particular attention on coverage-guided grey-box fuzzing.
+In \hyperref[sec:biniary_rewriting]{Section 1.2} is discussed the background on binary rewriting, its approaches and its difficulties.
+\hyperref[sec:problem_statement]{Section 1.3} states the problem addressed by this work, 
+and \hyperref[sec:state_of_the_art]{Section 1.4} reviews the state of the art in binary-only fuzzing, focusing also on a description
+of AFL/AFL++ internals. In the last section (\hyperref[sec:goals-and-challenges]{Section 1.5}) I will present which are the main 
+goals and challenges of this thesis, and why the implemented tool differ from the state of the art .
+
+\section{Fuzzing Background} \label{sec:fuzz_background}
+    Fuzzing is nowaday a widely used approach for software testing and vulnerability assesment \cite{Zhu2022,Mallissery2023}. 
+    Its main strenght derives from the fact that could rapidly produce various inputs to be fed into a target executable.
+    In general a fuzzer can be divided into the \textbf{Input Generator}, that is responsible of provide inputs to the \textbf{Executor} that execute them.
+    During the execution the \textbf{Defect Monitor} check if the input executed ends in a crash of the target.\\
+    In particular the Input Generator must choose which input provide to the executor between all the inputs in the \textit{Input Space}.
+    A subset of the \textit{Input Space} is represented by the \textit{Valid Input Space}.
+    This is a subset of the input space, specifically contains all the inputs that are well formed with respect to the 
+    application that is being tested.
+    For example if the fuzzed target if a pdf-reader, a valid input is represented by a pdf file.
+    A good Input Generator must choose inputs that are also valid inputs, because only by doing this there is a probability of find a vulnerability\cite{Zhu2022}.
+    So the need of a precise input selection and mutation arise, in order to discover as many edge cases as possible.\\
+    In order to do so, the Input Generator must gain some informations from the Executor. 
+    Depending on the amount of informations that the Input Generator has, fuzzing can be classified into 
+    \textit{White-box}, \textit{Black-box} or \textit{Grey-box}.
+    In Black-box fuzzing the fuzzer does not have any knowledge about the execution \cite{Miller1990}.
+    In White-box fuzzing instead the source code must always be available and technique of Symbolic and Concolic execution are used \cite{Godefroid2012}.
+    In Grey-box fuzzing instead the inputs are choosen using, for example, \textbf{Code Coverage} informations (i.e. number of lines of code visited during execution of the target).
+    This approach is called \textit{Coverage-Guided Grey-box fuzzing} and is based on prioritizing the inputs that discover new sections of code.
+    Since not always the source code is available the Code Coverage is not always a viable Coverage Measure.
+    In general the coverage measures could be of different granularity \cite{CollAFL}. 
+    The main three options are:
+    \begin{itemize}
+        \item \textbf{Block Coverage} : Keep track of the hit count for each \gls{BB}. This approach is used by some 
+            popular fuzzers such as libFuzzer or honggfuzz \cite{CollAFL}. This method is often too imprecise because 
+            it fails to capture the transitions between bb
+        \item \textbf{Edge Coverage} : Keep track of the hit count of every edge in the \gls{CFG} (i.e. transition between two \gls{BB}).
+            This is the approach used by AFL and AFL++ \cite{aflplusplus}. Maintain the overheads similar to Block Coverage but could 
+            track the transition between \gls{BB} and not only their execution adding some context information.
+            Beside this it lack of precision in keep track of the order in which the edges are taken or not.
+        \item \textbf{Path Coverage} : This is the most complete metric and keep track of the complete path taken during the execution 
+            of a specific input, so keeping track also of the order in which the edges are taken.
+            The main drawback of this metric is represented by the fact that a single execution path could become very large, and so 
+            incur in large runtime and memory overheads.
+    \end{itemize}
+
+    The best approach to Code Coverage, in terms of overhead and effectiveness, is \textbf{Edge Coverage} \cite{CollAFL} which keeps track of which edges 
+    in the \gls{CFG} are taken during execution but without the overheads given by keeping track of all the execution path.
+    The coverage informations are obtained through the instrumentation of the target application. 
+    Depending on the availability of the source code, the instrumentation could be added in different ways:
+    \begin{itemize}
+        \item The source code is available : In this case the instrumentation is added at \textit{Compile Time}
+        \item The source code is not available : In this case there are two different techniques to instrument the application:
+        \begin{itemize}
+            \item \textbf{\gls{SBI}} : The instrumentation is added before the target is executed but without having the 
+                source code, so relying on Static Binary Rewriting techniques.
+            \item \textbf{\gls{DBI}} : The instrumentation is added during the program execution, relying on Dynamic Binary Rewriting techniques.
+        \end{itemize}
+    \end{itemize}
+    Indipendently from the availability of the source code, \textit{Coverage-Guided Grey-box fuzzing} technique could be summarized
+    as seen in \cref{fig:coverageguidedfuzzing}.
+    \begin{figure}[ht]
+        \caption{Generic diagram that describe Coverage-Guided Grey-box fuzzing workflow}
+        \centering
+        \includegraphics[width=\textwidth]{CoverageGuidedGrayBoxFuzzing.png}
+        \label{fig:coverageguidedfuzzing}
+    \end{figure}
+    \\Specifically for \textbf{Edge Coverage} the \cref{fig:coverageguidedfuzzing} could be described as follows:
+    \begin{enumerate}
+        \item \textbf{Seed Corpus} : Represent the set of inputs on which are computed the mutations. 
+            At the beginning is composed of user defined seeds but during fuzzing this set can grow if a specific mutation discover new edges not yet discovered.
+        \item \textbf{Input Generator} : Is composed of two main parts:
+            \begin{itemize}
+                \item \small \textbf{Seed Scheduling} : responsible of decide which seed in the corpus to mutate
+                \item \small \textbf{Mutation Scheduling} : responsible of decide which mutation or mutations apply to the selected seed
+            \end{itemize}
+        \item \textbf{Executor} : Is the component that actually execute the target binary. 
+            If the target binary has already been instrumented with Edge Coverage tracking instruction is executed as is, 
+            otherwise, in case of \gls{DBI} a dynamic translator must dynamically instrument the binary.
+        \item \textbf{Coverage Collection} : In case of Edge Coverage this part is represented by the data structure used 
+            to keep track of which edges between \gls{BB} has been taken and which are not.\\
+            These information are used, in some tools such as AFL++ \cite{aflplusplus} to guide Seed Scheduling, 
+            a technique that, given different inputs with the same level of coverage (i.e. number of edges visited), 
+            prioritize the input that is smaller in size and takes less execution time.
+        \item \textbf{Defect Monitor} : this component check for exit status of the target to catch any crash or 
+            for an eventual timeout of the target or any other unexpected behavior of this.
+            If none of these conditions are met, which means that the target ends normally, the coverage is checked 
+            to see if the current input had discovered a new edge. 
+            In case the input had discovered a new edge, that input is added to the corpus.
+        \end{enumerate}
+        
+\section{Binary Rewriting Background}\label{sec:biniary_rewriting}
+        Binary rewriting consist in the alteration af an already compiled executable without having access to the source code 
+        while the modified binary remains executable. 
+        The process of binary rewriting can be classified into Static Binary Rewriting , if the binary is stored into the 
+        persistent memory while rewrited, and Dynamic Binary Rewriting, if the binary is being executed.
+        The process of binary rewriting could be divided into four main steps \cite{binaryrewriting}:
+        \begin{enumerate}
+            \item \textit{Parsing} : In this phase the main goal is to retrieve informations about the binary. 
+                In particular the output of this phase is a raw stream of instruction (in machine code) and data.
+                These informations are then used in the Analysis step
+
+            \item \textit{Analysis} : The informations gained from the Parsing phase are analyzed to reconstruct the program structure.
+            For example the raw stream of machine code is passed through a disassembler that reconstruct the 
+            assembly instructions. A structural recory is performed, that include function detection and \gls{CFG} reconstruction, 
+            labels and symbols are extracted from the raw stream of data.
+
+            \item \textit{Transformation} : Once the \gls{CFG} has been reconstructed and functions and data boundaries has been recovered, 
+                the binary rewriter can modify the binary at the \gls{IP}. These are user defined locations in the binary where 
+                the rewriter must add, modify or delete an instruction. The \gls{IP} could be coarse or fine-grained.
+                In the first case, for example, the instrumentation could be made at branch level (at the beginning of each \gls{BB}).
+                In the second case instead any instruction could be potentially modified.
+            
+            \item \textit{Code Generation} : In this last step the changes made in the previous steps must be integrated into the 
+                binary preserving its executability. This could be done in different ways. For example the changes could be 
+                inserted into a new section of the executable and redirect the execution to the new code at the \gls{IP}.
+                Otherwise this step could be done also reassemblying a completely new executable starting from the 
+                changes made at \gls{IP}. This second approach is much harder because need to preserve all the 
+                references inside the excutable and preserve the executable layout.
+        \end{enumerate} 
+        \begin{figure}[ht]
+            \caption{An example of Static Binary Rewriting Workflow}
+            \centering
+            \includegraphics[width=200pt]{BinaryRewritingScheme.png}
+            \label{fig:static_rewrite}
+        \end{figure}
+        In \cref{fig:static_rewrite} can be seen a general scheme for static binary rewriting.
+        In this case all the phases occur prior the execution. So the cost in terms of overheads 
+        is paied only one time before the execution. The main problems are disambiguate between code and data 
+        (i.e. decide if a stream of bytes represent machine code instructions or are constant placed inline into the .text section) 
+        and resolving indirected branches \cite{binaryrewriting,andriesse2016}.
+        This problem is in general undecidable and can be resolved only using heuristics. 
+        There are three main families of static transformation:
+        \begin{itemize}
+            \item \textbf{Direct} : Consist in directly modifying the instruction. Works well with RISC systems with instructions having 
+                the same lenght. Generally fails to add and remove instruction because this doesn't preserve the offset into the .text section.
+            \item \textbf{Minimal-invasive}: The new code is inserted into a new section of the binary and in the \gls{IP} 
+                is placed an unconditional jump to the new section. 
+                The main liminitation of this approach arise when the new section is far from the \gls{IP} and a jump near (necessary to reach the new section) 
+                uses a number of bytes different from the number of bytes used by the instruction at the instrumentation point. 
+                Infact in assembly x86-64 a jump short uses 2 bytes and a jump near uses up to 5 bytes.
+                So in case at the instrumentation point is needed a jump short for alignment reason, 
+                but the new section is too far away and a jump near is needed, it is necessary to add a \textbf{trampoline}.
+                This approach can be seen in \cref{fig:trampoline_instrumentation}.
+                The tracmpoline based instrumentation is one of the most common approah to binary rewriting \cite{binaryrewriting}.
+                
+            \item \textbf{Full-translation} : The binary is lifted into an \gls{IR} that makes possible to add an \gls{IP} at 
+                instruction level. The \gls{IR} is then reassembled into machine code after the changes.
+        \end{itemize}
+        \begin{figure}[ht]
+            \caption{An example of Static Instrumentation with trampoline technique}
+            \centering
+            \includegraphics[width=400pt]{trampolineInstrumentation.png}
+            \label{fig:trampoline_instrumentation}
+        \end{figure}
+        With regard to Dynamic Binary Rewriting the Analysis and Transformation phases are executed at runtime for each instruction.
+        In this case there are not all the problems that arise in Static Binary Rewriting, since the Binary is being executed, 
+        and so the indirected branches could be resolved with the values inside the registers and there is no need for 
+        disambiguate between wich are constants inside the .text section and which are instructions.
+        The main drawback of this approach consist in prohibitive overheads caused by the dynamic analysis and transformation of each instruction, 
+        alongside the fact that only the taken branches could be modified.
+        Infact if a branch is not actually taken during execution, its instructions never reach the rewriter.\\
+        \\
+        A specific type of binary rewriting is the Binary Instrumentation.
+        The binary instrumentation uses binary rewriting techniques to add instructions that tracks binary behaviour, 
+        log event or, in the case of this thesis, insert edge coverage tracing instructions.
+\section{Problem Statement}\label{sec:problem_statement}
+    Coverage-Guided Grey-box fuzzing is one of the most effective techniques in automatic vulnerability disclosure on software 
+    \cite{zafl,Boehme2016}, 
+    due to its capability of generating wide amount of inputs based on the feedback obtained through Code Coverage informations 
+    that guide the fuzzer towards unexplored regions of code and therefore find hidden vulnerabilities.
+    Infact \textit{Black-box} fuzzing lack of a precise mutation strategy based on execution monitoring while 
+    \textit{White-box} fuzzing incur in high overheads given by Symbolic or Concolic execution.
+    Furthermore, the latter approach also requires the availability of the source code, not always available.
+    So \textit{Grey-box} fuzzing seems to be the most promising trade-off between precision of input mutation and overheads.
+    However, also \textit{Grey-box} fuzzing has its own drawback.
+    As matter of facts the effectiveness of this approach strongly depends on the availability of the source code.
+    Infact both \gls{SBI} and \gls{DBI} have many limitations.
+    The main limitation of \gls{DBI} is represented by huge amount of overheads (higher than 600\% overheads 
+    in case of AFL++ in QEMU-Mode \cite{zafl}) that makes the exploration of a substantial part 
+    of the valid input space almost impossible.
+    Instead \gls{SBI} main difficulty arise in modifying already compiled binaries.
+    There are several problems regarding Binary Rewriting such as Indirect Control Transfers (e.g. \texttt{call rax}), 
+    shift in binary sections or instructions that cause the need of rewrite the instructions that reference these sections and many others 
+    as seen in the previous \hyperref[sec:biniary_rewriting]{Section 1.2}.\\
+    For all these reasons the preferable technique nowaday is \textit{Compile time Edge Coverage instrumentation} with fuzzers such as 
+    AFL++, LibAFL \cite{libafl} o libFuzzer \cite{libfuzzer}.
+    However in practice, for industrial secrecy (i.e. proprietary software) or due to precompiled libraries, the applications are 
+    often closed source, and so Compile Time Edge Coverage instrumentation become unusable.\\
+    In these scenario binary only fuzzing is the only viable approach.
+    Although \gls{SBI} presents many challenges, it nonetheless proves to be the most fruitful area, 
+    given the low overheads \cite{zafl}.
+    In this thesis I will address the problem 
+    of statically instrument a binary with Edge Coverage instructions in a way that the instrumented binary is compatible with AFL++,  
+    which  has been choosen as fuzzer due to its popularity and because represent the current state of the art implementing 
+    most of the recent discovered techniques disclosed demostrated by Andrea Fioraldi et al. \cite{aflplusplus}.\\
+    The instrumentation must add as little overheads as possible with respect to compile time overheads and must 
+    preserve the correctness of the binary. This is important in fuzzing because less overheads means more executions per second, 
+    so a bigger portion of the valid input space could be visited.
+   
+    \section{State of the Art}\label{sec:state_of_the_art}
+        In this section I will disclose some of the current state of the art solutions in terms of binary only greybox fuzzing, 
+        differentiating between \gls{SBI} and \gls{DBI} approaches.
+        
+        \begin{itemize}
+            \item \underline{\textbf{\gls{DBI}}}
+            \begin{itemize}
+                \item \textbf{AFL++ in QEMU/FRIDA mode}\cite{aflplusplus} : AFL++ in QEMU mode uses QEMU in \textit{User-mode Emulation}
+                    which consist in translating guest machine code (i.e. guest \gls{BB}) into an intermediate representation 
+                    called \gls{TB} and subsequently append the coverage tracing instructions at the end of it.
+                    This approach is based on emulating the entire CPU thanks to QEMU virtualized environment. As stated before, 
+                    AFL in QEMU mode has overheads in the order of 600\% with respect to the compile time instrumentation \cite{zafl}\\
+                    Instead AFL++ in FRIDA mode \cite{aflplusplus-frida-mode} is based on a shared library injection in which is present a frida \cite{frida} component 
+                    called \textbf{Stalker} which intercept any \gls{BB} that is about to be executed , copy it into a \textbf{Code Cache} 
+                    and dynamically instrument the copy with coverage tracing instructions. 
+                    The execution control is then transferred to the copy, execute it, and then re-intercepted by \textbf{Stalker} at the end.
+                    Differenctly from QEMU mode doesn't emulate the CPU, but is executed within the memory space of the target program.
+                    AFL++ reports that FRIDA mode is approximately 2 to 5 times slower than compile-time instrumentation \cite{aflplusplus_binary_only_targets}.
+                
+                    \item \textbf{DynamoRIO/Pin}\cite{DynamoRIOPaper,PinPaper} : Both these approaches share the same base principle, called 
+                    \textbf{\gls{JIT} code caching}. This consist on take control of the thread when the target application starts, 
+                    and from that moment on every \gls{BB} is intercepted befor it is executed and is copied into a private \textbf{Code Cache}.
+                    The instrumentation is then added to the copy and the control is transferred to the code cache.
+                    The instrumentation process is more or less identical to FRIDA's Stalker mechanism, but are not optimized like taht.
+                    Also in this case the implemented version uses AFL\cite{zalewski2017afl} as fuzzer \cite{heuse2018afldynamorio,heuse2018aflpin}.
+            \end{itemize}
+                \item \underline{\textbf{\gls{SBI}}}
+                \begin{itemize}
+                    \item \textbf{Retrowrite} \cite{retrowrite}: This tool performs symbolic lifting on the code, replacing every reference
+                        discovered during disassembly with a symbolic label. Doing this allows instructions to be added without
+                        modifying the references, achieving reassembleable assembly.
+                        While RetroWrite can add ASan instrumentation, it cannot natively add AFL-style edge coverage instructions.
+                        To do so, the lifted assembly must be instrumented with the afl-gcc tool in order to produce the patched binary.
+                        Moreover, community-reported issues \cite{retrowrite_issue28} document missing instrumentation points when
+                        RetroWrite's symbolized output is compiled through afl-gcc, caused by a mismatch between RetroWrite's
+                        label-naming convention and afl-as's basic-block detection heuristics.
+                        Finally, RetroWrite only works with PIE, non-stripped binaries.
+                    \item \textbf{AFL-Dyninst} \cite{afldyninst} : AFL-Dyninst employs Dyninst's binary rewriting capabilities 
+                            to instrument an existing executable by inserting callbacks at selected basic blocks. 
+                            Dyninst's instrumentation mechanism is based on code patching and trampoline redirection \cite{Dyninst}, 
+                            which cause many context switches and state saving/restoring.
+                            Its performance are slightly better than \gls{DBI} but this approach reaches 500\% of fuzzing overheads 
+                            as demostrated by Stefan Nagy et al. \cite{zafl}.
+                 
+                    \item \textbf{ZAFL} \cite{zafl} : This tool uses two main phases: the first phase consist in 
+                        reconstructing an \gls{IR} using the Zipr bynary rewriter. 
+                        The obtained \gls{IR} is then used by ZAX to perform an optimization on the \gls{IR}, find the instrumentation points 
+                        and in the end instrument these points. ZAFL works inserting calls to a function that update the shared map 
+                        at the beginning of each \gls{BB}.
+                        Beside many improvements of ZAFL, Jifan Xiao et al. \cite{SystemCallPatternTracing} demostrated that 
+                        still cause crashes in binaries in 28\% of the binaries used in the cited paper.
+                \end{itemize}
+        \end{itemize}
+        Before proceding with the next section in which I will talk about the main goals of this thesis, I want to discuss the core functioning of AFL and AFL++, 
+        given its importance for understanding my approach.
+        \subsection{AFL Functioning} 
+        \cite{afl_technical_details}
+            As previously stated, AFL and, in particular, AFL++, are among the most widely used grey-box 
+            fuzzing frameworks \cite{aflplusplus}.
+            AFL++ represent the community based continuation of the initial AFL project.
+            The core functioning is virtually the same and consist in a \gls{SHM} region, shared between the fuzzer and the target.
+            The \gls{SHM} dimension could vary but the default one is of 65536 bytes.\\
+            Each ``cell'' of the  \gls{SHM} contains the number of times a given Edge in the \gls{CFG} has been 
+                taken during the execution of the target. Since the \gls{SHM} has 65536 ``cells'', each ``cell'' 
+                can contain a number from 0 to 255.
+            The ``cell'' position is computed with a specific hash function applied to the IDs of the two \gls{BB} 
+            that formed the edge. 
+            The main Edge Tracing update rule is summarized in \cref{alg:afl_style_update}. 
+            \begin{algorithm}
+                \caption{AFL Style SHM update rule}
+                \label{alg:afl_style_update}
+                \begin{algorithmic}[1]
+                    \STATE $idx \gets current\_bb\_id \oplus previous\_bb\_id$ \label{line:xor}
+                    \STATE $shared\_map[idx] \gets shared\_map[idx]+1$ \label{line:increment}
+                    \STATE $previous\_bb\_id \gets current\_bb\_id \gg 1$ \label{line:shift}
+                \end{algorithmic}
+            \end{algorithm}
+            The line \cref{line:shift} of \cref{alg:afl_style_update} is used to avoid update the same \gls{SHM} 
+            location if an edge is traversed forward or backward.
+            An example of this could be a simple \texttt{do-while} loop as seen in \cref{alg:do-while} and in \cref{fig:Do-While-CFG}.\\
+            \begin{figure}[ht]
+                \centering
+                \begin{minipage}[h]{0.48\textwidth}
+                    \centering
+                    \begin{algorithm}[H]
+                        \caption{Do-While Example}
+                        \label{alg:do-while}
+                        \begin{algorithmic}
+                            \REPEAT
+                                \STATE \COMMENT{Basic Block A }
+                            \UNTIL{$Permanence\_Condition$}
+                            \STATE \COMMENT{Basic Block C}
+                        \end{algorithmic}
+                    \end{algorithm}
+                Without \cref{line:shift} of \cref{alg:afl_style_update} the hash of Edge1 
+                will result in $ID\_A \oplus ID\_B$ and the hash of Edge2 (in case the permanence condition is not met) will result 
+                in $ID\_B \oplus ID\_A = ID\_A \oplus ID\_B$ for xor simmetry. But since the hash is the same there will be an hash collision
+                that cause the same ``cell'' to be updated two times instead on one.
+                \end{minipage}
+                \hfill
+                \begin{minipage}[h]{0.48\textwidth}
+                    \centering
+                    \includegraphics[width=100pt]{AFLUpdateAlg3InstructionWhy.png}
+                    \caption{Do-while CFG}
+                    \label{fig:Do-While-CFG}
+                \end{minipage}
+            \end{figure}
+            The main idea behind AFL is instrumenting each basic block of a target application with the shared map update rule.
+            The fuzzer initialize the \gls{SHM} memory with zeros, run the instrumented target that will update the \gls{SHM} 
+            with the \cref{alg:afl_style_update},  until it reach the end and then return to the fuzzer.
+            The \gls{SHM} ID is comunicated to the target with an environmental variable called \textit{\_\_AFL\_SHM\_ID}.\\
+            At this point the fuzzer check the just obtained \gls{SHM}, that il called \texttt{trace\_bits}, searching for any new discovered edge.
+            This is done keeping a structure called \texttt{virgin\_bits} that contains all the edges not yet discovered and 
+            it is initialized with ones. The compare is executed through $\texttt{trace\_bits} \land \texttt{virgin\_bits}$. If one of the position gives one after the logic AND, 
+            this means a new edge has been discovered. In this case the \texttt{virgin\_bits} data structure is updated and  
+            the just executed input is saved in the corpus. Otherwise a new input is choosen, mutated and then executed. \\
+            This approach requires that for each input a \texttt{fork()} call and then an \texttt{execve()} call are performed, 
+            causing a lot of overheads for each input execution.
+            Two main optimizations are been implemented:
+            \begin{itemize}
+                \item \textbf{forkserver}
+                \item \textbf{persisten-mode} : \small (vailable only in AFL++)
+            \end{itemize}
+            \vspace{0.5cm}
+            \begin{center}
+                \textbf{Forkserver}
+            \end{center}
+            The forkserver makes it possible to avoid calling \textbf{execve} for every input, performing it only once at the start of execution.
+            The forkserver is instrumented before the main of the target application.
+            The AFL++ forkserver protocol could be summarized as follows:
+            \begin{figure}[ht]
+                \caption{AFL++ Forkserver Protocol}
+                \centering
+                \includegraphics[width=350pt]{AFLPlusPlusForkserverFunctioning.png}
+                \label{fig:aflplusplusforkserver}
+            \end{figure}
+            \footnote{ \small \textit{The differences between AFL forkserver protocol and AFL++ forkserver protocol are mainly the messages exchanged between forkserver and fuzzer}}
+            The communication between Fuzzer and Target seen in \cref{fig:aflplusplusforkserver} happens 
+            unidirectionally through two different file descriptors created by the fuzzer:
+            \begin{itemize}
+                \item \textit{FORKSRV\_FD (fd 198)}: used by the forkserver to read a message sent by the fuzzer.
+                \item \textit{FORKSRV\_FD + 1 (fd 199)}: used by the forkserver to write a message to the fuzzer.
+            \end{itemize}
+            \begin{enumerate}
+                \item The forkserver sends the ``Welcome'' message to the fuzzer (0x41464c01).
+                \item The fuzzer reply with the status code. At this point the forkserver must check if $status \land 0xffffffff = 0x41464c01$.
+                        If it is equal continue the execution, otherwise the forkserver stops here.
+                \item The forkserver sends the execution options to the fuzzer. 
+                    These could indicate the fact that the target is running in persisten mode or other optimizations.
+                \item The forkserver sends 0x41464c01 to the fuzzer to end the handshake
+                \item The fuzzer write a message to the forkserver (its content is discarded) the handshake is finished.
+                            This message is the ``go'' signal for the forkserver.
+                \item The forkserver invoke \texttt{fork()}. The parent write the PID of the child to the fuzzer and then invoke \texttt{waitpid()}.\\
+                        The child continue the execution of the main until it ends
+                \item When the parent exit from the \texttt{waitpid()} function (i.e. the child terminate),  the exit status 
+                of the child is sent to the fuzzer and the forkserver waits for another ``go'' from the fuzzer.
+            \end{enumerate}        
+    \section{Goals and Challenges}\label{sec:goals-and-challenges}
+    The main goal of this thesis is to develop a tool capable of inline, static edge-coverage instrumentation
+    that preserves binary correctness while achieving performance comparable to compile-time instrumentation.\\
+    I have choose to implement the \gls{SBI} approach instead of \gls{DBI} due to its low overheads.
+    For doing this I will use GRAPE binary rewrite framework, a novel approach for binary rewriting that preserve binary executability, 
+    while introducing small overheads with respect to a trampoline based approach.
+    This approach involves several challenges, mainly related to preserving the binary's correctness and behavior.
+    Moreover the tool must be compatible with the already existing AFL++ fuzzer. 
+    This means implement the forkserver communication protocol inside the target binary without recompiling it.
+    This had created not few problems, mainly regarding the preservation of ELF layout after adding new sections.
+    With respect to ZAFL approach, the \gls{SHM} update instructions are placed directly inside the \gls{BB}, and not 
+    in a function called at each \gls{BB}.
+    This approach increment drastically the dimension of the file, causing many instruction repetitions (infact the \gls{SHM} 
+    instructions are always the same), but has been chosen because does not cause a context switch at each \gls{BB}.
+    Infact, in order to call a function, the state of the registers must be saved and restored. Moreover stack must be allocated, 
+    the callee RIP must be saved on the stack alongside the old Base Pointer of the stack.
+    All these operations to be performed at each \gls{BB} introduce significant overheads.
+    
