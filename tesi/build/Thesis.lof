@@ -1,7 +1,9 @@
 \babel@toc {english}{}\relax 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Generic diagram that describe Coverage-Guided Grey-box fuzzing workflow}}{3}{figure.caption.8}%
-\contentsline {figure}{\numberline {1.2}{\ignorespaces An example of Static Binary Rewriting Workflow}}{5}{figure.caption.9}%
-\contentsline {figure}{\numberline {1.3}{\ignorespaces An example of Static Instrumentation with trampoline technique}}{6}{figure.caption.10}%
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Generic diagram describing the Coverage-Guided Grey-box fuzzing workflow}}{3}{figure.caption.8}%
+\contentsline {figure}{\numberline {1.2}{\ignorespaces An example of a Static Binary Rewriting Workflow}}{5}{figure.caption.9}%
+\contentsline {figure}{\numberline {1.3}{\ignorespaces An example of Static Instrumentation using the trampoline technique}}{6}{figure.caption.10}%
 \contentsline {figure}{\numberline {1.4}{\ignorespaces Do-while CFG}}{10}{figure.caption.11}%
 \contentsline {figure}{\numberline {1.5}{\ignorespaces AFL++ Forkserver Protocol}}{12}{figure.caption.12}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces An example of printf function resolution using Dynamic Linking and Immediate Binding}}{16}{figure.caption.14}%

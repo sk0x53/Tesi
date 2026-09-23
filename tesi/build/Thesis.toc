@@ -10,10 +10,12 @@
 \contentsline {section}{\numberline {1.4}State of the Art}{8}{section.1.4}%
 \contentsline {subsection}{\numberline {1.4.1}AFL Functioning}{9}{subsection.1.4.1}%
 \contentsline {section}{\numberline {1.5}Goals and Challenges}{12}{section.1.5}%
+\contentsline {chapter}{\numberline {2}Approach}{15}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Forkserver Insertion}{15}{section.2.1}%
 \vspace {2em}
-\contentsline {chapter}{Bibliography\markboth {\MakeUppercase []{Bibliography}}{\MakeUppercase []{Bibliography}}}{15}{chapter*.14}%
+\contentsline {chapter}{Bibliography\markboth {\MakeUppercase []{Bibliography}}{\MakeUppercase []{Bibliography}}}{19}{chapter*.16}%
 \vspace {2em}
-\contentsline {chapter}{List of Acronyms}{19}{chapter*.17}%
-\contentsline {chapter}{List of Figures}{21}{chapter*.19}%
-\contentsline {chapter}{List of Tables}{23}{chapter*.21}%
-\contentsline {chapter}{List of Algorithms\markboth {\MakeUppercase []{List of Algorithms}}{\MakeUppercase []{List of Algorithms}}}{25}{chapter*.23}%
+\contentsline {chapter}{List of Acronyms}{23}{chapter*.19}%
+\contentsline {chapter}{List of Figures}{25}{chapter*.21}%
+\contentsline {chapter}{List of Tables}{27}{chapter*.23}%
+\contentsline {chapter}{List of Algorithms\markboth {\MakeUppercase []{List of Algorithms}}{\MakeUppercase []{List of Algorithms}}}{29}{chapter*.25}%

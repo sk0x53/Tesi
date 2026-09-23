@@ -103,12 +103,14 @@
 \usepackage{listings}
 
 \lstdefinestyle{asmstyle}{
+    language=[x86masm]Assembler,
     basicstyle=\ttfamily\footnotesize,
     numbers=left,
     numberstyle=\tiny\color{gray},
-    keywordstyle=\color{blue}\bfseries,
-    commentstyle=\color{gray}\itshape,
+    commentstyle=\itshape\color{green!60!black},
+    keywordstyle=\color{blue!80!black},
     stringstyle=\color{red},
+    identifierstyle=\color{red!80!black},
     frame=single,
     breaklines=true,
     showstringspaces=false,
@@ -216,6 +218,8 @@
 \chapter{Background and Motivation}
 	\input{Background.tex}
 
+\chapter{Approach}
+    \input{Approach.tex}
 %-------------------------------------------------------------------------
 %	BIBLIOGRAPHY
 %-------------------------------------------------------------------------
