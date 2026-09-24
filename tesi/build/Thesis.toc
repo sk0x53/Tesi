@@ -12,10 +12,12 @@
 \contentsline {section}{\numberline {1.5}Goals and Challenges}{12}{section.1.5}%
 \contentsline {chapter}{\numberline {2}Approach}{15}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Forkserver Insertion}{15}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}ELF Loading in case of Dynamic linking}{18}{subsection.2.1.1}%
+\contentsline {section}{\numberline {2.2}Shared Memory Instrumentation}{20}{section.2.2}%
 \vspace {2em}
-\contentsline {chapter}{Bibliography\markboth {\MakeUppercase []{Bibliography}}{\MakeUppercase []{Bibliography}}}{19}{chapter*.16}%
+\contentsline {chapter}{Bibliography\markboth {\MakeUppercase []{Bibliography}}{\MakeUppercase []{Bibliography}}}{25}{chapter*.20}%
 \vspace {2em}
-\contentsline {chapter}{List of Acronyms}{23}{chapter*.19}%
-\contentsline {chapter}{List of Figures}{25}{chapter*.21}%
-\contentsline {chapter}{List of Tables}{27}{chapter*.23}%
-\contentsline {chapter}{List of Algorithms\markboth {\MakeUppercase []{List of Algorithms}}{\MakeUppercase []{List of Algorithms}}}{29}{chapter*.25}%
+\contentsline {chapter}{List of Acronyms}{29}{chapter*.23}%
+\contentsline {chapter}{List of Figures}{31}{chapter*.25}%
+\contentsline {chapter}{List of Tables}{33}{chapter*.27}%
+\contentsline {chapter}{List of Algorithms\markboth {\MakeUppercase []{List of Algorithms}}{\MakeUppercase []{List of Algorithms}}}{35}{chapter*.29}%

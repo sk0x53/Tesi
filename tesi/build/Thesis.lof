@@ -7,3 +7,7 @@
 \contentsline {figure}{\numberline {1.5}{\ignorespaces AFL++ Forkserver Protocol}}{12}{figure.caption.12}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces An example of printf function resolution using Dynamic Linking and Immediate Binding}}{16}{figure.caption.14}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces An example of ELF execution with dynamic dependencies and constructor function}}{18}{figure.caption.15}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces ELF dynamically linked loading procedure}}{19}{figure.caption.16}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Example of a \textit {.dynsym} table for the shared object injected as dynamic dependency into target binary}}{21}{figure.caption.17}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Example of a \textit {.rela.dyn} relocation table extracted from a binary that has been instrumented with the tool discussed in this thesis}}{22}{figure.caption.18}%

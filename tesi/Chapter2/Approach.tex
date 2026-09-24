@@ -1,0 +1,15 @@
+In this chapter I will disclose the general aspects of the approach regarding the insertion of the Edge Tracing 
+instructions inside an already compiled binary.\\
+Four are three main steps to be fullfilled to have a binary that is able to trace Edge Coverage and 
+    to be compatible with AFL/AFL++:
+    \begin{enumerate}
+        \item Insertion of the forkserver invocation prior the main (\cref{sec:forkserver_insertion}).
+        \item Shared Memory address discovery (\cref{sec:shared_mem}).
+        \item Search of instrumentation points to trace Edge Coverage.
+        \item Intrument the previously found points with Edge Coverage tracing instructions.
+    \end{enumerate}
+
+\section{Forkserver Insertion}\label{sec:forkserver_insertion}
+    \input{Chapter2/Forkserver_insertion.tex}
+\section{Shared Memory Instrumentation}\label{sec:shared_mem}
+    \input{Chapter2/SharedMemory_export.tex}

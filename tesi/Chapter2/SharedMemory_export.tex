@@ -1,0 +1,98 @@
+As stated in the previuos chapter, the \gls{SHM} is declared by the fuzzer and the forkserver could 
+know the ID of the \gls{SHM} thanks to an environment variable setted by the fuzzer.
+The forkserver is injected as a constructor function of a shared object for which a DT\_NEEDED dependency 
+has been added to the target binary.
+But, as stated before, the dynamic linker execute the constructor of the shared object (and therefore the forkserver) before 
+the actual initialization of the binary.
+This means that a variable inside the forkserver is not by default visible inside the target binary.
+The best approach that allows for a variable to be accessible outside a binary is to export the symbol 
+that represent the variable.
+The dynamic linker will then uses the symbols to link different ELF togheter.
+\begin{itemize}
+    \item A component (an ELF or a Shared Object) could export a symbol that represent a variable or a function inside it.
+    \item Another component could reference the exported symbol and use it (if the first component is a dependency of the second).
+    \item The linker is the intermediary between the two components that is responsible of match the symbols names 
+        (the exported and the referenced) and store the address of exported symbol into the second component address space 
+        in a way that this component could access it.
+\end{itemize}
+All the symbols that belong to an ELF (both imported and exported) are stored into a specific section called \textit{.dynsym}.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=300pt]{dynsym_example.png}
+    \caption{Example of a \textit{.dynsym} table for the shared object injected as dynamic dependency into target binary}
+    \label{fig:dynsym_example}
+\end{figure}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=400pt]{reladynexample.png}
+    \caption{Example of a \textit{.rela.dyn} relocation table extracted from a binary that has been instrumented with the tool discussed in this thesis}
+    \label{fig:reladyn_example}
+\end{figure}
+In \cref{fig:dynsym_example} can be seen a list of symbols extracted from the shared object used for shared object injection.
+The first 24 symbols are external symbols that must be resolved. This can be seen because the Value column is 0 and Ndx is UND (undefined).
+The last 7 instead are symbols declared inside the shared object.
+When the visibility is setted to \textit{DEFAULT} this means that the symbol can be visible outside the shared object.
+
+The process of resolving the symbol references is called \textbf{relocation}.
+As seen in the previous section the relocation for the external symbols are resolved during the execution of the dynamic 
+linker before the main (or at the first invocation of the function in case of lazy binding).
+Since the shared object contains the symbol with written inside the address of the \gls{SHM} the idea to let the target binary 
+know the address of the \gls{SHM} is:
+\begin{itemize}
+    \item The shared object export that symbol declaring it with\\\texttt{\_\_attribute\_\_((visibility("default")))} \footnote{
+        It is not mandatory to write explicitly the attribute visibility because each symbol has the ``default'' visibility.
+    }
+    \item Add a relocation entry into the target binary. 
+\end{itemize}
+By doing this the dynamic linker, at binary loading, will resolve the relocation finding the address of the \gls{SHM} 
+inside the shared object and writing it somewere inside the target binary.
+Now the fact is : ``Where do the dynamic linker will write the resolved value?''
+
+In order to understand this, the \gls{GOT} mechanism must be revised.
+The \gls{GOT} is the place where the resolved relocations are written. After resolving the relocation, 
+the dynamic linker will write the relocated address into the \gls{GOT}.
+This procedure works both with external variables and with external function, with the difference that, if a binary uses 
+a function that is not declared inside it (e.g. \texttt{printf}), there is also the \gls{PLT} step. 
+The call to the function is always made to the \gls{PLT} but inside it there is a reference to the \gls{GOT}.
+The most common case in a generic binary is the relocation of a function (e.g. \texttt{printf}).
+The relocation could be in two different instants :
+\begin{itemize}
+    \item \textbf{Immediate Binding} : The relocation are resolved at load time. At the first call to printf, the \gls{GOT} 
+        entry of the printf is already written with the correct address of the function.
+    \item \textbf{Lazy Binding} (most common) : The relocation is resolved lazily upon the first invocation of the function. 
+    When control is transferred to the corresponding \gls{PLT} entry, the entry performs an indirect jump through 
+    its associated \gls{GOT} entry. Before the symbol is resolved, this \gls{GOT} entry contains an address that 
+    redirects execution back to the \gls{PLT}, eventually reaching the \gls{PLT} resolver stub. 
+    The resolver then invokes the dynamic linker, which performs the symbol lookup, resolves the relocation, 
+    and updates the \gls{GOT} entry with the resolved address of the function. 
+    Subsequent calls can therefore jump directly to the resolved address through the \gls{GOT}.
+\end{itemize}
+Since, as stated in the previous section, is difficult to add a \gls{GOT} entry in the general case, because it depend on 
+the presence of space available into the \gls{GOT}, the choosen approach has been to add a new section to the binary where 
+the needed symbols could be relocated.
+In \cref{fig:reladyn_example} the last two relocation entries are been addded.
+The first column show the offset. This is the actual address in which the dynamic linker will write the resolveed address.
+With reference with \cref{fig:dynsym_example} can be seen that the name of the relocated symbols must match between 
+the target binary that wants to access those symbols and the shared object that export it.
+
+Now the complete method to make the \gls{SHM} accessible by the target instrumented binary could be revised : 
+\begin{enumerate}
+    \item Add a new section to the binary. This section will be needed as \gls{GOT} in which the resolved symbol 
+        values will be written.
+    \item Add a dynamic symbol to the binary\footnote{In \cref{fig:reladyn_example} the symbol is \textit{\_\_afl\_area\_ptr}}. 
+        This is the local symbol that will be referenced by the relocation table.
+        The name of the local symbol must be the same as the symbol exported by the shared object that has already been 
+        injected as dependecy to the binary.
+    \item Add a dynamic relocation entry. This relocation entry must link the symbol to be relocated with the address of memory 
+        in which the resolved value will be written.
+\end{enumerate}
+
+Another precisation must be made.
+According to \cref{fig:dynamicallyLinkedProgramLoad} the relocations are resolved before the forkserver invocation (because the 
+forkserver lay inside the constructor of the shared object).
+The correct value for \gls{SHM} address is obtained by the forkserver, but the symbol is resolved before.
+The resolution of a symbol consist in write into the \gls{GOT} the address of that symbol inside the original component.
+In reality inside the \gls{GOT} there is not the address of the \gls{SHM}, but there is the address of the shared object 
+variable that reference the \gls{SHM}.
+When the main starts, the forkserver has already been executed, and dereferencing the relocated symbols will result 
+in the correct value initializated by the forkserver.
