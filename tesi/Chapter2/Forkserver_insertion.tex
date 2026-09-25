@@ -1,157 +1,88 @@
-This has been one of the most crucial points of this work.
+This has been one of the most crucial points of the whole work.
 First of all I have tried to instrument the forkserver function directly inline.
-This approach present many problems. The biggest difficulty is the fact that a forkserver needs some library functions 
-to work properly :
+This approach presents many problems. The biggest difficulty is the fact that a forkserver needs some library functions 
+to work properly:
 \begin{itemize}
     \item \texttt{read/write} to implement the communication protocol with the fuzzer.
     \item \texttt{fork/waitpid} to implement the forkserver main logic.
 \end{itemize}
 These functions could be part of the target binary (if the binary already uses these functions) or not.
-In the best case the binary already uses these functions and they are available. 
-In this case a call to these functions could be instrumented at any time taking into consideration the type of 
-linking with which the binary has been comppiled.
+In the best case, the binary already uses these functions and they are available. 
+In this case, a call to these functions could be instrumented at any time, taking into consideration the type of 
+linking with which the binary has been compiled.
 \begin{itemize}
-    \item In case of \textit{Static Linking} the function instructions are already inside the target application, 
-        because during the compilation the linker inserted it. So a call to these functions could be inserted finding 
-        the function address and then instrument a call instruction to that address.
-    \item In case of \textit{Dynamic Linking} the function instructions are not inside the target application when 
-        the application is launched, but the function addresses are dynamically resolved by the dynamic linker at need. 
-        In this case two new section must be inserted (\texttt{.plt} and \texttt{.got} sections).
-        These sections represent rispectively the \gls{PLT} and the \gls{GOT}
-        As can be seen in \cref{fig:dynamic_linking_example} 
+    \item In case of \textit{Static Linking}, the function instructions are already inside the target application, 
+        because the linker inserted them during compilation. So a call to these functions could be inserted by finding 
+        the function address and then instrumenting a call instruction to that address.
+    \item In case of \textit{Dynamic Linking}, the function instructions are not inside the target application when 
+        it is launched, but the function addresses are dynamically resolved by the dynamic linker as needed. 
+        In this case, two new sections must be used (the \texttt{.plt} and \texttt{.got} sections, as seen in 
+        \cref{sec:loading_relocations}).
 \end{itemize}
-\begin{figure}[ht]
-    \centering
-    \begin{minipage}[h]{0.48\textwidth}
-        \centering
-        \caption{An example of printf function resolution using Dynamic Linking and Immediate Binding}
-        \includegraphics[width=150pt]{dynamicFunctionResolution.png}
-        \label{fig:dynamic_linking_example}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[h]{0.48\textwidth}
-        \begin{small}
-        In \cref{fig:dynamic_linking_example} can be seen an example of dynamic resolution of \texttt{printf} function.
-        In case of Dynamic Linking the printf function call in the main is not done to the actual printf libc function.
-        Instead there is a specific function in the .plt section usually called  \texttt{printf@plt}.
-        Into the .plt section each library function is replaced by the following lines of code
-        \begin{lstlisting}
-jmp    QWORD PTR [rip + offset_to_printf@GOT]
-push   0x0
-jmp    <plt_starting_address>
-        \end{lstlisting}
-        Into the \gls{GOT} there are the resolved addresses of the external functions.
-        If the \gls{GOT} actually contains the resolved address of the printf (the library address), the first intruction 
-        will jump into the library.
-        The second and third instructions are used in case of \textbf{Lazy Binding}. In this case the GOT entry 
-        does not contain the address of the library function when the main start, but contain the next address of the plt entry.
-        At the \texttt{plt\_starting\_address} there is the plt resolver that invoke the dynamic linker that search for the 
-        address of printf function into libc.so library.
-        \end{small} 
-    \end{minipage}
-\end{figure}
+
 If the functions required by the forkserver are part of the target binary, their calls can be easily instrumented. 
 Depending on whether the binary is statically or dynamically linked, this can be done either by finding the address 
-of the function and calling it directly, or by finding the address of its .plt entry and calling it, 
+of the function and calling it directly, or by finding the address of its .plt entry and calling that, 
 leaving the dynamic linker to resolve the function. 
 The problem arises when the original binary does not include these functions. 
 In this case, it is almost impossible to modify the .plt and .got sections to include the new functions 
-while preserving the binary layout and correctness in the general case. In fact, in some exceptional cases, 
-padding may provide enough space in the .got section for a new entry, but this cannot be assumed in the general case. 
+while preserving the binary's layout and correctness in the general case. In fact, in some exceptional cases 
+padding may provide enough space in the .got section for a new entry, but this cannot be assumed in general. 
 Therefore, this first approach has been completely discarded.
-Since the forkserver is more complicated than the simple shared map update due to the presence of many controls on 
+Since the forkserver is more complex than a simple shared map update, due to the presence of many checks on 
 environment variables and communication with the fuzzer, 
-the best approach is to inject the compiled forkserver code inside the target.
-This has been done through a \textit{Shared Onject Injection}.
-In order to achieve a Shared Object Injection the \textit{.dynamic} section of the target binary is modified.
-In particular :
+the best approach is to inject the compiled forkserver code into the target through \textit{Shared Object Injection}.
+In order to achieve Shared Object Injection, the \textit{.dynamic} section of the target binary must be modified.
+In particular:
 \begin{itemize}
-    \item A \textit{DT\_NEEDED} entry is added with the name of the shared object to be injected. \footnote{ In reality 
-        the shared object name is a string that is written into the \textit{.dynstr} section and into the 
-        \textit{.dynamic} section is specified the offset of the string written into \textit{.dynstr}}
-    \item A \textit{RUNPATH} entry is added containing the path in which is saved the actual shared object.
+    \item A \textit{DT\_NEEDED} entry is added with the name of the shared object to be injected. \footnote{In reality 
+        the shared object name is a string that is written into the \textit{.dynstr} section, and the 
+        \textit{.dynamic} section specifies the offset of the string written into \textit{.dynstr}.}
+    \item A \textit{RUNPATH} entry is added containing the path where the actual shared object is saved.
 \end{itemize}
 \footnote{
-    The injection could be also made with LD\_PRELOAD environment variable. 
-    This variable tells the dynamic linker to add the specified libraries as dependencie of the executable.
-    The problem is that at each execution the variable must be resetted with the name of the shared object.
-    Adding the DT\_NEEDED dependency instead the dependency is persistent
+    The injection could also be done with the LD\_PRELOAD environment variable. 
+    This variable tells the dynamic linker to add the specified libraries as dependencies of the executable.
+    The problem is that at each execution the variable must be reset with the name of the shared object.
+    By adding the DT\_NEEDED dependency instead, the dependency becomes persistent.
 }\\
-The shared object injected into the target binary, contains the code of the forkserver that must be executed 
-prior the main of the binary.
-In order to achieve the fact that a function of a shared object injected into a binary is executed before the main, 
+The shared object injected into the target binary contains the code of the forkserver, which must be executed 
+before the main of the binary.
+In order for a function of a shared object injected into a binary to be executed before the main, 
 that function must be declared as a ``constructor''.
-This means prepend to the function declaration the string \texttt{\_\_attribute\_\_((constructor))}.
-When a function is declared as constructor, the address of this function is added to the \textit{.init\_array} section 
-of that binary.
-The addresses of the functions inside \textit{.init\_array} section are executed before the actual start of the main of the executable.
-When an executable has some dependencies, the dynamic linker execute the \textit{.init} section and the functions 
-contained into \textit{.init\_array} section before actually start the main of the executable.\footnote{
-    The .init section is the legacy version of .init\_array section. 
+As stated in \cref{sec:loading_relocations}, by declaring a function as a constructor, its address is 
+placed inside the \textit{.init\_array} section and executed before the actual start of the executable's main.
+When an executable has some dependencies, the dynamic linker executes the \textit{.init} section and the functions 
+contained in the \textit{.init\_array} section before actually starting the main of the executable.\footnote{
+    The .init section is the legacy version of the .init\_array section. 
 }
-In \cref{fig:dl_sub2} can be seen the execution flow of the dynamic linker when it initialize the dynamic dependencies of a target binary that 
+In \cref{fig:dl_sub2} the execution flow of the dynamic linker can be seen as it initializes the dynamic dependencies of a target binary that 
 has the dynamic dependencies shown in \cref{fig:dl_sub1}.
 \begin{enumerate}
-    \item The dynamic linker search for \textit{DT\_NEEDED} entries of the target binary. When a dependency is found, it map the library 
-        into a loaded \gls{VMA} of the process associated with the target binary that is being executed.
-    \item For each library founded previously, the dynamic linker execute each function found in the \textit{.init\_array} 
-        section of that shared object. These functions are the ``constructor'' of the shared objects.
-    \item When the dynamic linker ends, the \texttt{\_start} function is executed and it execute \texttt{\_\_libc\_start\_main} 
-        function that execute all the functions in the \textit{.init\_array} of the target binary.
+    \item The dynamic linker searches for \textit{DT\_NEEDED} entries of the target binary. When a dependency is found, it maps the library 
+        into a loaded \gls{VMA} of the process associated with the target binary being executed.
+    \item For each library found previously, the dynamic linker executes each function found in the \textit{.init\_array} 
+        section of that shared object.
+    \item When the dynamic linker finishes, the \texttt{\_start} function is executed, and it in turn executes \texttt{\_\_libc\_start\_main}, 
+        which executes all the functions in the \textit{.init\_array} of the target binary.
 \end{enumerate}
 \begin{figure}[ht]
 \centering
-        \begin{subfigure}[h]{0.7\textwidth}
+        \begin{subfigure}[h]{0.8\textwidth}
         \centering
         \includegraphics[width=\linewidth]{init_array_loading_example_a.png}
         \caption{Layout of a target binary with its dynamic dependencies}
         \label{fig:dl_sub1}
     \end{subfigure}
     \vspace{0.5cm}
-    \begin{subfigure}[h]{0.7\textwidth}
+    \begin{subfigure}[h]{0.8\textwidth}
         \centering
         \includegraphics[width=\linewidth]{init_array_loading_example_b.png}
         \caption{Dynamic linker initialization of dynamic dependencies}
         \label{fig:dl_sub2}
     \end{subfigure}
-    \caption{An example of ELF execution with dynamic dependencies and constructor function}
+    \caption{An example of ELF execution with dynamic dependencies and a constructor function}
     \label{fig:constructor_function_execution}
 \end{figure}
-Therefore, injecting a shared object that has a function declared as constructor into the target binary, the forkserver could 
-be actually executed prior main function of the target binary.
-
-Before actually discuss the technique with which the \gls{SHM} address is instrumented inside the target binary, 
-the way a binary is executed by the kernel must be reviewed in details.
-Since the tool implemented and discussed in this thesis, works on ELF (Executable and Linkable Format), 
-the Linux executable format standard, the binary execution algorithm shown in the next subsection will focus on this type of executable.
-\subsection{ELF Loading in case of Dynamic linking}
-If a binary is statically linked, each instruction that is needed by the executable is inside it.
-Supposing that an executable uses \texttt{printf} libc function and that executable is statically linked, then 
-the instructions of \texttt{printf} libc function are copied inside the binary itself.
-Nowaday the majority of binaries are dynamically linked. This is easily understandable because, if each process that uses 
-a library function copy inside its memory space all the function instructions, the result is a waste of memory space.
-Instead, if a binary is dynamically linked, the instructions of \texttt{printf} are not copied inside the process 
-memory space.
-In \cref{fig:dynamicallyLinkedProgramLoad} can be seen the procedure for loading a dynamically linked ELF.
-\begin{wrapfigure}{l}{0.55\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{dynamicallyLinkedProgramLoad.png}
-        \caption{ELF dynamically linked loading procedure}
-        \label{fig:dynamicallyLinkedProgramLoad}
-\end{wrapfigure}
-\begin{itemize}
-    \item The kernel loads the ELF. Between the ELF segments there is the \textit{PT\_INTERP} segment that contains the instruction 
-        to find the dynamic linker. The kernel, found the dynamic linker and execute it
-    \item The Dynamic Linker loads all the dynamic dependencies, resolve the relocations and prepare 
-        \gls{PLT} and \gls{GOT} entries.
-        For each shared object identify its \textit{.init\_array} section and execute the functions in it.
-        In the end locate the \texttt{\_start} function of the target binary and execute it.
-    \item \texttt{\_start} prepare some parameters and then call \texttt{\_\_libc\_start\_main} function that initialize the environment and 
-        the parameters to be passed at the main function. 
-        Then execute the functions found in \textit{.init\_array} section of the executable and in the end execute the main function.
-\end{itemize}
-The relocation mechanism lies at the foundation of dynamic linking because it allow to store the address of an 
-external function inside the binary address space (in particular inside the \gls{GOT})
-In the next \hyperref[sec:shared_mem]{Section 2.2} the relocation mechanism will be examined in greater depth, because is 
-the starting point for making accessible the \gls{SHM} to the target binary. 
-
+Therefore, injecting an \gls{SO} that has a function declared as constructor into the target binary could resolve the 
+problem of instrumenting the forkserver so that it is executed before the main.

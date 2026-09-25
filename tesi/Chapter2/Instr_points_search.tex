@@ -1,0 +1,7 @@
+At this point the target binary has been modified with :
+\begin{itemize}
+    \item A DT\_NEEDED entry has been added to \textit{.dynamic} pointing to a shared object that contains 
+        the forkserver declared as constructor, alongside a RUNPATH that points to that shared object.
+    \item A symbol that represent the pointer to the \gls{SHM} has been inserted into \textit{.dynsym}
+    \item A relocation 
+\end{itemize}

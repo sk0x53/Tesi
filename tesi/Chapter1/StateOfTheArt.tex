@@ -1,0 +1,156 @@
+In this section I will present some of the current state-of-the-art solutions in binary-only grey-box fuzzing,
+    distinguishing between \gls{SBI} and \gls{DBI} approaches.
+
+    \begin{itemize}
+        \item \underline{\textbf{\gls{DBI}}}
+        \begin{itemize}
+            \item \textbf{AFL++ in QEMU/FRIDA mode} \cite{aflplusplus}: AFL++ in QEMU mode uses QEMU in \textit{User-mode Emulation},
+                which consists in translating guest machine code (i.e. guest \gls{BB}s) into an intermediate representation
+                called \gls{TB} and subsequently appending the coverage tracing instructions at the end of it.
+                This approach is based on emulating the entire CPU using QEMU's virtualized environment. As stated before,
+                AFL in QEMU mode has overheads on the order of 600\% with respect to compile-time instrumentation \cite{zafl}.\\
+                AFL++ in FRIDA mode \cite{aflplusplus-frida-mode}, instead, is based on shared library injection, in which a Frida \cite{frida} component
+                called \textbf{Stalker} intercepts any \gls{BB} that is about to be executed, copies it into a \textbf{Code Cache}
+                and dynamically instruments the copy with coverage tracing instructions.
+                Execution control is then transferred to the copy, which is executed and then re-intercepted by \textbf{Stalker} at the end.
+                Unlike QEMU mode, it does not emulate the CPU, but instead executes within the memory space of the target program.
+                AFL++ reports that FRIDA mode is approximately 2 to 5 times slower than compile-time instrumentation \cite{aflplusplus_binary_only_targets}.
+
+                \item \textbf{DynamoRIO/Pin} \cite{DynamoRIOPaper,PinPaper}: Both these approaches share the same basic principle, called
+                \textbf{\gls{JIT} code caching}. This consists in taking control of the thread when the target application starts,
+                and from that moment on, every \gls{BB} is intercepted before it is executed and is copied into a private \textbf{Code Cache}.
+                The instrumentation is then added to the copy, and control is transferred to the code cache.
+                The instrumentation process is more or less identical to FRIDA's Stalker mechanism, but is not as optimized.
+                Also in this case, the implemented version uses AFL \cite{zalewski2017afl} as the fuzzer \cite{heuse2018afldynamorio,heuse2018aflpin}.
+        \end{itemize}
+            \item \underline{\textbf{\gls{SBI}}}
+            \begin{itemize}
+                \item \textbf{Retrowrite} \cite{retrowrite}: This tool performs symbolic lifting on the code, replacing every reference
+                    discovered during disassembly with a symbolic label. Doing this allows instructions to be added without
+                    modifying the references, achieving reassembleable assembly.
+                    While RetroWrite can add ASan instrumentation, it cannot natively add AFL-style edge coverage instructions.
+                    To do so, the lifted assembly must be instrumented with the afl-gcc tool in order to produce the patched binary.
+                    Moreover, community-reported issues \cite{retrowrite_issue28} document missing instrumentation points when
+                    RetroWrite's symbolized output is compiled through afl-gcc, caused by a mismatch between RetroWrite's
+                    label-naming convention and afl-as's basic-block detection heuristics.
+                    Finally, RetroWrite only works with PIE, non-stripped binaries.
+                \item \textbf{AFL-Dyninst} \cite{afldyninst}: AFL-Dyninst employs Dyninst's binary rewriting capabilities
+                        to instrument an existing executable by inserting callbacks at selected basic blocks.
+                        Dyninst's instrumentation mechanism is based on code patching and trampoline redirection \cite{Dyninst},
+                        which causes many context switches and state saving/restoring operations.
+                        Its performance is slightly better than \gls{DBI}, but this approach still reaches 500\% fuzzing overhead,
+                        as demonstrated by Stefan Nagy et al. \cite{zafl}.
+
+                \item \textbf{ZAFL} \cite{zafl}: This tool uses two main phases: the first consists in
+                    reconstructing an \gls{IR} using the Zipr binary rewriter.
+                    The resulting \gls{IR} is then used by ZAX to perform an optimization on the \gls{IR}, find the instrumentation points,
+                    and finally instrument these points. ZAFL works by inserting calls to a function that updates the shared map
+                    at the beginning of each \gls{BB}.
+                    Despite ZAFL's many improvements, Jifan Xiao et al. \cite{SystemCallPatternTracing} demonstrated that
+                    it still causes crashes in 28\% of the binaries used in their cited paper.
+            \end{itemize}
+    \end{itemize}
+    Before proceeding to the next section, in which I will discuss the main goals of this thesis, I want to discuss the core functioning of AFL and AFL++,
+    given its importance for understanding my approach.
+    \subsection{AFL Functioning}
+    \cite{afl_technical_details}
+        As previously stated, AFL and, in particular, AFL++ are among the most widely used grey-box
+        fuzzing frameworks \cite{aflplusplus}.
+        AFL++ represents the community-based continuation of the original AFL project.
+        The core functioning is virtually the same and consists of a \gls{SHM} region shared between the fuzzer and the target.
+        The \gls{SHM} size can vary, but the default is 65536 bytes.\\
+        Each ``cell'' of the \gls{SHM} contains the number of times a given edge in the \gls{CFG} has been
+            taken during the execution of the target. Since the \gls{SHM} has 65536 ``cells'', each ``cell''
+            can contain a number from 0 to 255.
+        The ``cell'' position is computed with a specific hash function applied to the IDs of the two \gls{BB}s
+        that form the edge.
+        The main Edge Tracing update rule is summarized in \cref{alg:afl_style_update}.
+        \begin{algorithm}
+            \caption{AFL-style SHM update rule}
+            \label{alg:afl_style_update}
+            \begin{algorithmic}[1]
+                \STATE $idx \gets current\_bb\_id \oplus previous\_bb\_id$ \label{line:xor}
+                \STATE $shared\_map[idx] \gets shared\_map[idx]+1$ \label{line:increment}
+                \STATE $previous\_bb\_id \gets current\_bb\_id \gg 1$ \label{line:shift}
+            \end{algorithmic}
+        \end{algorithm}
+        Line \cref{line:shift} of \cref{alg:afl_style_update} is used to avoid updating the same \gls{SHM}
+        location when an edge is traversed forward or backward.
+        An example of this could be a simple \texttt{do-while} loop, as seen in \cref{alg:do-while} and \cref{fig:Do-While-CFG}.\\
+        \begin{figure}[ht]
+            \centering
+            \begin{minipage}[h]{0.48\textwidth}
+                \centering
+                \begin{algorithm}[H]
+                    \caption{Do-While Example}
+                    \label{alg:do-while}
+                    \begin{algorithmic}
+                        \REPEAT
+                            \STATE \COMMENT{Basic Block A}
+                        \UNTIL{$Permanence\_Condition$}
+                        \STATE \COMMENT{Basic Block C}
+                    \end{algorithmic}
+                \end{algorithm}
+            Without \cref{line:shift} of \cref{alg:afl_style_update}, the hash of Edge1
+            would result in $ID\_A \oplus ID\_B$, and the hash of Edge2 (if the permanence condition is not met) would result
+            in $ID\_B \oplus ID\_A = ID\_A \oplus ID\_B$, due to the symmetry of XOR. But since the hash is the same, there would be a hash collision
+            that would cause the same ``cell'' to be updated twice instead of once.
+            \end{minipage}
+            \hfill
+            \begin{minipage}[h]{0.48\textwidth}
+                \centering
+                \includegraphics[width=100pt]{AFLUpdateAlg3InstructionWhy.png}
+                \caption{Do-while CFG}
+                \label{fig:Do-While-CFG}
+            \end{minipage}
+        \end{figure}
+        The main idea behind AFL is to instrument each basic block of a target application with the shared map update rule.
+        The fuzzer initializes the \gls{SHM} memory with zeros, runs the instrumented target, which updates the \gls{SHM}
+        according to \cref{alg:afl_style_update} until it reaches the end, and then returns to the fuzzer.
+        The \gls{SHM} ID is communicated to the target through an environment variable called \textit{\_\_AFL\_SHM\_ID}.\\
+        At this point the fuzzer checks the \gls{SHM} it has just obtained, called \texttt{trace\_bits}, searching for any newly discovered edge.
+        This is done by keeping a structure called \texttt{virgin\_bits}, which contains all the edges not yet discovered and
+        is initialized with ones. The comparison is performed through $\texttt{trace\_bits} \land \texttt{virgin\_bits}$. If any position results in one after the logical AND,
+        this means a new edge has been discovered. In this case, the \texttt{virgin\_bits} data structure is updated and
+        the input just executed is saved in the corpus. Otherwise, a new input is chosen, mutated and then executed. \\
+        This approach requires a \texttt{fork()} call followed by an \texttt{execve()} call for each input,
+        causing significant overhead for each input execution.
+        Two main optimizations have been implemented:
+        \begin{itemize}
+            \item \textbf{forkserver}
+            \item \textbf{persistent mode}: \small (available only in AFL++)
+        \end{itemize}
+        \vspace{0.5cm}
+        \begin{center}
+            \textbf{Forkserver}
+        \end{center}
+        The forkserver makes it possible to avoid calling \textbf{execve} for every input, performing it only once at the start of execution.
+        The forkserver is instrumented before the main function of the target application.
+        The AFL++ forkserver protocol can be summarized as follows:
+        \begin{figure}[ht]
+            \caption{AFL++ Forkserver Protocol}
+            \centering
+            \includegraphics[width=350pt]{AFLPlusPlusForkserverFunctioning.png}
+            \label{fig:aflplusplusforkserver}
+        \end{figure}
+        \footnote{ \small \textit{The differences between the AFL forkserver protocol and the AFL++ forkserver protocol lie mainly in the messages exchanged between the forkserver and the fuzzer}}
+        The communication between the Fuzzer and the Target shown in \cref{fig:aflplusplusforkserver} occurs
+        unidirectionally through two different file descriptors created by the fuzzer:
+        \begin{itemize}
+            \item \textit{FORKSRV\_FD (fd 198)}: used by the forkserver to read a message sent by the fuzzer.
+            \item \textit{FORKSRV\_FD + 1 (fd 199)}: used by the forkserver to write a message to the fuzzer.
+        \end{itemize}
+        \begin{enumerate}
+            \item The forkserver sends the ``Welcome'' message to the fuzzer (0x41464c01).
+            \item The fuzzer replies with the status code. At this point the forkserver must check whether $status \land 0xffffffff = 0x41464c01$.
+                    If it is equal, execution continues; otherwise, the forkserver stops here.
+            \item The forkserver sends the execution options to the fuzzer.
+                These can indicate that the target is running in persistent mode, or other optimizations.
+            \item The forkserver sends 0x41464c01 to the fuzzer to end the handshake.
+            \item The fuzzer writes a message to the forkserver (its content is discarded); the handshake is now finished.
+                        This message is the ``go'' signal for the forkserver.
+            \item The forkserver invokes \texttt{fork()}. The parent writes the PID of the child to the fuzzer and then invokes \texttt{waitpid()}.\\
+                    The child continues execution of the main function until it ends.
+            \item When the parent returns from the \texttt{waitpid()} function (i.e. the child has terminated), the exit status
+            of the child is sent to the fuzzer, and the forkserver waits for another ``go'' from the fuzzer.
+        \end{enumerate}

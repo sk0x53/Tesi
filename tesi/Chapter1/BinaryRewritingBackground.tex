@@ -1,0 +1,74 @@
+Binary rewriting consists in altering an already compiled executable without having access to the source code,
+        while ensuring that the modified binary remains executable.
+        The process of binary rewriting can be classified into Static Binary Rewriting, if the binary is stored in
+        persistent memory while being rewritten, and Dynamic Binary Rewriting, if the binary is being executed.
+        The process of binary rewriting can be divided into four main steps \cite{binaryrewriting}:
+        \begin{enumerate}
+            \item \textit{Parsing}: In this phase the main goal is to retrieve information about the binary.
+                In particular, the output of this phase is a raw stream of instructions (in machine code) and data.
+                This information is then used in the Analysis step.
+
+            \item \textit{Analysis}: The information gained from the Parsing phase is analyzed to reconstruct the program structure.
+            For example, the raw stream of machine code is passed through a disassembler that reconstructs the
+            assembly instructions. A structural recovery is performed, which includes function detection and \gls{CFG} reconstruction,
+            and labels and symbols are extracted from the raw stream of data.
+
+            \item \textit{Transformation}: Once the \gls{CFG} has been reconstructed and function and data boundaries have been recovered,
+                the binary rewriter can modify the binary at the \gls{IP}. These are user-defined locations in the binary where
+                the rewriter must add, modify or delete an instruction. The \gls{IP} can be coarse- or fine-grained.
+                In the first case, for example, the instrumentation could be inserted at branch level (at the beginning of each \gls{BB}).
+                In the second case, instead, any instruction could potentially be modified.
+
+            \item \textit{Code Generation}: In this last step, the changes made in the previous steps must be integrated into the
+                binary while preserving its executability. This can be done in different ways. For example, the changes could be
+                inserted into a new section of the executable, redirecting execution to the new code at the \gls{IP}.
+                Alternatively, this step could also be performed by reassembling a completely new executable starting from the
+                changes made at the \gls{IP}. This second approach is much harder, because it requires preserving all the
+                references inside the executable and preserving the executable layout.
+        \end{enumerate}
+        \begin{figure}[ht]
+            \caption{An example of a Static Binary Rewriting Workflow}
+            \centering
+            \includegraphics[width=200pt]{BinaryRewritingScheme.png}
+            \label{fig:static_rewrite}
+        \end{figure}
+        In \cref{fig:static_rewrite}, a general scheme for static binary rewriting can be seen.
+        In this case all the phases occur prior to execution, so the cost in terms of overhead
+        is paid only once, before the execution. The main problems are disambiguating between code and data
+        (i.e. deciding whether a stream of bytes represents machine code instructions or constants placed inline in the .text section)
+        and resolving indirect branches \cite{binaryrewriting,andriesse2016}.
+        This problem is generally undecidable and can only be solved using heuristics.
+        There are three main families of static transformation:
+        \begin{itemize}
+            \item \textbf{Direct}: Consists in directly modifying the instruction. Works well with RISC systems with instructions having
+                the same length. Generally fails when adding or removing instructions, because this does not preserve the offset into the .text section.
+            \item \textbf{Minimal-invasive}: The new code is inserted into a new section of the binary, and at the \gls{IP}
+                an unconditional jump to the new section is placed.
+                The main limitation of this approach arises when the new section is far from the \gls{IP} and a near jump (necessary to reach the new section)
+                uses a different number of bytes than the instruction at the instrumentation point.
+                In fact, in x86-64 assembly a short jump uses 2 bytes while a near jump uses up to 5 bytes.
+                So, if a short jump is needed at the instrumentation point for alignment reasons,
+                but the new section is too far away and a near jump is needed instead, it is necessary to add a \textbf{trampoline}.
+                This approach can be seen in \cref{fig:trampoline_instrumentation}.
+                Trampoline-based instrumentation is one of the most common approaches to binary rewriting \cite{binaryrewriting}.
+
+            \item \textbf{Full-translation}: The binary is lifted into an \gls{IR} that makes it possible to add an \gls{IP} at
+                instruction level. The \gls{IR} is then reassembled into machine code after the changes are made.
+        \end{itemize}
+        \begin{figure}[ht]
+            \caption{An example of Static Instrumentation using the trampoline technique}
+            \centering
+            \includegraphics[width=400pt]{trampolineInstrumentation.png}
+            \label{fig:trampoline_instrumentation}
+        \end{figure}
+        With regard to Dynamic Binary Rewriting, the Analysis and Transformation phases are executed at runtime for each instruction.
+        In this case, none of the problems that arise in Static Binary Rewriting occur, since the binary is being executed,
+        so indirect branches can be resolved using the values in the registers, and there is no need to
+        disambiguate between constants inside the .text section and instructions.
+        The main drawback of this approach is the prohibitive overhead caused by the dynamic analysis and transformation of each instruction,
+        together with the fact that only the taken branches can be modified.
+        In fact, if a branch is not actually taken during execution, its instructions never reach the rewriter.\\
+        \\
+        A specific type of binary rewriting is Binary Instrumentation.
+        Binary instrumentation uses binary rewriting techniques to add instructions that track binary behaviour,
+        log events, or, in the case of this thesis, insert edge coverage tracing instructions.

@@ -6,18 +6,23 @@
 \contentsline {chapter}{\numberline {1}Background and Motivation}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Fuzzing Background}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Binary Rewriting Background}{4}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Problem Statement}{7}{section.1.3}%
-\contentsline {section}{\numberline {1.4}State of the Art}{8}{section.1.4}%
-\contentsline {subsection}{\numberline {1.4.1}AFL Functioning}{9}{subsection.1.4.1}%
-\contentsline {section}{\numberline {1.5}Goals and Challenges}{12}{section.1.5}%
-\contentsline {chapter}{\numberline {2}Approach}{15}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Forkserver Insertion}{15}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}ELF Loading in case of Dynamic linking}{18}{subsection.2.1.1}%
-\contentsline {section}{\numberline {2.2}Shared Memory Instrumentation}{20}{section.2.2}%
+\contentsline {section}{\numberline {1.3}ELF Loading and Relocations}{7}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}ELF Structure}{7}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}ELF Linking}{8}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}ELF Loading}{9}{subsection.1.3.3}%
+\contentsline {subsection}{\numberline {1.3.4}ELF Symbols and Relocations}{11}{subsection.1.3.4}%
+\contentsline {section}{\numberline {1.4}Problem Statement}{13}{section.1.4}%
+\contentsline {section}{\numberline {1.5}State of the Art}{15}{section.1.5}%
+\contentsline {subsection}{\numberline {1.5.1}AFL Functioning}{16}{subsection.1.5.1}%
+\contentsline {section}{\numberline {1.6}Goals and Challenges}{19}{section.1.6}%
+\contentsline {chapter}{\numberline {2}Approach}{21}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Forkserver Insertion}{21}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Shared Memory Instrumentation}{24}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Instrumentation Points Search}{26}{section.2.3}%
 \vspace {2em}
-\contentsline {chapter}{Bibliography\markboth {\MakeUppercase []{Bibliography}}{\MakeUppercase []{Bibliography}}}{25}{chapter*.20}%
+\contentsline {chapter}{Bibliography\markboth {\MakeUppercase []{Bibliography}}{\MakeUppercase []{Bibliography}}}{27}{chapter*.21}%
 \vspace {2em}
-\contentsline {chapter}{List of Acronyms}{29}{chapter*.23}%
-\contentsline {chapter}{List of Figures}{31}{chapter*.25}%
-\contentsline {chapter}{List of Tables}{33}{chapter*.27}%
-\contentsline {chapter}{List of Algorithms\markboth {\MakeUppercase []{List of Algorithms}}{\MakeUppercase []{List of Algorithms}}}{35}{chapter*.29}%
+\contentsline {chapter}{List of Acronyms}{31}{chapter*.24}%
+\contentsline {chapter}{List of Figures}{33}{chapter*.26}%
+\contentsline {chapter}{List of Tables}{35}{chapter*.28}%
+\contentsline {chapter}{List of Algorithms\markboth {\MakeUppercase []{List of Algorithms}}{\MakeUppercase []{List of Algorithms}}}{37}{chapter*.30}%

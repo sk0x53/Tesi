@@ -1,0 +1,32 @@
+Coverage-Guided Grey-box fuzzing is one of the most effective techniques for automatic vulnerability discovery in software
+    \cite{zafl,Boehme2016},
+    due to its ability to generate a wide range of inputs based on the feedback obtained through Code Coverage information,
+    which guides the fuzzer towards unexplored regions of code and therefore helps it find hidden vulnerabilities.
+    In fact, \textit{Black-box} fuzzing lacks a precise mutation strategy based on execution monitoring, while
+    \textit{White-box} fuzzing incurs high overheads due to Symbolic or Concolic execution.
+    Furthermore, the latter approach also requires the availability of the source code, which is not always available.
+    So \textit{Grey-box} fuzzing seems to be the most promising trade-off between precision of input mutation and overhead.
+    However, \textit{Grey-box} fuzzing also has its own drawbacks.
+    As a matter of fact, the effectiveness of this approach strongly depends on the availability of the source code.
+    In fact, both \gls{SBI} and \gls{DBI} have many limitations.
+    The main limitation of \gls{DBI} is the huge amount of overhead (higher than 600\% in the case of AFL++ in QEMU
+    mode \cite{zafl}), which makes the exploration of a substantial part
+    of the valid input space almost impossible.
+    Instead, the main difficulty of \gls{SBI} arises in modifying already compiled binaries.
+    There are several problems regarding Binary Rewriting, such as Indirect Control Transfers (e.g. \texttt{call rax}),
+    shifts in binary sections, or instructions that require rewriting the instructions that reference these sections, and many others,
+    as seen in the previous \hyperref[sec:biniary_rewriting]{Section 1.2}.\\
+    For all these reasons, the preferred technique nowadays is \textit{Compile-time Edge Coverage instrumentation} with fuzzers such as
+    AFL++, LibAFL \cite{libafl}, or libFuzzer \cite{libfuzzer}.
+    However, in practice, for reasons of industrial secrecy (i.e. proprietary software) or due to precompiled libraries, applications are
+    often closed source, and so Compile-time Edge Coverage instrumentation becomes unusable.\\
+    In these scenarios, binary-only fuzzing is the only viable approach.
+    Although \gls{SBI} presents many challenges, it nonetheless proves to be the most fruitful area,
+    given its low overheads \cite{zafl}.
+    In this thesis I will address the problem
+    of statically instrumenting a binary with Edge Coverage instructions in a way that makes the instrumented binary compatible with AFL++,
+    which has been chosen as the fuzzer due to its popularity and because it represents the current state of the art, implementing
+    most of the recently discovered techniques demonstrated by Andrea Fioraldi et al. \cite{aflplusplus}.\\
+    The instrumentation must add as little overhead as possible with respect to compile-time overheads and must
+    preserve the correctness of the binary. This is important in fuzzing, because lower overhead means more executions per second,
+    so a larger portion of the valid input space can be explored.

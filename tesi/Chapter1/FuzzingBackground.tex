@@ -1,0 +1,79 @@
+Fuzzing is nowadays a widely used approach for software testing and vulnerability assessment \cite{Zhu2022,Mallissery2023}.
+    Its main strength derives from the fact that it can rapidly produce various inputs to be fed into a target executable.
+    In general, a fuzzer can be divided into the \textbf{Input Generator}, which is responsible for providing inputs to the \textbf{Executor} that executes them.
+    During the execution, the \textbf{Defect Monitor} checks whether the executed input causes a crash of the target.\\
+    In particular, the Input Generator must choose which input to provide to the executor among all the inputs in the \textit{Input Space}.
+    A subset of the \textit{Input Space} is represented by the \textit{Valid Input Space}.
+    This is a subset of the input space that specifically contains all the inputs that are well formed with respect to the
+    application being tested.
+    For example, if the fuzzed target is a PDF reader, a valid input is a PDF file.
+    A good Input Generator must choose inputs that are also valid inputs, because only by doing this is there a probability of finding a vulnerability \cite{Zhu2022}.
+    Hence the need for a precise input selection and mutation strategy arises, in order to discover as many edge cases as possible.\\
+    In order to do so, the Input Generator must obtain some information from the Executor.
+    Depending on the amount of information the Input Generator has, fuzzing can be classified into
+    \textit{White-box}, \textit{Black-box} or \textit{Grey-box}.
+    In Black-box fuzzing, the fuzzer does not have any knowledge of the execution \cite{Miller1990}.
+    In White-box fuzzing, instead, the source code must always be available, and techniques such as Symbolic and Concolic execution are used \cite{Godefroid2012}.
+    In Grey-box fuzzing, instead, the inputs are chosen using, for example, \textbf{Code Coverage} information (i.e. the number of lines of code visited during execution of the target).
+    This approach is called \textit{Coverage-Guided Grey-box fuzzing} and is based on prioritizing the inputs that discover new sections of code.
+    Since the source code is not always available, Code Coverage is not always a viable Coverage Measure.
+    In general, the coverage measures can be of different granularity \cite{CollAFL}.
+    The three main options are:
+    \begin{itemize}
+        \item \textbf{Block Coverage}: Keeps track of the hit count for each \gls{BB}. This approach is used by some
+            popular fuzzers such as libFuzzer or honggfuzz \cite{CollAFL}. This method is often too imprecise because
+            it fails to capture the transitions between BBs.
+        \item \textbf{Edge Coverage}: Keeps track of the hit count of every edge in the \gls{CFG} (i.e. the transition between two \gls{BB}s).
+            This is the approach used by AFL and AFL++ \cite{aflplusplus}. It maintains overheads similar to Block Coverage but can
+            track the transitions between \gls{BB}s and not only their execution, adding some context information.
+            However, it lacks precision in keeping track of the order in which the edges are taken.
+        \item \textbf{Path Coverage}: This is the most complete metric and keeps track of the complete path taken during the execution
+            of a specific input, thus also keeping track of the order in which the edges are taken.
+            The main drawback of this metric is that a single execution path could become very large, resulting in
+            large runtime and memory overheads.
+    \end{itemize}
+
+    The best approach to Code Coverage, in terms of overhead and effectiveness, is \textbf{Edge Coverage} \cite{CollAFL}, which keeps track of which edges
+    in the \gls{CFG} are taken during execution without the overheads incurred by keeping track of the entire execution path.
+    Coverage information is obtained through the instrumentation of the target application.
+    Depending on the availability of the source code, the instrumentation can be added in different ways:
+    \begin{itemize}
+        \item The source code is available: In this case the instrumentation is added at \textit{Compile Time}.
+        \item The source code is not available: In this case there are two different techniques for instrumenting the application:
+        \begin{itemize}
+            \item \textbf{\gls{SBI}}: The instrumentation is added before the target is executed, without access to the
+                source code, relying on Static Binary Rewriting techniques.
+            \item \textbf{\gls{DBI}}: The instrumentation is added during program execution, relying on Dynamic Binary Rewriting techniques.
+        \end{itemize}
+    \end{itemize}
+    Regardless of the availability of the source code, the \textit{Coverage-Guided Grey-box fuzzing} technique can be summarized
+    as shown in \cref{fig:coverageguidedfuzzing}.
+    \begin{figure}[ht]
+        \caption{Generic diagram describing the Coverage-Guided Grey-box fuzzing workflow}
+        \centering
+        \includegraphics[width=\textwidth]{CoverageGuidedGrayBoxFuzzing.png}
+        \label{fig:coverageguidedfuzzing}
+    \end{figure}
+    \\Specifically for \textbf{Edge Coverage}, \cref{fig:coverageguidedfuzzing} can be described as follows:
+    \begin{enumerate}
+        \item \textbf{Seed Corpus}: Represents the set of inputs on which mutations are computed.
+            At the beginning it is composed of user-defined seeds, but during fuzzing this set can grow if a specific mutation discovers new edges not yet found.
+        \item \textbf{Input Generator}: Composed of two main parts:
+            \begin{itemize}
+                \item \small \textbf{Seed Scheduling}: responsible for deciding which seed in the corpus to mutate.
+                \item \small \textbf{Mutation Scheduling}: responsible for deciding which mutation or mutations to apply to the selected seed.
+            \end{itemize}
+        \item \textbf{Executor}: The component that actually executes the target binary.
+            If the target binary has already been instrumented with Edge Coverage tracking instructions, it is executed as is;
+            otherwise, in the case of \gls{DBI}, a dynamic translator must dynamically instrument the binary.
+        \item \textbf{Coverage Collection}: In the case of Edge Coverage, this part is represented by the data structure used
+            to keep track of which edges between \gls{BB}s have been taken and which have not.\\
+            This information is used, in some tools such as AFL++ \cite{aflplusplus}, to guide Seed Scheduling,
+            a technique that, given different inputs with the same level of coverage (i.e. number of edges visited),
+            prioritizes the input that is smaller in size and takes less execution time.
+        \item \textbf{Defect Monitor}: This component checks the exit status of the target to catch any crash or
+            timeout of the target, or any other unexpected behavior.
+            If none of these conditions are met, meaning that the target ends normally, the coverage is checked
+            to see whether the current input discovered a new edge.
+            If the input discovered a new edge, that input is added to the corpus.
+        \end{enumerate}

@@ -1,0 +1,109 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+\title{Risoluzione delle rilocazioni dei simboli esterni in ELF\\
+\large (dopo il caricamento di tutte le \texttt{DT\_NEEDED})}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent
+Notazione: ogni oggetto caricato $obj$ (eseguibile o shared object) espone le
+proprie sezioni dinamiche: $obj.\texttt{relaDyn}$ (rilocazioni eager, da
+\texttt{.rela.dyn}), $obj.\texttt{relaPlt}$ (rilocazioni delle funzioni, da
+\texttt{.rela.plt}), $obj.\texttt{dynsym}$ (tabella dei simboli,
+\texttt{.dynsym}), $obj.\texttt{dynstr}$ (tabella delle stringhe,
+\texttt{.dynstr}), $obj.\texttt{gnuHash}$ (\texttt{.gnu.hash}),
+$obj.\texttt{got}$ / $obj.\texttt{gotPlt}$ (\texttt{.got} e \texttt{.got.plt},
+dove viene \emph{scritto} il risultato) e $obj.\texttt{loadBias}$ (base di
+caricamento scelta a runtime, es. da ASLR).
+
+\begin{algorithm}[h]
+\caption{\textsc{RisolviRilocazioni} --- eseguito da \texttt{ld.so} per ogni
+oggetto $obj$ del grafo di dipendenze, dopo che tutte le \texttt{DT\_NEEDED}
+sono state mappate in memoria}
+\begin{algorithmic}[1]
+\REQUIRE $L = [obj_1,\dots,obj_n]$ \COMMENT{tutti gli oggetti caricati:
+eseguibile + DT\_NEEDED transitive, gia' mappati in memoria}
+\ENSURE per ogni $obj \in L$, $obj.\texttt{got}$ / $obj.\texttt{gotPlt}$
+contengono l'indirizzo runtime corretto per ogni simbolo esterno referenziato
+
+\FOR{ogni $obj \in L$}
+    \STATE $R \gets obj.\texttt{relaDyn}$ \COMMENT{voci lette da \texttt{.rela.dyn} \emph{di obj}}
+    \FOR{ogni rilocazione $r \in R$}
+        \IF{$r.\text{tipo} = \texttt{R\_*\_RELATIVE}$}
+            \STATE $addr \gets obj.\texttt{loadBias} + r.\text{addend}$ \COMMENT{nessuna ricerca di simbolo: solo aggiustamento per ASLR}
+        \ELSE
+            \IF{$r.\text{tipo} \in \{\texttt{R\_*\_GLOB\_DAT}, \texttt{R\_*\_JUMP\_SLOT}\}$}
+                \STATE $sIdx \gets r.\text{sym\_index}$
+                \STATE $sName \gets obj.\texttt{dynstr}[\, obj.\texttt{dynsym}[sIdx].\text{st\_name} \,]$ \COMMENT{nome letto da \texttt{.dynsym}/\texttt{.dynstr} \emph{di obj}, il richiedente}
+                \STATE $target \gets \textsc{RisolviSimbolo}(sName, L, obj)$
+                \IF{$target = \text{NULL}$}
+                    \STATE \textbf{errore}: simbolo indefinito $sName$ \COMMENT{a meno che sia \texttt{STB\_WEAK}: in tal caso $addr \gets 0$}
+                \ELSE
+                    \STATE $(defObj, defIdx) \gets target$
+                    \STATE $addr \gets defObj.\texttt{loadBias} + defObj.\texttt{dynsym}[defIdx].\text{st\_value}$ \COMMENT{indirizzo calcolato nel binario/.so che \emph{definisce} il simbolo}
+                \ENDIF
+            \ENDIF
+        \ENDIF
+        \STATE scrivi $addr$ in $obj.\texttt{got}$ (dati) o $obj.\texttt{gotPlt}$ (funzioni) all'offset $r.\text{offset}$ \COMMENT{scrittura sempre nella GOT \emph{di obj}, il richiedente}
+    \ENDFOR
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[h]
+\caption{\textsc{RisolviSimbolo} --- individua \emph{in quale} oggetto del
+grafo il simbolo e' definito, seguendo lo scope globale}
+\begin{algorithmic}[1]
+\REQUIRE nome $name$, lista oggetti $L$, oggetto richiedente $requester$
+\ENSURE coppia $(obj, idx)$ del primo simbolo definito trovato, oppure NULL
+\FOR{ogni $obj \in L$ \COMMENT{ordine: eseguibile, poi librerie nell'ordine di caricamento}}
+    \STATE $idx \gets \textsc{GnuHashLookup}(name,\ obj.\texttt{gnuHash},\ obj.\texttt{dynsym},\ obj.\texttt{dynstr})$
+    \IF{$idx \neq \text{NOT\_FOUND}$ \textbf{e} $obj.\texttt{dynsym}[idx].\text{st\_shndx} \neq \texttt{SHN\_UNDEF}$}
+        \STATE \textbf{return} $(obj, idx)$ \COMMENT{primo match nello scope: puo' essere anche requester stesso (interposition)}
+    \ENDIF
+\ENDFOR
+\STATE \textbf{return} NULL
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[h]
+\caption{\textsc{GnuHashLookup} --- ricerca del simbolo dentro un singolo
+oggetto, tramite \texttt{.gnu.hash}}
+\begin{algorithmic}[1]
+\REQUIRE nome $name$, sezione $hashSec$ (\texttt{.gnu.hash}), $symtab$ (\texttt{.dynsym}), $strtab$ (\texttt{.dynstr}) \emph{tutti dello stesso oggetto candidato}
+\ENSURE indice in $symtab$, oppure NOT\_FOUND
+\STATE $h \gets \text{GnuHash32}(name)$
+\IF{bloom filter di $hashSec$ non contiene $h$}
+    \STATE \textbf{return} NOT\_FOUND \COMMENT{scarto immediato, nessun accesso a symtab/strtab}
+\ENDIF
+\STATE $b \gets h \bmod \text{nbuckets}(hashSec)$
+\STATE $i \gets \text{bucket}[b]$
+\WHILE{$i \neq 0$}
+    \IF{$(\text{chain}[i] \mid 1) = (h \mid 1)$} \COMMENT{confronto hash a 32 bit, economico}
+        \IF{$strtab[\, symtab[i].\text{st\_name} \,] = name$} \COMMENT{solo ora si tocca .dynstr}
+            \STATE \textbf{return} $i$
+        \ENDIF
+    \ENDIF
+    \IF{$\text{chain}[i]$ ha il bit di stop settato}
+        \STATE \textbf{break} \COMMENT{fine della catena del bucket}
+    \ENDIF
+    \STATE $i \gets i + 1$
+\ENDWHILE
+\STATE \textbf{return} NOT\_FOUND
+\end{algorithmic}
+\end{algorithm}
+
+\end{document}

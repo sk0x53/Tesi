@@ -1,0 +1,212 @@
+\gls{ELF} is the standard executable format under Linux operating systems.
+The work done on this thesis heavily involve the \gls{ELF} structure, with particular focus on some sections 
+used for relocation, alongside the process of execute an \gls{ELF}.
+\subsection{ELF Structure}
+    In this subsection the process of \gls{ELF} execution is discussed with a focus on the parts of the execution flow 
+    that will influence this work.\\
+    \textbf{ELF Header} is a structure locate at the beginning of the \gls{ELF} and contains some important informations 
+    about the type of \gls{ELF}, the type of target operating system \dots.
+    Alongside these informations there is the location of two important data structure inside the \gls{ELF} :
+    \begin{itemize}
+        \item The \textbf{Program Header Table} that defines the \textit{Execution View}
+        \item The \textbf{Section Header Table} that defines the \textit{Linking View}
+    \end{itemize}
+    The \textbf{Program Header Table} contains informations to create a runtime image of the program in memory with 
+    the  \textbf{Segments} \textit{(i.e. which parts of the fils must be loaded into memory (), which shared 
+    objects are needed \dots)}.
+    Each segment contains the access flag for that part of memory (i.e. Read/Write/Execute).
+    The \textbf{Section Header table} contains the informations about the \textbf{Sections} that compose the binary, 
+    togheter with the mapping with the segments (the section \textit{.text} in which segment is mapped?).
+    Among all the sections, some of them contains specific structure used to perform specific tasks:
+    \begin{itemize}
+        \item \textit{\textbf{.dynamic} : The dynamic section contains informations used by the Dynamic Linker 
+            (e.g. the dependencies, the interpreter location \dots)}.
+        \item \textit{\textbf{.dynsym} : List of symbols defined and used by the binary. 
+            If the binary is not stripped, there is also the \textbf{.symtab} section, that contains a more complete list of symbols}.
+        \item \textit{\textbf{.hash or .gnu.hash} : Structures used for efficient symbol lookup during symbol resolution}\footnote{
+            The \textbf{.gnu.hash} section is the more efficient version of \textbf{.hash}
+        }.
+        \item \textit{\textbf{.rela.dyn and .rela.plt} : Both are relocation table. the first is the standard one, 
+        the second is used in case of \textbf{Lazy Binding}}.
+        \item \textit{\textbf{.shstrtab, .dynstr and .strtab} : Holds lists of strings referenced by other parts of the \gls{ELF}.
+            The first holds section names, the second holds the names of the symbols contained into \textbf{.dynsym} section. 
+            the last one holds the names of the entire \textbf{.symtab} section}.
+        \item \textit{\textbf{.got and .got.plt} : Contains the \gls{GOT} filled by the dynamic linker with a
+            ddresses of external functions and variables. The first is the standard one, the second is used by the \gls{PLT}}.
+        \item \textit{\textbf{.plt} : Contains the \gls{PLT} that is an executable section with trampolines. In particular 
+            contains stubs for function that might be located in another \gls{ELF} or \gls{SO}. 
+            The stub reference the corresponding \gls{GOT} entry with the resolved address of the function.
+            This section is used in case of \textbf{Lazy Binding}}.
+        \item \textit{\textbf{.init and .init\_array} : Sections used for initialization. \textbf{.init} contains initialization code.
+            \textbf{.init\_array} contains addresses of initialization functions}.
+        \item \textit{\textbf{.fini and .fini\_array} : Sections used for termination handling. 
+            \textbf{.init} contains termination code.
+            \textbf{.init\_array} contains addresses of termination functions}.
+    \end{itemize}
+\subsection{ELF Linking}
+    Before actually dig deep into \gls{ELF} loading, the linking process must be revised.
+    The \textbf{Linking phase} consist in join togheter different pieces of code belonging to different files.
+    For example if a program uses \texttt{printf} function, it need to take the code of the printf from the libc library.
+    This process of joinig togheter the executable that uses the printf with the printf code that is in another file 
+    is called \textbf{Linkinig}. The linking could be of two different types : 
+    \begin{itemize}
+        \item \textbf{Static linking} : The needed code (e.g. the instructions of printf) is copied inside the binary 
+        at \textit{Link Time}. This cause the dimension of the binary to be bigger (because the code 
+        of external functions actually lies inside it) and conseguently a waste of RAM space (if 10 binaries both uses 
+        printf function, the code of the printf is copied inside all the 10 binaries).
+        \item \textbf{Dynamic linking} : The needed code is not copied inside the binary, but it contains informations (i.e. 
+        the address of the external function or variable) that are used to locate the needed resource.
+        The resolution happens at runtime when the Dynamic Linker finds and load in the process virtual address space the 
+        library and resolve the reference to the symbols. This allows different processes to share the same \gls{SO}.
+    \end{itemize}
+    Since nowaday the most used approach is \textbf{Dynamic Linking} the following discussion will focus on it.\\
+    As stated before the linking process can be used for both external variables and external functions.
+    In both cases the process is the same since both functions and variables could be exported as symbols.\\
+    When dealing with functions there is the possibility of use \textbf{Lazy Binding}.
+    This technique consist in resolve the symbol only during the first invocation of the function and not at load time 
+    as happens with the variables.
+    In order to achieve \textbf{Lazy Binding} a stub section is used (i.e. \textbf{.plt}).
+    When a program uses a library function, a \gls{PLT} entry is added into the .plt section.
+    \begin{figure}[ht]
+    \centering
+            \begin{subfigure}[h]{0.7\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{LazyBindingExample.png}
+            \caption{An example of puts function resolution using Dynamic Linking and Lazy Binding before the actual resolution}
+            \label{fig:lazy_resolution_plt_1}
+        \end{subfigure}
+        \vspace{0.5cm}
+        \begin{subfigure}[h]{0.7\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{LazyBindingExampleAfterResolution.png}
+            \caption{Same binary of \cref{fig:lazy_resolution_plt_1} but with symbol resolved}
+            \label{fig:lazy_resolution_plt_2}
+        \end{subfigure}
+        \caption{An example Lazy Binding involving .plt and .got}
+        \label{fig:lazy_resolution}
+    \end{figure}
+    As can be seen in \cref{fig:lazy_resolution} the relocation is resolved lazily upon the first invocation of the function. 
+    When control is transferred to the corresponding \gls{PLT} entry, the entry performs an indirect jump through 
+    its associated \gls{GOT} entry. Before the symbol is resolved, this \gls{GOT} entry contains an address that 
+    redirects execution back to the \gls{PLT}, eventually reaching the \gls{PLT} resolver stub. 
+    The resolver then invokes the dynamic linker, which performs the symbol lookup, resolves the relocation, 
+    and updates the \gls{GOT} entry with the resolved address of the function as can be seen in \cref{fig:lazy_resolution_plt_2}. 
+    Subsequent calls can therefore jump directly to the resolved address through the \gls{GOT}.
+
+\subsection{ELF Loading}
+    The next useful step in order to understand the choosen approach consist in go into details of ELF Loading phase.
+    There are 3 main actors that allow a binary to be executed properly:
+    \begin{itemize}
+        \item \textbf{Kernel} : is the one responsible of the actual \texttt{execve} invocation and 
+            allocation of different segments of memory. Moreover is the one that execute 
+            the dynamic linker used to resolve dependencies prior the execution of the binary
+        \item \textbf{Dynamic Linker} : Loads all the needed libraries into the process memory, 
+            resolve the external dependencies, prepare the .got and .plt and execute the initializers of the libraries.
+        \item \textbf{Target Binary} : Invoked by the Dynamic Linker, it prepare the environment for the main function and, 
+            in the end, it runs it.
+    \end{itemize}
+
+    \begin{figure}[ht]
+        \centering
+        \includegraphics[width=300pt]{dynamicallyLinkedProgramLoad.png}
+        \caption{Dynamically linked ELF loading procedure}
+        \label{fig:dynamicallyLinkedProgramLoad}
+    \end{figure}
+    All these procedures could be seen in details in \cref{fig:dynamicallyLinkedProgramLoad}.
+    The dynamic linker part is the one on which I will focus in this dissertation.
+    The dynamic linker:
+    \begin{itemize}
+        \item \textit{Loads all the DT\_NEEDED entries} : these are the dependencies (i.e. \gls{SO} needed by the binary).
+            For example if the binary uses an external function contained in \textit{libc.so}, the library from which the 
+            function is exported must be added as dependency
+        \item \textit{Resolve the relocations} : a focus on relocations will be presented in the next subsection
+        \item \textit{Arranges \gls{GOT} and \gls{PLT}}
+        \item \textit{Execute all the initializer functions (constructor) for each dependency} : For each \textit{DT\_NEEDED} 
+            entry found by the dynamic linker, it execute all the functions contained in \textit{.init\_array} section of 
+            that entry. These are functions declared with \texttt{\_\_attribute\_\_((constructor))}.
+        \item \textit{Find and execute the binary entry point}
+    \end{itemize}
+
+\subsection{ELF Symbols and Relocations}
+    The dynamic linker will use the symbols to link different ELF togheter.
+    \begin{itemize}
+        \item A component (an \gls{ELF} or a \gls{SO}) could export a symbol that represent a variable or a function inside it.
+        \item Another component could reference the exported symbol and use it (if the first component is a dependency of the second).
+        \item The linker is the intermediary between the two components that is responsible of match the symbols names 
+            (the exported and the referenced) and store the address of exported symbol into the second component address space 
+            in a way that this component could access it.
+    \end{itemize}
+    All the symbols that belong to an \gls{ELF} (both imported and exported) are stored into \textit{.dynsym} section.
+    \begin{figure}[ht]
+        \centering
+        \includegraphics[width=\linewidth]{dynsym_example.png}
+        \caption{Example of a \textit{.dynsym} table for a shared object}
+        \label{fig:dynsym_example}
+    \end{figure}
+    \begin{figure}[ht]
+        \centering
+        \includegraphics[width=\linewidth]{reladynexample.png}
+        \caption{Example of a \textit{.rela.dyn} relocation table extracted from a binary}
+        \label{fig:reladyn_example}
+    \end{figure}
+    In \cref{fig:dynsym_example} can be seen a list of symbols extracted from a \gls{SO}.
+    The first 4 symbols are external symbols that must be resolved. This can be seen because the Value column is 0 and Ndx is UND (undefined).
+    The last 7 instead are symbols declared inside the shared object.
+    When the visibility is setted to \textit{DEFAULT} this means that the symbol can be visible outside the shared object.
+
+    The process of resolving the symbol references is called \textbf{Relocation}. The relocation algorithm is shown in 
+    \cref{alg:relocation_resolution}.
+    Relocate a symbol means resolve the symbol (i.e. find the address of that symbol in the original object), and write 
+    that address inside the binary that has the relocation.
+    Specifically the symbol address is written inside the \gls{GOT}.
+    In \cref{fig:reladyn_example} the address where the symbol address must be written can be seen in the ``Offset'' column.
+    \begin{algorithm}
+        \caption{Relocation resolution at ELF load time}
+        \label{alg:relocation_resolution}
+        \begin{algorithmic}[1]
+            \REQUIRE $L = [obj_1,\dots,obj_n]$ \COMMENT{The object that has a dependency (DT\_NEEDED) must already been loaded in memory}
+            \ENSURE for each $obj \in L$, the respective GOT entry contains the resolved runutime address of the external symbol.
+            
+            \FOR{$obj \in L$}
+                \STATE $Reloc\_table \gets obj.\texttt{GET\_SECTION(".rela.dyn")}$
+                \FOR{$reloc \in Reloc\_table$}
+                    \IF{$reloc.\text{type} = \texttt{R\_*\_RELATIVE}$}
+                        \STATE $addr \gets obj.\texttt{loadBias} + r.\text{addend}$ 
+                        \COMMENT{\textcolor{green!60!black}{The symbol does not need to be resolved. The address must be adjusted in order to enable ASLR}}
+                    \ELSE
+                        \IF{$reloc.\text{type} \in \{\texttt{R\_*\_GLOB\_DAT} , \texttt{R\_*\_JUMP\_SLOT}\}$} 
+                            \STATE $sIdx \gets reloc.\text{symbol\_index}$
+                            \STATE $symbolName \gets obj.\texttt{dynstr}[\, obj.\texttt{dynsym}[sIdx].\text{name} \,]$ 
+                            \COMMENT{\textcolor{green!60!black}{The name of the symbol is read from \textit{.dynsym}}}
+                            \STATE $target \gets \textsc{ResolveSymbol}(symbolName, L, obj)$
+                            \IF{$target = \text{NULL}$}
+                                \STATE \textbf{error}: undefined symbol $symbolName$ 
+                            \ELSE
+                                \STATE $(defObj, defIdx) \gets target$ \COMMENT{\small \textcolor{green!60!black}{\textit{defObj} is the object that export the symbol, \textit{defIdx} is the index of the .dynsym table of \textit{defObj}}}
+                                \STATE $addr \gets defObj.\texttt{loadBias} + defObj.\texttt{dynsym}[defIdx].\text{value}$
+                                \COMMENT{\small \textcolor{green!60!black}{The address of the resolved symbol is computed as base\_address (of the object that export the symbol) + the offset in which the symbol is stored}}
+                            \ENDIF
+                        \ENDIF
+                    \ENDIF
+                    \STATE write $addr$ in $obj.\texttt{got}$ at offset $reloc.\text{offset}$ \COMMENT{\small \textcolor{green!60!black}{The destination address in which write the resolved symbol address is specified in the relocation entry}}
+                \ENDFOR
+            \ENDFOR
+        \end{algorithmic}
+        
+    \end{algorithm}
+    \begin{algorithm}
+        \caption{\textsc{ResolveSymbol} function used by \cref{alg:relocation_resolution}}
+        \label{alg:symbol_resolution}
+        \begin{algorithmic}[1]
+            \REQUIRE name $name$, object list $L$, object that request the resolution $requester$
+            \ENSURE pair $(obj, idx)$ of the first found symbol, or NULL if the symbol has not been defined by any object.
+            \FOR{$obj \in L$ \COMMENT{\small \textcolor{green!60!black}{The order is: first the executable, then all the DT\_NEEDED dependencies in order of definition}}}
+                \STATE $idx \gets \textsc{GnuHashLookup}(name,\ obj.\texttt{gnuHash},\ obj.\texttt{dynsym},\ obj.\texttt{dynstr})$
+                \COMMENT{\small \textcolor{green!60!black}{As seen before, the hashes are used in order to speedup the symbol lookup}}
+                \IF{$idx \neq \text{NOT\_FOUND}$ \textbf{\&\&} $obj.\texttt{dynsym}[idx].\text{st\_shndx} \neq \texttt{SHN\_UNDEF}$}
+                    \STATE \textbf{return} $(obj, idx)$ 
+                \ENDIF
+            \ENDFOR
+            \STATE \textbf{return} NULL
+        \end{algorithmic}
+    \end{algorithm}

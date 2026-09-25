@@ -1,0 +1,88 @@
+This has been one of the most crucial points of the whole work.
+First of all I have tried to instrument the forkserver function directly inline.
+This approach present many problems. The biggest difficulty is the fact that a forkserver needs some library functions 
+to work properly :
+\begin{itemize}
+    \item \texttt{read/write} to implement the communication protocol with the fuzzer.
+    \item \texttt{fork/waitpid} to implement the forkserver main logic.
+\end{itemize}
+These functions could be part of the target binary (if the binary already uses these functions) or not.
+In the best case the binary already uses these functions and they are available. 
+In this case a call to these functions could be instrumented at any time taking into consideration the type of 
+linking with which the binary has been comppiled.
+\begin{itemize}
+    \item In case of \textit{Static Linking} the function instructions are already inside the target application, 
+        because during the compilation the linker inserted it. So a call to these functions could be inserted finding 
+        the function address and then instrument a call instruction to that address.
+    \item In case of \textit{Dynamic Linking} the function instructions are not inside the target application when 
+        the application is launched, but the function addresses are dynamically resolved by the dynamic linker at need. 
+        In this case two new section must be used (\texttt{.plt} and \texttt{.got} sections as seen in 
+        \cref{sec:loading_relocations}).
+\end{itemize}
+
+If the functions required by the forkserver are part of the target binary, their calls can be easily instrumented. 
+Depending on whether the binary is statically or dynamically linked, this can be done either by finding the address 
+of the function and calling it directly, or by finding the address of its .plt entry and calling it, 
+leaving the dynamic linker to resolve the function. 
+The problem arises when the original binary does not include these functions. 
+In this case, it is almost impossible to modify the .plt and .got sections to include the new functions 
+while preserving the binary layout and correctness in the general case. In fact, in some exceptional cases, 
+padding may provide enough space in the .got section for a new entry, but this cannot be assumed in the general case. 
+Therefore, this first approach has been completely discarded.
+Since the forkserver is more complicated than the simple shared map update due to the presence of many controls on 
+environment variables and communication with the fuzzer, 
+the best approach is to inject the compiled forkserver code inside the target through a \textit{Shared Onbect Injection}.
+In order to achieve a Shared Object Injection the \textit{.dynamic} section of the target binary must be modified.
+In particular :
+\begin{itemize}
+    \item A \textit{DT\_NEEDED} entry is added with the name of the shared object to be injected. \footnote{ In reality 
+        the shared object name is a string that is written into the \textit{.dynstr} section and into the 
+        \textit{.dynamic} section is specified the offset of the string written into \textit{.dynstr}}
+    \item A \textit{RUNPATH} entry is added containing the path in which is saved the actual shared object.
+\end{itemize}
+\footnote{
+    The injection could be also made with LD\_PRELOAD environment variable. 
+    This variable tells the dynamic linker to add the specified libraries as dependencie of the executable.
+    The problem is that at each execution the variable must be resetted with the name of the shared object.
+    Adding the DT\_NEEDED dependency instead the dependency is persistent
+}\\
+The shared object injected into the target binary, contains the code of the forkserver that must be executed 
+prior the main of the binary.
+In order to achieve the fact that a function of a shared object injected into a binary is executed before the main, 
+that function must be declared as a ``constructor''.
+As stated in \cref{sec:loading_relocations}, by declaring a function as constructor, the address of that function is 
+placed inside the \textit{.init\_array} section and executed before the actual start of the main of the executable.
+When an executable has some dependencies, the dynamic linker execute the \textit{.init} section and the functions 
+contained into \textit{.init\_array} section before actually start the main of the executable.\footnote{
+    The .init section is the legacy version of .init\_array section. 
+}
+In \cref{fig:dl_sub2} can be seen the execution flow of the dynamic linker when it initialize the dynamic dependencies of a target binary that 
+has the dynamic dependencies shown in \cref{fig:dl_sub1}.
+\begin{enumerate}
+    \item The dynamic linker search for \textit{DT\_NEEDED} entries of the target binary. When a dependency is found, it map the library 
+        into a loaded \gls{VMA} of the process associated with the target binary that is being executed.
+    \item For each library founded previously, the dynamic linker execute each function found in the \textit{.init\_array} 
+        section of that shared object.
+    \item When the dynamic linker ends, the \texttt{\_start} function is executed and it execute \texttt{\_\_libc\_start\_main} 
+        function that execute all the functions in the \textit{.init\_array} of the target binary.
+\end{enumerate}
+\begin{figure}[ht]
+\centering
+        \begin{subfigure}[h]{0.7\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{init_array_loading_example_a.png}
+        \caption{Layout of a target binary with its dynamic dependencies}
+        \label{fig:dl_sub1}
+    \end{subfigure}
+    \vspace{0.5cm}
+    \begin{subfigure}[h]{0.7\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{init_array_loading_example_b.png}
+        \caption{Dynamic linker initialization of dynamic dependencies}
+        \label{fig:dl_sub2}
+    \end{subfigure}
+    \caption{An example of ELF execution with dynamic dependencies and constructor function}
+    \label{fig:constructor_function_execution}
+\end{figure}
+Therefore, injecting a \gls{SO} that has a function declared as constructor into the target binary, could resolve the 
+problem of instrument the forkserver in such a way that it is executeb prior the main.
