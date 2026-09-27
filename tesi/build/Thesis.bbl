@@ -1,4 +1,4 @@
-\begin{thebibliography}{26}
+\begin{thebibliography}{27}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -162,6 +162,12 @@ O.~A.~V. Ravn{\aa}s.
 \newblock Frida: Dynamic instrumentation toolkit for developers,
   reverse-engineers, and security researchers, 2026.
 \newblock URL \url{https://github.com/frida/frida}.
+
+\bibitem[{RizinOrg}(2026)]{cutter}
+{RizinOrg}.
+\newblock Cutter, 2026.
+\newblock URL \url{https://github.com/rizinorg/cutter}.
+\newblock Accessed September 27, 2026.
 
 \bibitem[Wenzl et~al.(2019)Wenzl, Merzdovnik, Ullrich, and
   Weippl]{binaryrewriting}

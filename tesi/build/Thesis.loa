@@ -2,3 +2,4 @@
 \contentsline {algorithm}{\numberline {1.2}{\ignorespaces \textsc {ResolveSymbol} function used by \cref {alg:relocation_resolution}}}{14}{algorithm.1.2}%
 \contentsline {algorithm}{\numberline {1.3}{\ignorespaces AFL-style SHM update rule}}{17}{algorithm.1.3}%
 \contentsline {algorithm}{\numberline {1.4}{\ignorespaces Do-While Example}}{17}{figure.caption.15}%
+\contentsline {algorithm}{\numberline {2.1}{\ignorespaces Instrumentation point search with DFS algorithm}}{27}{algorithm.2.1}%

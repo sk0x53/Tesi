@@ -19,10 +19,11 @@
 \contentsline {section}{\numberline {2.1}Forkserver Insertion}{21}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Shared Memory Instrumentation}{24}{section.2.2}%
 \contentsline {section}{\numberline {2.3}Instrumentation Points Search}{26}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Actual Instrumentation}{28}{section.2.4}%
 \vspace {2em}
-\contentsline {chapter}{Bibliography\markboth {\MakeUppercase []{Bibliography}}{\MakeUppercase []{Bibliography}}}{27}{chapter*.21}%
+\contentsline {chapter}{Bibliography\markboth {\MakeUppercase []{Bibliography}}{\MakeUppercase []{Bibliography}}}{31}{chapter*.22}%
 \vspace {2em}
-\contentsline {chapter}{List of Acronyms}{31}{chapter*.24}%
-\contentsline {chapter}{List of Figures}{33}{chapter*.26}%
-\contentsline {chapter}{List of Tables}{35}{chapter*.28}%
-\contentsline {chapter}{List of Algorithms\markboth {\MakeUppercase []{List of Algorithms}}{\MakeUppercase []{List of Algorithms}}}{37}{chapter*.30}%
+\contentsline {chapter}{List of Acronyms}{35}{chapter*.25}%
+\contentsline {chapter}{List of Figures}{37}{chapter*.27}%
+\contentsline {chapter}{List of Tables}{39}{chapter*.29}%
+\contentsline {chapter}{List of Algorithms\markboth {\MakeUppercase []{List of Algorithms}}{\MakeUppercase []{List of Algorithms}}}{41}{chapter*.31}%

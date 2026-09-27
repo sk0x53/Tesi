@@ -65,12 +65,12 @@
 \newlabel{fig:lazy_resolution_plt_1@cref}{{[subfigure][1][1,4]1.4a}{[1][9][]10}{}{}{}}
 \newlabel{sub@fig:lazy_resolution_plt_1}{{a}{10}{An example of puts function resolution using Dynamic Linking and Lazy Binding before the actual resolution}{figure.caption.11}{}}
 \newlabel{sub@fig:lazy_resolution_plt_1@cref}{{[subfigure][1][1,4]1.4a}{[1][9][]10}{}{}{}}
-\newlabel{fig:lazy_resolution_plt_2}{{1.4b}{10}{Same binary of \cref {fig:lazy_resolution_plt_1} but with symbol resolved}{figure.caption.11}{}}
+\newlabel{fig:lazy_resolution_plt_2}{{1.4b}{10}{Same binary as \cref {fig:lazy_resolution_plt_1} but with symbol resolved}{figure.caption.11}{}}
 \newlabel{fig:lazy_resolution_plt_2@cref}{{[subfigure][2][1,4]1.4b}{[1][9][]10}{}{}{}}
-\newlabel{sub@fig:lazy_resolution_plt_2}{{b}{10}{Same binary of \cref {fig:lazy_resolution_plt_1} but with symbol resolved}{figure.caption.11}{}}
+\newlabel{sub@fig:lazy_resolution_plt_2}{{b}{10}{Same binary as \cref {fig:lazy_resolution_plt_1} but with symbol resolved}{figure.caption.11}{}}
 \newlabel{sub@fig:lazy_resolution_plt_2@cref}{{[subfigure][2][1,4]1.4b}{[1][9][]10}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.4}{\ignorespaces An example Lazy Binding involving .plt and .got}}{10}{figure.caption.11}\protected@file@percent }
-\newlabel{fig:lazy_resolution}{{1.4}{10}{An example Lazy Binding involving .plt and .got}{figure.caption.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.4}{\ignorespaces An example of Lazy Binding involving .plt and .got}}{10}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:lazy_resolution}{{1.4}{10}{An example of Lazy Binding involving .plt and .got}{figure.caption.11}{}}
 \newlabel{fig:lazy_resolution@cref}{{[figure][4][1]1.4}{[1][9][]10}{}{}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1.5}{\ignorespaces Dynamically linked ELF loading procedure}}{11}{figure.caption.12}\protected@file@percent }
 \newlabel{fig:dynamicallyLinkedProgramLoad}{{1.5}{11}{Dynamically linked ELF loading procedure}{figure.caption.12}{}}
@@ -105,11 +105,11 @@
 \citation{DynamoRIOPaper,PinPaper}
 \citation{zalewski2017afl}
 \citation{heuse2018afldynamorio,heuse2018aflpin}
-\citation{retrowrite}
-\citation{retrowrite_issue28}
 \@writefile{toc}{\contentsline {section}{\numberline {1.5}State of the Art}{15}{section.1.5}\protected@file@percent }
 \newlabel{sec:state_of_the_art}{{1.5}{15}{State of the Art}{section.1.5}{}}
 \newlabel{sec:state_of_the_art@cref}{{[section][5][1]1.5}{[1][15][]15}{}{}{}}
+\citation{retrowrite}
+\citation{retrowrite_issue28}
 \citation{afldyninst}
 \citation{Dyninst}
 \citation{zafl}
@@ -174,11 +174,30 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Shared Memory relocation between the target binary and the Shared Object}}{25}{figure.caption.19}\protected@file@percent }
 \newlabel{fig:shm_relocation}{{2.2}{25}{Shared Memory relocation between the target binary and the Shared Object}{figure.caption.19}{}}
 \newlabel{fig:shm_relocation@cref}{{[figure][2][2]2.2}{[1][25][]25}{}{}{}}
-\bibdata{Thesis_bibliography}
 \@writefile{toc}{\contentsline {section}{\numberline {2.3}Instrumentation Points Search}{26}{section.2.3}\protected@file@percent }
 \newlabel{sec:instr_point_search}{{2.3}{26}{Instrumentation Points Search}{section.2.3}{}}
 \newlabel{sec:instr_point_search@cref}{{[section][3][2]2.3}{[1][26][]26}{}{}{}}
+\citation{cutter}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2.1}{\ignorespaces Instrumentation point search with DFS algorithm}}{27}{algorithm.2.1}\protected@file@percent }
+\newlabel{alg:ip_search_dfs}{{2.1}{27}{Instrumentation point search with DFS algorithm}{algorithm.2.1}{}}
+\newlabel{alg:ip_search_dfs@cref}{{[algorithm][1][2]2.1}{[1][26][]27}{}{}{}}
+\bibdata{Thesis_bibliography}
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}Actual Instrumentation}{28}{section.2.4}\protected@file@percent }
+\newlabel{sec:actual_instrumentation}{{2.4}{28}{Actual Instrumentation}{section.2.4}{}}
+\newlabel{sec:actual_instrumentation@cref}{{[section][4][2]2.4}{[1][28][]28}{}{}{}}
 \@writefile{toc}{\vspace  {2em}}
+\newlabel{fig:pow_main_example}{{2.3a}{29}{Main CFG}{figure.caption.20}{}}
+\newlabel{fig:pow_main_example@cref}{{[subfigure][1][2,3]2.3a}{[1][26][]29}{}{}{}}
+\newlabel{sub@fig:pow_main_example}{{a}{29}{Main CFG}{figure.caption.20}{}}
+\newlabel{sub@fig:pow_main_example@cref}{{[subfigure][1][2,3]2.3a}{[1][26][]29}{}{}{}}
+\newlabel{fig:pow_function_example}{{2.3b}{29}{Pow function CFG}{figure.caption.20}{}}
+\newlabel{fig:pow_function_example@cref}{{[subfigure][2][2,3]2.3b}{[1][26][]29}{}{}{}}
+\newlabel{sub@fig:pow_function_example}{{b}{29}{Pow function CFG}{figure.caption.20}{}}
+\newlabel{sub@fig:pow_function_example@cref}{{[subfigure][2][2,3]2.3b}{[1][26][]29}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Example of the CFG of a program that computes the power operation between two numbers}}{29}{figure.caption.20}\protected@file@percent }
+\newlabel{fig:pow_example}{{2.3}{29}{Example of the CFG of a program that computes the power operation between two numbers}{figure.caption.20}{}}
+\newlabel{fig:pow_example@cref}{{[figure][3][2]2.3}{[1][26][]29}{}{}{}}
+\transparent@use{.4}
 \bibcite{aflplusplus-frida-mode}{{1}{2026}{{AFL++ contributors}}{{}}}
 \bibcite{aflplusplus_binary_only_targets}{{2}{}{{AFL++ Developers}}{{}}}
 \bibcite{andriesse2016}{{3}{2016}{{Andriesse et~al.}}{{Andriesse, Chen, van~der Veen, Slowinska, and Bos}}}
@@ -188,7 +207,7 @@
 \bibcite{retrowrite}{{7}{2020}{{Dinesh et~al.}}{{Dinesh, Burow, Xu, and Payer}}}
 \bibcite{aflplusplus}{{8}{2020}{{Fioraldi et~al.}}{{Fioraldi, Maier, Ei{\ss }feldt, and Heuse}}}
 \bibcite{libafl}{{9}{2022}{{Fioraldi et~al.}}{{Fioraldi, Maier, Zhang, and Balzarotti}}}
-\@writefile{toc}{\contentsline {chapter}{Bibliography\markboth {\MakeUppercase    []{Bibliography}}{\MakeUppercase    []{Bibliography}}}{27}{chapter*.21}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{Bibliography\markboth {\MakeUppercase    []{Bibliography}}{\MakeUppercase    []{Bibliography}}}{31}{chapter*.22}\protected@file@percent }
 \bibcite{CollAFL}{{10}{2018}{{Gan et~al.}}{{Gan, Zhang, Qin, Tu, Li, Pei, and Chen}}}
 \bibcite{Godefroid2012}{{11}{2012}{{Godefroid et~al.}}{{Godefroid, Levin, and Molnar}}}
 \bibcite{afldyninst}{{12}{}{{Heuse}}{{}}}
@@ -201,20 +220,21 @@
 \bibcite{Miller1990}{{19}{1990}{{Miller et~al.}}{{Miller, Fredriksen, and So}}}
 \bibcite{zafl}{{20}{2021}{{Nagy et~al.}}{{Nagy, Nguyen-Tuong, Hiser, Davidson, and Hicks}}}
 \bibcite{frida}{{21}{2026}{{Ravn{\r a}s}}{{}}}
-\bibcite{binaryrewriting}{{22}{2019}{{Wenzl et~al.}}{{Wenzl, Merzdovnik, Ullrich, and Weippl}}}
-\bibcite{SystemCallPatternTracing}{{23}{2025}{{Xiao et~al.}}{{Xiao, Jiang, Zhao, Huang, Liu, and Li}}}
-\bibcite{afl_technical_details}{{24}{}{{Zalewski}}{{}}}
-\bibcite{zalewski2017afl}{{25}{2017}{{Zalewski}}{{}}}
-\bibcite{Zhu2022}{{26}{2022}{{Zhu et~al.}}{{Zhu, Wen, Camtepe, and Xiang}}}
+\bibcite{cutter}{{22}{2026}{{RizinOrg}}{{}}}
+\bibcite{binaryrewriting}{{23}{2019}{{Wenzl et~al.}}{{Wenzl, Merzdovnik, Ullrich, and Weippl}}}
+\bibcite{SystemCallPatternTracing}{{24}{2025}{{Xiao et~al.}}{{Xiao, Jiang, Zhao, Huang, Liu, and Li}}}
+\bibcite{afl_technical_details}{{25}{}{{Zalewski}}{{}}}
+\bibcite{zalewski2017afl}{{26}{2017}{{Zalewski}}{{}}}
+\bibcite{Zhu2022}{{27}{2022}{{Zhu et~al.}}{{Zhu, Wen, Camtepe, and Xiang}}}
 \transparent@use{.4}
 \@writefile{toc}{\vspace  {2em}}
-\@writefile{toc}{\contentsline {chapter}{List of Acronyms}{31}{chapter*.24}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{List of Acronyms}{35}{chapter*.25}\protected@file@percent }
 \transparent@use{.4}
-\@writefile{toc}{\contentsline {chapter}{List of Figures}{33}{chapter*.26}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{List of Figures}{37}{chapter*.27}\protected@file@percent }
 \transparent@use{.4}
-\@writefile{toc}{\contentsline {chapter}{List of Tables}{35}{chapter*.28}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{List of Tables}{39}{chapter*.29}\protected@file@percent }
 \transparent@use{.4}
-\@writefile{toc}{\contentsline {chapter}{List of Algorithms\markboth {\MakeUppercase    []{List of Algorithms}}{\MakeUppercase    []{List of Algorithms}}}{37}{chapter*.30}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{List of Algorithms\markboth {\MakeUppercase    []{List of Algorithms}}{\MakeUppercase    []{List of Algorithms}}}{41}{chapter*.31}\protected@file@percent }
 \transparent@use{.4}
 \gdef\svg@ink@ver@settings{{\m@ne }{inkscape}{\m@ne }}
-\gdef \@abspage@last{46}
+\gdef \@abspage@last{50}

@@ -3,7 +3,7 @@
 \contentsline {figure}{\numberline {1.1}{\ignorespaces Generic diagram describing the Coverage-Guided Grey-box fuzzing workflow}}{3}{figure.caption.8}%
 \contentsline {figure}{\numberline {1.2}{\ignorespaces An example of a Static Binary Rewriting Workflow}}{5}{figure.caption.9}%
 \contentsline {figure}{\numberline {1.3}{\ignorespaces An example of Static Instrumentation using the trampoline technique}}{6}{figure.caption.10}%
-\contentsline {figure}{\numberline {1.4}{\ignorespaces An example Lazy Binding involving .plt and .got}}{10}{figure.caption.11}%
+\contentsline {figure}{\numberline {1.4}{\ignorespaces An example of Lazy Binding involving .plt and .got}}{10}{figure.caption.11}%
 \contentsline {figure}{\numberline {1.5}{\ignorespaces Dynamically linked ELF loading procedure}}{11}{figure.caption.12}%
 \contentsline {figure}{\numberline {1.6}{\ignorespaces Example of a \textit {.dynsym} table for a shared object}}{12}{figure.caption.13}%
 \contentsline {figure}{\numberline {1.7}{\ignorespaces Example of a \textit {.rela.dyn} relocation table extracted from a binary}}{12}{figure.caption.14}%
@@ -12,3 +12,4 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces An example of ELF execution with dynamic dependencies and a constructor function}}{23}{figure.caption.18}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Shared Memory relocation between the target binary and the Shared Object}}{25}{figure.caption.19}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Example of the CFG of a program that computes the power operation between two numbers}}{29}{figure.caption.20}%

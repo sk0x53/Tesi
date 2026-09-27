@@ -1,39 +1,39 @@
-As stated in the previuos chapter, the \gls{SHM} is declared by the fuzzer and the forkserver could 
-know the ID of the \gls{SHM} thanks to an environment variable setted by the fuzzer.
+As stated in the previous chapter, the \gls{SHM} is declared by the fuzzer and the forkserver can 
+know the ID of the \gls{SHM} thanks to an environment variable set by the fuzzer.
 The forkserver is injected as a constructor function of a \gls{SO} for which a DT\_NEEDED dependency 
 has been added to the target binary.
-But, as stated before, the dynamic linker execute the constructor of the \gls{SO} (and therefore the forkserver) before 
+But, as stated before, the dynamic linker executes the constructor of the \gls{SO} (and therefore the forkserver) before 
 the actual initialization of the binary.
-Moreover the \gls{SHM} address is saved in a variable of the \gls{SO} and not by default visible inside the target binary.
-The best approach that allows for a variable to be accessible outside a binary is to export the symbol 
-that represent the variable.
+Moreover, the \gls{SHM} address is saved in a variable of the \gls{SO} and is not, by default, visible inside the target binary.
+The best approach that allows a variable to be accessible outside a binary is to export the symbol 
+that represents the variable.
 
-As seen in \cref{sec:loading_relocations} section the relocation for the external symbols are resolved during the 
-execution of the dynamic linker before the main (or at the first invocation of the function in case of lazy binding).
-Since the \gls{SO} contains the symbol with written inside the address of the \gls{SHM} the idea to let the target binary 
+As seen in \cref{sec:loading_relocations}, the relocations for external symbols are resolved during the 
+execution of the dynamic linker before the main (or at the first invocation of the function in the case of lazy binding).
+Since the \gls{SO} contains the symbol holding the address of the \gls{SHM}, the idea to let the target binary 
 know the address of the \gls{SHM} is:
 \begin{itemize}
-    \item The \gls{SO} export that symbol declaring it with\\\texttt{\_\_attribute\_\_((visibility("default")))} \footnote{
-        It is not mandatory to write explicitly the attribute visibility because each symbol has the ``default'' visibility.
+    \item The \gls{SO} exports that symbol, declaring it with\\\texttt{\_\_attribute\_\_((visibility("default")))} \footnote{
+        It is not mandatory to explicitly write the visibility attribute, because each symbol has ``default'' visibility by default.
     }
-    \item Add a relocation entry into the target binary. 
+    \item Add a relocation entry to the target binary. 
 \end{itemize}
-By doing this the dynamic linker, at binary loading, will resolve the relocation finding the address of the variable 
-that store the address of the \gls{SHM} inside the \gls{SO} and write it in the \textit{.got} of the target binary.
+By doing this, the dynamic linker, at binary loading, will resolve the relocation, finding the address of the variable 
+that stores the address of the \gls{SHM} inside the \gls{SO}, and write it into the \textit{.got} of the target binary.
 
 Since, as stated in \cref{sec:forkserver_insertion}, it is difficult to add a \gls{GOT} entry in the general case (because 
-it depend on the presence of space available into the \gls{GOT}) the choosen approach has been to add a new section 
+it depends on the presence of available space in the \gls{GOT}), the chosen approach has been to add a new section 
 to the binary where the needed symbols, after relocation, will be written.
-Now the complete method to make the \gls{SHM} accessible by the target instrumented binary could be revised : 
+Now the complete method to make the \gls{SHM} accessible to the target instrumented binary can be reviewed: 
 \begin{enumerate}
-    \item Add a new section to the binary. This section will be needed as \gls{GOT} in which the resolved symbol 
+    \item Add a new section to the binary. This section will be needed as a \gls{GOT} in which the resolved symbol 
         values will be written.
     \item Add a dynamic symbol to the binary. 
         This is the local symbol that will be referenced by the relocation table.
         The name of the local symbol must be the same as the symbol exported by the \gls{SO} that has already been 
-        injected as dependecy to the binary.
-    \item Add a dynamic relocation entry. This relocation entry must link the symbol to be relocated with the address of memory 
-        in which the resolved value will be written (i.e. the section previously created to host the \gls{GOT}).
+        injected as a dependency of the binary.
+    \item Add a dynamic relocation entry. This relocation entry must link the symbol to be relocated with the memory address 
+        at which the resolved value will be written (i.e. the section previously created to host the \gls{GOT}).
 \end{enumerate}
 \begin{figure}[ht]
 \centering
@@ -60,17 +60,15 @@ Now the complete method to make the \gls{SHM} accessible by the target instrumen
     \caption{Shared Memory relocation between the target binary and the Shared Object}
     \label{fig:shm_relocation}
 \end{figure}
-According to \cref{fig:dynamicallyLinkedProgramLoad} the relocations are resolved before the forkserver invocation (because the 
-forkserver lay inside the constructor of the shared object).
-The correct value for \gls{SHM} address is obtained by the forkserver, but the symbol is resolved before and therefore 
-the address off the symbol is written inside the \gls{GOT} before the vairable contains the address of \gls{SHM}.
-This is not a problem because inside the \gls{GOT} is written the address of the variable inside the \gls{SO}.
-Any change in the value does not modify the address and, at the beginning of the main the \gls{SHM} address is available.
-When the main starts, the forkserver has already been executed, and dereferencing the relocated symbols will result 
-in the correct value initializated by the forkserver.
+According to \cref{fig:dynamicallyLinkedProgramLoad}, the relocations are resolved before the forkserver invocation (because the 
+forkserver lies inside the constructor of the shared object).
+The correct value for the \gls{SHM} address is obtained by the forkserver, but the symbol is resolved beforehand, and therefore 
+the address of the symbol is written inside the \gls{GOT} before the variable contains the address of the \gls{SHM}.
+When the main starts, the forkserver has already been executed, and dereferencing the relocated symbol will result 
+in the correct value initialized by the forkserver.
 The process can be seen in \cref{fig:shm_relocation}.
-In \cref{fig:shm_relocation1} the \gls{GOT} contains the address 0x0 because the relocation has not be performed yet 
-(suppose to be after the \gls{SO} loading but before symbol relocation).
-Just after performing the relocation of symbols, in \gls{GOT} there will be the address of the external variable, 
-but inside that variable there will be 0x0 because the \gls{SHM} has not been attached yet \cref{fig:shm_relocation2}.
-After forkserver execution the external variable will also contains the address of the \gls{SHM} \cref{fig:shm_relocation3}.
+In \cref{fig:shm_relocation1} the \gls{GOT} contains the address 0x0, because the relocation has not yet been performed 
+(assume this is after the \gls{SO} loading but before symbol relocation).
+Just after the relocation of symbols is performed, the \gls{GOT} will contain the address of the external variable, 
+but that variable will still contain 0x0, because the \gls{SHM} has not been attached yet, as shown in \cref{fig:shm_relocation2}.
+After forkserver execution, the external variable will also contain the address of the \gls{SHM}, as shown in \cref{fig:shm_relocation3}.
