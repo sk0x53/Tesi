@@ -63,17 +63,21 @@ For the moment, it can be said that this function filters the successors of the 
 discarding those that it would make no sense to consider.
 For example, if at a certain point the binary performs a call to a library function (e.g. \texttt{printf}), 
 without excluding this case the program would also instrument the \textit{plt} stub of the library function.
-\begin{figure}[t]
+\begin{figure}[ht]
     \centering
-    \begin{subfigure}[h]{0.8\textwidth}
+    \begin{subfigure}{0.8\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{pow_main_example.png}
+        \includegraphics[width=\textwidth,
+            height=0.5\textheight
+            ]{pow_main_example.png}
         \caption{Main CFG}
         \label{fig:pow_main_example}
     \end{subfigure}
-    \begin{subfigure}[h]{0.8\textwidth}
+    \begin{subfigure}{0.8\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{pow_function_example.png}
+        \includegraphics[width=\textwidth,
+            height=0.35\textheight
+            ]{pow_function_example.png}
         \caption{Pow function CFG}
         \label{fig:pow_function_example}
     \end{subfigure}
@@ -108,3 +112,4 @@ With respect to \cref{fig:pow_function_example}, the \gls{IP}s found are:
     \item \textbf{\textit{0x11bd}} (prev=\textit{0x11b5},next=\textit{0x11bd}) 
 \end{itemize}
 The initial \gls{BB} of the function is not instrumented.
+\clearpage

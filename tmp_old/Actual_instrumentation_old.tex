@@ -1,0 +1,123 @@
+In the last section has been discussed the method with which the \gls{IP}s are found.
+In this section the actual instrumentation is reviewed.
+As stated in \cref{sec:instr_point_search} there are two types of instrumentation :
+\begin{itemize}
+    \item The first one is used to setup the variables used by the \gls{SHM} update rule.
+    \item All the other \gls{IP} are used for the actual \gls{SHM} update.
+\end{itemize}
+With reference to \cref{alg:afl_style_update} there are 3 main variables to consider:
+\begin{itemize}
+    \item \textit{current\_bb\_id} : ID of the \gls{BB} in which the instrumentation is placed
+    \item \textit{previous\_bb\_id} : ID of the \gls{BB} from which the branch is taken
+    \item \textit{shared\_map} : Address of the \gls{SHM}
+\end{itemize}
+In the last example of the previous section (\cref{fig:pow_example}) the \gls{IP}s are already been found.
+Without considering the first (that is where the initial instrumeentation is placed), in all the other \gls{IP}s the 
+initial address of the \gls{BB} is where the instrumentation will be placed.
+Lets consider for example \textbf{0x11f1} \gls{IP} with previous \gls{BB} equal \textit{0x11c2} and the current \textit{0x11f1}.
+In this case, since there is only one incoming edge to \textbf{0x11f1}, the \textit{previous\_bb\_id} could be placed inline.
+But in the general case (e.g. \textbf{0x11b5}) there are more edges that ends in the \gls{BB}. For this reason become impossible 
+place the ID of the \gls{BB} directly inline.
+The solution implemented in the tool discussed in this thesis consist in storing a variable in a section of the binary\footnote{
+    This section could be the same used for relocation or a new one added specifically to store the data
+}
+This variable represent the \textit{previous\_bb\_id} and it is initialized by the initial instrumentation to a random value.
+
+For the \textit{current\_bb\_id} instead there is no need to store it into memory. It will be hardcoded into the 
+assembly instrumented within the basic block (to a random value).
+
+The \textit{shared\_map} is already been resolved and written in the section added to the binary specifically to store 
+resolved symbols.
+
+So now all the instrumentation phase could be revised with greter details.
+\begin{center}
+    \textbf{Initial Instrumentation}
+\end{center}
+This instrumentation is needed to :
+\begin{itemize}
+    \item Initialize the \textit{previous\_bb\_id}. This value is stored into a specific section created for the porpouse of 
+        holding temporary values needed for instrumentation.
+    \item Dereference the resolved \gls{SHM} address. This initialization step is performed to optimization porpouse. 
+        As can be seen in \cref{fig:shm_relocation} the instrumented section that work as \gls{GOT} holds inside the address 
+        of the variable inside the injected \gls{SO}. In order to obtain the actual \gls{SHM} address the value must be dereferenced twice. 
+        If, at any \gls{IP}, a dereference step must be performed twice, this will result in many useless overheads.
+        For this reason in the initial instrumentation the value is dereference twice and then saved into the same section of \textit{previous\_bb\_id}.
+        By doing this, at each \gls{IP}, the \gls{SHM} address must only be loaded into a register and find the offset of the correct cell.
+\end{itemize}
+\begin{center}
+    \textbf{\gls{SHM} update instrumentation}
+\end{center}
+In \cref{alg:shm_update} can be seen the general approach to \gls{SHM} update.
+Since the \texttt{rax} register value is modified, its value must be saved and restore before the actual \gls{SHM} update.
+The value of the \texttt{rax} is not saved into the stack but in the same section where \textit{previous\_bb\_id} and 
+\textit{shared\_map\_address} are stored.
+\begin{algorithm}
+    \caption{Pseudo-code of Shared Memory update instrumentation}
+    \label{alg:shm_update}
+    \begin{algorithmic}[1]
+        \STATE $\text{Save the state of \texttt{rax} register that will be used for computation}$
+        \STATE $\texttt{rax} \gets \textit{previous\_bb\_id}$
+        \STATE $\texttt{rax} \gets \texttt{rax} \oplus \textit{current\_bb\_id}$ \COMMENT{\small \textcolor{green!60!black}{into \texttt{rax} there will be the result of hash operation between the basic blocks}}
+        \STATE $\texttt{rax} \gets \texttt{rax} + \textit{shared\_map\_address} $\COMMENT{\small \textcolor{green!60!black}{since the shared map is an array, the offset is obtained adding the initial address plus the index}}
+        \STATE $[\,\texttt{rax}\,] \gets [\,\texttt{rax}\,] + 1$ \COMMENT{\small \textcolor{green!60!black}{the [\,\,] is the dereference operator}}
+        \STATE $\textit{previous\_bb\_id} \gets \textit{current\_bb\_id} \gg 1$
+        \STATE $\text{Restore the value of \texttt{rax} register to the previously saved value}$
+    \end{algorithmic}
+\end{algorithm}
+
+Now the complete approach could be revised : 
+\begin{itemize}
+    \item Add a dynamic dependency to a \gls{SO} that contains the forkserver function.
+    \item Add a symbol that will contains the \gls{SHM} address.
+    \item Add two new sections. The first will be used as \gls{GOT} to relocate the symbol. The second will 
+        be used as temporary memory space to store \textit{previous\_bb\_id} and \textit{shared\_map\_address} alongside register saving.
+    \item Add a relocation entry in order to resolve the symbol previously added. That symbol is exported from the \gls{SO}.
+    \item Find the \gls{IP}s with the algorithm discussed in \cref{sec:instr_point_search}
+    \item Add the initial instrumentation used to initialize the values of 
+        \textit{previous\_bb\_id} and \textit{shared\_map\_address} stored in the added section
+    \item For each previously found \gls{IP} add the \gls{SHM} update instructions as seen in \cref{alg:shm_update}
+\end{itemize}
+
+\begin{center}
+    \textbf{Optimization}
+\end{center}
+Since fuzzing is a technique that intensively rely on execution speed with the single input, the optimization 
+of the instrumentation could save time.
+In the previously discussed approach there is a major cause of overheads, that is the point in which the forkserver is executed.
+Infact, as can be seen in \cref{fig:dynamicallyLinkedProgramLoad}, since the forkserver is executed by the dynamic linker 
+before the execution of the actual target \texttt{\_start} function, at each input the target binary must execute many operations 
+before actually reach the main:
+\begin{itemize}
+    \item \_start function must be executed
+    \item \_\_libc\_start\_main function must be executed, in which the environment is setted up for the main execution
+    \item .init\_array functions are scanned and eventually executed
+\end{itemize}
+The ideal approach is to execute the forkserver at the very beginning of the main function, 
+avoiding execute all the preamble functions for each input.
+To achieve this the relocation mechanism is used again.
+In the injected \gls{SO}, the constructor function does not contains the forkserver anymore, but is used only to 
+prepare the execution of the forkserver. The workflow can be seen in \cref{fig:final_forkserver_invocation}
+Precisely the constructor function will :
+\begin{itemize}
+    \item setup the \gls{SHM} reading from the environmental variable the \gls{SHM} ID and assign to the exported symbol its address.\footnote{
+        In the next chapter the \gls{SHM} attach will be discussed deeply. Infact the \gls{SO} also includes a \textit{standalone-mode} 
+        in which there is no need for a \gls{SHM}
+    }
+    \item assign to a symbol (that will be also exported) the address of the forkserver function that will be executed
+\end{itemize}
+To the target binary will be added two symbols instead of one :
+\begin{itemize}
+    \item The first is the usual \gls{SHM} address
+    \item The second is a pointer to the forkserver function
+\end{itemize}
+These two symbols are then resolved by the dynamic linker at binary startup and their value is written to the section that 
+is has been added.
+Into the initial instrumentation first of all the address of the forkserver function is dereferenced and then executed.
+At the exit of forkserver the rest of the main function is executed without reexecuting all the binary startup functions 
+for each input.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=400pt]{FinalForkserverExecutionDiagram.png}
+    \caption{Optimized forkserver invocation}
+    \label{fig:final_forkserver_invocation}
+\end{figure}

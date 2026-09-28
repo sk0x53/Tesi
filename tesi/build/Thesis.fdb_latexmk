@@ -1,18 +1,18 @@
 # Fdb version 4
-["bibtex build/Thesis"] 1790525431.19621 "build/Thesis.aux" "build/Thesis.bbl" "build/Thesis" 1790525535.78771 0
+["bibtex build/Thesis"] 1790607721.23515 "build/Thesis.aux" "build/Thesis.bbl" "build/Thesis" 1790608054.21598 0
   "./Thesis_bibliography.bib" 1790516479.20618 10594 af1c038c4692c27b76b524f2c221a7e1 ""
   "/home/edoardo/.miktex/texmfs/install/bibtex/bst/natbib/abbrvnat.bst" 1789053095.56787 26532 66bed5cc59495faaa3f9ae9af9fa5e42 ""
-  "build/Thesis.aux" 1790525534.62547 19224 3340330013e3dcf08200fb16cb07c70d "pdflatex"
+  "build/Thesis.aux" 1790608052.54561 19928 bdccef455be4dbe18c5688061f2a7a66 "pdflatex"
   (generated)
   "build/Thesis.bbl"
   "build/Thesis.blg"
   (rewritten before read)
-["cusdep acn acr build/Thesis"] 1790524897.0402 "build/Thesis.acn" "build/Thesis.acr" "build/Thesis" 1790525535.7882 0
-  "build/Thesis.acn" 1790525534.63347 11163 4e656a4d6805793130adbfe2a56e4fa3 "pdflatex"
+["cusdep acn acr build/Thesis"] 1790608053.55173 "build/Thesis.acn" "build/Thesis.acr" "build/Thesis" 1790608054.2163 0
+  "build/Thesis.acn" 1790608052.55062 14319 2711b98e8b659d0b9bebc135a24f7841 "pdflatex"
   (generated)
   "build/Thesis.acr"
   (rewritten before read)
-["pdflatex"] 1790525530.39897 "/home/edoardo/materiale_tesi/Tesi/tesi/Thesis.tex" "build/Thesis.pdf" "Thesis" 1790525535.78841 0
+["pdflatex"] 1790608048.46066 "/home/edoardo/materiale_tesi/Tesi/tesi/Thesis.tex" "build/Thesis.pdf" "Thesis" 1790608054.21641 0
   "/home/edoardo/.miktex/texmfs/data/fonts/map/pdftex/pdftex.map" 1790245244.46839 79739 7dbccbe3c2e4147aa1cc9e0c3cc8d249 ""
   "/home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi1244/ecbx1200.pk" 1789053142.17658 74568 07931c296ed718ba4928162f869f6bab ""
   "/home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi2500/ecbx1200.pk" 1789055754.77422 154876 74b326cfe2d6cc4232d0c2e1e47bfec9 ""
@@ -51,6 +51,8 @@
   "/home/edoardo/.miktex/texmfs/install/fonts/tfm/jknappen/ec/ecrm1000.tfm" 1774938953.02294 3148 7e594c8240c71e432203f65ab5f95a51 ""
   "/home/edoardo/.miktex/texmfs/install/fonts/tfm/jknappen/ec/ecrm1200.tfm" 1774938953.02315 3152 4850ff0163852b7fab34bd55e1197f28 ""
   "/home/edoardo/.miktex/texmfs/install/fonts/tfm/jknappen/ec/ecrm1728.tfm" 1774938953.02338 3168 11457c8185ce67fb79662ba8b03d6db1 ""
+  "/home/edoardo/.miktex/texmfs/install/fonts/tfm/jknappen/ec/ecti0700.tfm" 1774938953.03801 2844 4ce33120ad42fff47ba8c63fe5d7f767 ""
+  "/home/edoardo/.miktex/texmfs/install/fonts/tfm/jknappen/ec/ecti0800.tfm" 1774938953.03814 2840 b6fc7cd2d2eed024b253ee3d8fe2d4cb ""
   "/home/edoardo/.miktex/texmfs/install/fonts/tfm/jknappen/ec/ecti1000.tfm" 1774938953.03838 2840 5606e1a681c23005308de9d61c09a8ff ""
   "/home/edoardo/.miktex/texmfs/install/fonts/tfm/jknappen/ec/ecti1200.tfm" 1774938953.03865 2832 28bbd97ca29f46e76c87a158a9915203 ""
   "/home/edoardo/.miktex/texmfs/install/fonts/tfm/jknappen/ec/ectt0800.tfm" 1774938953.03943 1348 ad6a25e9916b0e5ddfcc7ffcb8d43448 ""
@@ -277,9 +279,10 @@
   "Chapter1/LoadingAndRelocations.tex" 1790507542.68536 16265 0d21d121fcdc6c32fe6f9e7ceb3257eb ""
   "Chapter1/ProblemStatement.tex" 1790333662.33188 3128 534f98947cc11afbc529e894f40599e7 ""
   "Chapter1/StateOfTheArt.tex" 1790333714.43543 12540 00da6f8bd79f12d4152fd19bf7842fd6 ""
-  "Chapter2/Approach.tex" 1790525425.66078 1079 4058d1bfcb72f97ddd917bbd35ab29e5 ""
+  "Chapter2/Actual_instrumentation.tex" 1790608041.40115 8607 393dfa373d9bc3e8b7325e7df26b7e96 ""
+  "Chapter2/Approach.tex" 1790608047.78675 1127 ee447682f04c99f88397905665b5c0c8 ""
   "Chapter2/Forkserver_insertion.tex" 1790507722.44401 6280 aeb9b1a2637c972dcd21c29ffa22eeb1 ""
-  "Chapter2/Instr_points_search.tex" 1790525529.74678 6882 ea97b0a2b8f012fa6b8caf418cb28d82 ""
+  "Chapter2/Instr_points_search.tex" 1790588159.52236 6985 3533fb0139f30d8194eb99ce60375346 ""
   "Chapter2/SharedMemory_export.tex" 1790508201.15241 4976 858b31eb8778265c4561a1f229e7c02b ""
   "Configuration_Files/PoliMi3i_thesis.cls" 1789052805.94308 5370 0af241c047a6c7c634bb6039c1955869 ""
   "Configuration_Files/config.tex" 1789052201.30508 2476 d3dced3cc5952a79637f07732bd04be5 ""
@@ -289,6 +292,7 @@
   "Images/AFLUpdateAlg3InstructionWhy.png" 1789824243.14805 18195 9ed93cbb1d1a942eacd521e195a9df2c ""
   "Images/BinaryRewritingScheme.png" 1790012034.25685 80509 812311b34fc26325f3efc3ccee91d69c ""
   "Images/CoverageGuidedGrayBoxFuzzing.png" 1789302643.3826 118586 b5e8e2d90a8c5c9fa81768403a59bb66 ""
+  "Images/FinalForkserverExecutionDiagram.png" 1790607877.76759 113235 cad071c347583bb7539907d6304a7587 ""
   "Images/LazyBindingExample.png" 1790346417.61092 74633 35dc4e7282ae195550cd60524830b1d7 ""
   "Images/LazyBindingExampleAfterResolution.png" 1790346768.50773 71031 1fd33543ee3cf664b1e1d052f7d7b72c ""
   "Images/SHMDiscoveryA.png" 1790353812.57392 21061 e3f82f9958244d46f15ae2d5f5c23cfb ""
@@ -304,14 +308,14 @@
   "Images/trampolineInstrumentation.png" 1790067149.12293 78016 b8d4528ad3707a139f8e910f370cee4b ""
   "Thesis.tex" 1790517178.8289 9823 c76f328e7e860efbbd9612511d83a31c ""
   "Thesis_Acronyms.tex" 1790511141.10379 666 7b025d0100ab4c8cc66ebaacf983c646 ""
-  "build/Thesis.acr" 1790524897.52897 3534 6a462ccd72da52df9a7d0ca82b10d956 "cusdep acn acr build/Thesis"
-  "build/Thesis.aux" 1790525534.62547 19224 3340330013e3dcf08200fb16cb07c70d "pdflatex"
-  "build/Thesis.bbl" 1790525431.45161 8745 8adfc1cafdc3b97d08226a3d409367bd "bibtex build/Thesis"
-  "build/Thesis.loa" 1790525534.63347 609 9ebc8486dfb23bd9d23438547ede14ac "pdflatex"
-  "build/Thesis.lof" 1790525534.63347 1729 45ed9d1c10c45e7872f1e318f226015d "pdflatex"
-  "build/Thesis.lot" 1790525534.63347 70 d043e2cefe227276a1e443919a6072d0 "pdflatex"
-  "build/Thesis.out" 1790525534.63247 3683 b5349ad4c23b0adedcbf444d4655e334 "pdflatex"
-  "build/Thesis.toc" 1790525534.63347 2177 42874a01176b58db30e671f41cc5fd53 "pdflatex"
+  "build/Thesis.acr" 1790608054.10045 3839 cab3ed11f7547fe25998c5c0bf7d0055 "cusdep acn acr build/Thesis"
+  "build/Thesis.aux" 1790608052.54561 19928 bdccef455be4dbe18c5688061f2a7a66 "pdflatex"
+  "build/Thesis.bbl" 1790607721.47244 8745 8adfc1cafdc3b97d08226a3d409367bd "bibtex build/Thesis"
+  "build/Thesis.loa" 1790608052.55062 741 157e856244c651487a5ee61d82da421e "pdflatex"
+  "build/Thesis.lof" 1790608052.55062 1842 1abe35d7b8643ae38bb3f42fdfbd778f "pdflatex"
+  "build/Thesis.lot" 1790608052.55062 70 d043e2cefe227276a1e443919a6072d0 "pdflatex"
+  "build/Thesis.out" 1790608052.55062 3683 044055916db7ef01bbdd4c86ba366057 "pdflatex"
+  "build/Thesis.toc" 1790608052.55062 2177 901536309f3f7c2d5fcf17d4d488ef42 "pdflatex"
   (generated)
   "build/Thesis.acn"
   "build/Thesis.aux"
