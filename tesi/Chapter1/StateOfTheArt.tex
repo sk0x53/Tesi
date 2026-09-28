@@ -134,12 +134,6 @@ In this section I will present some of the current state-of-the-art solutions in
             \label{fig:aflplusplusforkserver}
         \end{figure}
         \footnote{ \small \textit{The differences between the AFL forkserver protocol and the AFL++ forkserver protocol lie mainly in the messages exchanged between the forkserver and the fuzzer}}
-        The communication between the Fuzzer and the Target shown in \cref{fig:aflplusplusforkserver} occurs
-        unidirectionally through two different file descriptors created by the fuzzer:
-        \begin{itemize}
-            \item \textit{FORKSRV\_FD (fd 198)}: used by the forkserver to read a message sent by the fuzzer.
-            \item \textit{FORKSRV\_FD + 1 (fd 199)}: used by the forkserver to write a message to the fuzzer.
-        \end{itemize}
         \begin{enumerate}
             \item The forkserver sends the ``Welcome'' message to the fuzzer (0x41464c01).
             \item The fuzzer replies with the status code. At this point the forkserver must check whether $status \land 0xffffffff = 0x41464c01$.
@@ -154,3 +148,9 @@ In this section I will present some of the current state-of-the-art solutions in
             \item When the parent returns from the \texttt{waitpid()} function (i.e. the child has terminated), the exit status
             of the child is sent to the fuzzer, and the forkserver waits for another ``go'' from the fuzzer.
         \end{enumerate}
+        The communication between the Fuzzer and the Target shown in \cref{fig:aflplusplusforkserver} occurs
+        unidirectionally through two different file descriptors created by the fuzzer:
+        \begin{itemize}
+            \item \textit{FORKSRV\_FD (fd 198)}: used by the forkserver to read a message sent by the fuzzer.
+            \item \textit{FORKSRV\_FD + 1 (fd 199)}: used by the forkserver to write a message to the fuzzer.
+        \end{itemize}

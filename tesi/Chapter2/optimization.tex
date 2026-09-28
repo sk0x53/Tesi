@@ -1,0 +1,40 @@
+Since fuzzing is a technique that relies heavily on execution speed for each single input, optimizing 
+the instrumentation can save time.
+In the previously discussed approach there is a major cause of overhead: the point at which the forkserver is executed.
+In fact, as can be seen in \cref{fig:dynamicallyLinkedProgramLoad}, since the forkserver is executed by the dynamic linker 
+before the execution of the actual target \texttt{\_start} function, for each input the target binary must execute many operations 
+before actually reaching the main:
+\begin{itemize}
+    \item The \_start function must be executed.
+    \item The \_\_libc\_start\_main function must be executed, in which the environment is set up for the main execution.
+    \item The .init\_array functions are scanned and, if present, executed.
+\end{itemize}
+The ideal approach is to execute the forkserver at the very beginning of the main function, 
+avoiding the execution of all the preamble functions for each input.
+To achieve this, the relocation mechanism is used again.
+In the injected \gls{SO}, the constructor function no longer contains the forkserver, but is used only to 
+prepare its execution. The workflow can be seen in \cref{fig:final_forkserver_invocation}.
+Precisely, the constructor function will:
+\begin{itemize}
+    \item set up the \gls{SHM}, reading the \gls{SHM} ID from the environment variable and assigning its address to the exported symbol.\footnote{
+        In the next chapter the \gls{SHM} attachment will be discussed in depth. In fact, the \gls{SO} also includes a \textit{standalone mode} 
+        in which there is no need for a \gls{SHM}.
+    }
+    \item assign to a symbol (which will also be exported) the address of the forkserver function that will be executed.
+\end{itemize}
+Two symbols will be added to the target binary instead of one:
+\begin{itemize}
+    \item The first is the usual \gls{SHM} address.
+    \item The second is a pointer to the forkserver function.
+\end{itemize}
+These two symbols are then resolved by the dynamic linker at binary startup and their values are written to the section that 
+has been added.
+In the initial instrumentation, the address of the forkserver function is first dereferenced and then executed.
+When the forkserver exits, the rest of the main function is executed, without re-executing all the binary startup functions 
+for each input.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=400pt]{FinalForkserverExecutionDiagram.png}
+    \caption{Optimized forkserver invocation}
+    \label{fig:final_forkserver_invocation}
+\end{figure}
