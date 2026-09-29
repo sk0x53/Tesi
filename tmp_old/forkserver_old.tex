@@ -1,0 +1,99 @@
+As already stated, the forkserver lies inside a \gls{SO} that is injected as dynamic dependence to the binary.
+Moreover, as seen in \cref{sec:optimization}, the pointer to the forkserver function is initialized 
+(togheter with the \gls{SHM} pointer) in the init function (declared as constructor and executed before the target binary).
+During the execution of the ``init'' function the shared object access two environmental variables:
+\begin{itemize}
+    \item \textit{\_\_AFL\_SHM\_ID} : represent the \gls{SHM} ID setted by the fuzzer (as seen in \cref{sec:state_of_the_art}). 
+    \item \textit{\_\_AFL\_PLUSPLUS} : this is used to understand which version of the AFL fuzzer is being used. 
+        The tool supports both AFL and AFL++ communication protocol, so this environmental variable is used to choose between the two.
+\end{itemize}
+Depending on the value of these two environmental variable, 3 different forkserver functions could be used, 
+as can be seen in 
+\cref{tab:forkserver_modes}
+\begin{table}[ht]
+    \centering
+    \caption{Different execution modes of the forkserver based on environmental variables value}
+    \label{tab:forkserver_modes}
+    \begin{tabular}{c|c|c}
+    \hline
+    \textbf{\_\_AFL\_SHM\_ID} & \textbf{\_\_AFL\_PLUSPLUS} & forkserver execution mode\\
+    \hline
+    NULL & NULL & \textit{standalone mode}\\
+    \hline
+    NULL & \textit{any value} & \textit{standalone mode}\\
+    \hline
+    NOT NULL & NULL & \textit{afl++ mode}\\
+    \hline
+    NOT NULL & 0 & \textit{afl mode}\\
+    \hline
+    NOT NULL & \textit{any other value} & \textit{afl++ mode}\\
+        
+    \end{tabular}
+\end{table}
+\begin{itemize}
+    \item \textbf{standalone mode} : this is a modality in which the fuzzer is not present. It consent to run the binary  
+    only one time (without the typical loop of the forkserver) without any communication protocol. In this case there is not 
+    the \gls{SHM} so the piece of memory that is actually updated is instantiated by the forkserver with a \texttt{malloc} call.\footnote{
+        this fact is completely transparent to the target binary which see the relocated memory address as it be a shared memory
+    }
+    \item \textbf{afl mode} : In this case there is an actual \gls{SHM} and a fuzzer that track the edge coverage.
+    \item \textbf{afl++} : Same as the previous point but with a different communication protocol between the forkserver 
+        and the fuzzer
+\end{itemize}
+
+The \gls{SO} exports two different symbols:
+\begin{itemize}
+    \item \texttt{uint8\_t *\_\_afl\_area\_ptr} : pointer to the \gls{SHM} (or the local memory instantiated by 
+        \texttt{malloc})
+    \item \texttt{void (*\_\_forkserver\_start\_ptr)(void)} : pointer to the forkserver function that 
+        must be invoked by the main
+\end{itemize}
+These symbols are resolved inside the target binary in such a way that the binary has access to their value.
+Depending on the execution mode, these variables have different values.
+\begin{itemize}
+    \item \textbf{standalone mode}:\begin{itemize}
+        \item \textit{\_\_forkserver\_start\_ptr} : The forkserver function is will return without fork because 
+            the target must be executed without tracing. 
+        \item \textit{\_\_afl\_area\_ptr} : Allocated through a malloc because it does not need to be a shared map. 
+            In this case the edges are traced by the target altought this tracing is not actually used.
+            But, for compatibility with the traced case, the \_\_afl\_area\_ptr is kept.
+    \end{itemize}
+    \item \textbf{afl mode}:\begin{itemize}
+        \item \textit{\_\_forkserver\_start\_ptr} : In this case there is an actual communication with the fuzzer. 
+            The protocol used can be seen in \cref{alg:afl_forkserver}.
+            
+        \item \textit{\_\_afl\_area\_ptr} : During the init function to the pointer is associated the \gls{SHM} address 
+            through a \texttt{shmat} function, passing as parameter the ID of the \gls{SHM} obtained from 
+            the environmental variable.
+    \end{itemize}
+    \item \textbf{afl++ mode} : This mode works in the same way as the previous but uses a different communication protocol.
+        The communication protocol is shown precisely in \cref{fig:aflplusplusforkserver}
+        
+\end{itemize}
+
+\begin{algorithm}[h]
+    \caption{AFL forkserver algorithm}
+    \label{alg:afl_forkserver}
+    \begin{algorithmic}
+        \STATE $\textsc{write}(FORKSRV\_FD+1,0)$
+        \WHILE{$\text{true}$}
+            \STATE $\textsc{read}(FORKSRV\_FD)$
+            \STATE $child\_pid \gets \textsc{fork}()$
+            \IF{$child\_pid=0$}
+                \STATE $\textsc{close}(FORKSRV\_FD)$ \COMMENT{\small \textcolor{green!60!black}{The child must return from the forkserver and execute the main, so the child process can close the file descriptors}}
+                \STATE $\textsc{close}(FORKSRV\_FD+1)$
+                \STATE $\text{return}$
+            \ELSE
+                \STATE $\textsc{write}(FORKSRV\_FD+1,child\_pid)$  \COMMENT{\small \textcolor{green!60!black}{Communicate the PID of the child to the fuzzer}}
+                \STATE $\textsc{waitpid}(child\_pid)$
+            \ENDIF
+        \ENDWHILE
+    \end{algorithmic}
+\end{algorithm}
+
+\textbf{libforkserver.so} has also a destructor function called \texttt{void afl\_forkserver\_cleanup(void)}.
+A function declared as destructor is a function with the attribute \texttt{\_\_attribute\_\_((destructor))}.
+A reference to a function declared with the previous attribute is placed inside the \textit{.fini\_array} and is executed 
+after the main.
+This function is used to detatch the \gls{SHM} from the current process (in case of afl/afl++ execution mode), or to 
+free the memory in case of standalone execution mode.

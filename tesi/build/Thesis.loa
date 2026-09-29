@@ -4,3 +4,5 @@
 \contentsline {algorithm}{\numberline {1.4}{\ignorespaces Do-While Example}}{17}{figure.caption.15}%
 \contentsline {algorithm}{\numberline {2.1}{\ignorespaces Instrumentation point search with DFS algorithm}}{27}{algorithm.2.1}%
 \contentsline {algorithm}{\numberline {2.2}{\ignorespaces Pseudo-code of Shared Memory update instrumentation}}{31}{algorithm.2.2}%
+\contentsline {algorithm}{\numberline {3.1}{\ignorespaces AFL forkserver algorithm}}{37}{algorithm.3.1}%
+\contentsline {algorithm}{\numberline {3.2}{\ignorespaces Instrument location algorithm}}{42}{algorithm.3.2}%

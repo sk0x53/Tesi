@@ -2,11 +2,13 @@ In the following chapter, the previously discussed approach will be expanded to 
 specifications and implementation details used to achieve the described solution.
 Specifically two different files will be examined:
 \begin{itemize}
-    \item \textbf{libforkserver.so} : this is the \gls{SO} that will be injected. During the discussione a focus on the 
+    \item \textbf{libforkserver.so} : this is the \gls{SO} that will be injected. During the discussion a focus on the 
         forkserver functioning will be faced, alongside the different forkserver functioning modes, the parameters\dots
     \item \textbf{instrument.py} : this is the file that actually perform the binary modification and instrumentation.
         In this case the details on the instrumentation, togheter with API specification, will be discussed.
 \end{itemize}
 
-\section{Forkserver Specification}
+\section{Forkserver Specification} \label{sec:forksrv_spec}
     \input{Chapter3/forkserver.tex}
+\section{Instrumentator Specification} \label{sec:instrument_spec}
+    \input{Chapter3/instrumentator.tex}

@@ -120,19 +120,7 @@ void afl_forkserver_start(void) {
 void standalone_forkserver(void) {
     memset(__afl_area_ptr, 0, AFL_MAP_SIZE);
 
-    pid_t child_pid = fork();
-    if (child_pid < 0) {
-        perror("fork");
-        exit(1);
-    }
-    if (child_pid == 0) {
-        return; // return to the main of the instrumented binary
-    }
-    else{
-        int status = 0;
-
-        waitpid(child_pid, &status, 0);
-    }
+    return;
 
 }
 

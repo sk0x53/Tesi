@@ -143,7 +143,6 @@ class FunctionAdder:
         # .mydata+0x10 ==> index of previus basic block
         # .mydata+0x20 ==> saved address of shared memory
         # .mydata+0x30 ==> saved rax
-        # .mydata+0x40 ==> saved rbx
         #
         section = lief.ELF.Section(".mydata")
         #This string is used only because AFL check for the presence of that string into the target binary
