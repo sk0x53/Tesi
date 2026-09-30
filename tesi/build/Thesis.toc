@@ -27,9 +27,9 @@
 \contentsline {subsection}{\numberline {3.2.1}Binary Modification}{38}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}Instrumentation}{40}{subsection.3.2.2}%
 \vspace {2em}
-\contentsline {chapter}{Bibliography\markboth {\MakeUppercase []{Bibliography}}{\MakeUppercase []{Bibliography}}}{45}{chapter*.27}%
+\contentsline {chapter}{Bibliography\markboth {\MakeUppercase []{Bibliography}}{\MakeUppercase []{Bibliography}}}{47}{chapter*.27}%
 \vspace {2em}
-\contentsline {chapter}{List of Acronyms}{49}{chapter*.30}%
-\contentsline {chapter}{List of Figures}{51}{chapter*.32}%
-\contentsline {chapter}{List of Tables}{53}{chapter*.34}%
-\contentsline {chapter}{List of Algorithms\markboth {\MakeUppercase []{List of Algorithms}}{\MakeUppercase []{List of Algorithms}}}{55}{chapter*.36}%
+\contentsline {chapter}{List of Acronyms}{51}{chapter*.30}%
+\contentsline {chapter}{List of Figures}{53}{chapter*.32}%
+\contentsline {chapter}{List of Tables}{55}{chapter*.34}%
+\contentsline {chapter}{List of Algorithms\markboth {\MakeUppercase []{List of Algorithms}}{\MakeUppercase []{List of Algorithms}}}{57}{chapter*.36}%

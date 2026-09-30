@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.10)  29 SEP 2026 20:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.10)  30 SEP 2026 14:33
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1400,21 +1400,21 @@ File: ./Images/SHMDiscoveryC.png Graphic file (type png)
 <use ./Images/SHMDiscoveryC.png>
 Package pdftex.def Info: ./Images/SHMDiscoveryC.png  used on input line 56.
 (pdftex.def)             Requested size: 364.19667pt x 109.31207pt.
-) [25 <./Images/SHMDiscoveryA.png> <./Images/SHMDiscoveryB.png> <./Images/SHMDiscoveryC.png>] (Chapter2/Instr_points_search.tex
-<./Images/pow_main_example.png, id=732, 863.47594pt x 696.35156pt>
+) [25 <./Images/SHMDiscoveryA.png> <./Images/SHMDiscoveryB.png> <./Images/SHMDiscoveryC.png>] (Chapter2/Instr_points_search.tex [26]
+<./Images/pow_main_example.png, id=741, 863.47594pt x 696.35156pt>
 File: ./Images/pow_main_example.png Graphic file (type png)
 <use ./Images/pow_main_example.png>
-Package pdftex.def Info: ./Images/pow_main_example.png  used on input line 72.
+Package pdftex.def Info: ./Images/pow_main_example.png  used on input line 78.
 (pdftex.def)             Requested size: 364.18579pt x 332.91676pt.
-<./Images/pow_function_example.png, id=733, 572.89032pt x 426.84468pt>
+<./Images/pow_function_example.png, id=742, 572.89032pt x 426.84468pt>
 File: ./Images/pow_function_example.png Graphic file (type png)
 <use ./Images/pow_function_example.png>
-Package pdftex.def Info: ./Images/pow_function_example.png  used on input line 80.
+Package pdftex.def Info: ./Images/pow_function_example.png  used on input line 86.
 (pdftex.def)             Requested size: 364.2009pt x 233.05235pt.
- [26] [27] [28] [29 <./Images/pow_main_example.png> <./Images/pow_function_example.png>]) (Chapter2/Actual_instrumentation.tex [30
+ [27] [28] [29 <./Images/pow_main_example.png> <./Images/pow_function_example.png>]) (Chapter2/Actual_instrumentation.tex [30
 
 ] [31]) (Chapter2/optimization.tex
-<./Images/FinalForkserverExecutionDiagram.png, id=854, 813.0375pt x 505.89pt>
+<./Images/FinalForkserverExecutionDiagram.png, id=857, 813.0375pt x 505.89pt>
 File: ./Images/FinalForkserverExecutionDiagram.png Graphic file (type png)
 <use ./Images/FinalForkserverExecutionDiagram.png>
 Package pdftex.def Info: ./Images/FinalForkserverExecutionDiagram.png  used on input line 37.
@@ -1450,7 +1450,7 @@ Overfull \hbox (48.70796pt too wide) in paragraph at lines 94--13
  []
 
 (Chapter3/instrumentator.tex
-<./Images/BinaryModification.png, id=901, 684.5575pt x 230.8625pt>
+<./Images/BinaryModification.png, id=904, 684.5575pt x 230.8625pt>
 File: ./Images/BinaryModification.png Graphic file (type png)
 <use ./Images/BinaryModification.png>
 Package pdftex.def Info: ./Images/BinaryModification.png  used on input line 14.
@@ -1460,25 +1460,44 @@ Underfull \hbox (badness 10000) in paragraph at lines 10--18
 
  []
 
-[37] [38 <./Images/BinaryModification.png>] [39] [40]
-<./Images/error_rip_relative1.png, id=952, 618.31pt x 149.55875pt>
+[37] [38 <./Images/BinaryModification.png>] [39]
+Underfull \hbox (badness 10000) in paragraph at lines 88--88
+[][][]\T1/cmr/m/n/10 This check can ac-tu-ally be avoided by set-ting the en-vi-ron-ment vari-able
+ []
+
+[40]
+<./Images/error_rip_relative1.png, id=957, 618.31pt x 149.55875pt>
 File: ./Images/error_rip_relative1.png Graphic file (type png)
 <use ./Images/error_rip_relative1.png>
 Package pdftex.def Info: ./Images/error_rip_relative1.png  used on input line 116.
 (pdftex.def)             Requested size: 364.19667pt x 88.09512pt.
-<./Images/error_rip_relative2.png, id=953, 493.845pt x 145.54375pt>
+<./Images/error_rip_relative2.png, id=958, 493.845pt x 145.54375pt>
 File: ./Images/error_rip_relative2.png Graphic file (type png)
 <use ./Images/error_rip_relative2.png>
 Package pdftex.def Info: ./Images/error_rip_relative2.png  used on input line 122.
 (pdftex.def)             Requested size: 327.77478pt x 96.59882pt.
  [41 <./Images/error_rip_relative1.png> <./Images/error_rip_relative2.png>]
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 161.
-
-Underfull \hbox (badness 10000) in paragraph at lines 182--187
-
+Overfull \hbox (21.57059pt too wide) in paragraph at lines 172--173
+[] []$\OML/cmm/m/it/12 instructions \OMS/cmsy/m/n/12   []\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 addr; mydata[]addr; mygot[]addr\OT1/cmr/m/n/12 )$
  []
 
-[42])) (/home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.bbl [43]
+
+Overfull \hbox (8.80753pt too wide) in paragraph at lines 180--182
+[] []$\OML/cmm/m/it/10.95 instructions \OMS/cmsy/m/n/10.95   []\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 addr; mydata[]addr; mygot[]addr\OT1/cmr/m/n/10.95 )$
+ []
+
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 192.
+[42] [43]
+Overfull \hbox (24.87267pt too wide) in paragraph at lines 257--258
+[] []$\OML/cmm/m/it/10.95 instructions \OMS/cmsy/m/n/10.95   []\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 addr; mydata[]addr; mygot[]addr\OT1/cmr/m/n/10.95 )$ 
+ []
+
+
+Overfull \hbox (48.36693pt too wide) in paragraph at lines 265--266
+[] []$\OML/cmm/m/it/10.95 instructions \OMS/cmsy/m/n/10.95   []\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 addr; mydata[]addr; mygot[]addr\OT1/cmr/m/n/10.95 )$
+ []
+
+)) (/home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.bbl [44] [45]
 Package epstopdf Info: Source file: <./Images/./raggiera_polimi.eps>
 (epstopdf)                    date: 2026-09-10 16:57:28
 (epstopdf)                    size: 1813066 bytes
@@ -1492,16 +1511,16 @@ File: ./Images/./raggiera_polimi-eps-converted-to.pdf Graphic file (type pdf)
 <use ./Images/./raggiera_polimi-eps-converted-to.pdf>
 Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 1.
 (pdftex.def)             Requested size: 507.88533pt x 507.88051pt.
- [44
+ [46
 
-] [45
+] [47
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 98--103
 []\T1/cmr/m/n/12 M. Heuse.  AFL-DynamoRIO.  [][]$\T1/cmtt/m/n/12 https : / / github . com / vanhauser-[]thc /
  []
 
-[46]) [47] (/home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.acr
+[48]) [49] (/home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.acr
 Package epstopdf Info: Source file: <./Images/./raggiera_polimi.eps>
 (epstopdf)                    date: 2026-09-10 16:57:28
 (epstopdf)                    size: 1813066 bytes
@@ -1515,10 +1534,10 @@ File: ./Images/./raggiera_polimi-eps-converted-to.pdf Graphic file (type pdf)
 <use ./Images/./raggiera_polimi-eps-converted-to.pdf>
 Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 1.
 (pdftex.def)             Requested size: 507.88533pt x 507.88051pt.
- [48
+ [50
 
 
-]) [49
+]) [51
 
 
 ]
@@ -1535,13 +1554,13 @@ File: ./Images/./raggiera_polimi-eps-converted-to.pdf Graphic file (type pdf)
 <use ./Images/./raggiera_polimi-eps-converted-to.pdf>
 Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 253.
 (pdftex.def)             Requested size: 507.88533pt x 507.88051pt.
- [50
+ [52
 
 ] (/home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.lof)
 \tf@lof=\write10
 \openout10 = `Thesis.lof'.
 
- [51
+ [53
 
 ]
 Package epstopdf Info: Source file: <./Images/./raggiera_polimi.eps>
@@ -1557,13 +1576,13 @@ File: ./Images/./raggiera_polimi-eps-converted-to.pdf Graphic file (type pdf)
 <use ./Images/./raggiera_polimi-eps-converted-to.pdf>
 Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 256.
 (pdftex.def)             Requested size: 507.88533pt x 507.88051pt.
- [52
+ [54
 
 ] (/home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.lot)
 \tf@lot=\write11
 \openout11 = `Thesis.lot'.
 
- [53
+ [55
 
 ]
 Package epstopdf Info: Source file: <./Images/./raggiera_polimi.eps>
@@ -1579,13 +1598,13 @@ File: ./Images/./raggiera_polimi-eps-converted-to.pdf Graphic file (type pdf)
 <use ./Images/./raggiera_polimi-eps-converted-to.pdf>
 Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 258.
 (pdftex.def)             Requested size: 507.88533pt x 507.88051pt.
- [54
+ [56
 
 ] (/home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.loa)
 \tf@loa=\write12
 \openout12 = `Thesis.loa'.
 
- [55
+ [57
 
 ]
 Package epstopdf Info: Source file: <./Images/./raggiera_polimi.eps>
@@ -1601,7 +1620,7 @@ File: ./Images/./raggiera_polimi-eps-converted-to.pdf Graphic file (type pdf)
 <use ./Images/./raggiera_polimi-eps-converted-to.pdf>
 Package pdftex.def Info: ./Images/./raggiera_polimi-eps-converted-to.pdf  used on input line 272.
 (pdftex.def)             Requested size: 507.88533pt x 507.88051pt.
- [56
+ [58
 
 ] (/home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.aux)
  ***********
@@ -1612,17 +1631,17 @@ Package rerunfilecheck Info: File `Thesis.out' has not changed.
 (rerunfilecheck)             Checksum: AB3E810F97EFAFA4E9B511BFE8AF4501;4643.
  ) 
 Here is how much of TeX's memory you used:
- 34618 strings out of 469353
- 656458 string characters out of 5458999
- 1433800 words of memory out of 5000000
- 62747 multiletter control sequences out of 15000+600000
+ 34652 strings out of 469353
+ 656890 string characters out of 5458999
+ 1438800 words of memory out of 5000000
+ 62749 multiletter control sequences out of 15000+600000
  664897 words of font info for 128 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 94i,12n,95p,2534b,1675s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 94i,12n,95p,2534b,2109s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ectt1000.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm0600.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecti1000.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi657/eccc1000.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi657/ectt1000.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi657/ecti1000.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/eccc1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1000.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm1000.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm0700.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ectt1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm0800.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecbi1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi657/tcrm1000.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi657/ecrm1000.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi657/ecbx1000.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi864/ecbx1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi2500/ecbx1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecti1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi720/ecbx1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi1244/ecbx1200.pk> </home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi720/ecxc1200.pk></home/edoardo/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi10.pfb></home/edoardo/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi12.pfb></home/edoardo/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi8.pfb></home/edoardo/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr10.pfb></home/edoardo/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr12.pfb></home/edoardo/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr8.pfb></home/edoardo/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy10.pfb></home/edoardo/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on /home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.pdf (64 pages, 1470111 bytes).
+Output written on /home/edoardo/materiale_tesi/Tesi/tesi/build/Thesis.pdf (66 pages, 1491985 bytes).
 PDF statistics:
- 2218 PDF objects out of 2487 (max. 8388607)
- 305 named destinations out of 1000 (max. 500000)
+ 2304 PDF objects out of 2487 (max. 8388607)
+ 337 named destinations out of 1000 (max. 500000)
  382 words of extra memory for PDF output out of 10000 (max. 10000000)
 

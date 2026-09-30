@@ -1,61 +1,61 @@
-This is the file capable of actually instrument the target binary.
-It uses two libraries :
+This is the file capable of actually instrumenting the target binary.
+It uses two libraries:
 \begin{itemize}
-    \item \textbf{lief} : python library used mainly to add the dynamic dependency, the new sections and the relocation entries. 
-        This library is used for the Binary Modification phase
-    \item \textbf{GRAPE} : binary rewriting framework used to instrument every \gls{IP} found.
-        This framework is used in the Instrumentation Phase
+    \item \textbf{lief}: a python library used mainly to add the dynamic dependency, the new sections and the relocation entries.
+        This library is used for the Binary Modification phase.
+    \item \textbf{GRAPE}: a binary rewriting framework used to instrument every \gls{IP} found.
+        This framework is used in the Instrumentation Phase.
 \end{itemize}
 \subsection{Binary Modification}
-Before actually instrument the binary the previously mentioned modifications must be made.
+Before actually instrumenting the binary, the previously mentioned modifications must be made.
 The principal steps are summarized in \cref{fig:binary_modification}.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=400pt]{BinaryModification.png}
-    \caption{Binary modification phase in which the needed sections, relocations and dynamic dependencies are added. (\small The dotted arrows specify which informations are needed for the relocation phase) }
+    \caption{Binary modification phase in which the needed sections, relocations and dynamic dependencies are added. (\small The dotted arrows specify which information is needed for the relocation phase) }
     \label{fig:binary_modification}
 \end{figure}\\
 
 \begin{center}
 \textbf{create .my\_got section}    
 \end{center}
-The created section has 
+The created section has the following properties:
 \begin{itemize}
-    \item \textit{section type = PROGBITS} . This means that the section data are actually into the \gls{ELF} file.
-        For example the \textit{.bss} section is declared as NOBITS because its data are not stored into the \gls{ELF} but a 
-        memory region must be allocated when the program starts
+    \item \textit{section type = PROGBITS}. This means that the section data is actually stored in the \gls{ELF} file.
+        For example, the \textit{.bss} section is declared as NOBITS because its data is not stored in the \gls{ELF} file, but a
+        memory region must be allocated when the program starts.
     \item \textit{section flags} \begin{itemize}
-        \item ALLOC : The section must occupy actual space in memory. This memory must be allocated during \gls{ELF} loading.
-        \item WRITE : This section must be writable by the process.
+        \item ALLOC: the section must occupy actual space in memory. This memory must be allocated during \gls{ELF} loading.
+        \item WRITE: this section must be writable by the process.
     \end{itemize}
-    \item \textit{section content} : This section must contains the resolved addresses of the two symbols that are relocated.
-        So the content of this section is composed of 16 bytes (in 64 bit addressing each resolved symbol occupy 8 bytes).
-        Automatically the section content is initializated to 0.
-    \item \textit{section alignment = 8} . Since this section will store 8 bytes addresses, the alignment is setted to 8.
+    \item \textit{section content}: this section must contain the resolved addresses of the two symbols that are relocated.
+        So the content of this section is composed of 16 bytes (in 64-bit addressing, each resolved symbol occupies 8 bytes).
+        The section content is automatically initialized to 0.
+    \item \textit{section alignment = 8}. Since this section will store 8-byte addresses, the alignment is set to 8.
 \end{itemize}
-This section, as stated before, must be actually loaded into memory. But this means associate the section to a segment 
-with the LOAD flag, that has the same permits of the section.
-\textbf{lief}, if specified, automatically add a new segment for each added section.
+This section, as stated before, must actually be loaded into memory. But this means that the section must be associated with a segment
+having the LOAD flag, with the same permissions as the section.
+\textbf{lief}, if specified, automatically adds a new segment for each added section.
 
 \begin{center}
 \textbf{create symbols}    
 \end{center}
-Two symbols must be created. These two symbols correspond to the two exported symbols of the \gls{SO} and so the name must 
-match. Specifically these symbols are created with:
+Two symbols must be created. These two symbols correspond to the two exported symbols of the \gls{SO}, and so their names must
+match. Specifically, these symbols are created with:
 \begin{itemize}
-    \item \textit{symbol name} : Since the symbols name must match, the two symbols name are \begin{itemize}
+    \item \textit{symbol name}: since the symbols' names must match, the two symbol names are \begin{itemize}
         \item \textit{\_\_afl\_area\_ptr}
         \item \textit{\_\_forkserver\_start\_ptr}
     \end{itemize}
-    \item \textit{symbol type = OBJECT}. The symbol represent a variable and not a functioning
-    \item \textit{symbol binding = GLOBAL}. The symbol could be referenced by the dynamic linker. \\As stated in 
-        \cref{sec:loading_relocations}, during \gls{ELF} loading, the dynamic linker resolve all the symbols for which there 
-        is a relocation entry. A symbol could be exported or imported only if its binding is configured to be GLOBAL.
-        There are LOCAL symbols that, by definition, are local to the object that define it and cannot be exported 
-        (and therefore not imported either). 
-    \item \textit{symbol visibility = DEFAULT}. The symbol has the default visibility of \gls{ELF}. There are other types 
-        (such as HIDDEN or PROTECTED) that are used for local symbols. 
-    \item \textit{symbol value = 0}. The symbol does not have a value. This is a clue to the fact that this symbol 
+    \item \textit{symbol type = OBJECT}. The symbol represents a variable, not a function.
+    \item \textit{symbol binding = GLOBAL}. The symbol can be referenced by the dynamic linker. \\As stated in
+        \cref{sec:loading_relocations}, during \gls{ELF} loading, the dynamic linker resolves all the symbols for which there
+        is a relocation entry. A symbol can be exported or imported only if its binding is set to GLOBAL.
+        There are LOCAL symbols that, by definition, are local to the object that defines them and therefore cannot be exported
+        (and, consequently, cannot be imported either).
+    \item \textit{symbol visibility = DEFAULT}. The symbol has the default visibility of \gls{ELF}. There are other types
+        (such as HIDDEN or PROTECTED) that are used for local symbols.
+    \item \textit{symbol value = 0}. The symbol does not have a value. This indicates that this symbol
     must be resolved by the dynamic linker.
     \item \textit{symbol size = 8}. The symbol size is 8 bytes.
 \end{itemize} 
@@ -63,52 +63,52 @@ match. Specifically these symbols are created with:
 \begin{center}
 \textbf{Add relocation entries}    
 \end{center}
-Two relocation entries must be added, The first is used for resolving \textit{\_\_afl\_area\_ptr} and the second for 
+Two relocation entries must be added. The first is used to resolve \textit{\_\_afl\_area\_ptr}, and the second to resolve
 \textit{\_\_forkserver\_start\_ptr}.
-In order to create a relocation entry must be specified:
+In order to create a relocation entry, the following must be specified:
 \begin{itemize}
-    \item \textit{target addres of relocation} : where the resolved value will be written
-    \item \textit{relocation type} : for both the symbols is used X86\_64\_GLOB\_DAT (that is the usual type when dealing with \gls{GOT} resolution)
-    \item \textit{relocation encoding} : for both the symbols is used RELA encoding, that consist in esplicitly specify the addend.
-    \item \textit{relocation porpouse} : for both the symbols is used a DYNAMIC porpouse because the symbol must be resolved at runtime bu the dynamic linker.
+    \item \textit{target address of relocation}: where the resolved value will be written
+    \item \textit{relocation type}: for both symbols, X86\_64\_GLOB\_DAT is used (the usual type when dealing with \gls{GOT} resolution)
+    \item \textit{relocation encoding}: for both symbols, RELA encoding is used, which consists in explicitly specifying the addend
+    \item \textit{relocation purpose}: for both symbols, a DYNAMIC purpose is used, because the symbol must be resolved at runtime by the dynamic linker
     \item \textit{addend = 0}
-    \item \textit{relocation symbol} :the symbol to be resolved
+    \item \textit{relocation symbol}: the symbol to be resolved
 \end{itemize}
 The difference between the two relocation entries lies in the target address and in the relocation symbol.
-For \textit{\_\_afl\_area\_ptr} the target address is the virtual address of \textit{.my\_got} section.\\
-\textit{\_\_forkserver\_start\_ptr} the target address is the virtual address of \textit{.my\_got} section + 8.
+For \textit{\_\_afl\_area\_ptr}, the target address is the virtual address of the \textit{.my\_got} section.\\
+For \textit{\_\_forkserver\_start\_ptr}, the target address is the virtual address of the \textit{.my\_got} section + 8.
 
 \begin{center}
 \textbf{Create .mydata section}    
 \end{center}
-All the consideration made for the previous section are already valid, a part from the section content.
-In fact AFL, to know if a target has been instrumented or not, before actually run it, check if in some part of the entire 
-\gls{ELF} is contained the string ``\_\_AFL\_SHM\_ID''. If is not contained AFL stops.\footnote{
-    This check is actually avoidable setting the environmental variable AFL\_SKIP\_BIN\_CHECK=1 as must be done using ZAFL.
+All the considerations made for the previous section are still valid, apart from the section content.
+In fact, before actually running a target, AFL checks whether the string ``\_\_AFL\_SHM\_ID'' is contained somewhere in the
+\gls{ELF} file, in order to know if the target has been instrumented. If it is not found, AFL stops.\footnote{
+    This check can actually be avoided by setting the environment variable AFL\_SKIP\_BIN\_CHECK=1, as must be done when using ZAFL.
 }
 For this reason the aforementioned string is placed inside this section.
-The string will be overwritten by the other data, but at fuzzing setup will pass the AFL check.
-According to mine implementation this section will contains different informations at different addresses:
+The string will later be overwritten by other data, but it will pass the AFL check during the fuzzing setup.
+According to my implementation, this section will contain different pieces of information at different addresses:
 \begin{itemize}
-    \item \textit{.mydata+0x10} : contains the ID of the previous \gls{BB}
-    \item \textit{.mydata+0x20} : contains the address of \gls{SHM} initialized by the initial instrumentation
-    \item \textit{.mydata+0x30} : contains the saved \texttt{rax} register to maintain its value before and after the instrumentation
+    \item \textit{.mydata+0x10}: contains the ID of the previous \gls{BB}
+    \item \textit{.mydata+0x20}: contains the address of the \gls{SHM} initialized by the initial instrumentation
+    \item \textit{.mydata+0x30}: contains the saved \texttt{rax} register, to preserve its value before and after the instrumentation
 \end{itemize}
 At the end of the \textbf{Binary Modification phase}, the modified binary is saved to the filesystem.
 \subsection{Instrumentation}
-The instrumentation is made entirely using GRAPE framework.
-It takes care of adjusting all the references shift caused by the altered \textit{.text} section, alongside the eventual 
-section size adjusting (caused by the exceeding in dimension of the section given the added instructions) and many other features.
-GRAPE first reconstruct the \gls{CFG} of the program and then performs operations on the obtained \gls{CFG}.
+The instrumentation is done entirely using the GRAPE framework.
+It takes care of adjusting all the reference shifts caused by the altered \textit{.text} section, as well as the eventual
+resizing of the section (caused by it exceeding its size due to the added instructions), and many other features.
+GRAPE first reconstructs the \gls{CFG} of the program and then performs operations on the obtained \gls{CFG}.
 The classes that the developed tool will use are:
 \begin{itemize}
-    \item \textsc{AddInstructionChange} : Used to add an instruction into a specific address of the binary \gls{CFG}.
-        By default the instruction is added specific at the address, shifting the instruction that was there before, after.
-    \item \textsc{RemoveInstructionChange} : Used to remove an instruction from a specific address of the binary
+    \item \textsc{AddInstructionChange}: used to add an instruction at a specific address of the binary \gls{CFG}.
+        By default, the instruction is added at the specified address, shifting the instruction that was previously there forward.
+    \item \textsc{RemoveInstructionChange}: used to remove an instruction from a specific address of the binary.
 \end{itemize}
-These two classes takes care of \gls{CFG} modification (split, union, \dots) but does not take care of RIP-relative instructions 
-modification, togheter with symbol coherence.
-An example of an error due to not taking care of modifying single instructions is \cref{fig:rip_relative_error_after_shift}.\\
+These two classes take care of \gls{CFG} modification (splitting a \gls{BB}, merging two \gls{BB}s, \dots) but do not take care of RIP-relative instruction
+modification, together with symbol coherence.
+An example of an error caused by not taking care of modifying single instructions is shown in \cref{fig:rip_relative_error_after_shift}.\\
 \begin{figure}[ht]
     \centering
     \begin{subfigure}{0.8\textwidth}
@@ -123,42 +123,73 @@ An example of an error due to not taking care of modifying single instructions i
         \caption{Same Basic Block of \cref{fig:rip_relative_error_after_shift1} with a nop instruction added}
         \label{fig:rip_relative_error_after_shift2}
     \end{subfigure}
-    \caption{Example of the error caused by not taking care of RIP-relative instruction offset}
+    \caption{Example of the error caused by not taking care of RIP-relative instruction offsets}
     \label{fig:rip_relative_error_after_shift}
 \end{figure}\footnote{
-    As can be seen the jmp seem to be shifted, but in reality the jmp instruction is expressed RIP-relative.
-    The disassembler used \cite{cutter} perform an automatic the relative address resolution
+    As can be seen, the jmp at 0x11ef seems to be shifted, but in reality the jmp instruction is always RIP-relative and
+    the disassembler used \cite{cutter} automatically performs the relative address resolution.
 }
-In \cref{fig:rip_relative_error_after_shift} can be seen that, after having inserted a \texttt{nop} instruction, the \texttt{lea} 
-that was at the address 0x11db now shift at the address 0x11dc.
-For this reason the referenced location is no longer a valid data location. 
-Before the addition the computation was $0x11db+0xe22+7 = 0x2004 <usage\_string\_location>$\footnote{
+In \cref{fig:rip_relative_error_after_shift} it can be seen that, after having inserted a \texttt{nop} instruction, the \texttt{lea}
+that was at address 0x11db now shifts to address 0x11dc.
+For this reason the referenced location is no longer a valid data location.
+Before the addition, the computation was $0x11db+0xe22+7 = 0x2004 <usage\_string\_location>$\footnote{
     The +7 is due to the instruction size
 }.
 Now the computation is $0x11dc+0xe22+7 = 0x2005 <??>$
 
-For these reasons the last step of binary rewriting use two other classes:
+For these reasons, the last step of binary rewriting (after actually adding all the instructions to the \gls{BB}) uses two other classes:
 \begin{itemize}
-    \item \textsc{RIPDataCoherenceAnalysis} : adjust the RIP-relative instructions.
-    \item \textsc{SymbolCoherenceAnalysis} : adjus symbols. For example, after having insert some instruction, 
-        the target address of another instruction has shifted. The reconstruction of the correct target address is
-        performed by the SymbolCoherence phase
+    \item \textsc{RIPDataCoherenceAnalysis}: adjusts the RIP-relative instructions.
+    \item \textsc{SymbolCoherenceAnalysis}: adjusts symbols. For example, after inserting some instructions,
+        the target address of another instruction may have shifted. The reconstruction of the correct target address is
+        performed by the SymbolCoherence phase.
 \end{itemize}
-Since GRAPE takes care of all the shifting and adjusting the instrumentation algorithm could be seen in \cref{alg:instrumentation}
+Since GRAPE takes care of all the shifting and adjusting, the instrumentation algorithm only needs to take care
+of computing the right offset of the RIP-relative instructions to be instrumented and inserting the instructions.
+
+Since the instructions must be added at a specific address, all the offsets are computed as $final\_address - instrumentation\_address - instruction\_size$.
+For example, with reference to \cref{lst:init_instr}, supposing the instrumentation address is 0x4100000c, offset\_to\_previous\_saved\_ID can be computed as follows:\\
+$offset\_to\_previous\_saved\_ID=(\textit{.mydata}.virtual\_addr + 0x10) - 0x4100000c - 9$\footnote{
+    The -9 at the end is needed because the instruction at line 6 of \cref{lst:init_instr} uses 9 bytes
+}.
+
+In \cref{alg:initial_instrumentation} the initial instrumentation algorithm can be seen.
+As stated before, GRAPE automatically increases the size of the \textit{.text} section if, after adding instructions,
+the section becomes too small to contain them all.
+When this happens, the \textit{.mydata} and \textit{.my\_got} sections could be shifted forward, and the previously computed
+offsets for the RIP-relative instructions are no longer valid.
+For this reason, if a shift is detected, all the instructions are recomputed.
+Moreover, it can be seen that the instructions are inserted in reverse order (the loop index starts from the last instruction).
+This is because the instructions are inserted one on top of the other.
 
 \begin{algorithm}[ht]
-    \label{alg:instrumentation}
-    \caption{Instrument location algorithm}
-    
+    \caption{Initial Instrumentation algorithm}
+    \label{alg:initial_instrumentation}
+    \begin{algorithmic}[1]
+        \REQUIRE $addr , mydata\_addr , mygot\_addr$ 
+        \ENSURE all the initial instructions are inserted in the correct order at address ``addr'' 
+
+        \STATE $instructions \gets \textsc{computeInitialInstrumentation}(addr,mydata\_addr,mygot\_addr)$ \COMMENT{\small \textcolor{green!60!black}{\textsc{computeInitialInstrumentation} computes the right offsets and returns a list of assembly instructions written as strings}}
+
+        \FOR{$i=\textsc{len}(instructions)$ \TO $1$} 
+                \STATE $instr \gets \textsc{asm}(instructions[\,i\,])$ \COMMENT{\small \textcolor{green!60!black}{the \textsc{asm} function converts the assembly instruction, passed as a string parameter, into machine code}}
+                \STATE $\textsc{AddInstructionChange}(addr,instr).\textsc{modify}(binary.cfg)$
+                \IF{$\text{.mydata section shifted after .text enlargement}$}
+                    \STATE $mydata\_addr \gets mydata.virtual\_address$
+                    \STATE $mygot\_addr \gets mygot.virtual\_address$
+                    \STATE $instructions \gets \textsc{computeInitialInstrumentation}(
+                            addr,mydata\_addr,mygot\_addr)$ \COMMENT{\small \textcolor{green!60!black}{recompute all the instructions with the new offsets. GRAPE will take care of shifting the instructions already added}}
+                    \STATE $instr \gets \textsc{asm}(instructions[\,i\,])$
+                    \STATE $\textsc{RemoveInstructionChange}(addr).\textsc{modify}(binary.cfg)$ \COMMENT{\small \textcolor{green!60!black}{remove and reinsert the last instruction, to make sure that the offset to the .mydata section is correct}}
+                    \STATE $\textsc{AddInstructionChange}(addr,instr).\textsc{modify}(binary.cfg)$
+                \ENDIF
+        \ENDFOR
+    \end{algorithmic}
 \end{algorithm}
-
-
-As already stated, the instrumentation is divided into \textit{Initial Instrumentation}, performed at the start of the  \texttt{main} function, 
-and \textit{Basic Block Instrumentation}, performed in each \gls{IP} previously found.
 \begin{center}
-\textbf{Initial Instrumntation}    
+\textbf{Initial Instrumentation}    
 \end{center}
-\begin{lstlisting}[caption={Initial Instrumentation},label=lst:initial_instrumentation]
+\begin{lstlisting}[caption={Initial Instrumentation},label=lst:init_instr]
 push rsi
 push rdi
 mov rax, QWORD PTR[rip + offset_to_relocated_forkserver_function]
@@ -170,23 +201,21 @@ mov rax, QWORD PTR [rax]
 mov rax, QWORD PTR [rax]
 mov QWORD PTR[rip + offset_to_saved_shared_memory_address], rax
 \end{lstlisting}
-The \cref{lst:initial_instrumentation} perfomrs three main tasks:
+\Cref{lst:init_instr} performs three main tasks:
 \begin{itemize}
-    \item Find the address of forkserver function dereferencing the resolved symbol, store it into \texttt{rax} and the perfomr an indirect call.
-    \item Write a random integer (between 0 and 65535\footnote{
-        Since the AFL shared map size is 65536 each Basci Block ID must be between 0 and 65535
-    }) as previous \gls{BB} ID
-    \item Dinf the address of the \gls{SHM} resolved by the dynamic linker and write it into \textit{.mydata} section in 
-        order to avoiding dereference it every single time. 
+    \item Finds the address of the forkserver function by dereferencing the resolved symbol, stores it in \texttt{rax}, and then performs an indirect call.
+    \item Writes a random integer (between 0 and 65535\footnote{
+        Since the AFL shared map size is 65536, each Basic Block ID must be between 0 and 65535
+    }) as the previous \gls{BB} ID.
+    \item Dereferences the address of the \gls{SHM} resolved by the dynamic linker and writes it into the \textit{.mydata} section, in
+        order to avoid dereferencing it every single time. 
 \end{itemize}
-Since the instructions must be added to a specific address, all the offsets are computed as $final\_address - instrumentation\_address -instruction\_size$.
-For example, supposing the instrumentation address is 0x4100000c, the offset\_to\_previous\_saved\_ID can be computed as follows\\
-$offset\_to\_previous\_saved\_ID=(\textit{.mydata}.virtual\_addr + 0x10) - 0x4100000c - 9$\footnote{
-    The -9 at the end is needed because the instruction at line 6 of \cref{lst:initial_instrumentation} uses 9 bytes
-}.\\
+
 \begin{center}
-\textbf{Basic Block Instrumntation}    
+\textbf{Basic Block Instrumentation}    
 \end{center}
+The instrumentation added for each \gls{BB} can be seen in \cref{lst:bb_instrumentation}.
+
 \begin{lstlisting}[caption={Basic Block Instrumentation},label=lst:bb_instrumentation]
 mov QWORD PTR[rip + offset_to_saved_rax], rax
 movzx rax, WORD PTR[rip + offset_to_previous_saved_ID]        
@@ -196,5 +225,66 @@ inc BYTE PTR[rax]
 mov WORD PTR[rip + offset_to_precedent_bb_saved], right_shifted_current_ID
 mov rax, QWORD PTR[rip + offset_to_saved_rax]
 \end{lstlisting}
-In \cref{lst:bb_instrumentation} all the consideration previously made for the offset computation are still valid. 
-The random\_current\_basic\_block\_ID and right\_shifted\_current\_ID are computed by the instrumentator and hardcoded into each \gls{BB}.
+
+In \cref{lst:bb_instrumentation}, all the considerations previously made for the offset computation are still valid.
+random\_current\_basic\_block\_ID and right\_shifted\_current\_ID are computed by the instrumenter and hardcoded into each \gls{BB}.
+
+For the \gls{BB} instrumentation, the algorithm must also take care of address shifting during instrumentation.
+Let's consider the example of \cref{fig:pow_example} and the \gls{BB} addresses found in that section.
+These addresses were $[\, 0x11a7 , 0x11b5, 0x11bd , 0x11db , 0x11f1 , 0x1253 \,]$.
+The instrumentation seen in \cref{lst:bb_instrumentation} occupies a total of 44 bytes.
+Supposing the location 0x11bd has been instrumented, all the following locations must then be shifted by 44 bytes.
+And this computation must be done for each \gls{IP} found.
+
+But this approach is quite impractical.
+GRAPE, in order to overcome the issue of changing addresses, uses \textit{labels}.
+It associates a unique label to each \gls{BB}. The \gls{BB} can be uniquely retrieved using this label.
+If the \gls{BB} changes its starting address, the label will not change.
+So, during the \gls{IP} search, instead of keeping the addresses of the basic blocks saved, the tool keeps the labels
+of the \gls{BB}s to be instrumented saved, and only afterwards retrieves the addresses of these \gls{BB}s.
+The final approach can be seen below.
+
+\begin{algorithm}[ht]
+    \caption{Instrument Basic Block algorithm}
+    \label{alg:bb_instr}
+    \begin{algorithmic}[1]
+        \REQUIRE $bbs=[\, bb\_label_1 \dots bb\_label_n] , mydata\_addr , mygot\_addr$ 
+        \ENSURE all the Basic Blocks are instrumented correctly
+
+        \FOR{$bb\_label \in bbs$}
+            \STATE $bb \gets binary.\textsc{getBasicBlockFromLabel}(bb\_label)$ \COMMENT{\small \textcolor{green!60!black}{``binary'' is the main object used by GRAPE and is a virtual representation of the ELF it is rewriting}}
+            \STATE $addr \gets bb.initial\_address$
+            \STATE $instructions \gets \textsc{computeBasicBlockInstrumentation}(addr,mydata\_addr,mygot\_addr)$ 
+
+            \FOR{$i=\textsc{len}(instructions)$ \TO $1$} 
+                    \STATE $instr \gets \textsc{asm}(instructions[\,i\,])$ 
+                    \STATE $\textsc{AddInstructionChange}(addr,instr).\textsc{modify}(binary.cfg)$
+                    \IF{$\text{.mydata section shifted after .text enlargement}$}
+                        \STATE $mydata\_addr \gets mydata.virtual\_address$
+                        \STATE $mygot\_addr \gets mygot.virtual\_address$
+                        \STATE $instructions \gets \textsc{computeBasicBlockInstrumentation}(addr,mydata\_addr,mygot\_addr)$ 
+                        \STATE $\textsc{RemoveInstructionChange}(addr).\textsc{modify}(binary.cfg)$ 
+                        \STATE $\textsc{AddInstructionChange}(addr,instr).\textsc{modify}(binary.cfg)$
+                    \ENDIF
+            \ENDFOR
+        \ENDFOR
+    \end{algorithmic}
+\end{algorithm}
+
+After the instrumentation of each \gls{BB} according to \cref{alg:bb_instr}, the tool performs
+\textsc{RIPDataCoherenceAnalysis} and \textsc{SymbolCoherenceAnalysis}, adjusting all the shifted references,
+and overwrites the file that \textbf{lief} had previously written.
+
+Finally, the tool must check that the \texttt{e\_phoff} field of the \gls{ELF} header coincides with
+the actual offset of the \textbf{Program Header Table}, and thus with the \texttt{p\_offset} field of the
+\textbf{PT\_PHDR} segment.\\
+In some binaries, adding new segments (for \textit{.mydata} and \textit{.my\_got}) and adding instructions to other segments
+can cause the \textbf{Program Header Table} to shift, and the \texttt{e\_phoff} field not to be updated correctly.
+
+The tool first reads the \gls{ELF} header using the \textbf{lief} library, obtaining \texttt{e\_phoff}, and then
+cycles through all the binary segments until it finds the \textbf{PT\_PHDR} segment. When it finds the segment, it checks
+whether the two fields coincide.
+If not, it manually rewrites the byte that represents \texttt{e\_phoff} (the 0x20th byte of the header), adjusting
+it to the correct value.
+The ``manual'' rewriting is performed without using an actual library, assuming little-endian addressing.
+This is done in order to avoid libraries (such as \textbf{lief}) adjusting other fields.

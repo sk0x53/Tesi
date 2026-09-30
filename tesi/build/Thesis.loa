@@ -5,4 +5,5 @@
 \contentsline {algorithm}{\numberline {2.1}{\ignorespaces Instrumentation point search with DFS algorithm}}{27}{algorithm.2.1}%
 \contentsline {algorithm}{\numberline {2.2}{\ignorespaces Pseudo-code of Shared Memory update instrumentation}}{31}{algorithm.2.2}%
 \contentsline {algorithm}{\numberline {3.1}{\ignorespaces AFL forkserver algorithm}}{37}{algorithm.3.1}%
-\contentsline {algorithm}{\numberline {3.2}{\ignorespaces Instrument location algorithm}}{42}{algorithm.3.2}%
+\contentsline {algorithm}{\numberline {3.2}{\ignorespaces Initial Instrumentation algorithm}}{43}{algorithm.3.2}%
+\contentsline {algorithm}{\numberline {3.3}{\ignorespaces Instrument Basic Block algorithm}}{45}{algorithm.3.3}%
