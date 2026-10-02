@@ -216,6 +216,19 @@ class FunctionAdder:
                     self.functions_addresses.append({
                         "fname":f_name,
                         "addresses":(func.addr,func.addr+func.size)})
+        else:
+            #Find _start
+            cfg=self.binary._disassembler._angr_cfg
+            func = cfg.kb.functions[self.binary._header_manager.entry_point]
+
+            start = func.addr
+            end = max(b.addr + b.size for b in func.blocks)
+            self.functions_addresses.append({
+                "fname":"_start",
+                "addresses":(start,end)
+            })
+            print("_start addr range ",end=" ")
+            print(self.functions_addresses)
 
 
     def __printProgressBar__ (self,iteration, total):

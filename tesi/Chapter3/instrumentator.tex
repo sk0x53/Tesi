@@ -1,3 +1,4 @@
+In this case the discussion will vert on the \textbf{instrument.py} file. 
 This is the file capable of actually instrumenting the target binary.
 It uses two libraries:
 \begin{itemize}
@@ -189,6 +190,16 @@ This is because the instructions are inserted one on top of the other.
 \begin{center}
 \textbf{Initial Instrumentation}    
 \end{center}
+\Cref{lst:init_instr} performs three main tasks:
+\begin{itemize}
+    \item Finds the address of the forkserver function by dereferencing the resolved symbol, stores it in \texttt{rax}, and then performs an indirect call.
+    \item Writes a random integer (between 0 and 65535\footnote{
+        Since the AFL shared map size is 65536, each Basic Block ID must be between 0 and 65535
+    }) as the previous \gls{BB} ID.
+    \item Dereferences the address of the \gls{SHM} resolved by the dynamic linker and writes it into the \textit{.mydata} section, in
+        order to avoid dereferencing it every single time. 
+\end{itemize}
+
 \begin{lstlisting}[caption={Initial Instrumentation},label=lst:init_instr]
 push rsi
 push rdi
@@ -201,15 +212,6 @@ mov rax, QWORD PTR [rax]
 mov rax, QWORD PTR [rax]
 mov QWORD PTR[rip + offset_to_saved_shared_memory_address], rax
 \end{lstlisting}
-\Cref{lst:init_instr} performs three main tasks:
-\begin{itemize}
-    \item Finds the address of the forkserver function by dereferencing the resolved symbol, stores it in \texttt{rax}, and then performs an indirect call.
-    \item Writes a random integer (between 0 and 65535\footnote{
-        Since the AFL shared map size is 65536, each Basic Block ID must be between 0 and 65535
-    }) as the previous \gls{BB} ID.
-    \item Dereferences the address of the \gls{SHM} resolved by the dynamic linker and writes it into the \textit{.mydata} section, in
-        order to avoid dereferencing it every single time. 
-\end{itemize}
 
 \begin{center}
 \textbf{Basic Block Instrumentation}    

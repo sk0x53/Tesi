@@ -1,18 +1,18 @@
 # Fdb version 4
-["bibtex build/Thesis"] 1790771596.06159 "build/Thesis.aux" "build/Thesis.bbl" "build/Thesis" 1790771603.43031 0
+["bibtex build/Thesis"] 1790790637.62001 "build/Thesis.aux" "build/Thesis.bbl" "build/Thesis" 1790790643.26222 0
   "./Thesis_bibliography.bib" 1790516479.20618 10594 af1c038c4692c27b76b524f2c221a7e1 ""
   "/home/edoardo/.miktex/texmfs/install/bibtex/bst/natbib/abbrvnat.bst" 1789053095.56787 26532 66bed5cc59495faaa3f9ae9af9fa5e42 ""
-  "build/Thesis.aux" 1790771602.14495 25431 9f1db86a19591c4fa7f6cbeca44f8863 "pdflatex"
+  "build/Thesis.aux" 1790790642.21404 25744 e8d0e827d04324b8af2a0fada96e6895 "pdflatex"
   (generated)
   "build/Thesis.bbl"
   "build/Thesis.blg"
   (rewritten before read)
-["cusdep acn acr build/Thesis"] 1790771596.45781 "build/Thesis.acn" "build/Thesis.acr" "build/Thesis" 1790771603.43094 0
-  "build/Thesis.acn" 1790771602.15156 18367 7bfca772d7a23f661b99a01e16900e99 "pdflatex"
+["cusdep acn acr build/Thesis"] 1790788737.21931 "build/Thesis.acn" "build/Thesis.acr" "build/Thesis" 1790790643.26259 0
+  "build/Thesis.acn" 1790790642.22004 18367 c630ed31b4f1a1e4f80de8149a98bad5 "pdflatex"
   (generated)
   "build/Thesis.acr"
   (rewritten before read)
-["pdflatex"] 1790771597.20612 "/home/edoardo/materiale_tesi/Tesi/tesi/Thesis.tex" "build/Thesis.pdf" "Thesis" 1790771603.4314 0
+["pdflatex"] 1790790637.92936 "/home/edoardo/materiale_tesi/Tesi/tesi/Thesis.tex" "build/Thesis.pdf" "Thesis" 1790790643.26278 0
   "/home/edoardo/.miktex/texmfs/data/fonts/map/pdftex/pdftex.map" 1790245244.46839 79739 7dbccbe3c2e4147aa1cc9e0c3cc8d249 ""
   "/home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi1244/ecbx1200.pk" 1789053142.17658 74568 07931c296ed718ba4928162f869f6bab ""
   "/home/edoardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi2500/ecbx1200.pk" 1789055754.77422 154876 74b326cfe2d6cc4232d0c2e1e47bfec9 ""
@@ -273,7 +273,7 @@
   "/home/edoardo/.miktex/texmfs/install/tex/latex/xcolor/xcolor.sty" 1774884297.31978 55384 b454dec21c2d9f45ec0b793f0995b992 ""
   "/home/edoardo/.miktex/texmfs/install/tex/latex/xfor/xfor.sty" 1789053112.53752 2689 44855b72da58344b1c1d9b3087bce6ca ""
   "/home/edoardo/.miktex/texmfs/install/tex/latex/xkeyval/xkeyval.sty" 1789052946.89764 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
-  "/home/edoardo/materiale_tesi/Tesi/tesi/Thesis.tex" 1790767087.26412 9543 9dd1ed753a78c812b3dc4a4ca0b18d44 ""
+  "/home/edoardo/materiale_tesi/Tesi/tesi/Thesis.tex" 1790789939.10861 9602 875e3517b44587dbf9f335d6fad6e5f8 ""
   "Chapter1/Background.tex" 1790507581.69694 1727 fc4785fe5d848025cc12b07148b0dfbb ""
   "Chapter1/BinaryRewritingBackground.tex" 1790333632.22291 6484 8ad21a3bbab8704ec9c7c267158ec2bb ""
   "Chapter1/FuzzingBackground.tex" 1790333594.96944 7294 07dd506c0b3accb333b399d406f585af ""
@@ -287,9 +287,10 @@
   "Chapter2/Instr_points_search.tex" 1790768444.78355 7508 8118bfd3904ab81b29d747550a92cf04 ""
   "Chapter2/SharedMemory_export.tex" 1790508201.15241 4976 858b31eb8778265c4561a1f229e7c02b ""
   "Chapter2/optimization.tex" 1790610715.6746 2594 88b93d1fa9072f69043b13d026d28dbc ""
-  "Chapter3/Implementation_Details.tex" 1790769662.19277 937 e9f21f3319b46bc8b674603566f86dc9 ""
+  "Chapter3/Implementation_Details.tex" 1790787634.74118 948 25f4c5d7bb901d873a4a739b16c562bb ""
   "Chapter3/forkserver.tex" 1790674384.16906 5798 76042f580c1fd803e609b245b5736fb2 ""
-  "Chapter3/instrumentator.tex" 1790771589.3074 19266 f0af4c9b85a7e974d171e6293fe0b116 ""
+  "Chapter3/instrumentator.tex" 1790788731.68706 19342 760c68e01302adb7153cceb2b5c2bf93 ""
+  "Chapter4/Experiments.tex" 1790790632.2689 968 7d63287034c1eb0b123740c5305e5381 ""
   "Configuration_Files/PoliMi3i_thesis.cls" 1789052805.94308 5370 0af241c047a6c7c634bb6039c1955869 ""
   "Configuration_Files/config.tex" 1789052201.30508 2476 d3dced3cc5952a79637f07732bd04be5 ""
   "Images/./raggiera_polimi.eps" 1789052248.93214 1813066 dca994a8e6dbfff46979ea0a845ddce3 ""
@@ -315,16 +316,16 @@
   "Images/pow_main_example.png" 1790516369.62309 163831 ac3a1d4b7b03765650480b5a04d72279 ""
   "Images/reladynexample.png" 1790268939.9682 82414 6a30957cc5ac037aed90d2565fb49dde ""
   "Images/trampolineInstrumentation.png" 1790067149.12293 78016 b8d4528ad3707a139f8e910f370cee4b ""
-  "Thesis.tex" 1790767087.26412 9543 9dd1ed753a78c812b3dc4a4ca0b18d44 ""
+  "Thesis.tex" 1790789939.10861 9602 875e3517b44587dbf9f335d6fad6e5f8 ""
   "Thesis_Acronyms.tex" 1790511141.10379 666 7b025d0100ab4c8cc66ebaacf983c646 ""
-  "build/Thesis.acr" 1790771597.06874 4594 d75a8552c66efa023c9ea1945e06ce61 "cusdep acn acr build/Thesis"
-  "build/Thesis.aux" 1790771602.14495 25431 9f1db86a19591c4fa7f6cbeca44f8863 "pdflatex"
-  "build/Thesis.bbl" 1790771596.35284 8745 8adfc1cafdc3b97d08226a3d409367bd "bibtex build/Thesis"
-  "build/Thesis.loa" 1790771602.15195 1073 ae9b8f27c52db3451d21ec6eec44fdaf "pdflatex"
-  "build/Thesis.lof" 1790771602.15195 2300 c39e025df5305c50abc75772aee3d38a "pdflatex"
-  "build/Thesis.lot" 1790771602.15195 250 c10f0e85c28432794d41c4d541d78b22 "pdflatex"
-  "build/Thesis.out" 1790771602.15156 4643 ab3e810f97efafa4e9b511bfe8af4501 "pdflatex"
-  "build/Thesis.toc" 1790771602.15156 2682 ba28062a301c5fefc204a4b65b721d2b "pdflatex"
+  "build/Thesis.acr" 1790788737.7209 4584 0e7d7009c28319314b666a6655dbbf6a "cusdep acn acr build/Thesis"
+  "build/Thesis.aux" 1790790642.21404 25744 e8d0e827d04324b8af2a0fada96e6895 "pdflatex"
+  "build/Thesis.bbl" 1790790637.83722 8745 8adfc1cafdc3b97d08226a3d409367bd "bibtex build/Thesis"
+  "build/Thesis.loa" 1790790642.22104 1073 426f1fdb82adc3a60fb2ae682d923b38 "pdflatex"
+  "build/Thesis.lof" 1790790642.22004 2320 c4e0aa5b97a8b42595c538ad7b57bc71 "pdflatex"
+  "build/Thesis.lot" 1790790642.22104 270 afcc304053bb2c2e99b97d30a2212427 "pdflatex"
+  "build/Thesis.out" 1790790642.22004 4822 03aa42ab37406abbfc47cef652e690a9 "pdflatex"
+  "build/Thesis.toc" 1790790642.22004 2816 12d0073ae39643a3dd72d9664b49bc21 "pdflatex"
   (generated)
   "build/Thesis.acn"
   "build/Thesis.aux"

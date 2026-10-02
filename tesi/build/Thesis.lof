@@ -17,3 +17,4 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Binary modification phase in which the needed sections, relocations and dynamic dependencies are added. (\small The dotted arrows specify which information is needed for the relocation phase) }}{38}{figure.caption.24}%
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Example of the error caused by not taking care of RIP-relative instruction offsets}}{41}{figure.caption.25}%
+\addvspace {10\p@ }

@@ -6,4 +6,4 @@
 \contentsline {algorithm}{\numberline {2.2}{\ignorespaces Pseudo-code of Shared Memory update instrumentation}}{31}{algorithm.2.2}%
 \contentsline {algorithm}{\numberline {3.1}{\ignorespaces AFL forkserver algorithm}}{37}{algorithm.3.1}%
 \contentsline {algorithm}{\numberline {3.2}{\ignorespaces Initial Instrumentation algorithm}}{43}{algorithm.3.2}%
-\contentsline {algorithm}{\numberline {3.3}{\ignorespaces Instrument Basic Block algorithm}}{45}{algorithm.3.3}%
+\contentsline {algorithm}{\numberline {3.3}{\ignorespaces Instrument Basic Block algorithm}}{44}{algorithm.3.3}%
