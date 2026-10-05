@@ -11,4 +11,128 @@ are executed and the actual test performed, alongside their results.
         \item \textbf{Goal III} : Show taht instrumentation overhead is competitive with other binary only rewriters and lower
                         than dynamic binary translator.
     \end{itemize}
+
+    In order to prove that the tool satisfy these goals,  experiments were conducted:
+    \begin{itemize}
+        \item \textbf{Experiment I} : Test the original binary and the instrumented binary with the same input and 
+            without using a fuzzer in order to prove the behavior preservation of the program after the instrumentation 
+            (Goal I)
+        \item \textbf{Experiment II} : Perform a fuzzing campaign with 3 different instrumentations:
+        \begin{itemize}
+            \item AFL++ in QEMU mode
+            \item ZAFL 
+            \item Mine
+        \end{itemize}
+        The choosen fuzzer will be AFL++. This test aim to prove Goal II and Goal III.
+    \end{itemize}
+
+\section{Datasets and Experiment Setup}
+    \begin{center}
+        \textbf{Experiment I}
+    \end{center}
+    The experiment consist in feeding an input both to original binary and the modified \footnote{
+        The original binary is not intended to be the original coreutil program, but the LAVA modified one
+    }, and check if the output coincide.he dataset is taken from \textit{real-world software} dataset used in the ZAFL 
+    paper \cite{zafl}. Not all the software was used. In \cref{tab:experiment1Dataset} can be seen the list of binaries 
+    with their version
+    \begin{table}[ht]
+        \centering
+        \caption{Binaries extracted from ZAFL \textit{real-world software} dataset}
+        \label{tab:experiment1Dataset}
+        \begin{tabular}{c|c}
+            Binary name & Version \\
+            \hline
+            bsdtar & bsdtar 3.7.2 - libarchive 3.7.2 \\
+            \hline
+            readlelf & GNU Binutils 2.42\\
+            \hline
+            sfconvert & 0.3.6\\
+            \hline
+            tcpdump & 4.99.4\\
+            \hline 
+            unrtf & 0.21.10\\
+
+        \end{tabular}
+    \end{table}
+
+     \begin{center}
+        \textbf{Experiment II}
+    \end{center}
+    The dataset used for the second experiment is LAVA-M \cite{lava}, in the same version used by ZAFL \cite{zafl}.
+    This dataset is composed of 4 coreutils binaries (\textit{base64 , md5sum , uniq , who}), to which synthetic bugs 
+    were added with LAVA framework.Each bug has an unique ID and is protected by a checksum.
+    A input could trigger the synthetic bug if the random mutation could satisfy the checksum.
+    If a specific bug is triggered, the unique ID of that bug is printed and then the program crash intentionally.\\ 
+    The used coreutil version is the \textbf{8.24}.
+    As reported by Chen et al.~\cite{Angora}, the LAVA-M version of \textit{md5sum} was modified incorrectly: 
+    when run with the \texttt{-c} option, it crashes on every input. 
+    This affects our second experiment, in which the fuzzing seed must be parsed with \texttt{-c}. 
+    Since every input triggers a crash, the results for this experiment are not meaningful.
+    The experiment is done with AFL++ version 5.03c and made across 24 hours fuzzing campaign with 3 different repetitions per binary tested.
+    
+\section{Experiment I}
+Among the binaries in the dataset in \cref{tab:experiment1Dataset}, 
+\textit{tcpdump} and \textit{unrtf} fails to be instrumented. Specifically fails 
+    during the GRAPE \gls{CFG} reconstruction.
+    The results of the experiments can be seen in \cref{tab:experiment1}.\\
+    \begin{table}[ht]
+        \centering
+        \caption{Results of experiment I}
+        \label{tab:experiment1}
+        \begin{tabular}{c|c|c}
+            Binary name & Instrumentation phase & Output correspondence\\
+            \hline
+            bsdtar & \cmark &  \cmark\\
+            \hline
+            readlelf & \cmark & \xmark\\
+            \hline
+            sfconvert & \cmark & \xmark \\
+            \hline
+            tcpdump & \xmark & \xmark\\
+            \hline 
+            unrtf &  \xmark & \xmark\\
+        \end{tabular}
+    \end{table}
+    The case of \textit{sfconvert} is particular, because the output is almost the same, apart from one field as can be seen in 
+    \cref{fig:exp1Error}.\\
+
+    \begin{figure}[t]
+        \centering
+        \begin{subfigure}[h]{0.8\textwidth}
+            \centering
+            \begin{minipage}[h]{0.48\textwidth}
+                    \includegraphics[width=\linewidth]{exp1originalOut.png}
+
+            \end{minipage}
+            \hfill
+            \begin{minipage}[h]{0.48\textwidth}
+                    \includegraphics[width=\linewidth]{exp1MineOut.png}
+            \end{minipage}
+            \caption{On the left there is the output of the original binary when tested with an input.
+            On the right the output of the instrumented binary, when feeded with the same input}
+            \label{fig:exp1Output}
+        \end{subfigure} 
+
+        \vspace{0.5cm}
+
+        \begin{subfigure}[h]{0.8\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{diffOutput.png}
+            \caption{Output of diff command}
+            \label{fig:exp1DiffOutput}
+        \end{subfigure}
+
+        \caption{Correctness test example of the binary \textit{sfconvert}}
+        \label{fig:exp1Error}
+    \end{figure}
+    With regard to \textit{readelf} the instrumented binary encounter a \texttt{SIGSEGV} error due to the fact that, 
+    adding new sections and segments to the binary, \textbf{lief} library automatically reorganize the \gls{ELF} layout, 
+    causing some sections (e.g. \textit{.bss}) to be shifted. The instructions that did reference this sections, 
+    after the layout changing, will reference wrong addresses, causing a \texttt{SIGSEGV} when try access.
+
+\section{Experiment II}
+    Among the 4 LAVA-M binaries, none of them fails during the instrumentation phase.
+    However two of them (i.e. \textit{md5sum} and \textit{who}) result in an incorrect instrumentation.
+    Md5sum was already corrupted as stated before, \textit{who} was incorrectly instrumented.
+    
     

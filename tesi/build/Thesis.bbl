@@ -1,4 +1,4 @@
-\begin{thebibliography}{27}
+\begin{thebibliography}{31}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -51,6 +51,13 @@ M.~Böhme, V.-T. Pham, and A.~Roychoudhury.
   and Communications Security}, CCS16, pages 1032--1043. ACM, Oct. 2016.
 \newblock \doi{10.1145/2976749.2978428}.
 
+\bibitem[Chen and Chen(2018)]{Angora}
+P.~Chen and H.~Chen.
+\newblock Angora: Efficient fuzzing by principled search.
+\newblock In \emph{2018 IEEE Symposium on Security and Privacy (SP)}, pages
+  711--725, 2018.
+\newblock \doi{10.1109/SP.2018.00046}.
+
 \bibitem[Dinesh et~al.(2020)Dinesh, Burow, Xu, and Payer]{retrowrite}
 S.~Dinesh, N.~Burow, D.~Xu, and M.~Payer.
 \newblock Retrowrite: Statically instrumenting cots binaries for fuzzing and
@@ -58,6 +65,15 @@ S.~Dinesh, N.~Burow, D.~Xu, and M.~Payer.
 \newblock In \emph{2020 IEEE Symposium on Security and Privacy (SP)}, pages
   1497--1511, 2020.
 \newblock \doi{10.1109/SP40000.2020.00009}.
+
+\bibitem[Dolan-Gavitt et~al.(2016)Dolan-Gavitt, Hulin, Kirda, Leek, Mambretti,
+  Robertson, Ulrich, and Whelan]{lava}
+B.~Dolan-Gavitt, P.~Hulin, E.~Kirda, T.~Leek, A.~Mambretti, W.~Robertson,
+  F.~Ulrich, and R.~Whelan.
+\newblock Lava: Large-scale automated vulnerability addition.
+\newblock In \emph{2016 IEEE Symposium on Security and Privacy (SP)}, pages
+  110--121, 2016.
+\newblock \doi{10.1109/SP.2016.15}.
 
 \bibitem[Fioraldi et~al.(2020)Fioraldi, Maier, Ei{\ss}feldt, and
   Heuse]{aflplusplus}
@@ -168,6 +184,21 @@ O.~A.~V. Ravn{\aa}s.
 \newblock Cutter, 2026.
 \newblock URL \url{https://github.com/rizinorg/cutter}.
 \newblock Accessed September 27, 2026.
+
+\bibitem[Schilling et~al.(2024)Schilling, Wendler, G{\"o}rz, Bars, Schloegel,
+  and Holz]{schilling2024binary}
+J.~Schilling, A.~Wendler, P.~G{\"o}rz, N.~Bars, M.~Schloegel, and T.~Holz.
+\newblock A binary-level thread sanitizer or why sanitizing on the binary level
+  is hard.
+\newblock In \emph{33rd USENIX Security Symposium (USENIX Security 24)}, pages
+  1903--1920, 2024.
+
+\bibitem[Serebryany et~al.(2012)Serebryany, Bruening, Potapenko, and
+  Vyukov]{serebryany2012addresssanitizer}
+K.~Serebryany, D.~Bruening, A.~Potapenko, and D.~Vyukov.
+\newblock $\{$AddressSanitizer$\}$: A fast address sanity checker.
+\newblock In \emph{2012 USENIX annual technical conference (USENIX ATC 12)},
+  pages 309--318, 2012.
 
 \bibitem[Wenzl et~al.(2019)Wenzl, Merzdovnik, Ullrich, and
   Weippl]{binaryrewriting}

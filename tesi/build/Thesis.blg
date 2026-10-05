@@ -15,45 +15,45 @@ Warning--empty year in afldyninst
 Warning--empty year in libfuzzer
 Warning--empty journal in binaryrewriting
 Warning--empty year in afl_technical_details
-You've used 27 entries,
+You've used 31 entries,
             2773 wiz_defined-function locations,
-            783 strings with 10096 characters,
-and the built_in function-call counts, 13759 in all, are:
-= -- 1278
-> -- 770
-< -- 21
-+ -- 265
-- -- 237
-* -- 1069
-:= -- 2062
-add.period$ -- 121
-call.type$ -- 27
-change.case$ -- 160
-chr.to.int$ -- 26
-cite$ -- 60
-duplicate$ -- 611
-empty$ -- 1103
-format.name$ -- 268
-if$ -- 2965
+            806 strings with 10997 characters,
+and the built_in function-call counts, 16693 in all, are:
+= -- 1540
+> -- 962
+< -- 26
++ -- 329
+- -- 297
+* -- 1300
+:= -- 2473
+add.period$ -- 135
+call.type$ -- 31
+change.case$ -- 192
+chr.to.int$ -- 30
+cite$ -- 68
+duplicate$ -- 744
+empty$ -- 1321
+format.name$ -- 334
+if$ -- 3618
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 17
-newline$ -- 178
-num.names$ -- 108
-pop$ -- 356
+missing$ -- 21
+newline$ -- 200
+num.names$ -- 124
+pop$ -- 430
 preamble$ -- 1
-purify$ -- 133
+purify$ -- 161
 quote$ -- 0
-skip$ -- 495
+skip$ -- 620
 stack$ -- 0
-substring$ -- 456
-swap$ -- 127
-text.length$ -- 8
+substring$ -- 592
+swap$ -- 173
+text.length$ -- 12
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 297
+type$ -- 341
 warning$ -- 6
-while$ -- 112
+while$ -- 134
 width$ -- 0
-write$ -- 419
+write$ -- 475
 (There were 8 warnings)

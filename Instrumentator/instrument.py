@@ -63,12 +63,14 @@ class FunctionAdder:
         #
         elf.add_library("libforkserver.so")
         elf.add(lief.ELF.DynamicEntryRunPath(library_path)) 
+
         got_slot_addr=self.__create_mygot_section__(elf)
    
         afl_area_symbol=self.__create__afl_area_ptr_symbol__(elf)
         forkserver_start_symbol=self.__create__forkserver_start_ptr_symbol__(elf)
         self.__add_relocation__(got_slot_addr,afl_area_symbol,elf,forkserver_start_symbol)
         mydata_addr=self.__add_data_section__(elf)
+
 
         self.my_got_addr=got_slot_addr
         self.my_data_addr=mydata_addr
@@ -316,8 +318,7 @@ class FunctionAdder:
                 AddInstructionChange(self.instrumentation_address,assembled_instruction,[]).modify(
                     self.binary.cfg
                 )
-                print(f"        [!] Segment shift. New data location ={hex(self.my_data_addr)}, my got addr={hex(self.my_got_addr)} while instrumenting {hex(self.instrumentation_address)} of init instrumentation")
-
+                
         
         print(f"     [-] Startup instrumentation size={hex(length)}")
         if not self.is_stripped:
@@ -417,8 +418,7 @@ class FunctionAdder:
                 AddInstructionChange(addr,assembled_instructions[i],[]).modify(
                     self.binary.cfg
                 )
-                print(f"        [!] Segment shift. New data location ={hex(self.my_data_addr)}, my got addr={hex(self.my_got_addr)} while instrumenting {hex(addr)} i={num_instrucitons-i-1} out of {num_instrucitons}")
-
+                
         if not self.is_stripped and sym is not None:
             sym.size+=length#Increment the size of the function while the instructions are added
         return length

@@ -28,10 +28,16 @@
 \contentsline {subsection}{\numberline {3.2.2}Instrumentation}{40}{subsection.3.2.2}%
 \contentsline {chapter}{\numberline {4}Experiments}{47}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Goals}{47}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Datasets and Experiment Setup}{48}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Experiment I}{48}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Experiment II}{49}{section.4.4}%
+\contentsline {chapter}{\numberline {5}Limitations and Future Works}{51}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Limitations}{51}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Future Works}{52}{section.5.2}%
 \vspace {2em}
-\contentsline {chapter}{Bibliography\markboth {\MakeUppercase []{Bibliography}}{\MakeUppercase []{Bibliography}}}{49}{chapter*.28}%
+\contentsline {chapter}{Bibliography\markboth {\MakeUppercase []{Bibliography}}{\MakeUppercase []{Bibliography}}}{53}{chapter*.32}%
 \vspace {2em}
-\contentsline {chapter}{List of Acronyms}{53}{chapter*.31}%
-\contentsline {chapter}{List of Figures}{55}{chapter*.33}%
-\contentsline {chapter}{List of Tables}{57}{chapter*.35}%
-\contentsline {chapter}{List of Algorithms\markboth {\MakeUppercase []{List of Algorithms}}{\MakeUppercase []{List of Algorithms}}}{59}{chapter*.37}%
+\contentsline {chapter}{List of Acronyms}{57}{chapter*.35}%
+\contentsline {chapter}{List of Figures}{59}{chapter*.37}%
+\contentsline {chapter}{List of Tables}{61}{chapter*.39}%
+\contentsline {chapter}{List of Algorithms\markboth {\MakeUppercase []{List of Algorithms}}{\MakeUppercase []{List of Algorithms}}}{63}{chapter*.41}%

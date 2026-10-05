@@ -1,0 +1,45 @@
+As demonstrated by the tests performed and discussed in the previous chapter, the current implementation 
+has some limitations.
+In this chapter, I will discuss the main limitations of the current implementation and try to outline 
+a direction for future work in this field.
+
+\section{Limitations}
+    The main limitation is that the developed tool fails to correctly modify some binaries, as 
+    shown in [Add reference].
+    I have identified some possible causes of instrumentation failure.
+    One of these occurs in some binaries, where the addition of segments (needed to hold the new sections) 
+    causes other sections in other segments to shift.
+    In fact, according to the \textbf{LIEF} documentation, LIEF does not guarantee preservation of the \gls{ELF} layout.
+    For instance, when the dynamic dependency is added to the binary, some sections are modified. Specifically:
+\begin{itemize}
+\item \textit{.dynstr}: the string 'libforkserver.so' must be added to the dynamic string section.
+\item \textit{.dynamic}: LIEF adds a DT\_NEEDED entry that points to the newly added string in \textit{.dynstr}.
+\end{itemize}
+    If, during either of these two additions, LIEF exceeds the available space in the segment containing the 
+    grown section, it reorganizes the segments.
+    This causes a complete displacement of the data sections (such as \textit{.bss, .data, .rodata}, \dots) 
+    without a corresponding fix to the instructions that reference these data sections.
+    This can cause a segmentation fault when, for example, an instruction tries to access a value stored 
+    in \textit{.bss}.
+    In both PIE and non-PIE binaries, the non-linear displacement between the \textit{.bss} section's address 
+    before and after the binary modification causes instructions to no longer point to the correct address.
+
+    Another limitation worth mentioning is that the developed tool works only with \gls{ELF} files, lacking 
+    compatibility with the Windows PE executable format.
+
+\section{Future Works}
+    The main work to be done in the future consists in making this type of solution more resilient to binary corruption.
+    The approach of instrumenting the \gls{SHM} update directly inline within each \gls{BB} has proven effective, 
+    given the speedup resulting from avoiding a context switch at each \gls{BB} (which would otherwise be caused 
+    by invoking a function) [Reference to the experiments section].
+    For this reason, a possible direction for future work could be to apply current state-of-the-art techniques 
+    to this approach.
+    For example, using the \gls{SHM} update rule presented in this thesis, several hash collisions occur in the 
+    \gls{SHM}, causing the fuzzer to misinterpret coverage, as demonstrated by Shuitao Gan et al. \cite{CollAFL}.
+    In fact, that paper presents a new approach to \gls{SHM} updates, which was later added as a supported 
+    instrumentation method in the AFL++ framework. Implementing a collision-free coverage algorithm as 
+    \gls{SHM} update rule could be a possible improvement over the proposed approach.
+
+    Furthermore, implementing a sanitization mechanism could be another research direction building on the work 
+    done in this thesis, for example by implementing an Address Sanitizer \cite{serebryany2012addresssanitizer} 
+    or a Thread Sanitizer \cite{schilling2024binary}.
