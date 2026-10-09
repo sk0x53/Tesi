@@ -46,7 +46,7 @@ Binary rewriting consists in altering an already compiled executable without hav
                 an unconditional jump to the new section is placed.
                 The main limitation of this approach arises when the new section is far from the \gls{IP} and a near jump (necessary to reach the new section)
                 uses a different number of bytes than the instruction at the instrumentation point.
-                In fact, in x86-64 assembly a short jump uses 2 bytes while a near jump uses up to 5 bytes.
+                In fact, in x86-64 assembly a short jump uses 2 bytes while a near jump uses 5 bytes.
                 So, if a short jump is needed at the instrumentation point for alignment reasons,
                 but the new section is too far away and a near jump is needed instead, it is necessary to add a \textbf{trampoline}.
                 This approach can be seen in \cref{fig:trampoline_instrumentation}.

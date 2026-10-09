@@ -5,7 +5,7 @@ a direction for future work in this field.
 
 \section{Limitations}
     The main limitation is that the developed tool fails to correctly modify some binaries, as 
-    shown in [Add reference].
+    shown in \cref{tab:experiment1}.
     I have identified some possible causes of instrumentation failure.
     One of these occurs in some binaries, where the addition of segments (needed to hold the new sections) 
     causes other sections in other segments to shift.
@@ -23,6 +23,19 @@ a direction for future work in this field.
     in \textit{.bss}.
     In both PIE and non-PIE binaries, the non-linear displacement between the \textit{.bss} section's address 
     before and after the binary modification causes instructions to no longer point to the correct address.
+    This fact can be seen as the underlying problem both for \textit{readelf} and \textit{sfconvert} of \cref{tab:experiment1}. 
+    In \textit{who} of \cref{table:fuzzingStats} instead, the problem needs to be traced in some error inside the instrumentation 
+    that cause the disalignment of the instructions of a \gls{BB}, causing some of these instruction to be illegal instructions.\\ 
+    Moreover, for other binaries, the problem arise in the actual instrumentation phase, highlighting a certain fragility 
+    of the tool to instrument any type of binary.
+
+    Another important limitation that must be mentioned is that the presented approach is not thread-safe.
+    Infact, the rax value is saved in a global memory area that is not thread safe.
+    For this reason, if two parallel threads reach a \gls{SHM} update block at the same time, the value inside of save 
+    rax register will be overwritten, causing one of the two threads to restore an incorrect value of rax.
+    The same problem happens with previous \gls{BB} ID saved.
+    Supposing that, at a certain point, four different threads are active, each thread will have, in general, a different 
+    previous \gls{BB} ID.
 
     Another limitation worth mentioning is that the developed tool works only with \gls{ELF} files, lacking 
     compatibility with the Windows PE executable format.

@@ -13,7 +13,7 @@ Fuzzing is nowadays a widely used approach for software testing and vulnerabilit
     Depending on the amount of information the Input Generator has, fuzzing can be classified into
     \textit{White-box}, \textit{Black-box} or \textit{Grey-box}.
     In Black-box fuzzing, the fuzzer does not have any knowledge of the execution \cite{Miller1990}.
-    In White-box fuzzing, instead, the source code must always be available, and techniques such as Symbolic and Concolic execution are used \cite{Godefroid2012}.
+    In White-box fuzzing, instead, the source code must be available in the general case, and techniques such as Symbolic and Concolic execution are used \cite{Godefroid2012}.
     In Grey-box fuzzing, instead, the inputs are chosen using, for example, \textbf{Code Coverage} information (i.e. the number of lines of code visited during execution of the target).
     This approach is called \textit{Coverage-Guided Grey-box fuzzing} and is based on prioritizing the inputs that discover new sections of code.
     Since the source code is not always available, Code Coverage is not always a viable Coverage Measure.
@@ -33,7 +33,8 @@ Fuzzing is nowadays a widely used approach for software testing and vulnerabilit
             large runtime and memory overheads.
     \end{itemize}
 
-    The best approach to Code Coverage, in terms of overhead and effectiveness, is \textbf{Edge Coverage} \cite{CollAFL}, which keeps track of which edges
+    One of the best approach to Code Coverage, in terms of tradeoff between overhead and effectiveness, 
+    is \textbf{Edge Coverage} \cite{CollAFL}, which keeps track of which edges
     in the \gls{CFG} are taken during execution without the overheads incurred by keeping track of the entire execution path.
     Coverage information is obtained through the instrumentation of the target application.
     Depending on the availability of the source code, the instrumentation can be added in different ways:

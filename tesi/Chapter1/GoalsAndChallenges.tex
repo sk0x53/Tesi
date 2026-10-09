@@ -1,5 +1,6 @@
 The main goal of this thesis is to develop a tool capable of inline, static edge-coverage instrumentation
-that preserves binary correctness while achieving performance comparable to compile-time instrumentation.\\
+that preserves binary correctness while achieving better performance with respect to \gls{DBI} and comparable to 
+other state-of-the-art instrumentation technique.\\
 I have chosen to implement the \gls{SBI} approach instead of \gls{DBI} due to its low overhead.
 To do this, I will use the GRAPE binary rewriting framework, a novel approach for binary rewriting that preserves binary executability
 while introducing small overheads compared to a trampoline-based approach.

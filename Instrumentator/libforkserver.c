@@ -141,11 +141,9 @@ void init(void) {
         if(version_str){
             if(strcmp(version_str,"0")==0){ //version=0 mean standard AFL
                 __forkserver_start_ptr=&afl_forkserver_start;
-                printf("afl used\n");
             }
             else {
                 __forkserver_start_ptr=&aflplusplus_forkserver_start;
-                printf("afl++ used\n");
             }
 
         }
@@ -163,7 +161,6 @@ void init(void) {
             exit(1);
         }
         __forkserver_start_ptr=&standalone_forkserver;
-        printf("Standalone selected\n");
     }
 
 }

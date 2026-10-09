@@ -1,40 +1,38 @@
-The following chapter aims to discuss the various objectives that we want to achieve with this thesis, the dataset used 
-to test and prove the objectives, in order to know if these are reached or not, the experimental setup on which the test 
-are executed and the actual test performed, alongside their results.
+This chapter presents the objectives of this thesis, the dataset used to verify whether these objectives are achieved, 
+the experimental setup in which the tests are executed, and the tests performed, together with their results.
 
 \section{Goals}
-    In order to prove that the instrumentation approach is valid, I have choosen 3 main goals :
+    In order to prove that the instrumentation approach is valid, I have chosen three main goals:
     \begin{itemize}
         \item \textbf{Goal I} : The instrumented binary must be compatible with the original one.
             This means that the behavior of the program must be preserved after the instrumentation.
-        \item \textbf{Goal II} : The instrumented binary must be compatible with AFL and AFL++ communication protocol.
-        \item \textbf{Goal III} : Show taht instrumentation overhead is competitive with other binary only rewriters and lower
-                        than dynamic binary translator.
+        \item \textbf{Goal II} : The instrumented binary must be compatible with the AFL and AFL++ communication protocol.
+        \item \textbf{Goal III} : Show that the instrumentation overhead is competitive with other binary-only rewriters and lower
+                        than that of dynamic binary translators.
     \end{itemize}
 
-    In order to prove that the tool satisfy these goals,  experiments were conducted:
+    In order to prove that the tool satisfies these goals, the following experiments were conducted:
     \begin{itemize}
-        \item \textbf{Experiment I} : Test the original binary and the instrumented binary with the same input and 
-            without using a fuzzer in order to prove the behavior preservation of the program after the instrumentation 
-            (Goal I)
-        \item \textbf{Experiment II} : Perform a fuzzing campaign with 3 different instrumentations:
+        \item \textbf{Experiment I} : Test the original binary and the instrumented binary with the same input, 
+            without using a fuzzer, in order to prove that the behavior of the program is preserved after the instrumentation 
+            (Goal I).
+        \item \textbf{Experiment II} : Perform a fuzzing campaign with three different instrumentations:
         \begin{itemize}
             \item AFL++ in QEMU mode
             \item ZAFL 
             \item Mine
         \end{itemize}
-        The choosen fuzzer will be AFL++. This test aim to prove Goal II and Goal III.
+        The chosen fuzzer is AFL++. This test aims to prove Goal II and Goal III.
     \end{itemize}
 
 \section{Datasets and Experiment Setup}
     \begin{center}
         \textbf{Experiment I}
     \end{center}
-    The experiment consist in feeding an input both to original binary and the modified \footnote{
-        The original binary is not intended to be the original coreutil program, but the LAVA modified one
-    }, and check if the output coincide.he dataset is taken from \textit{real-world software} dataset used in the ZAFL 
-    paper \cite{zafl}. Not all the software was used. In \cref{tab:experiment1Dataset} can be seen the list of binaries 
-    with their version
+    The experiment consists in feeding the same input to both the original binary and the modified one, 
+    and checking whether the outputs coincide. The dataset is taken from the \textit{real-world software} dataset used in the ZAFL 
+    paper \cite{zafl}. Not all the software was used. \Cref{tab:experiment1Dataset} lists the binaries 
+    used, with their versions.
     \begin{table}[ht]
         \centering
         \caption{Binaries extracted from ZAFL \textit{real-world software} dataset}
@@ -44,7 +42,7 @@ are executed and the actual test performed, alongside their results.
             \hline
             bsdtar & bsdtar 3.7.2 - libarchive 3.7.2 \\
             \hline
-            readlelf & GNU Binutils 2.42\\
+            readelf & GNU Binutils 2.42\\
             \hline
             sfconvert & 0.3.6\\
             \hline
@@ -54,85 +52,238 @@ are executed and the actual test performed, alongside their results.
 
         \end{tabular}
     \end{table}
-
+    All the binaries considered for this experiment are stripped.
      \begin{center}
         \textbf{Experiment II}
     \end{center}
     The dataset used for the second experiment is LAVA-M \cite{lava}, in the same version used by ZAFL \cite{zafl}.
-    This dataset is composed of 4 coreutils binaries (\textit{base64 , md5sum , uniq , who}), to which synthetic bugs 
-    were added with LAVA framework.Each bug has an unique ID and is protected by a checksum.
-    A input could trigger the synthetic bug if the random mutation could satisfy the checksum.
-    If a specific bug is triggered, the unique ID of that bug is printed and then the program crash intentionally.\\ 
-    The used coreutil version is the \textbf{8.24}.
-    As reported by Chen et al.~\cite{Angora}, the LAVA-M version of \textit{md5sum} was modified incorrectly: 
+    This dataset is composed of four coreutils binaries (\textit{base64 , md5sum , uniq , who}), to which synthetic bugs 
+    were added with the LAVA framework. Each bug has a unique ID and is protected by a checksum.
+    An input can trigger a synthetic bug only if random mutation manages to satisfy the checksum.
+    When a specific bug is triggered, the unique ID of that bug is printed and the program then crashes intentionally.\\ 
+    The coreutils version used is \textbf{8.24}.
+    As reported by Chen et al. \cite{Angora}, the LAVA-M version of \textit{md5sum} was modified incorrectly: 
     when run with the \texttt{-c} option, it crashes on every input. 
     This affects our second experiment, in which the fuzzing seed must be parsed with \texttt{-c}. 
-    Since every input triggers a crash, the results for this experiment are not meaningful.
-    The experiment is done with AFL++ version 5.03c and made across 24 hours fuzzing campaign with 3 different repetitions per binary tested.
+    Since every input triggers a crash, the results for this binary are not meaningful.
+    The experiment was run with AFL++ version 5.03c, over a 24-hour fuzzing campaign with three repetitions for each tested binary.
+    The experiment was executed inside a KVM virtual machine (full virtualization) exposing 16 virtual CPUs, hosting 
+    Ubuntu 24 as guest operating system, with 32 GB of RAM. 
+    All the different runs was executed concurrently; each was pinned to a dedicated virtual CPU. 
+    The 3 different instrumentation methods are tested indipendently; parallely are executed the 3 runs of one of the instrumentation 
+    method on each of the 4 binaries, having a total of 12 virtual cores occupied.
+    The seeds for each runs are different.
+    The initial corpus is composed of only 1 test case.\\
+    The general AFL++ command used to each fuzzing campaign is:\\
+    \texttt{afl-fuzz -i <input\_dir> -o <findings\_dir> -V 86400   -\,- <binary>} ;
+    with some difference depending on the binary that is being tested and the instrumentation method:
+    \begin{itemize}
+        \item For the binaries instrumented with ZAFL the environment variable \\``AFL\_SKIP\_BIN\_CHECK=1'' must be set
+        \item For the binaries fuzzed with AFL++ in QEMU mode, the option ``-Q'' must be added to the command
+    \end{itemize}
+    Moreover the 4 binaries are executed in different ways:
+    \begin{itemize}
+        \item \textit{base64} : \texttt{base64 -d}
+        \item \textit{md5sum} : \texttt{md5sum -c @@}
+        \item \textit{uniq} : \texttt{uniq}
+        \item \textit{who} : \texttt{who @@} 
+    \end{itemize}
+
     
 \section{Experiment I}
-Among the binaries in the dataset in \cref{tab:experiment1Dataset}, 
-\textit{tcpdump} and \textit{unrtf} fails to be instrumented. Specifically fails 
-    during the GRAPE \gls{CFG} reconstruction.
-    The results of the experiments can be seen in \cref{tab:experiment1}.\\
+Among the binaries listed in \cref{tab:experiment1Dataset}, 
+\textit{tcpdump} and \textit{unrtf} could not be instrumented: the failure occurs 
+during the GRAPE \gls{CFG} reconstruction (specifically during \texttt{Angr} CFG analysis).\\
+Each binary is executed different times, with different inputs and different execution options.
+The output of the original and the instrumented are then compared to check if are the same or not.
+The results of the experiment are shown in \cref{tab:experiment1}.\\
+
     \begin{table}[ht]
         \centering
         \caption{Results of experiment I}
         \label{tab:experiment1}
-        \begin{tabular}{c|c|c}
-            Binary name & Instrumentation phase & Output correspondence\\
+        \begin{tabular}{c|c|c|c|c}
+                        & Instrumented  & total tested inputs   & pass  & fail\\
             \hline
-            bsdtar & \cmark &  \cmark\\
+            bsdtar      & \cmark        &   34                  & 34    &   0\\
             \hline
-            readlelf & \cmark & \xmark\\
+            readelf     & \cmark        &   54                  & 4     &  50\\
             \hline
-            sfconvert & \cmark & \xmark \\
+            sfconvert   & \cmark        &   52                  & 9    &   43\\
             \hline
-            tcpdump & \xmark & \xmark\\
-            \hline 
-            unrtf &  \xmark & \xmark\\
+            tcpdump     & \xmark        & \nd                   & \nd   & \nd\\
+            \hline
+            unrtf       & \xmark        & \nd                   & \nd   & \nd\\
         \end{tabular}
     \end{table}
-    The case of \textit{sfconvert} is particular, because the output is almost the same, apart from one field as can be seen in 
-    \cref{fig:exp1Error}.\\
+    
 
-    \begin{figure}[t]
-        \centering
-        \begin{subfigure}[h]{0.8\textwidth}
-            \centering
-            \begin{minipage}[h]{0.48\textwidth}
-                    \includegraphics[width=\linewidth]{exp1originalOut.png}
+    With regard to \textit{readelf}, the instrumented binary encounters a \texttt{SIGSEGV} error in all the failed tests. 
+    This is due to the fact that, 
+    when new sections and segments are added to the binary, the \textbf{lief} library automatically reorganizes the \gls{ELF} layout, 
+    causing some sections (e.g. \textit{.bss}) to be shifted. The instructions that referenced these sections 
+    will, after the layout change, reference wrong addresses, causing a \texttt{SIGSEGV} when they try to access them.\\
+    With regard to \textit{sfconvert} instead, a corruption of the Data Format recognizer had happend.
+    Specifically the instrumented binary could not recognize the Data Format of the audio file anymore after the instrumntation.
 
-            \end{minipage}
-            \hfill
-            \begin{minipage}[h]{0.48\textwidth}
-                    \includegraphics[width=\linewidth]{exp1MineOut.png}
-            \end{minipage}
-            \caption{On the left there is the output of the original binary when tested with an input.
-            On the right the output of the instrumented binary, when feeded with the same input}
-            \label{fig:exp1Output}
-        \end{subfigure} 
+    A possible reason for the difficulty encountered in instrumenting this datased could be the fact that this binaries are 
+    stripped. The absence of 
+    A reason for the impossibility to instrument \textit{tcpdump} and \textit{unrtf} could be the fact that these binaries are 
+    stripped. This fact could create difficulties to the \gls{CFG} reconstruction phase.
 
-        \vspace{0.5cm}
-
-        \begin{subfigure}[h]{0.8\textwidth}
-            \centering
-            \includegraphics[width=\linewidth]{diffOutput.png}
-            \caption{Output of diff command}
-            \label{fig:exp1DiffOutput}
-        \end{subfigure}
-
-        \caption{Correctness test example of the binary \textit{sfconvert}}
-        \label{fig:exp1Error}
-    \end{figure}
-    With regard to \textit{readelf} the instrumented binary encounter a \texttt{SIGSEGV} error due to the fact that, 
-    adding new sections and segments to the binary, \textbf{lief} library automatically reorganize the \gls{ELF} layout, 
-    causing some sections (e.g. \textit{.bss}) to be shifted. The instructions that did reference this sections, 
-    after the layout changing, will reference wrong addresses, causing a \texttt{SIGSEGV} when try access.
 
 \section{Experiment II}
-    Among the 4 LAVA-M binaries, none of them fails during the instrumentation phase.
-    However two of them (i.e. \textit{md5sum} and \textit{who}) result in an incorrect instrumentation.
-    Md5sum was already corrupted as stated before, \textit{who} was incorrectly instrumented.
+    Among the four LAVA-M binaries, none fails during the instrumentation phase.
+    However, two of them (i.e. \textit{md5sum} and \textit{who}) result in an incorrect instrumentation:
+    \textit{md5sum} was already corrupted, as stated before, while \textit{who} was incorrectly instrumented by the tool.
+    The results of the experiment are shown in \cref{table:fuzzingStats}.
+    The runs marked as not done were not executed: since the tool discussed in this thesis produced no valid result for these binaries, 
+    there was nothing to compare against.
+    \begin{table}[ht]
+        \centering
+        \setlength{\tabcolsep}{3pt}
+        \newcolumntype{L}{>{\raggedright\arraybackslash}p{2.6cm}}
+        \newcolumntype{C}{>{\centering\arraybackslash}p{1.7cm}}
+        \begin{subtable}{\linewidth}
+            \centering
+            \caption{\textmd{\texttt{base64}}}
+            \label{table:fuzzingStats:base64}
+            \resizebox{\linewidth}{!}{%
+            \begin{tabular}{|L!{\vrule width 1.2pt}C|C|C!{\vrule width 1.2pt}C|C|C!{\vrule width 1.2pt}C|C|C|}
+                \hline
+                & \multicolumn{3}{c!{\vrule width 1.2pt}}{afl} & \multicolumn{3}{c!{\vrule width 1.2pt}}{mine} & \multicolumn{3}{c|}{zafl} \\
+                \hline
+                & run1 & run2 & run3 & run1 & run2 & run3 & run1 & run2 & run3 \\
+                \thickhline
+                execs\_per\_sec & 398.49 & 444.98 & 351.77 & 1703.45 & 1738.99 & 1842.27 & 1577.45 & 1792.35 & 1749.11 \\
+                \hline
+                execs\_done     & 34429329 & 38446221 & 30392855 & 147177902 & 150249117 & 159172058 & 136291378 & 154859292 & 151123034 \\
+                \hline
+                edges\_found    & 690 & 690 & 690 & 358 & 370 & 358 & 640 & 672 & 672 \\
+                \hline
+                saved\_crashes  & 7 & 3 & 2 & 12 & 41 & 11 & 10 & 115 & 118 \\
+                \hline
+            \end{tabular}}
+        \end{subtable}
+        \bigskip
+        \begin{subtable}{\linewidth}
+            \centering
+            \caption{\textmd{\texttt{md5sum}}}
+            \label{table:fuzzingStats:md5sum}
+            \resizebox{\linewidth}{!}{%
+            \begin{tabular}{|L!{\vrule width 1.2pt}C|C|C!{\vrule width 1.2pt}C|C|C!{\vrule width 1.2pt}C|C|C|}
+                \hline
+                & \multicolumn{3}{c!{\vrule width 1.2pt}}{afl} & \multicolumn{3}{c!{\vrule width 1.2pt}}{mine} & \multicolumn{3}{c|}{zafl} \\
+                \hline
+                & run1 & run2 & run3 & run1 & run2 & run3 & run1 & run2 & run3 \\
+                \thickhline
+                execs\_per\_sec & \xmark & \xmark & \xmark & \xmark & \xmark & \xmark & 515.09 & \nd & \nd\\
+                \hline
+                execs\_done     & \xmark & \xmark & \xmark & \xmark & \xmark & \xmark & 44503697 & \nd & \nd\\
+                \hline
+                edges\_found    & \xmark & \xmark & \xmark & \xmark & \xmark & \xmark & 9 & \nd & \nd\\
+                \hline
+                saved\_crashes  & \xmark & \xmark & \xmark & \xmark & \xmark & \xmark & 846 & \nd & \nd\\
+                \hline
+            \end{tabular}}
+        \end{subtable}
+        \bigskip
+        \begin{subtable}{\linewidth}
+            \centering
+            \caption{\textmd{\texttt{uniq}}}
+            \label{table:fuzzingStats:uniq}
+            \resizebox{\linewidth}{!}{%
+            \begin{tabular}{|L!{\vrule width 1.2pt}C|C|C!{\vrule width 1.2pt}C|C|C!{\vrule width 1.2pt}C|C|C|}
+                \hline
+                & \multicolumn{3}{c!{\vrule width 1.2pt}}{afl} & \multicolumn{3}{c!{\vrule width 1.2pt}}{mine} & \multicolumn{3}{c|}{zafl} \\
+                \hline
+                & run1 & run2 & run3 & run1 & run2 & run3 & run1 & run2 & run3 \\
+                \thickhline
+                execs\_per\_sec & 567.81 & 576.57 & 577.17 & 1758.61 & 1399.39 & 1864.43 & 1773.92 & 1559.98 & 1605.66 \\
+                \hline
+                execs\_done     & 49058377 & 49815928 & 49867759 & 151943556 & 120907581 & 161086939 & 153267103 & 134782333 & 138729055 \\
+                \hline
+                edges\_found    & 473 & 473 & 473 & 242 & 242 & 242 & 443 & 443 & 443 \\
+                \hline
+                saved\_crashes  & 2 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+                \hline
+            \end{tabular}}
+        \end{subtable}
+        \bigskip
+        \begin{subtable}{\linewidth}
+            \centering
+            \caption{\textmd{\texttt{who}}}
+            \label{table:fuzzingStats:who}
+            \resizebox{\linewidth}{!}{%
+            \begin{tabular}{|L!{\vrule width 1.2pt}C|C|C!{\vrule width 1.2pt}C|C|C!{\vrule width 1.2pt}C|C|C|}
+                \hline
+                & \multicolumn{3}{c!{\vrule width 1.2pt}}{afl} & \multicolumn{3}{c!{\vrule width 1.2pt}}{mine} & \multicolumn{3}{c|}{zafl} \\
+                \hline
+                & run1 & run2 & run3 & run1 & run2 & run3 & run1 & run2 & run3 \\
+                \thickhline
+                execs\_per\_sec & 225.11 & \nd & \nd & \xmark & \xmark & \xmark & 456.42 & \nd & \nd\\
+                \hline
+                execs\_done     & 19449595 & \nd & \nd& \xmark & \xmark & \xmark & 39434809 & \nd & \nd \\
+                \hline
+                edges\_found    & 13770 & \nd & \nd & \xmark & \xmark & \xmark & 14044 & \nd & \nd \\
+                \hline
+                saved\_crashes  & 0 & \nd & \nd & \xmark & \xmark & \xmark & 2 & \nd & \nd \\
+                \hline
+            \end{tabular}}
+        \end{subtable}
     
-    
+        \caption{Fuzzing statistics over a 24-hour fuzzing campaign on the LAVA-M dataset using AFL++ in QEMU mode, ZAFL instrumentation + AFL++ fuzzer, and my instrumentation + AFL++ fuzzer}
+        \label{table:fuzzingStats}
+    \end{table}
+    \Cref{table:fuzzingStats} is divided into four subtables, one per fuzzed binary.
+    Each table reports some parameters obtained for each of the three runs performed.\\
+    As can be seen, the tool developed in this thesis finds a considerably smaller number of edges than the other tested methods.
+    This could be caused by a different edge instrumentation method (for example, because the tool does not instrument 
+    function calls).\\
+    Moreover, ZAFL is the only tool capable of executing \textit{md5sum} with the \texttt{-c} option but the high number 
+    of crashes if probably given by errors of the binary.
+    Infact none of the found uniq crashes actually trigger a LAVA Bug, but trigger SIGSEGV errors that make the entire statistic 
+    of md5sum unreliable.
+
+    \Cref{tab:binariesStats} shows the size of the instrumented files in MBytes and the average executions per 
+    second obtained from \cref{table:fuzzingStats}.
+    As already discussed, the tool developed in this thesis produces larger binaries, because the \gls{SHM} update 
+    is instrumented inline.
+    The average execution speed is only slightly higher than that of ZAFL.
+    Since the tool execution speed, as can be seen in \cref{table:fuzzingStats}, is not always higher with respect to 
+    the ZAFL execution speed, and only slightly higher in average, it is not possible to conclude an actual 
+    improvement in the execution speed.
+    Worth mention that ZAFL perform an optimization of the Intermediate Representation, that surely speed up the instrumented 
+    binary execution. With inline instrumentation is possible to reach performance that are comparable to the one 
+    obtained by ZAFL, without an actual optimization.
+
+    \begin{table}[ht]
+        \centering
+        \begin{tabular}{|c|c!{\vrule width 1.2pt}c|c|}
+            \hline
+            &  & file\_size[MByte] & avg execs/sec \\
+            \thickhline
+            \multirow{2}{*}{base64}
+            & mine & 8,25228  & 1761.57 \\
+            \cline{2-4}
+            & zafl & 0,137459 & 1706.3  \\
+            \thickhline
+            \multirow{2}{*}{md5sum}
+            & mine & 8,256376 & \xmark  \\
+            \cline{2-4}
+            & zafl & 0,145651 & 515.09  \\
+            \thickhline
+            \multirow{2}{*}{uniq}
+            & mine & 8,256376 & 1674.14 \\
+            \cline{2-4}
+            & zafl & 0,149747 & 1646.52 \\
+            \thickhline
+            \multirow{2}{*}{who}
+            & mine & 8,62092  & \xmark  \\
+            \cline{2-4}
+            & zafl & 1,718515 & 456.42  \\
+            \hline
+        \end{tabular}
+        \caption{Instrumented binaries statistics}
+        \label{tab:binariesStats}
+    \end{table}

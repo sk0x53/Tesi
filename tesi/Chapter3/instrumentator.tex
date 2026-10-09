@@ -206,6 +206,8 @@ push rdi
 mov rax, QWORD PTR[rip + offset_to_relocated_forkserver_function]
 mov rax, [rax]
 call rax
+pop rdi
+pop rsi
 mov WORD PTR[rip + offset_to_previous_saved_ID], random_int
 lea rax, [rip + offset_to_relocated__afl_area_ptr]
 mov rax, QWORD PTR [rax]

@@ -85,7 +85,8 @@ Depending on the execution mode, these variables have different values.
                 \STATE $\text{return}$
             \ELSE
                 \STATE $\textsc{write}(FORKSRV\_FD+1,child\_pid)$  \COMMENT{\small \textcolor{green!60!black}{Communicate the PID of the child to the fuzzer}}
-                \STATE $\textsc{waitpid}(child\_pid)$
+                \STATE $status \gets \textsc{waitpid}(child\_pid)$
+                \STATE $\textsc{write}(FORKSRV\_FD+1,status)$
             \ENDIF
         \ENDWHILE
     \end{algorithmic}

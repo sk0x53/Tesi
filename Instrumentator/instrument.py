@@ -75,6 +75,8 @@ class FunctionAdder:
         self.my_got_addr=got_slot_addr
         self.my_data_addr=mydata_addr
 
+        self.__add_dummy_section_and_relocation__(elf)
+
         elf.write(self.path+self.out_file_name)
 
     def __create_mygot_section__(self,elf):
@@ -145,6 +147,7 @@ class FunctionAdder:
         # .mydata+0x10 ==> index of previus basic block
         # .mydata+0x20 ==> saved address of shared memory
         # .mydata+0x30 ==> saved rax
+        # .mydata+0x40 ==> saved flags
         #
         section = lief.ELF.Section(".mydata")
         #This string is used only because AFL check for the presence of that string into the target binary
@@ -159,6 +162,34 @@ class FunctionAdder:
         )       
         elf.add(section,loaded=True)
         return elf.get_section(".mydata").virtual_address
+
+    def __add_dummy_section_and_relocation__(self,elf):
+
+        # The basic idea is to write into .my_data+0x20 (that is the place where the shared memory address is saved), the address of the dummy section
+        # This because any bb reached before the actual initialization of the shared memory must write into the dummy section
+        # This address will be replaced at the beginning of the main with the real shm address
+        # Since in general the binary is PIE, the value to be written into mydata+0x20 is obtained through relocation
+
+        dummy = lief.ELF.Section(".dummy_shm")
+        dummy.type = lief.ELF.Section.TYPE.PROGBITS
+        dummy.flags = lief.ELF.Section.FLAGS.ALLOC | lief.ELF.Section.FLAGS.WRITE
+        dummy.alignment = 0x1000
+        dummy.content = [0] * 0x10000
+        dummy_section = elf.add(dummy, loaded=True)
+
+        shared_memory_addr=self.my_data_addr+0x20
+        dummy_shm_address=elf.get_section(".dummy_shm").virtual_address
+
+        reloc = lief.ELF.Relocation(
+            shared_memory_addr,
+            lief.ELF.Relocation.TYPE.X86_64_RELATIVE,
+            lief.ELF.Relocation.ENCODING.RELA,
+        )
+        reloc.addend = dummy_shm_address
+        reloc.purpose = lief.ELF.Relocation.PURPOSE.DYNAMIC
+        elf.add_dynamic_relocation(reloc)
+
+    
 #########################################################################################################
 # End of the function needed to add sections and relocation
 # Start of help function to analyze the binary
@@ -234,13 +265,12 @@ class FunctionAdder:
 
 
     def __printProgressBar__ (self,iteration, total):
-            if iteration%50==0:
-                fill = '█'
-                percent = ("{0:." + str(1) + "f}").format(100 * (iteration / float(total)))
-                filledLength = int(80 * iteration // total)
-                bar = fill * filledLength + '-' * (80 - filledLength)
-                print(f'\r{""} |{bar}| {percent}%  {iteration} out of {total} {""}', end = "\r")
-                # Print New Line on Complete
+            fill = '█'
+            percent = ("{0:." + str(1) + "f}").format(100 * (iteration / float(total)))
+            filledLength = int(80 * iteration // total)
+            bar = fill * filledLength + '-' * (80 - filledLength)
+            print(f'\r{""} |{bar}| {percent}%  {iteration} out of {total} {""}', end = "\r")
+            # Print New Line on Complete
             if iteration == total: 
                 print()
 
@@ -379,15 +409,25 @@ class FunctionAdder:
         save_rax_instruction=f"mov QWORD PTR[rip {"+" if (rax_save_offset)>0 else "-"} {hex(abs(rax_save_offset))}], rax"
         restore_rax_instruction=f"mov rax, QWORD PTR[rip {"+" if (rax_save_offset)>0 else "-"} {hex(abs(rax_save_offset))}]"
 
+        flags_offset=self.my_data_addr+0x40-addr-7
+        save_flags_instruction=f"mov WORD PTR [rip {"+" if (flags_offset)>0 else "-"} {hex(abs(flags_offset))}], ax"
+        restore_flags_instruction=f"mov ax, WORD PTR [rip {"+" if (flags_offset)>0 else "-"} {hex(abs(flags_offset))}]"
 
         instructions=[
 
             save_rax_instruction,
+            "lahf", #Save in ah = SF ZF 0 AF 0 PF 1 CF
+            "seto al",  # Save in al the oveflow flag
+            save_flags_instruction,
             prev_load,
             "xor ax, "+hex(current_idx), #performing xor between the prev saved in ax and current that is in memory
             shared_load,
             "inc BYTE PTR[rax]", #Increment by one the hash map (shared bitmap)
             prev_save,
+            restore_flags_instruction,
+            "add al, 0x7f", #If the save overflow is 0, adding 0x7f doesn't cause an overflow and so the flag is set to 0
+                            #If the saved overflow is 1, adding 0x7f cause another overflow and then the flag is setted again
+            "sahf",
             restore_rax_instruction
         ]
         return [asm(instr) for instr in instructions]
@@ -518,7 +558,9 @@ class FunctionAdder:
             
             current=current_edge[1]
 
-            if current_edge[0].last_instruction[1].op_code != "call":
+            if current_edge[0].last_instruction[1].op_code != "call" or (current_edge[0].last_instruction[1].op_code == "call" and (
+                current_edge[1].addr==current_edge[0].last_instruction[0] + current_edge[0].last_instruction[1].size
+            )):
                 #If the last instruction was not a call I instrument always
                 self.__add_location_to_be_instrumented__(instrument_addresses,current)
                 

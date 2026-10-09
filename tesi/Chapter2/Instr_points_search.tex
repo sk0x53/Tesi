@@ -41,29 +41,23 @@ Specifically, once a \gls{BB} is found and has not already been analyzed or disc
                 \STATE $to\_instrument.\textsc{append}(curr)$  \COMMENT{\small \textcolor{green!60!black}{If the previous basic block ends with a call instruction, the current basic block is not instrumented}}
             \ENDIF
             \STATE $found.\textsc{append}(curr)$
-            \STATE $successors\gets \textsc{ExtractSuccessors}(current,found)$
+            \STATE $successors\gets \textsc{ExtractSuccessors}(curr,found)$
             \FOR{$s \in successors$}
-                \STATE $stack.\textsc{push}((current,s))$ 
+                \STATE $stack.\textsc{push}((curr,s))$ 
             \ENDFOR
         \ENDWHILE
     \end{algorithmic}
 \end{algorithm}
 The \gls{IP}s discovery procedure can be seen in \cref{alg:ip_search_dfs}.\\
 Two different lists must be used in order to distinguish between found basic blocks and basic blocks to be instrumented.
-For example, if a basic block ends with a call, it is ``useless'' to instrument the next one.
-In fact, a \texttt{call} is like a branch that is always taken.
-If an edge that is always taken is instrumented, this would not add any information for a fuzzer.
-In fact, if, during fuzzing, the first basic block is discovered, the second will surely be discovered as well.
-The situation is different for the \texttt{jmp} instruction. In fact, although this is also a branch that is always taken, it can be 
-useful, for example in loops, to disambiguate between the backward edge (returning to the beginning of the loop) and the entry edge.
-An example of this can be seen in \cref{fig:pow_example}.\\
+Moreover, if a basic block ends with a call, the next \gls{BB} it is not instrumented.
 The \textsc{ExtractSuccessors} function will find all the successors of a \gls{BB}, excluding :
 \begin{itemize}
     \item The successors that are outside the \textit{``code''} region (so avoiding instrumenting \textit{.plt} stubs).
         For \textit{``code''} region is intended all the instruction of the main and other functions that are callable from the main.
         So avoid instrument functions in \textit{.fini\_array} and other not intereseting part of \textit{.text} section.
-    \item The \gls{BB} that are already been found (and so are contained in ``found'' list)
-    \item The \gls{BB} that are temporarily inside the stack data structure
+    \item The edges that are already been found (and so are contained in ``found'' list)
+    \item The edges that are temporarily inside the stack data structure
 \end{itemize} 
 For the moment, it can be said that this function filters the successors of the current basic block, 
 discarding those that it would make no sense to consider.

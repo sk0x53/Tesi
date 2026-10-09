@@ -69,12 +69,12 @@ In this section I will present some of the current state-of-the-art solutions in
             \caption{AFL-style SHM update rule}
             \label{alg:afl_style_update}
             \begin{algorithmic}[1]
-                \STATE $idx \gets current\_bb\_id \oplus previous\_bb\_id$ \label{line:xor}
-                \STATE $shared\_map[idx] \gets shared\_map[idx]+1$ \label{line:increment}
-                \STATE $previous\_bb\_id \gets current\_bb\_id \gg 1$ \label{line:shift}
+                \STATE $idx \gets current\_bb\_id \oplus previous\_bb\_id$ 
+                \STATE $shared\_map[idx] \gets shared\_map[idx]+1$ 
+                \STATE $previous\_bb\_id \gets current\_bb\_id \gg 1$ 
             \end{algorithmic}
         \end{algorithm}
-        Line \cref{line:shift} of \cref{alg:afl_style_update} is used to avoid updating the same \gls{SHM}
+        Line 3 of \cref{alg:afl_style_update} is used to avoid updating the same \gls{SHM}
         location when an edge is traversed forward or backward.
         An example of this could be a simple \texttt{do-while} loop, as seen in \cref{alg:do-while} and \cref{fig:Do-While-CFG}.\\
         \begin{figure}[ht]
@@ -91,7 +91,7 @@ In this section I will present some of the current state-of-the-art solutions in
                         \STATE \COMMENT{Basic Block C}
                     \end{algorithmic}
                 \end{algorithm}
-            Without \cref{line:shift} of \cref{alg:afl_style_update}, the hash of Edge1
+            Without 3 of \cref{alg:afl_style_update}, the hash of Edge1
             would result in $ID\_A \oplus ID\_B$, and the hash of Edge2 (if the permanence condition is not met) would result
             in $ID\_B \oplus ID\_A = ID\_A \oplus ID\_B$, due to the symmetry of XOR. But since the hash is the same, there would be a hash collision
             that would cause the same ``cell'' to be updated twice instead of once.
@@ -118,7 +118,7 @@ In this section I will present some of the current state-of-the-art solutions in
         Two main optimizations have been implemented:
         \begin{itemize}
             \item \textbf{forkserver}
-            \item \textbf{persistent mode}: \small (available only in AFL++)
+            \item \textbf{persistent mode}: \small (not shown in this thesis)
         \end{itemize}
         \vspace{0.5cm}
         \begin{center}
@@ -136,7 +136,7 @@ In this section I will present some of the current state-of-the-art solutions in
         \footnote{ \small \textit{The differences between the AFL forkserver protocol and the AFL++ forkserver protocol lie mainly in the messages exchanged between the forkserver and the fuzzer}}
         \begin{enumerate}
             \item The forkserver sends the ``Welcome'' message to the fuzzer (0x41464c01).
-            \item The fuzzer replies with the status code. At this point the forkserver must check whether $status \land 0xffffffff = 0x41464c01$.
+            \item The fuzzer replies with the status code. At this point the forkserver must check whether $status \oplus 0xffffffff = 0x41464c01$.
                     If it is equal, execution continues; otherwise, the forkserver stops here.
             \item The forkserver sends the execution options to the fuzzer.
                 These can indicate that the target is running in persistent mode, or other optimizations.
@@ -149,7 +149,7 @@ In this section I will present some of the current state-of-the-art solutions in
             of the child is sent to the fuzzer, and the forkserver waits for another ``go'' from the fuzzer.
         \end{enumerate}
         The communication between the Fuzzer and the Target shown in \cref{fig:aflplusplusforkserver} occurs
-        unidirectionally through two different file descriptors created by the fuzzer:
+        using two unidirectionally pipes that uses the file descriptor:
         \begin{itemize}
             \item \textit{FORKSRV\_FD (fd 198)}: used by the forkserver to read a message sent by the fuzzer.
             \item \textit{FORKSRV\_FD + 1 (fd 199)}: used by the forkserver to write a message to the fuzzer.
