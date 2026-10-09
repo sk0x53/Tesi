@@ -321,4 +321,47 @@
   keywords  = {Computer bugs;Instruments;Fuzzing;Software;Space exploration;Shape;Measurement;vulnrability detection;coverage based fuzzing;taint analysis},
 }
 
+@InProceedings{E9AFL,
+  author    = {Gao, Xiang and Duck, Gregory J. and Roychoudhury, Abhik},
+  booktitle = {2021 36th IEEE/ACM International Conference on Automated Software Engineering (ASE)},
+  title     = {Scalable Fuzzing of Program Binaries with E9AFL},
+  year      = {2021},
+  pages     = {1247-1251},
+  doi       = {10.1109/ASE51524.2021.9678913},
+  keywords  = {Program processors;Instruments;Binary codes;Fuzzing;Browsers;Optimization;Software engineering;Fuzzing;binary rewriting},
+}
+
+@InProceedings{E9Patch,
+  author    = {Duck, Gregory J. and Gao, Xiang and Roychoudhury, Abhik},
+  booktitle = {Proceedings of the 41st ACM SIGPLAN Conference on Programming Language Design and Implementation},
+  title     = {Binary rewriting without control flow recovery},
+  year      = {2020},
+  address   = {New York, NY, USA},
+  pages     = {151–163},
+  publisher = {Association for Computing Machinery},
+  series    = {PLDI 2020},
+  doi       = {10.1145/3385412.3385972},
+  isbn      = {9781450376136},
+  keywords  = {binary instrumentation, binary patching, binary repair, instruction eviction, instruction punning, memory management, static binary rewriting},
+  location  = {London, UK},
+  numpages  = {13},
+  url       = {https://doi.org/10.1145/3385412.3385972},
+}
+
+@Article{PeAR,
+  author        = {Charles, Alvin and Herrera, Adrian and Oslington, Peter and Tiu, Alwen},
+  title         = {PeAR: A Static Binary Rewriting Framework for Binary-Only Fuzzing},
+  year          = {2026},
+  month         = jun,
+  abstract      = {Binary-only fuzzing is a key technique for finding bugs in close-source software. Without access to source code, the fuzzer must rely on static or dynamic binary instrumentation for coverage guidance. In practice, most fuzzers favor dynamic binary instrumentation (DBI), accepting runtime overhead to avoid the perceived accuracy and soundness challenges associated with static binary instrumentation (SBI). We show that these concerns are unwarranted, and that accurate, scalable~SBI is achievable using off-the-shelf frameworks. Building on these frameworks, we develop PeAR, an extensible binary-only fuzzing framework. We demonstrate PeAR's versatility by implementing several modern fuzzer features -- including, deferred initialization, persistent mode, and shared-memory fuzzing. We evaluate PeAR over 4.25 CPU-yrs of fuzzing on the FUZZBENCH benchmark and find that PeAR: (i) successfully instruments 88% of FUZZBENCH targets, comparable to the best SBI-based fuzzers; (ii) achieves a median throughput improvement of 4x when using persistent mode and shared memory fuzzing; and (iii) attains coverage comparable to compiler-based instrumentation. Our results show that SBI is a practical and effective technique for binary-only fuzzing, and that modern binary rewriting frameworks can apply complex instrumentation with high granularity and negligible performance compromise.},
+  archiveprefix = {arXiv},
+  copyright     = {Creative Commons Attribution 4.0 International},
+  doi           = {10.48550/ARXIV.2606.02126},
+  eprint        = {2606.02126},
+  file          = {:Charles2026 - PeAR_ a Static Binary Rewriting Framework for Binary Only Fuzzing.pdf:PDF:https\://arxiv.org/pdf/2606.02126v1},
+  keywords      = {Cryptography and Security (cs.CR), FOS: Computer and information sciences},
+  primaryclass  = {cs.CR},
+  publisher     = {arXiv},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

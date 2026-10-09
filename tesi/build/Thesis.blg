@@ -10,50 +10,51 @@ Warning--entry type for "frida" isn't style-file defined
 Warning--entry type for "cutter" isn't style-file defined
 --line 279 of file Thesis_bibliography.bib
 Warning--empty year in aflplusplus_binary_only_targets
+Warning--empty journal in PeAR
 Warning--empty year in afldyninst
 Warning--empty year in afldyninst
 Warning--empty year in libfuzzer
 Warning--empty journal in binaryrewriting
 Warning--empty year in afl_technical_details
-You've used 31 entries,
+You've used 34 entries,
             2773 wiz_defined-function locations,
-            806 strings with 10997 characters,
-and the built_in function-call counts, 16693 in all, are:
-= -- 1540
-> -- 962
-< -- 26
-+ -- 329
-- -- 297
-* -- 1300
-:= -- 2473
-add.period$ -- 135
-call.type$ -- 31
-change.case$ -- 192
-chr.to.int$ -- 30
-cite$ -- 68
-duplicate$ -- 744
-empty$ -- 1321
-format.name$ -- 334
-if$ -- 3618
+            829 strings with 11707 characters,
+and the built_in function-call counts, 18536 in all, are:
+= -- 1720
+> -- 1061
+< -- 28
++ -- 362
+- -- 327
+* -- 1439
+:= -- 2732
+add.period$ -- 150
+call.type$ -- 34
+change.case$ -- 211
+chr.to.int$ -- 33
+cite$ -- 75
+duplicate$ -- 842
+empty$ -- 1458
+format.name$ -- 367
+if$ -- 4035
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 21
-newline$ -- 200
-num.names$ -- 124
-pop$ -- 430
+missing$ -- 24
+newline$ -- 220
+num.names$ -- 136
+pop$ -- 469
 preamble$ -- 1
-purify$ -- 161
+purify$ -- 177
 quote$ -- 0
-skip$ -- 620
+skip$ -- 707
 stack$ -- 0
-substring$ -- 592
-swap$ -- 173
-text.length$ -- 12
+substring$ -- 652
+swap$ -- 207
+text.length$ -- 14
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 341
-warning$ -- 6
-while$ -- 134
+type$ -- 374
+warning$ -- 7
+while$ -- 146
 width$ -- 0
-write$ -- 475
-(There were 8 warnings)
+write$ -- 525
+(There were 9 warnings)

@@ -7,15 +7,15 @@
 \contentsline {figure}{\numberline {1.5}{\ignorespaces Dynamically linked ELF loading procedure}}{11}{figure.caption.12}%
 \contentsline {figure}{\numberline {1.6}{\ignorespaces Example of a \textit {.dynsym} table for a shared object}}{12}{figure.caption.13}%
 \contentsline {figure}{\numberline {1.7}{\ignorespaces Example of a \textit {.rela.dyn} relocation table extracted from a binary}}{12}{figure.caption.14}%
-\contentsline {figure}{\numberline {1.8}{\ignorespaces Do-while CFG}}{17}{figure.caption.15}%
+\contentsline {figure}{\numberline {1.8}{\ignorespaces Do-while CFG}}{18}{figure.caption.15}%
 \contentsline {figure}{\numberline {1.9}{\ignorespaces AFL++ Forkserver Protocol}}{19}{figure.caption.16}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces An example of ELF execution with dynamic dependencies and a constructor function}}{23}{figure.caption.18}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Shared Memory relocation between the target binary and the Shared Object}}{25}{figure.caption.19}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Example of the CFG of a program that computes the power operation between two numbers}}{29}{figure.caption.20}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Optimized forkserver invocation}}{33}{figure.caption.21}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces An example of ELF execution with dynamic dependencies and a constructor function}}{25}{figure.caption.18}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Shared Memory relocation between the target binary and the Shared Object}}{27}{figure.caption.19}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Example of the CFG of a program that computes the power operation between two numbers}}{31}{figure.caption.20}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Optimized forkserver invocation}}{35}{figure.caption.21}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Binary modification phase in which the needed sections, relocations and dynamic dependencies are added. (\small The dotted arrows specify which information is needed for the relocation phase) }}{38}{figure.caption.24}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Example of the error caused by not taking care of RIP-relative instruction offsets}}{41}{figure.caption.25}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Binary modification phase in which the needed sections, relocations and dynamic dependencies are added. (\small The dotted arrows specify which information is needed for the relocation phase) }}{40}{figure.caption.24}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Example of the error caused by not taking care of RIP-relative instruction offsets}}{43}{figure.caption.25}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }

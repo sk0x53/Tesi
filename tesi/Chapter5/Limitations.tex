@@ -37,17 +37,22 @@ a direction for future work in this field.
     Supposing that, at a certain point, four different threads are active, each thread will have, in general, a different 
     previous \gls{BB} ID.
 
+    In case of dynamic linking, where the code of external libraries is not actually inside the binary, the library functions 
+    cannot be instrumented, because the tool is capable of instrumenting only the code sections 
+    inside the binary that are reachable from main.
+
     Another limitation worth mentioning is that the developed tool works only with \gls{ELF} files, lacking 
     compatibility with the Windows PE executable format.
 
 \section{Future Works}
     The main work to be done in the future consists in making this type of solution more resilient to binary corruption.
-    The approach of instrumenting the \gls{SHM} update directly inline within each \gls{BB} has proven effective, 
-    given the speedup resulting from avoiding a context switch at each \gls{BB} (which would otherwise be caused 
-    by invoking a function) [Reference to the experiments section].
+    The approach of instrumenting the \gls{SHM} update directly inline within each \gls{BB} reach performance comparable 
+    with the current state-of-the-art. 
+    In particular ZAFL, as stated in \cref{sec:state_of_the_art}, perform an optimization to the Intermediate Representation.
+    The approach discussed in this thesis reach similar performance, without an actual optimization.
     For this reason, a possible direction for future work could be to apply current state-of-the-art techniques 
     to this approach.
-    For example, using the \gls{SHM} update rule presented in this thesis, several hash collisions occur in the 
+    For example, using the \gls{SHM} update rule presented in this thesis, several hash collisions could occur in the 
     \gls{SHM}, causing the fuzzer to misinterpret coverage, as demonstrated by Shuitao Gan et al. \cite{CollAFL}.
     In fact, that paper presents a new approach to \gls{SHM} updates, which was later added as a supported 
     instrumentation method in the AFL++ framework. Implementing a collision-free coverage algorithm as 

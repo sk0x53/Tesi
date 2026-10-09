@@ -1,6 +1,6 @@
-The main goal of this thesis is to develop a tool capable of inline, static edge-coverage instrumentation
-that preserves binary correctness while achieving better performance with respect to \gls{DBI} and comparable to 
-other state-of-the-art instrumentation technique.\\
+The problem that I want to address in this thesis is to develop a tool capable of inline, 
+static edge-coverage instrumentation that preserves binary correctness while achieving better performance with respect 
+to \gls{DBI} and comparable to other state-of-the-art instrumentation technique.\\
 I have chosen to implement the \gls{SBI} approach instead of \gls{DBI} due to its low overhead.
 To do this, I will use the GRAPE binary rewriting framework, a novel approach for binary rewriting that preserves binary executability
 while introducing small overheads compared to a trampoline-based approach.
@@ -8,10 +8,14 @@ This approach involves several challenges, mainly related to preserving the bina
 Moreover, the tool must be compatible with the already existing AFL++ fuzzer.
 This means implementing the forkserver communication protocol inside the target binary without recompiling it.
 This has created no small number of problems, mainly regarding the preservation of the ELF layout after adding new sections.
-Compared to the ZAFL approach, the \gls{SHM} update instructions are placed directly inside the \gls{BB},
-rather than in a function called at each \gls{BB}.
-This approach drastically increases the size of the file, causing many instruction repetitions (since the \gls{SHM}
-instructions are always the same), but was chosen because it does not cause a context switch at each \gls{BB}.
+
+The implemented approach drastically increases the size of the file, causing many instruction repetitions 
+(since the \gls{SHM} instructions are always the same), but was chosen because it does not cause a context switch 
+at each \gls{BB}.
 In fact, in order to call a function, the state of the registers must be saved and restored. Moreover, the stack must be allocated,
 and the callee's RIP must be saved on the stack alongside the old base pointer of the stack.
 Performing all these operations at each \gls{BB} would introduce significant overhead.
+
+The main contribution of this work consist in creating an ``extension'' of GRAPE framework capable of instrumenting 
+edge coverage instructions comparable with AFL++, or rather an application almost entirely based on GRAPE that seeks to 
+investigate the potential use of GRAPE in the context of fuzzing. 

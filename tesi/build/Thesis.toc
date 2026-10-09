@@ -14,30 +14,30 @@
 \contentsline {section}{\numberline {1.4}Problem Statement}{14}{section.1.4}%
 \contentsline {section}{\numberline {1.5}State of the Art}{15}{section.1.5}%
 \contentsline {subsection}{\numberline {1.5.1}AFL Functioning}{17}{subsection.1.5.1}%
-\contentsline {section}{\numberline {1.6}Goals and Challenges}{19}{section.1.6}%
-\contentsline {chapter}{\numberline {2}Approach}{21}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Forkserver Insertion}{21}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Shared Memory Instrumentation}{24}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Instrumentation Points Search}{26}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Actual Instrumentation}{30}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Forkserver Optimization}{32}{section.2.5}%
-\contentsline {chapter}{\numberline {3}Implementation}{35}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Forkserver Specification}{35}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Instrumentator Specification}{37}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Binary Modification}{38}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Instrumentation}{40}{subsection.3.2.2}%
-\contentsline {chapter}{\numberline {4}Experiments}{47}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Goals}{47}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Datasets and Experiment Setup}{48}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Experiment I}{49}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Experiment II}{50}{section.4.4}%
-\contentsline {chapter}{\numberline {5}Limitations and Future Works}{53}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Limitations}{53}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Future Works}{54}{section.5.2}%
+\contentsline {section}{\numberline {1.6}Goals and Challenges}{20}{section.1.6}%
+\contentsline {chapter}{\numberline {2}Approach}{23}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Forkserver Insertion}{23}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Shared Memory Instrumentation}{26}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Instrumentation Points Search}{28}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Actual Instrumentation}{32}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Forkserver Optimization}{34}{section.2.5}%
+\contentsline {chapter}{\numberline {3}Implementation}{37}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Forkserver Specification}{37}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Instrumentator Specification}{39}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Binary Modification}{40}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Instrumentation}{43}{subsection.3.2.2}%
+\contentsline {chapter}{\numberline {4}Experiments}{49}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Goals}{49}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Datasets and Experiment Setup}{50}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Experiment I}{51}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Experiment II}{52}{section.4.4}%
+\contentsline {chapter}{\numberline {5}Limitations and Future Works}{55}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Limitations}{55}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Future Works}{56}{section.5.2}%
 \vspace {2em}
-\contentsline {chapter}{Bibliography\markboth {\MakeUppercase []{Bibliography}}{\MakeUppercase []{Bibliography}}}{55}{chapter*.33}%
+\contentsline {chapter}{Bibliography\markboth {\MakeUppercase []{Bibliography}}{\MakeUppercase []{Bibliography}}}{57}{chapter*.33}%
 \vspace {2em}
-\contentsline {chapter}{List of Acronyms}{59}{chapter*.36}%
-\contentsline {chapter}{List of Figures}{61}{chapter*.38}%
-\contentsline {chapter}{List of Tables}{63}{chapter*.40}%
-\contentsline {chapter}{List of Algorithms\markboth {\MakeUppercase []{List of Algorithms}}{\MakeUppercase []{List of Algorithms}}}{65}{chapter*.42}%
+\contentsline {chapter}{List of Acronyms}{61}{chapter*.36}%
+\contentsline {chapter}{List of Figures}{63}{chapter*.38}%
+\contentsline {chapter}{List of Tables}{65}{chapter*.40}%
+\contentsline {chapter}{List of Algorithms\markboth {\MakeUppercase []{List of Algorithms}}{\MakeUppercase []{List of Algorithms}}}{67}{chapter*.42}%

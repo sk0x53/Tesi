@@ -1,4 +1,4 @@
-\begin{thebibliography}{31}
+\begin{thebibliography}{34}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -51,6 +51,12 @@ M.~Böhme, V.-T. Pham, and A.~Roychoudhury.
   and Communications Security}, CCS16, pages 1032--1043. ACM, Oct. 2016.
 \newblock \doi{10.1145/2976749.2978428}.
 
+\bibitem[Charles et~al.(2026)Charles, Herrera, Oslington, and Tiu]{PeAR}
+A.~Charles, A.~Herrera, P.~Oslington, and A.~Tiu.
+\newblock Pear: A static binary rewriting framework for binary-only fuzzing.
+\newblock June 2026.
+\newblock \doi{10.48550/ARXIV.2606.02126}.
+
 \bibitem[Chen and Chen(2018)]{Angora}
 P.~Chen and H.~Chen.
 \newblock Angora: Efficient fuzzing by principled search.
@@ -75,6 +81,16 @@ B.~Dolan-Gavitt, P.~Hulin, E.~Kirda, T.~Leek, A.~Mambretti, W.~Robertson,
   110--121, 2016.
 \newblock \doi{10.1109/SP.2016.15}.
 
+\bibitem[Duck et~al.(2020)Duck, Gao, and Roychoudhury]{E9Patch}
+G.~J. Duck, X.~Gao, and A.~Roychoudhury.
+\newblock Binary rewriting without control flow recovery.
+\newblock In \emph{Proceedings of the 41st ACM SIGPLAN Conference on
+  Programming Language Design and Implementation}, PLDI 2020, page 151–163,
+  New York, NY, USA, 2020. Association for Computing Machinery.
+\newblock ISBN 9781450376136.
+\newblock \doi{10.1145/3385412.3385972}.
+\newblock URL \url{https://doi.org/10.1145/3385412.3385972}.
+
 \bibitem[Fioraldi et~al.(2020)Fioraldi, Maier, Ei{\ss}feldt, and
   Heuse]{aflplusplus}
 A.~Fioraldi, D.~Maier, H.~Ei{\ss}feldt, and M.~Heuse.
@@ -96,6 +112,13 @@ S.~Gan, C.~Zhang, X.~Qin, X.~Tu, K.~Li, Z.~Pei, and Z.~Chen.
 \newblock In \emph{2018 IEEE Symposium on Security and Privacy (SP)}, pages
   679--696, 2018.
 \newblock \doi{10.1109/SP.2018.00040}.
+
+\bibitem[Gao et~al.(2021)Gao, Duck, and Roychoudhury]{E9AFL}
+X.~Gao, G.~J. Duck, and A.~Roychoudhury.
+\newblock Scalable fuzzing of program binaries with e9afl.
+\newblock In \emph{2021 36th IEEE/ACM International Conference on Automated
+  Software Engineering (ASE)}, pages 1247--1251, 2021.
+\newblock \doi{10.1109/ASE51524.2021.9678913}.
 
 \bibitem[Godefroid et~al.(2012)Godefroid, Levin, and Molnar]{Godefroid2012}
 P.~Godefroid, M.~Y. Levin, and D.~Molnar.

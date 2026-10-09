@@ -10,8 +10,8 @@ Coverage-Guided Grey-box fuzzing is one of the most effective techniques for aut
     However, \textit{Grey-box} fuzzing also has its own drawbacks.
     As a matter of fact, the effectiveness of this approach strongly depends on the availability of the source code.
     In fact, both \gls{SBI} and \gls{DBI} have many limitations.
-    The main limitation of \gls{DBI} is the huge amount of overhead (higher than 600\% in the case of AFL++ in QEMU
-    mode \cite{zafl}), which makes the exploration of a substantial part
+    The main limitation of \gls{DBI} is the huge amount of overhead (higher than 600\% with respect to the compile-time 
+    instrumentation in the case of AFL++ in QEMU mode \cite{zafl}), which makes the exploration of a substantial part
     of the valid input space almost impossible.
     Instead, the main difficulty of \gls{SBI} arises in modifying already compiled binaries.
     There are several problems regarding Binary Rewriting, such as Indirect Control Transfers (e.g. \texttt{call rax}),

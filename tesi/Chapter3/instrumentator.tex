@@ -55,7 +55,7 @@ match. Specifically, these symbols are created with:
         There are LOCAL symbols that, by definition, are local to the object that defines them and therefore cannot be exported
         (and, consequently, cannot be imported either).
     \item \textit{symbol visibility = DEFAULT}. The symbol has the default visibility of \gls{ELF}. There are other types
-        (such as HIDDEN or PROTECTED) that are used for local symbols.
+        (such as HIDDEN or PROTECTED) that are used for symbols that are not generally visible outside the file.
     \item \textit{symbol value = 0}. The symbol does not have a value. This indicates that this symbol
     must be resolved by the dynamic linker.
     \item \textit{symbol size = 8}. The symbol size is 8 bytes.
@@ -288,7 +288,7 @@ can cause the \textbf{Program Header Table} to shift, and the \texttt{e\_phoff} 
 The tool first reads the \gls{ELF} header using the \textbf{lief} library, obtaining \texttt{e\_phoff}, and then
 cycles through all the binary segments until it finds the \textbf{PT\_PHDR} segment. When it finds the segment, it checks
 whether the two fields coincide.
-If not, it manually rewrites the byte that represents \texttt{e\_phoff} (the 0x20th byte of the header), adjusting
-it to the correct value.
+If not, it manually rewrites the 8 bytes (for 64 bit programs) 
+that represents \texttt{e\_phoff} (the 0x20th byte of the header), adjusting it to the correct value.
 The ``manual'' rewriting is performed without using an actual library, assuming little-endian addressing.
 This is done in order to avoid libraries (such as \textbf{lief}) adjusting other fields.

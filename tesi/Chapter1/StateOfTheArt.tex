@@ -40,11 +40,20 @@ In this section I will present some of the current state-of-the-art solutions in
                         which causes many context switches and state saving/restoring operations.
                         Its performance is slightly better than \gls{DBI}, but this approach still reaches 500\% fuzzing overhead,
                         as demonstrated by Stefan Nagy et al. \cite{zafl}.
+                
+                \item \textbf{E9AFL} \cite{E9AFL} : E9AFL uses E9Patch \cite{E9Patch} to instrument binaries.
+                    This is a framework that allow to modify existing isntruction without actually retrieve and 
+                    analyze the whole \gls{CFG}. 
+                    E9AFL modify existing instruction inserting trampolines to a code region that update the \gls{SHM}.
+                    Since trampoline based instrumentation suffer of many overheads, this approach introduce many 
+                    optimization techniques that reduce the overheads given by the trampolines. 
+                    Alvin Charles et al. \cite{PeAR} shows that E9AFL has some limitations, especially regarding the 
+                    capability of instrumenting correctly the target binaries.
 
                 \item \textbf{ZAFL} \cite{zafl}: This tool uses two main phases: the first consists in
                     reconstructing an \gls{IR} using the Zipr binary rewriter.
                     The resulting \gls{IR} is then used by ZAX to perform an optimization on the \gls{IR}, find the instrumentation points,
-                    and finally instrument these points. ZAFL works by inserting calls to a function that updates the shared map
+                    and finally instrument these points. ZAFL works by inserting inline calls to a function that updates the shared map
                     at the beginning of each \gls{BB}.
                     Despite ZAFL's many improvements, Jifan Xiao et al. \cite{SystemCallPatternTracing} demonstrated that
                     it still causes crashes in 28\% of the binaries used in their cited paper.
@@ -154,3 +163,10 @@ In this section I will present some of the current state-of-the-art solutions in
             \item \textit{FORKSRV\_FD (fd 198)}: used by the forkserver to read a message sent by the fuzzer.
             \item \textit{FORKSRV\_FD + 1 (fd 199)}: used by the forkserver to write a message to the fuzzer.
         \end{itemize}
+        
+        An approach worth mention in this section is the \textit{deferred forkserver} technique.
+        It consist in execute the forkserver as later as possible in the target. 
+        As shown previously, at each input, all the instructions after the forkserver must be executed by the child. 
+        If the forkserver is invoked before some instructions that does not require tracing (for example the load of a 
+        configuration file, or the initialization of an object), these instructions are executed for each input, 
+        producing useless overheads.

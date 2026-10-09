@@ -7,8 +7,8 @@ the experimental setup in which the tests are executed, and the tests performed,
         \item \textbf{Goal I} : The instrumented binary must be compatible with the original one.
             This means that the behavior of the program must be preserved after the instrumentation.
         \item \textbf{Goal II} : The instrumented binary must be compatible with the AFL and AFL++ communication protocol.
-        \item \textbf{Goal III} : Show that the instrumentation overhead is competitive with other binary-only rewriters and lower
-                        than that of dynamic binary translators.
+        \item \textbf{Goal III} : Show that the instrumentation overhead is competitive with other binary-only rewriters 
+                and lower than that of dynamic binary translators.
     \end{itemize}
 
     In order to prove that the tool satisfies these goals, the following experiments were conducted:
@@ -126,11 +126,8 @@ The results of the experiment are shown in \cref{tab:experiment1}.\\
     With regard to \textit{sfconvert} instead, a corruption of the Data Format recognizer had happend.
     Specifically the instrumented binary could not recognize the Data Format of the audio file anymore after the instrumntation.
 
-    A possible reason for the difficulty encountered in instrumenting this datased could be the fact that this binaries are 
-    stripped. The absence of 
-    A reason for the impossibility to instrument \textit{tcpdump} and \textit{unrtf} could be the fact that these binaries are 
-    stripped. This fact could create difficulties to the \gls{CFG} reconstruction phase.
-
+    A possible reason for the difficulty encountered in instrumenting this dataset could be the fact that this binaries are 
+    stripped. The absence of symbols could create more problems in \gls{CFG} reconstruction.
 
 \section{Experiment II}
     Among the four LAVA-M binaries, none fails during the instrumentation phase.
@@ -248,7 +245,9 @@ The results of the experiment are shown in \cref{tab:experiment1}.\\
     \Cref{tab:binariesStats} shows the size of the instrumented files in MBytes and the average executions per 
     second obtained from \cref{table:fuzzingStats}.
     As already discussed, the tool developed in this thesis produces larger binaries, because the \gls{SHM} update 
-    is instrumented inline.
+    is instrumented inline. As shown in \cref{tab:binariesStats} the size of all the instrumented binaries is similar 
+    regardless of how many locations have been instrumented.
+    This could be a sign of a fixed dimension incremention given by the added section
     The average execution speed is only slightly higher than that of ZAFL.
     Since the tool execution speed, as can be seen in \cref{table:fuzzingStats}, is not always higher with respect to 
     the ZAFL execution speed, and only slightly higher in average, it is not possible to conclude an actual 

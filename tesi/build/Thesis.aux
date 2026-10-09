@@ -113,6 +113,9 @@
 \citation{afldyninst}
 \citation{Dyninst}
 \citation{zafl}
+\citation{E9AFL}
+\citation{E9Patch}
+\citation{PeAR}
 \citation{zafl}
 \citation{SystemCallPatternTracing}
 \citation{afl_technical_details}
@@ -120,179 +123,179 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.5.1}AFL Functioning}{17}{subsection.1.5.1}\protected@file@percent }
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1.3}{\ignorespaces AFL-style SHM update rule}}{17}{algorithm.1.3}\protected@file@percent }
 \newlabel{alg:afl_style_update}{{1.3}{17}{AFL-style SHM update rule}{algorithm.1.3}{}}
-\newlabel{alg:afl_style_update@cref}{{[algorithm][3][1]1.3}{[1][16][]17}{}{}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1.4}{\ignorespaces Do-While Example}}{17}{figure.caption.15}\protected@file@percent }
-\newlabel{alg:do-while}{{1.4}{17}{Do-While Example}{figure.caption.15}{}}
-\newlabel{alg:do-while@cref}{{[algorithm][4][1]1.4}{[1][16][]17}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.8}{\ignorespaces Do-while CFG}}{17}{figure.caption.15}\protected@file@percent }
-\newlabel{fig:Do-While-CFG}{{1.8}{17}{Do-while CFG}{figure.caption.15}{}}
-\newlabel{fig:Do-While-CFG@cref}{{[figure][8][1]1.8}{[1][16][]17}{}{}{}}
+\newlabel{alg:afl_style_update@cref}{{[algorithm][3][1]1.3}{[1][17][]17}{}{}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1.4}{\ignorespaces Do-While Example}}{18}{figure.caption.15}\protected@file@percent }
+\newlabel{alg:do-while}{{1.4}{18}{Do-While Example}{figure.caption.15}{}}
+\newlabel{alg:do-while@cref}{{[algorithm][4][1]1.4}{[1][17][]18}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.8}{\ignorespaces Do-while CFG}}{18}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:Do-While-CFG}{{1.8}{18}{Do-while CFG}{figure.caption.15}{}}
+\newlabel{fig:Do-While-CFG@cref}{{[figure][8][1]1.8}{[1][17][]18}{}{}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1.9}{\ignorespaces AFL++ Forkserver Protocol}}{19}{figure.caption.16}\protected@file@percent }
 \newlabel{fig:aflplusplusforkserver}{{1.9}{19}{AFL++ Forkserver Protocol}{figure.caption.16}{}}
 \newlabel{fig:aflplusplusforkserver@cref}{{[figure][9][1]1.9}{[1][18][]19}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {1.6}Goals and Challenges}{19}{section.1.6}\protected@file@percent }
-\newlabel{sec:goals-and-challenges}{{1.6}{19}{Goals and Challenges}{section.1.6}{}}
-\newlabel{sec:goals-and-challenges@cref}{{[section][6][1]1.6}{[1][19][]19}{}{}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {2}Approach}{21}{chapter.2}\protected@file@percent }
-\@writefile{lof}{\addvspace {10\p@ }}
-\@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {2.1}Forkserver Insertion}{21}{section.2.1}\protected@file@percent }
-\newlabel{sec:forkserver_insertion}{{2.1}{21}{Forkserver Insertion}{section.2.1}{}}
-\newlabel{sec:forkserver_insertion@cref}{{[section][1][2]2.1}{[1][21][]21}{}{}{}}
-\newlabel{fig:dl_sub1}{{2.1a}{23}{Layout of a target binary with its dynamic dependencies}{figure.caption.18}{}}
-\newlabel{fig:dl_sub1@cref}{{[subfigure][1][2,1]2.1a}{[1][23][]23}{}{}{}}
-\newlabel{sub@fig:dl_sub1}{{a}{23}{Layout of a target binary with its dynamic dependencies}{figure.caption.18}{}}
-\newlabel{sub@fig:dl_sub1@cref}{{[subfigure][1][2,1]2.1a}{[1][23][]23}{}{}{}}
-\newlabel{fig:dl_sub2}{{2.1b}{23}{Dynamic linker initialization of dynamic dependencies}{figure.caption.18}{}}
-\newlabel{fig:dl_sub2@cref}{{[subfigure][2][2,1]2.1b}{[1][23][]23}{}{}{}}
-\newlabel{sub@fig:dl_sub2}{{b}{23}{Dynamic linker initialization of dynamic dependencies}{figure.caption.18}{}}
-\newlabel{sub@fig:dl_sub2@cref}{{[subfigure][2][2,1]2.1b}{[1][23][]23}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces An example of ELF execution with dynamic dependencies and a constructor function}}{23}{figure.caption.18}\protected@file@percent }
-\newlabel{fig:constructor_function_execution}{{2.1}{23}{An example of ELF execution with dynamic dependencies and a constructor function}{figure.caption.18}{}}
-\newlabel{fig:constructor_function_execution@cref}{{[figure][1][2]2.1}{[1][23][]23}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.2}Shared Memory Instrumentation}{24}{section.2.2}\protected@file@percent }
-\newlabel{sec:shared_mem}{{2.2}{24}{Shared Memory Instrumentation}{section.2.2}{}}
-\newlabel{sec:shared_mem@cref}{{[section][2][2]2.2}{[1][24][]24}{}{}{}}
-\newlabel{fig:shm_relocation1}{{2.2a}{25}{Before relocation}{figure.caption.19}{}}
-\newlabel{fig:shm_relocation1@cref}{{[subfigure][1][2,2]2.2a}{[1][25][]25}{}{}{}}
-\newlabel{sub@fig:shm_relocation1}{{a}{25}{Before relocation}{figure.caption.19}{}}
-\newlabel{sub@fig:shm_relocation1@cref}{{[subfigure][1][2,2]2.2a}{[1][25][]25}{}{}{}}
-\newlabel{fig:shm_relocation2}{{2.2b}{25}{After relocation but before the forkserver execution}{figure.caption.19}{}}
-\newlabel{fig:shm_relocation2@cref}{{[subfigure][2][2,2]2.2b}{[1][25][]25}{}{}{}}
-\newlabel{sub@fig:shm_relocation2}{{b}{25}{After relocation but before the forkserver execution}{figure.caption.19}{}}
-\newlabel{sub@fig:shm_relocation2@cref}{{[subfigure][2][2,2]2.2b}{[1][25][]25}{}{}{}}
-\newlabel{fig:shm_relocation3}{{2.2c}{25}{After forkserver execution}{figure.caption.19}{}}
-\newlabel{fig:shm_relocation3@cref}{{[subfigure][3][2,2]2.2c}{[1][25][]25}{}{}{}}
-\newlabel{sub@fig:shm_relocation3}{{c}{25}{After forkserver execution}{figure.caption.19}{}}
-\newlabel{sub@fig:shm_relocation3@cref}{{[subfigure][3][2,2]2.2c}{[1][25][]25}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Shared Memory relocation between the target binary and the Shared Object}}{25}{figure.caption.19}\protected@file@percent }
-\newlabel{fig:shm_relocation}{{2.2}{25}{Shared Memory relocation between the target binary and the Shared Object}{figure.caption.19}{}}
-\newlabel{fig:shm_relocation@cref}{{[figure][2][2]2.2}{[1][25][]25}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.3}Instrumentation Points Search}{26}{section.2.3}\protected@file@percent }
-\newlabel{sec:instr_point_search}{{2.3}{26}{Instrumentation Points Search}{section.2.3}{}}
-\newlabel{sec:instr_point_search@cref}{{[section][3][2]2.3}{[1][26][]26}{}{}{}}
-\citation{cutter}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {2.1}{\ignorespaces Instrumentation point search with DFS algorithm}}{27}{algorithm.2.1}\protected@file@percent }
-\newlabel{alg:ip_search_dfs}{{2.1}{27}{Instrumentation point search with DFS algorithm}{algorithm.2.1}{}}
-\newlabel{alg:ip_search_dfs@cref}{{[algorithm][1][2]2.1}{[1][26][]27}{}{}{}}
-\newlabel{fig:pow_main_example}{{2.3a}{29}{Main CFG}{figure.caption.20}{}}
-\newlabel{fig:pow_main_example@cref}{{[subfigure][1][2,3]2.3a}{[1][27][]29}{}{}{}}
-\newlabel{sub@fig:pow_main_example}{{a}{29}{Main CFG}{figure.caption.20}{}}
-\newlabel{sub@fig:pow_main_example@cref}{{[subfigure][1][2,3]2.3a}{[1][27][]29}{}{}{}}
-\newlabel{fig:pow_function_example}{{2.3b}{29}{Pow function CFG}{figure.caption.20}{}}
-\newlabel{fig:pow_function_example@cref}{{[subfigure][2][2,3]2.3b}{[1][27][]29}{}{}{}}
-\newlabel{sub@fig:pow_function_example}{{b}{29}{Pow function CFG}{figure.caption.20}{}}
-\newlabel{sub@fig:pow_function_example@cref}{{[subfigure][2][2,3]2.3b}{[1][27][]29}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Example of the CFG of a program that computes the power operation between two numbers}}{29}{figure.caption.20}\protected@file@percent }
-\newlabel{fig:pow_example}{{2.3}{29}{Example of the CFG of a program that computes the power operation between two numbers}{figure.caption.20}{}}
-\newlabel{fig:pow_example@cref}{{[figure][3][2]2.3}{[1][27][]29}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.4}Actual Instrumentation}{30}{section.2.4}\protected@file@percent }
-\newlabel{sec:actual_instrumentation}{{2.4}{30}{Actual Instrumentation}{section.2.4}{}}
-\newlabel{sec:actual_instrumentation@cref}{{[section][4][2]2.4}{[1][30][]30}{}{}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {2.2}{\ignorespaces Pseudo-code of Shared Memory update instrumentation}}{31}{algorithm.2.2}\protected@file@percent }
-\newlabel{alg:shm_update}{{2.2}{31}{Pseudo-code of Shared Memory update instrumentation}{algorithm.2.2}{}}
-\newlabel{alg:shm_update@cref}{{[algorithm][2][2]2.2}{[1][31][]31}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.5}Forkserver Optimization}{32}{section.2.5}\protected@file@percent }
-\newlabel{sec:optimization}{{2.5}{32}{Forkserver Optimization}{section.2.5}{}}
-\newlabel{sec:optimization@cref}{{[section][5][2]2.5}{[1][32][]32}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces Optimized forkserver invocation}}{33}{figure.caption.21}\protected@file@percent }
-\newlabel{fig:final_forkserver_invocation}{{2.4}{33}{Optimized forkserver invocation}{figure.caption.21}{}}
-\newlabel{fig:final_forkserver_invocation@cref}{{[figure][4][2]2.4}{[1][32][]33}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.6}Goals and Challenges}{20}{section.1.6}\protected@file@percent }
+\newlabel{sec:goals-and-challenges}{{1.6}{20}{Goals and Challenges}{section.1.6}{}}
+\newlabel{sec:goals-and-challenges@cref}{{[section][6][1]1.6}{[1][20][]20}{}{}{}}
 \transparent@use{.4}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Implementation}{35}{chapter.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Approach}{23}{chapter.2}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}Forkserver Specification}{35}{section.3.1}\protected@file@percent }
-\newlabel{sec:forksrv_spec}{{3.1}{35}{Forkserver Specification}{section.3.1}{}}
-\newlabel{sec:forksrv_spec@cref}{{[section][1][3]3.1}{[1][35][]35}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Different execution modes of the forkserver based on environment variable values}}{36}{table.caption.23}\protected@file@percent }
-\newlabel{tab:forkserver_modes}{{3.1}{36}{Different execution modes of the forkserver based on environment variable values}{table.caption.23}{}}
-\newlabel{tab:forkserver_modes@cref}{{[table][1][3]3.1}{[1][35][]36}{}{}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {3.1}{\ignorespaces AFL forkserver algorithm}}{37}{algorithm.3.1}\protected@file@percent }
-\newlabel{alg:afl_forkserver}{{3.1}{37}{AFL forkserver algorithm}{algorithm.3.1}{}}
-\newlabel{alg:afl_forkserver@cref}{{[algorithm][1][3]3.1}{[1][37][]37}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Instrumentator Specification}{37}{section.3.2}\protected@file@percent }
-\newlabel{sec:instrument_spec}{{3.2}{37}{Instrumentator Specification}{section.3.2}{}}
-\newlabel{sec:instrument_spec@cref}{{[section][2][3]3.2}{[1][37][]37}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Binary Modification}{38}{subsection.3.2.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Binary modification phase in which the needed sections, relocations and dynamic dependencies are added. (\small  The dotted arrows specify which information is needed for the relocation phase) }}{38}{figure.caption.24}\protected@file@percent }
-\newlabel{fig:binary_modification}{{3.1}{38}{Binary modification phase in which the needed sections, relocations and dynamic dependencies are added. (\small The dotted arrows specify which information is needed for the relocation phase)}{figure.caption.24}{}}
-\newlabel{fig:binary_modification@cref}{{[figure][1][3]3.1}{[1][38][]38}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Instrumentation}{40}{subsection.3.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}Forkserver Insertion}{23}{section.2.1}\protected@file@percent }
+\newlabel{sec:forkserver_insertion}{{2.1}{23}{Forkserver Insertion}{section.2.1}{}}
+\newlabel{sec:forkserver_insertion@cref}{{[section][1][2]2.1}{[1][23][]23}{}{}{}}
+\newlabel{fig:dl_sub1}{{2.1a}{25}{Layout of a target binary with its dynamic dependencies}{figure.caption.18}{}}
+\newlabel{fig:dl_sub1@cref}{{[subfigure][1][2,1]2.1a}{[1][25][]25}{}{}{}}
+\newlabel{sub@fig:dl_sub1}{{a}{25}{Layout of a target binary with its dynamic dependencies}{figure.caption.18}{}}
+\newlabel{sub@fig:dl_sub1@cref}{{[subfigure][1][2,1]2.1a}{[1][25][]25}{}{}{}}
+\newlabel{fig:dl_sub2}{{2.1b}{25}{Dynamic linker initialization of dynamic dependencies}{figure.caption.18}{}}
+\newlabel{fig:dl_sub2@cref}{{[subfigure][2][2,1]2.1b}{[1][25][]25}{}{}{}}
+\newlabel{sub@fig:dl_sub2}{{b}{25}{Dynamic linker initialization of dynamic dependencies}{figure.caption.18}{}}
+\newlabel{sub@fig:dl_sub2@cref}{{[subfigure][2][2,1]2.1b}{[1][25][]25}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces An example of ELF execution with dynamic dependencies and a constructor function}}{25}{figure.caption.18}\protected@file@percent }
+\newlabel{fig:constructor_function_execution}{{2.1}{25}{An example of ELF execution with dynamic dependencies and a constructor function}{figure.caption.18}{}}
+\newlabel{fig:constructor_function_execution@cref}{{[figure][1][2]2.1}{[1][25][]25}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Shared Memory Instrumentation}{26}{section.2.2}\protected@file@percent }
+\newlabel{sec:shared_mem}{{2.2}{26}{Shared Memory Instrumentation}{section.2.2}{}}
+\newlabel{sec:shared_mem@cref}{{[section][2][2]2.2}{[1][26][]26}{}{}{}}
+\newlabel{fig:shm_relocation1}{{2.2a}{27}{Before relocation}{figure.caption.19}{}}
+\newlabel{fig:shm_relocation1@cref}{{[subfigure][1][2,2]2.2a}{[1][27][]27}{}{}{}}
+\newlabel{sub@fig:shm_relocation1}{{a}{27}{Before relocation}{figure.caption.19}{}}
+\newlabel{sub@fig:shm_relocation1@cref}{{[subfigure][1][2,2]2.2a}{[1][27][]27}{}{}{}}
+\newlabel{fig:shm_relocation2}{{2.2b}{27}{After relocation but before the forkserver execution}{figure.caption.19}{}}
+\newlabel{fig:shm_relocation2@cref}{{[subfigure][2][2,2]2.2b}{[1][27][]27}{}{}{}}
+\newlabel{sub@fig:shm_relocation2}{{b}{27}{After relocation but before the forkserver execution}{figure.caption.19}{}}
+\newlabel{sub@fig:shm_relocation2@cref}{{[subfigure][2][2,2]2.2b}{[1][27][]27}{}{}{}}
+\newlabel{fig:shm_relocation3}{{2.2c}{27}{After forkserver execution}{figure.caption.19}{}}
+\newlabel{fig:shm_relocation3@cref}{{[subfigure][3][2,2]2.2c}{[1][27][]27}{}{}{}}
+\newlabel{sub@fig:shm_relocation3}{{c}{27}{After forkserver execution}{figure.caption.19}{}}
+\newlabel{sub@fig:shm_relocation3@cref}{{[subfigure][3][2,2]2.2c}{[1][27][]27}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Shared Memory relocation between the target binary and the Shared Object}}{27}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:shm_relocation}{{2.2}{27}{Shared Memory relocation between the target binary and the Shared Object}{figure.caption.19}{}}
+\newlabel{fig:shm_relocation@cref}{{[figure][2][2]2.2}{[1][27][]27}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Instrumentation Points Search}{28}{section.2.3}\protected@file@percent }
+\newlabel{sec:instr_point_search}{{2.3}{28}{Instrumentation Points Search}{section.2.3}{}}
+\newlabel{sec:instr_point_search@cref}{{[section][3][2]2.3}{[1][28][]28}{}{}{}}
 \citation{cutter}
-\newlabel{fig:rip_relative_error_after_shift1}{{3.2a}{41}{Example of a Basic Block before the addition of an instruction}{figure.caption.25}{}}
-\newlabel{fig:rip_relative_error_after_shift1@cref}{{[subfigure][1][3,2]3.2a}{[1][41][]41}{}{}{}}
-\newlabel{sub@fig:rip_relative_error_after_shift1}{{a}{41}{Example of a Basic Block before the addition of an instruction}{figure.caption.25}{}}
-\newlabel{sub@fig:rip_relative_error_after_shift1@cref}{{[subfigure][1][3,2]3.2a}{[1][41][]41}{}{}{}}
-\newlabel{fig:rip_relative_error_after_shift2}{{3.2b}{41}{Same Basic Block of \cref {fig:rip_relative_error_after_shift1} with a nop instruction added}{figure.caption.25}{}}
-\newlabel{fig:rip_relative_error_after_shift2@cref}{{[subfigure][2][3,2]3.2b}{[1][41][]41}{}{}{}}
-\newlabel{sub@fig:rip_relative_error_after_shift2}{{b}{41}{Same Basic Block of \cref {fig:rip_relative_error_after_shift1} with a nop instruction added}{figure.caption.25}{}}
-\newlabel{sub@fig:rip_relative_error_after_shift2@cref}{{[subfigure][2][3,2]3.2b}{[1][41][]41}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Example of the error caused by not taking care of RIP-relative instruction offsets}}{41}{figure.caption.25}\protected@file@percent }
-\newlabel{fig:rip_relative_error_after_shift}{{3.2}{41}{Example of the error caused by not taking care of RIP-relative instruction offsets}{figure.caption.25}{}}
-\newlabel{fig:rip_relative_error_after_shift@cref}{{[figure][2][3]3.2}{[1][41][]41}{}{}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {3.2}{\ignorespaces Initial Instrumentation algorithm}}{43}{algorithm.3.2}\protected@file@percent }
-\newlabel{alg:initial_instrumentation}{{3.2}{43}{Initial Instrumentation algorithm}{algorithm.3.2}{}}
-\newlabel{alg:initial_instrumentation@cref}{{[algorithm][2][3]3.2}{[1][42][]43}{}{}{}}
-\newlabel{lst:init_instr}{{3.1}{43}{Initial Instrumentation}{lstlisting.3.1}{}}
-\newlabel{lst:init_instr@cref}{{[lstlisting][1][3]3.1}{[1][43][]43}{}{}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {3.1}{\ignorespaces Initial Instrumentation}}{43}{lstlisting.3.1}\protected@file@percent }
-\newlabel{lst:bb_instrumentation}{{3.2}{43}{Basic Block Instrumentation}{lstlisting.3.2}{}}
-\newlabel{lst:bb_instrumentation@cref}{{[lstlisting][2][3]3.2}{[1][43][]43}{}{}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {3.2}{\ignorespaces Basic Block Instrumentation}}{43}{lstlisting.3.2}\protected@file@percent }
-\@writefile{loa}{\contentsline {algorithm}{\numberline {3.3}{\ignorespaces Instrument Basic Block algorithm}}{45}{algorithm.3.3}\protected@file@percent }
-\newlabel{alg:bb_instr}{{3.3}{45}{Instrument Basic Block algorithm}{algorithm.3.3}{}}
-\newlabel{alg:bb_instr@cref}{{[algorithm][3][3]3.3}{[1][44][]45}{}{}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2.1}{\ignorespaces Instrumentation point search with DFS algorithm}}{29}{algorithm.2.1}\protected@file@percent }
+\newlabel{alg:ip_search_dfs}{{2.1}{29}{Instrumentation point search with DFS algorithm}{algorithm.2.1}{}}
+\newlabel{alg:ip_search_dfs@cref}{{[algorithm][1][2]2.1}{[1][28][]29}{}{}{}}
+\newlabel{fig:pow_main_example}{{2.3a}{31}{Main CFG}{figure.caption.20}{}}
+\newlabel{fig:pow_main_example@cref}{{[subfigure][1][2,3]2.3a}{[1][29][]31}{}{}{}}
+\newlabel{sub@fig:pow_main_example}{{a}{31}{Main CFG}{figure.caption.20}{}}
+\newlabel{sub@fig:pow_main_example@cref}{{[subfigure][1][2,3]2.3a}{[1][29][]31}{}{}{}}
+\newlabel{fig:pow_function_example}{{2.3b}{31}{Pow function CFG}{figure.caption.20}{}}
+\newlabel{fig:pow_function_example@cref}{{[subfigure][2][2,3]2.3b}{[1][29][]31}{}{}{}}
+\newlabel{sub@fig:pow_function_example}{{b}{31}{Pow function CFG}{figure.caption.20}{}}
+\newlabel{sub@fig:pow_function_example@cref}{{[subfigure][2][2,3]2.3b}{[1][29][]31}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Example of the CFG of a program that computes the power operation between two numbers}}{31}{figure.caption.20}\protected@file@percent }
+\newlabel{fig:pow_example}{{2.3}{31}{Example of the CFG of a program that computes the power operation between two numbers}{figure.caption.20}{}}
+\newlabel{fig:pow_example@cref}{{[figure][3][2]2.3}{[1][29][]31}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}Actual Instrumentation}{32}{section.2.4}\protected@file@percent }
+\newlabel{sec:actual_instrumentation}{{2.4}{32}{Actual Instrumentation}{section.2.4}{}}
+\newlabel{sec:actual_instrumentation@cref}{{[section][4][2]2.4}{[1][32][]32}{}{}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2.2}{\ignorespaces Pseudo-code of Shared Memory update instrumentation}}{33}{algorithm.2.2}\protected@file@percent }
+\newlabel{alg:shm_update}{{2.2}{33}{Pseudo-code of Shared Memory update instrumentation}{algorithm.2.2}{}}
+\newlabel{alg:shm_update@cref}{{[algorithm][2][2]2.2}{[1][33][]33}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.5}Forkserver Optimization}{34}{section.2.5}\protected@file@percent }
+\newlabel{sec:optimization}{{2.5}{34}{Forkserver Optimization}{section.2.5}{}}
+\newlabel{sec:optimization@cref}{{[section][5][2]2.5}{[1][34][]34}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces Optimized forkserver invocation}}{35}{figure.caption.21}\protected@file@percent }
+\newlabel{fig:final_forkserver_invocation}{{2.4}{35}{Optimized forkserver invocation}{figure.caption.21}{}}
+\newlabel{fig:final_forkserver_invocation@cref}{{[figure][4][2]2.4}{[1][34][]35}{}{}{}}
 \transparent@use{.4}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Experiments}{47}{chapter.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Implementation}{37}{chapter.3}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Goals}{47}{section.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Forkserver Specification}{37}{section.3.1}\protected@file@percent }
+\newlabel{sec:forksrv_spec}{{3.1}{37}{Forkserver Specification}{section.3.1}{}}
+\newlabel{sec:forksrv_spec@cref}{{[section][1][3]3.1}{[1][37][]37}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Different execution modes of the forkserver based on environment variable values}}{38}{table.caption.23}\protected@file@percent }
+\newlabel{tab:forkserver_modes}{{3.1}{38}{Different execution modes of the forkserver based on environment variable values}{table.caption.23}{}}
+\newlabel{tab:forkserver_modes@cref}{{[table][1][3]3.1}{[1][37][]38}{}{}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3.1}{\ignorespaces AFL forkserver algorithm}}{39}{algorithm.3.1}\protected@file@percent }
+\newlabel{alg:afl_forkserver}{{3.1}{39}{AFL forkserver algorithm}{algorithm.3.1}{}}
+\newlabel{alg:afl_forkserver@cref}{{[algorithm][1][3]3.1}{[1][39][]39}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Instrumentator Specification}{39}{section.3.2}\protected@file@percent }
+\newlabel{sec:instrument_spec}{{3.2}{39}{Instrumentator Specification}{section.3.2}{}}
+\newlabel{sec:instrument_spec@cref}{{[section][2][3]3.2}{[1][39][]39}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Binary Modification}{40}{subsection.3.2.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Binary modification phase in which the needed sections, relocations and dynamic dependencies are added. (\small  The dotted arrows specify which information is needed for the relocation phase) }}{40}{figure.caption.24}\protected@file@percent }
+\newlabel{fig:binary_modification}{{3.1}{40}{Binary modification phase in which the needed sections, relocations and dynamic dependencies are added. (\small The dotted arrows specify which information is needed for the relocation phase)}{figure.caption.24}{}}
+\newlabel{fig:binary_modification@cref}{{[figure][1][3]3.1}{[1][40][]40}{}{}{}}
+\citation{cutter}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Instrumentation}{43}{subsection.3.2.2}\protected@file@percent }
+\newlabel{fig:rip_relative_error_after_shift1}{{3.2a}{43}{Example of a Basic Block before the addition of an instruction}{figure.caption.25}{}}
+\newlabel{fig:rip_relative_error_after_shift1@cref}{{[subfigure][1][3,2]3.2a}{[1][43][]43}{}{}{}}
+\newlabel{sub@fig:rip_relative_error_after_shift1}{{a}{43}{Example of a Basic Block before the addition of an instruction}{figure.caption.25}{}}
+\newlabel{sub@fig:rip_relative_error_after_shift1@cref}{{[subfigure][1][3,2]3.2a}{[1][43][]43}{}{}{}}
+\newlabel{fig:rip_relative_error_after_shift2}{{3.2b}{43}{Same Basic Block of \cref {fig:rip_relative_error_after_shift1} with a nop instruction added}{figure.caption.25}{}}
+\newlabel{fig:rip_relative_error_after_shift2@cref}{{[subfigure][2][3,2]3.2b}{[1][43][]43}{}{}{}}
+\newlabel{sub@fig:rip_relative_error_after_shift2}{{b}{43}{Same Basic Block of \cref {fig:rip_relative_error_after_shift1} with a nop instruction added}{figure.caption.25}{}}
+\newlabel{sub@fig:rip_relative_error_after_shift2@cref}{{[subfigure][2][3,2]3.2b}{[1][43][]43}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Example of the error caused by not taking care of RIP-relative instruction offsets}}{43}{figure.caption.25}\protected@file@percent }
+\newlabel{fig:rip_relative_error_after_shift}{{3.2}{43}{Example of the error caused by not taking care of RIP-relative instruction offsets}{figure.caption.25}{}}
+\newlabel{fig:rip_relative_error_after_shift@cref}{{[figure][2][3]3.2}{[1][43][]43}{}{}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3.2}{\ignorespaces Initial Instrumentation algorithm}}{45}{algorithm.3.2}\protected@file@percent }
+\newlabel{alg:initial_instrumentation}{{3.2}{45}{Initial Instrumentation algorithm}{algorithm.3.2}{}}
+\newlabel{alg:initial_instrumentation@cref}{{[algorithm][2][3]3.2}{[1][44][]45}{}{}{}}
+\newlabel{lst:init_instr}{{3.1}{45}{Initial Instrumentation}{lstlisting.3.1}{}}
+\newlabel{lst:init_instr@cref}{{[lstlisting][1][3]3.1}{[1][45][]45}{}{}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {3.1}{\ignorespaces Initial Instrumentation}}{45}{lstlisting.3.1}\protected@file@percent }
+\newlabel{lst:bb_instrumentation}{{3.2}{46}{Basic Block Instrumentation}{lstlisting.3.2}{}}
+\newlabel{lst:bb_instrumentation@cref}{{[lstlisting][2][3]3.2}{[1][46][]46}{}{}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {3.2}{\ignorespaces Basic Block Instrumentation}}{46}{lstlisting.3.2}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3.3}{\ignorespaces Instrument Basic Block algorithm}}{47}{algorithm.3.3}\protected@file@percent }
+\newlabel{alg:bb_instr}{{3.3}{47}{Instrument Basic Block algorithm}{algorithm.3.3}{}}
+\newlabel{alg:bb_instr@cref}{{[algorithm][3][3]3.3}{[1][46][]47}{}{}{}}
+\transparent@use{.4}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Experiments}{49}{chapter.4}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Goals}{49}{section.4.1}\protected@file@percent }
 \citation{zafl}
 \citation{lava}
 \citation{zafl}
 \citation{Angora}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Datasets and Experiment Setup}{48}{section.4.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Binaries extracted from ZAFL \textit  {real-world software} dataset}}{48}{table.caption.27}\protected@file@percent }
-\newlabel{tab:experiment1Dataset}{{4.1}{48}{Binaries extracted from ZAFL \textit {real-world software} dataset}{table.caption.27}{}}
-\newlabel{tab:experiment1Dataset@cref}{{[table][1][4]4.1}{[1][48][]48}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}Experiment I}{49}{section.4.3}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces Results of experiment I}}{49}{table.caption.28}\protected@file@percent }
-\newlabel{tab:experiment1}{{4.2}{49}{Results of experiment I}{table.caption.28}{}}
-\newlabel{tab:experiment1@cref}{{[table][2][4]4.2}{[1][49][]49}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}Experiment II}{50}{section.4.4}\protected@file@percent }
-\newlabel{table:fuzzingStats:base64}{{4.3a}{51}{\textmd {\texttt {base64}}}{table.caption.29}{}}
-\newlabel{table:fuzzingStats:base64@cref}{{[subtable][1][4,3]4.3a}{[1][50][]51}{}{}{}}
-\newlabel{sub@table:fuzzingStats:base64}{{a}{51}{\textmd {\texttt {base64}}}{table.caption.29}{}}
-\newlabel{sub@table:fuzzingStats:base64@cref}{{[subtable][1][4,3]4.3a}{[1][50][]51}{}{}{}}
-\newlabel{table:fuzzingStats:md5sum}{{4.3b}{51}{\textmd {\texttt {md5sum}}}{table.caption.29}{}}
-\newlabel{table:fuzzingStats:md5sum@cref}{{[subtable][2][4,3]4.3b}{[1][50][]51}{}{}{}}
-\newlabel{sub@table:fuzzingStats:md5sum}{{b}{51}{\textmd {\texttt {md5sum}}}{table.caption.29}{}}
-\newlabel{sub@table:fuzzingStats:md5sum@cref}{{[subtable][2][4,3]4.3b}{[1][50][]51}{}{}{}}
-\newlabel{table:fuzzingStats:uniq}{{4.3c}{51}{\textmd {\texttt {uniq}}}{table.caption.29}{}}
-\newlabel{table:fuzzingStats:uniq@cref}{{[subtable][3][4,3]4.3c}{[1][50][]51}{}{}{}}
-\newlabel{sub@table:fuzzingStats:uniq}{{c}{51}{\textmd {\texttt {uniq}}}{table.caption.29}{}}
-\newlabel{sub@table:fuzzingStats:uniq@cref}{{[subtable][3][4,3]4.3c}{[1][50][]51}{}{}{}}
-\newlabel{table:fuzzingStats:who}{{4.3d}{51}{\textmd {\texttt {who}}}{table.caption.29}{}}
-\newlabel{table:fuzzingStats:who@cref}{{[subtable][4][4,3]4.3d}{[1][50][]51}{}{}{}}
-\newlabel{sub@table:fuzzingStats:who}{{d}{51}{\textmd {\texttt {who}}}{table.caption.29}{}}
-\newlabel{sub@table:fuzzingStats:who@cref}{{[subtable][4][4,3]4.3d}{[1][50][]51}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4.3}{\ignorespaces Fuzzing statistics over a 24-hour fuzzing campaign on the LAVA-M dataset using AFL++ in QEMU mode, ZAFL instrumentation + AFL++ fuzzer, and my instrumentation + AFL++ fuzzer}}{51}{table.caption.29}\protected@file@percent }
-\newlabel{table:fuzzingStats}{{4.3}{51}{Fuzzing statistics over a 24-hour fuzzing campaign on the LAVA-M dataset using AFL++ in QEMU mode, ZAFL instrumentation + AFL++ fuzzer, and my instrumentation + AFL++ fuzzer}{table.caption.29}{}}
-\newlabel{table:fuzzingStats@cref}{{[table][3][4]4.3}{[1][50][]51}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4.4}{\ignorespaces Instrumented binaries statistics}}{51}{table.caption.30}\protected@file@percent }
-\newlabel{tab:binariesStats}{{4.4}{51}{Instrumented binaries statistics}{table.caption.30}{}}
-\newlabel{tab:binariesStats@cref}{{[table][4][4]4.4}{[1][50][]51}{}{}{}}
-\transparent@use{.4}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Limitations and Future Works}{53}{chapter.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Datasets and Experiment Setup}{50}{section.4.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Binaries extracted from ZAFL \textit  {real-world software} dataset}}{50}{table.caption.27}\protected@file@percent }
+\newlabel{tab:experiment1Dataset}{{4.1}{50}{Binaries extracted from ZAFL \textit {real-world software} dataset}{table.caption.27}{}}
+\newlabel{tab:experiment1Dataset@cref}{{[table][1][4]4.1}{[1][50][]50}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Experiment I}{51}{section.4.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces Results of experiment I}}{51}{table.caption.28}\protected@file@percent }
+\newlabel{tab:experiment1}{{4.2}{51}{Results of experiment I}{table.caption.28}{}}
+\newlabel{tab:experiment1@cref}{{[table][2][4]4.2}{[1][51][]51}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Experiment II}{52}{section.4.4}\protected@file@percent }
+\newlabel{table:fuzzingStats:base64}{{4.3a}{53}{\textmd {\texttt {base64}}}{table.caption.29}{}}
+\newlabel{table:fuzzingStats:base64@cref}{{[subtable][1][4,3]4.3a}{[1][52][]53}{}{}{}}
+\newlabel{sub@table:fuzzingStats:base64}{{a}{53}{\textmd {\texttt {base64}}}{table.caption.29}{}}
+\newlabel{sub@table:fuzzingStats:base64@cref}{{[subtable][1][4,3]4.3a}{[1][52][]53}{}{}{}}
+\newlabel{table:fuzzingStats:md5sum}{{4.3b}{53}{\textmd {\texttt {md5sum}}}{table.caption.29}{}}
+\newlabel{table:fuzzingStats:md5sum@cref}{{[subtable][2][4,3]4.3b}{[1][52][]53}{}{}{}}
+\newlabel{sub@table:fuzzingStats:md5sum}{{b}{53}{\textmd {\texttt {md5sum}}}{table.caption.29}{}}
+\newlabel{sub@table:fuzzingStats:md5sum@cref}{{[subtable][2][4,3]4.3b}{[1][52][]53}{}{}{}}
+\newlabel{table:fuzzingStats:uniq}{{4.3c}{53}{\textmd {\texttt {uniq}}}{table.caption.29}{}}
+\newlabel{table:fuzzingStats:uniq@cref}{{[subtable][3][4,3]4.3c}{[1][52][]53}{}{}{}}
+\newlabel{sub@table:fuzzingStats:uniq}{{c}{53}{\textmd {\texttt {uniq}}}{table.caption.29}{}}
+\newlabel{sub@table:fuzzingStats:uniq@cref}{{[subtable][3][4,3]4.3c}{[1][52][]53}{}{}{}}
+\newlabel{table:fuzzingStats:who}{{4.3d}{53}{\textmd {\texttt {who}}}{table.caption.29}{}}
+\newlabel{table:fuzzingStats:who@cref}{{[subtable][4][4,3]4.3d}{[1][52][]53}{}{}{}}
+\newlabel{sub@table:fuzzingStats:who}{{d}{53}{\textmd {\texttt {who}}}{table.caption.29}{}}
+\newlabel{sub@table:fuzzingStats:who@cref}{{[subtable][4][4,3]4.3d}{[1][52][]53}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.3}{\ignorespaces Fuzzing statistics over a 24-hour fuzzing campaign on the LAVA-M dataset using AFL++ in QEMU mode, ZAFL instrumentation + AFL++ fuzzer, and my instrumentation + AFL++ fuzzer}}{53}{table.caption.29}\protected@file@percent }
+\newlabel{table:fuzzingStats}{{4.3}{53}{Fuzzing statistics over a 24-hour fuzzing campaign on the LAVA-M dataset using AFL++ in QEMU mode, ZAFL instrumentation + AFL++ fuzzer, and my instrumentation + AFL++ fuzzer}{table.caption.29}{}}
+\newlabel{table:fuzzingStats@cref}{{[table][3][4]4.3}{[1][52][]53}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.4}{\ignorespaces Instrumented binaries statistics}}{54}{table.caption.30}\protected@file@percent }
+\newlabel{tab:binariesStats}{{4.4}{54}{Instrumented binaries statistics}{table.caption.30}{}}
+\newlabel{tab:binariesStats@cref}{{[table][4][4]4.4}{[1][53][]54}{}{}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Limitations and Future Works}{55}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Limitations}{53}{section.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Limitations}{55}{section.5.1}\protected@file@percent }
 \citation{CollAFL}
 \citation{serebryany2012addresssanitizer}
 \citation{schilling2024binary}
 \bibdata{Thesis_bibliography}
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}Future Works}{54}{section.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Future Works}{56}{section.5.2}\protected@file@percent }
 \@writefile{toc}{\vspace  {2em}}
 \bibcite{aflplusplus-frida-mode}{{1}{2026}{{AFL++ contributors}}{{}}}
 \bibcite{aflplusplus_binary_only_targets}{{2}{}{{AFL++ Developers}}{{}}}
@@ -300,40 +303,43 @@
 \bibcite{DynamoRIOPaper}{{4}{2003}{{Bruening et~al.}}{{Bruening, Garnett, and Amarasinghe}}}
 \bibcite{Dyninst}{{5}{2000}{{Buck and Hollingsworth}}{{}}}
 \bibcite{Boehme2016}{{6}{2016}{{Böhme et~al.}}{{Böhme, Pham, and Roychoudhury}}}
-\bibcite{Angora}{{7}{2018}{{Chen and Chen}}{{}}}
-\bibcite{retrowrite}{{8}{2020}{{Dinesh et~al.}}{{Dinesh, Burow, Xu, and Payer}}}
-\bibcite{lava}{{9}{2016}{{Dolan-Gavitt et~al.}}{{Dolan-Gavitt, Hulin, Kirda, Leek, Mambretti, Robertson, Ulrich, and Whelan}}}
-\@writefile{toc}{\contentsline {chapter}{Bibliography\markboth {\MakeUppercase    []{Bibliography}}{\MakeUppercase    []{Bibliography}}}{55}{chapter*.33}\protected@file@percent }
-\bibcite{aflplusplus}{{10}{2020}{{Fioraldi et~al.}}{{Fioraldi, Maier, Ei{\ss }feldt, and Heuse}}}
-\bibcite{libafl}{{11}{2022}{{Fioraldi et~al.}}{{Fioraldi, Maier, Zhang, and Balzarotti}}}
-\bibcite{CollAFL}{{12}{2018}{{Gan et~al.}}{{Gan, Zhang, Qin, Tu, Li, Pei, and Chen}}}
-\bibcite{Godefroid2012}{{13}{2012}{{Godefroid et~al.}}{{Godefroid, Levin, and Molnar}}}
-\bibcite{afldyninst}{{14}{}{{Heuse}}{{}}}
-\bibcite{heuse2018afldynamorio}{{15}{2018{}}{{Heuse}}{{}}}
-\bibcite{heuse2018aflpin}{{16}{2018{}}{{Heuse}}{{}}}
-\bibcite{libfuzzer}{{17}{}{{LLVM Project}}{{}}}
-\bibcite{PinPaper}{{18}{2005}{{Luk et~al.}}{{Luk, Cohn, Muth, Patil, Klauser, Lowney, Wallace, Reddi, and Hazelwood}}}
-\bibcite{Mallissery2023}{{19}{2023}{{Mallissery and Wu}}{{}}}
-\bibcite{retrowrite_issue28}{{20}{2021}{{Marsman1996}}{{}}}
-\bibcite{Miller1990}{{21}{1990}{{Miller et~al.}}{{Miller, Fredriksen, and So}}}
-\bibcite{zafl}{{22}{2021}{{Nagy et~al.}}{{Nagy, Nguyen-Tuong, Hiser, Davidson, and Hicks}}}
-\bibcite{frida}{{23}{2026}{{Ravn{\r a}s}}{{}}}
-\bibcite{cutter}{{24}{2026}{{RizinOrg}}{{}}}
-\bibcite{schilling2024binary}{{25}{2024}{{Schilling et~al.}}{{Schilling, Wendler, G{\"o}rz, Bars, Schloegel, and Holz}}}
-\bibcite{serebryany2012addresssanitizer}{{26}{2012}{{Serebryany et~al.}}{{Serebryany, Bruening, Potapenko, and Vyukov}}}
-\bibcite{binaryrewriting}{{27}{2019}{{Wenzl et~al.}}{{Wenzl, Merzdovnik, Ullrich, and Weippl}}}
-\bibcite{SystemCallPatternTracing}{{28}{2025}{{Xiao et~al.}}{{Xiao, Jiang, Zhao, Huang, Liu, and Li}}}
-\bibcite{afl_technical_details}{{29}{}{{Zalewski}}{{}}}
-\bibcite{zalewski2017afl}{{30}{2017}{{Zalewski}}{{}}}
-\bibcite{Zhu2022}{{31}{2022}{{Zhu et~al.}}{{Zhu, Wen, Camtepe, and Xiang}}}
+\bibcite{PeAR}{{7}{2026}{{Charles et~al.}}{{Charles, Herrera, Oslington, and Tiu}}}
+\bibcite{Angora}{{8}{2018}{{Chen and Chen}}{{}}}
+\bibcite{retrowrite}{{9}{2020}{{Dinesh et~al.}}{{Dinesh, Burow, Xu, and Payer}}}
+\@writefile{toc}{\contentsline {chapter}{Bibliography\markboth {\MakeUppercase    []{Bibliography}}{\MakeUppercase    []{Bibliography}}}{57}{chapter*.33}\protected@file@percent }
+\bibcite{lava}{{10}{2016}{{Dolan-Gavitt et~al.}}{{Dolan-Gavitt, Hulin, Kirda, Leek, Mambretti, Robertson, Ulrich, and Whelan}}}
+\bibcite{E9Patch}{{11}{2020}{{Duck et~al.}}{{Duck, Gao, and Roychoudhury}}}
+\bibcite{aflplusplus}{{12}{2020}{{Fioraldi et~al.}}{{Fioraldi, Maier, Ei{\ss }feldt, and Heuse}}}
+\bibcite{libafl}{{13}{2022}{{Fioraldi et~al.}}{{Fioraldi, Maier, Zhang, and Balzarotti}}}
+\bibcite{CollAFL}{{14}{2018}{{Gan et~al.}}{{Gan, Zhang, Qin, Tu, Li, Pei, and Chen}}}
+\bibcite{E9AFL}{{15}{2021}{{Gao et~al.}}{{Gao, Duck, and Roychoudhury}}}
+\bibcite{Godefroid2012}{{16}{2012}{{Godefroid et~al.}}{{Godefroid, Levin, and Molnar}}}
+\bibcite{afldyninst}{{17}{}{{Heuse}}{{}}}
+\bibcite{heuse2018afldynamorio}{{18}{2018{}}{{Heuse}}{{}}}
+\bibcite{heuse2018aflpin}{{19}{2018{}}{{Heuse}}{{}}}
+\bibcite{libfuzzer}{{20}{}{{LLVM Project}}{{}}}
+\bibcite{PinPaper}{{21}{2005}{{Luk et~al.}}{{Luk, Cohn, Muth, Patil, Klauser, Lowney, Wallace, Reddi, and Hazelwood}}}
+\bibcite{Mallissery2023}{{22}{2023}{{Mallissery and Wu}}{{}}}
+\bibcite{retrowrite_issue28}{{23}{2021}{{Marsman1996}}{{}}}
+\bibcite{Miller1990}{{24}{1990}{{Miller et~al.}}{{Miller, Fredriksen, and So}}}
+\bibcite{zafl}{{25}{2021}{{Nagy et~al.}}{{Nagy, Nguyen-Tuong, Hiser, Davidson, and Hicks}}}
+\bibcite{frida}{{26}{2026}{{Ravn{\r a}s}}{{}}}
+\bibcite{cutter}{{27}{2026}{{RizinOrg}}{{}}}
+\bibcite{schilling2024binary}{{28}{2024}{{Schilling et~al.}}{{Schilling, Wendler, G{\"o}rz, Bars, Schloegel, and Holz}}}
+\bibcite{serebryany2012addresssanitizer}{{29}{2012}{{Serebryany et~al.}}{{Serebryany, Bruening, Potapenko, and Vyukov}}}
+\bibcite{binaryrewriting}{{30}{2019}{{Wenzl et~al.}}{{Wenzl, Merzdovnik, Ullrich, and Weippl}}}
+\bibcite{SystemCallPatternTracing}{{31}{2025}{{Xiao et~al.}}{{Xiao, Jiang, Zhao, Huang, Liu, and Li}}}
+\bibcite{afl_technical_details}{{32}{}{{Zalewski}}{{}}}
+\bibcite{zalewski2017afl}{{33}{2017}{{Zalewski}}{{}}}
+\bibcite{Zhu2022}{{34}{2022}{{Zhu et~al.}}{{Zhu, Wen, Camtepe, and Xiang}}}
 \@writefile{toc}{\vspace  {2em}}
-\@writefile{toc}{\contentsline {chapter}{List of Acronyms}{59}{chapter*.36}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{List of Acronyms}{61}{chapter*.36}\protected@file@percent }
 \transparent@use{.4}
-\@writefile{toc}{\contentsline {chapter}{List of Figures}{61}{chapter*.38}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{List of Figures}{63}{chapter*.38}\protected@file@percent }
 \transparent@use{.4}
-\@writefile{toc}{\contentsline {chapter}{List of Tables}{63}{chapter*.40}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{List of Tables}{65}{chapter*.40}\protected@file@percent }
 \transparent@use{.4}
-\@writefile{toc}{\contentsline {chapter}{List of Algorithms\markboth {\MakeUppercase    []{List of Algorithms}}{\MakeUppercase    []{List of Algorithms}}}{65}{chapter*.42}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{List of Algorithms\markboth {\MakeUppercase    []{List of Algorithms}}{\MakeUppercase    []{List of Algorithms}}}{67}{chapter*.42}\protected@file@percent }
 \transparent@use{.4}
 \gdef\svg@ink@ver@settings{{\m@ne }{inkscape}{\m@ne }}
-\gdef \@abspage@last{74}
+\gdef \@abspage@last{76}
