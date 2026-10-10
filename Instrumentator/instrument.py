@@ -180,14 +180,22 @@ class FunctionAdder:
         shared_memory_addr=self.my_data_addr+0x20
         dummy_shm_address=elf.get_section(".dummy_shm").virtual_address
 
-        reloc = lief.ELF.Relocation(
-            shared_memory_addr,
-            lief.ELF.Relocation.TYPE.X86_64_RELATIVE,
-            lief.ELF.Relocation.ENCODING.RELA,
-        )
-        reloc.addend = dummy_shm_address
-        reloc.purpose = lief.ELF.Relocation.PURPOSE.DYNAMIC
-        elf.add_dynamic_relocation(reloc)
+        if elf.is_pie:
+
+            reloc = lief.ELF.Relocation(
+                shared_memory_addr,
+                lief.ELF.Relocation.TYPE.X86_64_RELATIVE,
+                lief.ELF.Relocation.ENCODING.RELA,
+            )
+            reloc.addend = dummy_shm_address
+            reloc.purpose = lief.ELF.Relocation.PURPOSE.DYNAMIC
+            elf.add_dynamic_relocation(reloc)
+        else:
+            mydata_section=elf.get_section(".mydata")
+            mydata_content = bytearray(bytes(mydata_section.content))
+
+            mydata_content[shared_memory_addr: shared_memory_addr + 8] = dummy_shm_address.to_bytes(8, "little")
+            mydata_section.content = list(mydata_content)
 
     
 #########################################################################################################
@@ -558,10 +566,8 @@ class FunctionAdder:
             
             current=current_edge[1]
 
-            if current_edge[0].last_instruction[1].op_code != "call" or (current_edge[0].last_instruction[1].op_code == "call" and (
-                current_edge[1].addr==current_edge[0].last_instruction[0] + current_edge[0].last_instruction[1].size
-            )):
-                #If the last instruction was not a call I instrument always
+            if current_edge[0].last_instruction[1].op_code != "call":
+            #    #If the last instruction was not a call instrument
                 self.__add_location_to_be_instrumented__(instrument_addresses,current)
                 
 

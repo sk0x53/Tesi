@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import difflib, hashlib, math, os, random, shlex, shutil, signal, stat, struct, subprocess, sys, time
 from pathlib import Path
 
@@ -244,10 +242,10 @@ def main():
 
         ok, bad, skipped = test_tool(
             binary, 
-            Path(Path.cwd() / binary / f"{binary}.original"),
-            Path(Path.cwd() / binary / f"{binary}.mine_new"),   
+            Path(Path.cwd() / binary / f"{binary}"),
+            Path(Path.cwd() / binary / f"{binary}.mine"),   
             BUILD[binary](WORK / "_corpus" / binary, 
-                          Path(Path.cwd() / binary / f"{binary}.original")))
+                          Path(Path.cwd() / binary / f"{binary}")))
 
         
         print(f"{binary:10s} {'OK  ' if not bad else 'FAIL'} {ok}/{ok + bad} casi uguali" +

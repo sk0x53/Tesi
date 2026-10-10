@@ -17,7 +17,7 @@ initial address of the \gls{BB} is where the instrumentation will be placed.
 Let us consider, for example, the \textbf{0x11f1} \gls{IP}, with previous \gls{BB} equal to \textit{0x11c2} and current \gls{BB} equal to \textit{0x11f1}.
 In this case, since there is only one incoming edge to \textbf{0x11f1}, the \textit{previous\_bb\_id} can be placed inline.
 But in the general case (e.g. \textbf{0x11b5}) there are multiple edges that end in the \gls{BB}. For this reason, it becomes impossible to 
-place the ID of the \gls{BB} directly inline.
+place the ID of the previous \gls{BB} directly inline.
 The solution implemented in the tool discussed in this thesis consists of storing a variable in a section of the binary.\footnote{
     This section could be the same one used for relocation or a new one added specifically to store the data.
 }
@@ -49,22 +49,33 @@ This instrumentation is needed to:
 \end{center}
 \cref{alg:shm_update} shows the general approach to the \gls{SHM} update.
 Since the value of the \texttt{rax} register is modified, it must be saved before the actual \gls{SHM} update and restored afterwards.
-The value of \texttt{rax} is not saved on the stack but in the same section where \textit{previous\_bb\_id} and 
-\textit{shared\_map\_address} are stored.
-\begin{algorithm}
+The RFLAGS are automatically updated during any arithmetic operation.
+Since the binary behavior must be preserved, it is not possible that the RFLAGS are modified by the inserted instrumentation.
+For example if the operation before the instrumentation gives an Overflow, the Overflow flag must be correctly preserved to 1.
+Performing the add instruction (or the xor) the Overflow flag would be resetted to 0, creating a potential bug.
+\begin{algorithm}[ht]
     \caption{Pseudo-code of Shared Memory update instrumentation}
     \label{alg:shm_update}
     \begin{algorithmic}[1]
         \STATE $\text{Save the state of \texttt{rax} register that will be used for computation}$
+        \STATE $\text{Save the RFLAGS that will be modified by the instrumentation}$
         \STATE $\texttt{rax} \gets \textit{previous\_bb\_id}$
         \STATE $\texttt{rax} \gets \texttt{rax} \oplus \textit{current\_bb\_id}$ \COMMENT{\small \textcolor{green!60!black}{\texttt{rax} will contain the result of the hash operation between the basic blocks}}
         \STATE $\texttt{rax} \gets \texttt{rax} + \textit{shared\_map\_address} $\COMMENT{\small \textcolor{green!60!black}{since the shared map is an array, the offset is obtained by adding the initial address to the index}}
         \STATE $[\,\texttt{rax}\,] \gets [\,\texttt{rax}\,] + 1$ \COMMENT{\small \textcolor{green!60!black}{the [\,\,] is the dereference operator}}
         \STATE $\textit{previous\_bb\_id} \gets \textit{current\_bb\_id} \gg 1$
+        \STATE $\text{Restore RFLAGS to their values before the instrumentation}$
         \STATE $\text{Restore the value of \texttt{rax} register to the previously saved value}$
     \end{algorithmic}
 \end{algorithm}
-
+The value of \texttt{rax} is not saved on the stack but in the same section where \textit{previous\_bb\_id} and 
+\textit{shared\_map\_address} are stored.
+The reason behind this choice is to avoid any variable overwriting in case of \textbf{red zone}, or displacement in case 
+of \textbf{frame pointer omission}.
+Infact in some functions the compiler could choose, for optimization reason, to avoid the function preamble and reference the 
+local variables directly from the stack pointer (see \cref{sec:preamble}).
+In these cases, if a push occur, the stack pointer will change and the reference to the local variables will be destroyed  
+or, worst, the push of a value on the stack could overwrite a local variable present in the red zone.\\
 Now the complete approach can be reviewed: 
 \begin{itemize}
     \item Add a dynamic dependency on a \gls{SO} that contains the forkserver function.
@@ -77,3 +88,52 @@ Now the complete approach can be reviewed:
         \textit{previous\_bb\_id} and \textit{shared\_map\_address} stored in the added section.
     \item For each previously found \gls{IP}, add the \gls{SHM} update instructions as seen in \cref{alg:shm_update}.
 \end{itemize}
+Before discuss the actual implementation of the approach, a discussion on the RFLAGS must be made, in order to better understand 
+the design choices that will be discussed in \cref{sec:instrument_spec}
+\subsection{RFLAGS}
+    First of all is useful to know which RFLAGS could be modified by the instructions instrumented.
+    The RFLAGS are divided into :
+    \begin{itemize}
+        \item \textit{Status Flags} : Automatically modified by the arithmetic instructions
+        \item \textit{Control Flags} 
+        \item \textit{System Flags} : Control the Operating System behavior, the interruption and debugging
+    \end{itemize}
+    Among these the only flags that could be modified by the instrumentation are the \textit{Status Flags}.
+
+    \begin{table}[ht]
+        \centering
+        \setlength{\tabcolsep}{3pt}
+        \begin{subtable}{0.5\linewidth}
+            \centering
+            \caption{RFLAGS composition}
+            \label{table:rflags_composition}
+            \resizebox{\linewidth}{!}{%
+            \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c|c}
+                RFLAGS index   &31-12 & 11 & 10  & 9   & 8   & 7  & 6  & 5 & 4  & 3 & 2  & 1 & 0\\
+                \hline
+                RFLAGS content &\nd   & OF & \nd & \nd & \nd & SF & ZF & 0 & AF & 0 & PF & 1 & CF\\
+            \end{tabular}}
+        \end{subtable}
+        \bigskip
+        \begin{subtable}{\linewidth}
+            \centering
+            \caption{Status Flag meaning}
+            \label{table:status_flag}
+            \resizebox{\linewidth}{!}{%
+            \begin{tabular}{c|c}
+                Flag name & Flag meaning\\
+                \hline
+                OF (Overflow Flaf)        & Set to 1 if the last arithmetic operation gives overflow\\
+                SF (Sign Flag)            & Contain the most significant bit of the result. Show if the result is positive or negative\\
+                ZF (Zero Flag)            & Set to 1 if the result of the last operation is exactly 0\\
+                AF (Auxiliary Carry Flag) & Indicate the carry from 3-th to 4-th bit\\
+                PF (Parity Flag)          & Rarely used. Indicate if the least significa byte of the result contains an even number of 1\\
+                CF (Carry Flag)           & Set to 1 if the last arithmetic operation has a carry.
+            \end{tabular}}
+        \end{subtable}
+        \caption{RFLAGS register content and meaning}
+        \label{table:rflags_spec}
+    \end{table}
+    In \cref{table:rflags_composition} all the not shown bit are either Control Flags, System Flags or reserved bit for future use.
+    Moreover only the first 32 bits are shown. All the bits from 33 to 63 are kept reserved and not used.
+    

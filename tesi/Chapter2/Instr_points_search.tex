@@ -37,9 +37,9 @@ Specifically, once a \gls{BB} is found and has not already been analyzed or disc
         \WHILE{$stack \text{ is not empty}$}
             \STATE $current\_edge\gets stack.\textsc{pop}()$
             \STATE $prev \gets current\_edge[\,0\,] , curr \gets current\_edge[\,1\,]$
-            \IF{$prev.last\_instruction.\_opcode \neq ``call''$}
-                \STATE $to\_instrument.\textsc{append}(curr)$  \COMMENT{\small \textcolor{green!60!black}{If the previous basic block ends with a call instruction, the current basic block is not instrumented}}
-            \ENDIF
+            \IF{$prev.last\_instruction.\_opcode \neq "call" $}
+                \STATE $to\_instrument.\textsc{append}(curr)$  \COMMENT{\small \textcolor{green!60!black}{If the previous basic block ends with a call instruction, the current basic block will not be instrumented}}
+            \ENDIF 
             \STATE $found.\textsc{append}(curr)$
             \STATE $successors\gets \textsc{ExtractSuccessors}(curr,found)$
             \FOR{$s \in successors$}
@@ -51,6 +51,9 @@ Specifically, once a \gls{BB} is found and has not already been analyzed or disc
 The \gls{IP}s discovery procedure can be seen in \cref{alg:ip_search_dfs}.\\
 Two different lists must be used in order to distinguish between found basic blocks and basic blocks to be instrumented.
 Moreover, if a basic block ends with a call, the next \gls{BB} it is not instrumented.
+This is done because, although some change could occur (i.e. different calling basic blocks, different return point), 
+most of the times a function is called from a single point and has only 1 returning point.
+For this reason I have choose to avoid instrumenting the calls, loosing only little informations, but gaining performances.\\
 The \textsc{ExtractSuccessors} function will find all the successors of a \gls{BB}, excluding :
 \begin{itemize}
     \item The successors that are outside the \textit{``code''} region (so avoiding instrumenting \textit{.plt} stubs).
@@ -59,10 +62,10 @@ The \textsc{ExtractSuccessors} function will find all the successors of a \gls{B
     \item The edges that are already been found (and so are contained in ``found'' list)
     \item The edges that are temporarily inside the stack data structure
 \end{itemize} 
-For the moment, it can be said that this function filters the successors of the current basic block, 
-discarding those that it would make no sense to consider.
 For example, if at a certain point the binary performs a call to a library function (e.g. \texttt{printf}), 
 without excluding this case the program would also instrument the \textit{plt} stub of the library function.
+
+
 \begin{figure}[ht]
     \centering
     \begin{subfigure}{0.8\textwidth}

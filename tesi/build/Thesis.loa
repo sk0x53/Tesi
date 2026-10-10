@@ -1,9 +1,9 @@
 \contentsline {algorithm}{\numberline {1.1}{\ignorespaces Relocation resolution at ELF load time}}{13}{algorithm.1.1}%
 \contentsline {algorithm}{\numberline {1.2}{\ignorespaces \textsc {ResolveSymbol} function used by \cref {alg:relocation_resolution}}}{14}{algorithm.1.2}%
-\contentsline {algorithm}{\numberline {1.3}{\ignorespaces AFL-style SHM update rule}}{17}{algorithm.1.3}%
-\contentsline {algorithm}{\numberline {1.4}{\ignorespaces Do-While Example}}{18}{figure.caption.15}%
-\contentsline {algorithm}{\numberline {2.1}{\ignorespaces Instrumentation point search with DFS algorithm}}{29}{algorithm.2.1}%
-\contentsline {algorithm}{\numberline {2.2}{\ignorespaces Pseudo-code of Shared Memory update instrumentation}}{33}{algorithm.2.2}%
-\contentsline {algorithm}{\numberline {3.1}{\ignorespaces AFL forkserver algorithm}}{39}{algorithm.3.1}%
-\contentsline {algorithm}{\numberline {3.2}{\ignorespaces Initial Instrumentation algorithm}}{45}{algorithm.3.2}%
-\contentsline {algorithm}{\numberline {3.3}{\ignorespaces Instrument Basic Block algorithm}}{47}{algorithm.3.3}%
+\contentsline {algorithm}{\numberline {1.3}{\ignorespaces AFL-style SHM update rule}}{20}{algorithm.1.3}%
+\contentsline {algorithm}{\numberline {1.4}{\ignorespaces Do-While Example}}{20}{figure.caption.18}%
+\contentsline {algorithm}{\numberline {2.1}{\ignorespaces Instrumentation point search with DFS algorithm}}{31}{algorithm.2.1}%
+\contentsline {algorithm}{\numberline {2.2}{\ignorespaces Pseudo-code of Shared Memory update instrumentation}}{35}{algorithm.2.2}%
+\contentsline {algorithm}{\numberline {3.1}{\ignorespaces AFL forkserver algorithm}}{43}{algorithm.3.1}%
+\contentsline {algorithm}{\numberline {3.2}{\ignorespaces Initial Instrumentation algorithm}}{50}{algorithm.3.2}%
+\contentsline {algorithm}{\numberline {3.3}{\ignorespaces Instrument Basic Block algorithm}}{53}{algorithm.3.3}%

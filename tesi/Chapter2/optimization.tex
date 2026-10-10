@@ -11,6 +11,9 @@ before actually reaching the main:
 \end{itemize}
 The ideal approach is to execute the forkserver at the very beginning of the main function, 
 avoiding the execution of all the preamble functions for each input.
+This is, in principle, the same concept exposed in \cref{sec:state_of_the_art} when the \textit{deferred forkserver} 
+mechanism was showed, with the difference that, in this case, the forkserver entry point is always fixed at the beginning 
+of the main.
 To achieve this, the relocation mechanism is used again.
 In the injected \gls{SO}, the constructor function no longer contains the forkserver, but is used only to 
 prepare its execution. The workflow can be seen in \cref{fig:final_forkserver_invocation}.

@@ -1,0 +1,26 @@
+The last piece of the puzzle to be added to complete the approach specification is the implementation of the 
+\textit{dummy shared memory}. This is a temporary memory region used mainly to prevent the program from crashing 
+when certain circumstances are met.\\
+In particular, especially in stripped binaries, it is difficult to correctly identify which functions are the actual 
+program code and which functions are used by default to make the program run (e.g. \textit{\_start, frame\_dummy \dots}).
+For this reason, it sometimes happens that some functions that are executed prior to the main are actually instrumented 
+by the tool.
+Since each \gls{IP} holds the instructions that perform the \gls{SHM} update according to \cref{alg:shm_update}, 
+at each \gls{IP} there is an access to the \textit{shared\_map\_address} saved into the created section.
+However, as seen in \cref{sec:actual_instrumentation}, that address is actually written only when the Initial Instrumentation 
+is reached at the beginning of the main.\\
+The idea is then to create a new empty section and write the address of this memory region in the location where 
+the shared memory address should be written.
+In this way, if at any point prior to the main some instruction tries to access the shared memory address, it will 
+actually access the address of the dummy shared memory and update a memory region that is not used, so the binary 
+does not crash.
+At the beginning of the main, the actual address of the \gls{SHM} is dereferenced, copied from the \gls{GOT}, and 
+overwrites the address of the dummy shared memory. From this moment on, each \gls{BB} updates the real \gls{SHM}.\\
+Depending on whether the binary is \gls{PIE} or not, the address of the dummy section must be written differently:
+\begin{itemize}
+\item \textbf{\gls{PIE}}: in the presence of \gls{ASLR}, the address at which the binary will be loaded is not known a priori, 
+            and so it is impossible to know in advance the address at which the dummy section will be loaded.
+            For this reason, a relocation must be added in order to write the correct address at load time.
+\item \textbf{non-\gls{PIE}}: in this case the correct address is known at link time, so it is possible to write 
+        the address of the dummy section directly in the location where the \gls{SHM} address will be written.
+\end{itemize}

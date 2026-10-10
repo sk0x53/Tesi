@@ -3,9 +3,11 @@ In particular, in \hyperref[sec:fuzz_background]{Section 1.1} the fundamentals o
 In \hyperref[sec:biniary_rewriting]{Section 1.2} the background on binary rewriting is discussed, along with its approaches and difficulties.
 In the next chapther will be presented the approach used in order to resolve the main problems regarding the solution 
 discussed in this thesis. In order to do so some concept of binary loading must be presented (\hyperref[sec:loading_relocations]{Section 1.3}).
-\hyperref[sec:problem_statement]{Section 1.4} states the problem addressed by this work,
-and \hyperref[sec:state_of_the_art]{Section 1.5} reviews the state of the art in binary-only fuzzing, also focusing on a description
-of AFL/AFL++ internals. In the last section (\hyperref[sec:goals-and-challenges]{Section 1.6}) I will present the main
+In order to better understand a motivation to a design choice expressed in \cref{sec:actual_instrumentation}, in 
+\hyperref[sec:preamble]{Section 1.4} are presented two of the compiler optimization in terms of function preamble.
+\hyperref[sec:problem_statement]{Section 1.5} states the problem addressed by this work,
+and \hyperref[sec:state_of_the_art]{Section 1.6} reviews the state of the art in binary-only fuzzing, also focusing on a description
+of AFL/AFL++ internals. In the last section (\hyperref[sec:goals-and-challenges]{Section 1.7}) I will present the main
 goals and challenges of this thesis, and explain why the implemented tool differs from the state of the art.
 
 \section{Fuzzing Background} \label{sec:fuzz_background}
@@ -14,6 +16,8 @@ goals and challenges of this thesis, and explain why the implemented tool differ
     \input{Chapter1/BinaryRewritingBackground.tex}
 \section{ELF Loading and Relocations}\label{sec:loading_relocations}
     \input{Chapter1/LoadingAndRelocations.tex}
+\section{Frame pointer omission and Red Zone}\label{sec:preamble}
+    \input{Chapter1/preamble.tex}
 \section{Problem Statement}\label{sec:problem_statement}
     \input{Chapter1/ProblemStatement.tex}
 \section{State of the Art}\label{sec:state_of_the_art}

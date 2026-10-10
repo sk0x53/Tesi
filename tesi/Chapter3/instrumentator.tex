@@ -13,7 +13,7 @@ The principal steps are summarized in \cref{fig:binary_modification}.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=400pt]{BinaryModification.png}
-    \caption{Binary modification phase in which the needed sections, relocations and dynamic dependencies are added. (\small The dotted arrows specify which information is needed for the relocation phase) }
+    \caption{Binary modification phase in which the needed sections, relocations and dynamic dependencies are added. (\small The dotted arrows specify which information are needed to following steps) }
     \label{fig:binary_modification}
 \end{figure}\\
 
@@ -68,7 +68,7 @@ Two relocation entries must be added. The first is used to resolve \textit{\_\_a
 \textit{\_\_forkserver\_start\_ptr}.
 In order to create a relocation entry, the following must be specified:
 \begin{itemize}
-    \item \textit{target address of relocation}: where the resolved value will be written
+    \item \textit{target address of relocation}: where the resolved value will be written (\textit{.my\_got} entry)
     \item \textit{relocation type}: for both symbols, X86\_64\_GLOB\_DAT is used (the usual type when dealing with \gls{GOT} resolution)
     \item \textit{relocation encoding}: for both symbols, RELA encoding is used, which consists in explicitly specifying the addend
     \item \textit{relocation purpose}: for both symbols, a DYNAMIC purpose is used, because the symbol must be resolved at runtime by the dynamic linker
@@ -92,9 +92,43 @@ The string will later be overwritten by other data, but it will pass the AFL che
 According to my implementation, this section will contain different pieces of information at different addresses:
 \begin{itemize}
     \item \textit{.mydata+0x10}: contains the ID of the previous \gls{BB}
-    \item \textit{.mydata+0x20}: contains the address of the \gls{SHM} initialized by the initial instrumentation
+    \item \textit{.mydata+0x20}: contains the address of \textit{dummy\_shm} and after 
+        the \gls{SHM} initialized by the initial instrumentation 
     \item \textit{.mydata+0x30}: contains the saved \texttt{rax} register, to preserve its value before and after the instrumentation
+    \item \textit{.mydata+0x40}: contains the saved RFLAGS, used to preserve the binary behavior before and after the instrumentation
 \end{itemize}
+
+\begin{center}
+    \textbf{Create .dummy\_shm and write its address inside .mydata}
+\end{center}
+The section's type and flags are the same as the previous discussed section. The alignment has been set to 0x1000.
+The content of this section is all initialize to 0 with a size of 0x10000. This is done because the \gls{SHM} dimension is 
+65536=0x10000 as previously stated in \cref{sec:state_of_the_art}.\\
+As already seen in \cref{sec:dummy_shm} the address of the \textit{.dummy\_shm} must be written in \textit{.mydata+0x20}, and this 
+write depends on the fact that the binarty is \gls{PIE} or not.
+\begin{itemize}
+    \item \textbf{\gls{PIE}} : In this case a relocation must be added. This relocation is different from the previous because 
+        there is not an explicit symbol to be resolved.
+        \begin{itemize}
+            \item \textit{target address of relocation}: where the resolved value will be written (\textit{.mydata+0x20})
+            \item \textit{relocation type}: X86\_64\_RELATIVE. This is a relocation relative to the base address in which 
+                the binary will be loaded and does not require the resolution of a symbol.
+                Explicitly the formulae used by the loader is $*P = B + A$ where P is the  \textit{target address}, B is the 
+                \textit{Base Address}, A is the \textit{addend}. So will write inside P the result of the address in which 
+                the binary will be loaded plus the addend
+            \item \textit{relocation encoding}: RELA encoding is used, which consists in explicitly specifying the addend
+            \item \textit{relocation purpose}: DYNAMIC 
+            \item \textit{addend = .dummy\_shm address}. Since the idea is to write the rebased virtual address of the \textit{.dummy\_shm} 
+                the addend must be the non rebased address
+        \end{itemize}
+    \item \textbf{non-\gls{PIE}}: In this case the address of the \textit{.dummy\_shm} known before the execution, will also be 
+        its final address during the execution. So this address is written directly inside 
+        \textit{.mydata} at offset +0x20.
+\end{itemize}
+
+
+
+
 At the end of the \textbf{Binary Modification phase}, the modified binary is saved to the filesystem.
 \subsection{Instrumentation}
 The instrumentation is done entirely using the GRAPE framework.
@@ -109,7 +143,7 @@ The classes that the developed tool will use are:
 \end{itemize}
 These two classes take care of \gls{CFG} modification (splitting a \gls{BB}, merging two \gls{BB}s, \dots) but do not take care of RIP-relative instruction
 modification, together with symbol coherence.
-An example of an error caused by not taking care of modifying single instructions is shown in \cref{fig:rip_relative_error_after_shift}.\\
+An example of an error caused by not taking care of modifying the RIP offset of single instructions is shown in \cref{fig:rip_relative_error_after_shift}.\\
 \begin{figure}[ht]
     \centering
     \begin{subfigure}{0.8\textwidth}
@@ -127,7 +161,7 @@ An example of an error caused by not taking care of modifying single instruction
     \caption{Example of the error caused by not taking care of RIP-relative instruction offsets}
     \label{fig:rip_relative_error_after_shift}
 \end{figure}\footnote{
-    As can be seen, the jmp at 0x11ef seems to be shifted, but in reality the jmp instruction is always RIP-relative and
+    As can be seen, the jmp at 0x11ef (and after 0x11f0) seems to be shifted, but in reality the jmp instruction is always RIP-relative and
     the disassembler used \cite{cutter} automatically performs the relative address resolution.
 }
 In \cref{fig:rip_relative_error_after_shift} it can be seen that, after having inserted a \texttt{nop} instruction, the \texttt{lea}
@@ -161,7 +195,7 @@ When this happens, the \textit{.mydata} and \textit{.my\_got} sections could be 
 offsets for the RIP-relative instructions are no longer valid.
 For this reason, if a shift is detected, all the instructions are recomputed.
 Moreover, it can be seen that the instructions are inserted in reverse order (the loop index starts from the last instruction).
-This is because the instructions are inserted one on top of the other.
+This is because the instructions are inserted one on top of the other at the same address.
 
 \begin{algorithm}[ht]
     \caption{Initial Instrumentation algorithm}
@@ -187,6 +221,7 @@ This is because the instructions are inserted one on top of the other.
         \ENDFOR
     \end{algorithmic}
 \end{algorithm}
+\vspace{1cm}
 \begin{center}
 \textbf{Initial Instrumentation}    
 \end{center}
@@ -218,26 +253,81 @@ mov QWORD PTR[rip + offset_to_saved_shared_memory_address], rax
 \begin{center}
 \textbf{Basic Block Instrumentation}    
 \end{center}
+\begin{itemize}
+    \item Save rax and RFLAGS
+    \item Perform \gls{SHM} update 
+    \item Restore RFLAGS and rax
+\end{itemize}
 The instrumentation added for each \gls{BB} can be seen in \cref{lst:bb_instrumentation}.
 
 \begin{lstlisting}[caption={Basic Block Instrumentation},label=lst:bb_instrumentation]
 mov QWORD PTR[rip + offset_to_saved_rax], rax
+lahf,
+seto al
+mov WORD PTR [rip + offset_to_saved_RFLAGS], ax
 movzx rax, WORD PTR[rip + offset_to_previous_saved_ID]        
 xor ax, random_current_basic_block_ID
 add rax, QWORD PTR[rip + offset_to_saved_shared_memory_address]
 inc BYTE PTR[rax]
 mov WORD PTR[rip + offset_to_precedent_bb_saved], right_shifted_current_ID
+mov ax, WORD PTR [rip + offset_to_saved_RFLAGS]
+add al, 0x7f
+sahf
 mov rax, QWORD PTR[rip + offset_to_saved_rax]
 \end{lstlisting}
 
 In \cref{lst:bb_instrumentation}, all the considerations previously made for the offset computation are still valid.
 random\_current\_basic\_block\_ID and right\_shifted\_current\_ID are computed by the instrumenter and hardcoded into each \gls{BB}.
 
+A different consideration must be made in order to understand how to save and restore RFLAGS.
+The x86-64 mechanism to store RFLAGS is the instruction \texttt{pushfq} that store on the stack the entire RFLAGS, but, 
+as already stated in \cref{sec:actual_instrumentation}, is not possible in the general case to use the stack, because some 
+functions uses the \textbf{red zone} mechanism to store local variable and there is the risk of overwrite it.
+For this reason a different approach must be used.
+The instruction \texttt{lahf} (\textit{Load AH from FLAGS}) copy the first 8 bits of RFLAGS inside the ah register.
+The problem is that this instruction does not capture the Overflow flag.
+This is done through \texttt{seto al}, thats copy the OF into the register al.
+The complete procedure could be seed in \cref{fig:saveflags}.
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}{0.8\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{saveFlags1.png}
+        \caption{ax register before \textmd{\texttt{lahf}}}
+        \label{fig:saveflags1}
+    \end{subfigure}
+    \begin{subfigure}{0.8\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{saveFlags2.png}
+        \caption{ax register after \textmd{\texttt{lahf}}}
+        \label{fig:saveflags2}
+    \end{subfigure}
+    \begin{subfigure}{0.8\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{saveFlags3.png}
+        \caption{ax register after \textmd{\texttt{seto al}}}
+        \label{fig:saveflags3}
+    \end{subfigure}
+    \caption{Example ax register during first instructions of the basic block instrumentation}
+    \label{fig:saveflags}
+\end{figure}
+The value of ax is then written into \textit{.mydata+0x40}.\\
+A different consideration must be made for restore RFLAGS.
+First of all the value previously stored into \textit{.mydata+0x40} is copied into ax register.
+Then the instruction \texttt{sahf} (\textit{Store AH to FLAGS}) copy back the previously saved values of flags from ah register 
+to the first 8 bit of RFLAGS. The problem is that does not exist an instruction that copy back the value of OF.
+The solution is the instruction at line 11 of \cref{lst:bb_instrumentation}.
+\begin{itemize}
+    \item If the saved value of OF is 0 $al + 0x7f = 0x7f$ and the actual OF is set to 0
+    \item If the saved value of OF is 1 $al + 0x7f = 0x00$ and the actual OF is set to 1
+\end{itemize}
+As can be seen in both the case the value of OF is restored correctly.
+
 For the \gls{BB} instrumentation, the algorithm must also take care of address shifting during instrumentation.
 Let's consider the example of \cref{fig:pow_example} and the \gls{BB} addresses found in that section.
 These addresses were $[\, 0x11a7 , 0x11b5, 0x11bd , 0x11db , 0x11f1 , 0x1253 \,]$.
-The instrumentation seen in \cref{lst:bb_instrumentation} occupies a total of 44 bytes.
-Supposing the location 0x11bd has been instrumented, all the following locations must then be shifted by 44 bytes.
+The instrumentation seen in \cref{lst:bb_instrumentation} occupies a total of 67 bytes.
+Supposing the location 0x11bd has been instrumented, all the following locations must then be shifted by 67 bytes.
 And this computation must be done for each \gls{IP} found.
 
 But this approach is quite impractical.

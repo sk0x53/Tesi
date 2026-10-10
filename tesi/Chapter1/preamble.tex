@@ -1,0 +1,58 @@
+
+The classic function preamble, inserted by the compiler at the beginning of a function, can be seen in \cref{lst:classic_preamble}.
+\begin{lstlisting}[caption={Classic function preamble supposing a function that uses 0x30 bytes of stack},label=lst:classic_preamble]
+push rbp 
+mov rbp, rsp
+sub rsp, 0x30
+\end{lstlisting}
+Every function has its own \textbf{stack frame}, that is the stack zone where all the local informations used by the function 
+lies. Specifically it contains local variables, parameters passed to the function, \dots
+The stack frame is delimited by the value of two registers:
+\begin{itemize}
+    \item \textbf{Base Pointer} : point to the base of the activation frame (high addresses)
+    \item \textbf{Stack Pointer} : point to the top of the stack (low addresses)
+\end{itemize}
+When a function is invoked, the stack frame of the new function must be allocated. This is done by the \cref{lst:classic_preamble}.
+The effect on the stack could be seen in \cref{fig:preamble1}. If the function had a local variable, that variable 
+would be referenced with respect to the base pointer (e.g. \texttt{[rbp - 0x8]}).
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{preamble1.png}
+    \caption{Example of what happend during a function call}
+    \label{fig:preamble1}
+\end{figure}
+    The base pointer in this case is called \textbf{frame pointer} and it is used as a stable reference to the stack frame.
+Infact, during the execution of a function, the stack pointer could change 
+(a \texttt{push} or a \texttt{pop} instruction occur), and this case the stack pointer would not be a valid reference to the 
+variables anymore.\\
+If the compiler knows a priori that the stack pointer will not change during function execution, could optimize the function 
+preamble with a technique called \textbf{frame pointer omission}.
+This technique consist in not use the base pointer as reference to the local variables, but using directly the stack 
+pointer. This allow the function preamble to be shrink to the one shown in \cref{lst:fp_omission_preamble}
+\begin{lstlisting}[caption={Function preamble in case of frame pointer omission supposing a function that uses 0x30 bytes of stack},label=lst:fp_omission_preamble]
+sub rsp, 0x30
+\end{lstlisting}
+In this case the access to local variable is expressed with respect to the stack pointer 
+(e.g. \texttt{[rsp + 0x8]}), as can be seen in \cref{fig:preamble2}.\\
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.55\linewidth]{preamble2.png}
+    \caption{Example of what happend during a function call in case of frame pointer omission}
+    \label{fig:preamble2}
+\end{figure}
+\begin{center}
+    \textbf{red zone}
+\end{center}
+The red zone is composed of 128 bytes above the rsp that are reserved by the ABI System V AMD64.
+The user code that is compliant with the ABI could use this reserved memory to save temporary data without actually 
+modify the stack pointer and allocate a stack frame.
+Since the stack grows toward low addresses, this zone is overwritten by the stack frame of any function that is called from 
+the actual one, so the red zone could be used especially for leaf functions (functions that does not call other functions).\\
+The compiler could choose to bypass entirely the function premable and access the local variable with respect to 
+the stack pointer (e.g.\texttt{[rsp -0x8]}) as shown in \cref{fig:preamble3}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.25\linewidth]{preamble3.png}
+    \caption{Example of function call that does not allocate space of the stack bu access the variable saved on the red zone}
+    \label{fig:preamble3}
+\end{figure}
