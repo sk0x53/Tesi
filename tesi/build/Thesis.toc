@@ -37,10 +37,14 @@
 \contentsline {chapter}{\numberline {5}Limitations and Future Works}{61}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Limitations}{61}{section.5.1}%
 \contentsline {section}{\numberline {5.2}Future Works}{62}{section.5.2}%
+\contentsline {chapter}{\numberline {6}Conclusion}{63}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Summary of the work}{63}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Assessment of the goals}{64}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Final remarks}{65}{section.6.3}%
 \vspace {2em}
-\contentsline {chapter}{Bibliography\markboth {\MakeUppercase []{Bibliography}}{\MakeUppercase []{Bibliography}}}{63}{chapter*.38}%
+\contentsline {chapter}{Bibliography\markboth {\MakeUppercase []{Bibliography}}{\MakeUppercase []{Bibliography}}}{67}{chapter*.39}%
 \vspace {2em}
-\contentsline {chapter}{List of Acronyms}{67}{chapter*.41}%
-\contentsline {chapter}{List of Figures}{69}{chapter*.43}%
-\contentsline {chapter}{List of Tables}{71}{chapter*.45}%
-\contentsline {chapter}{List of Algorithms\markboth {\MakeUppercase []{List of Algorithms}}{\MakeUppercase []{List of Algorithms}}}{73}{chapter*.47}%
+\contentsline {chapter}{List of Acronyms}{71}{chapter*.42}%
+\contentsline {chapter}{List of Figures}{73}{chapter*.44}%
+\contentsline {chapter}{List of Tables}{75}{chapter*.46}%
+\contentsline {chapter}{List of Algorithms\markboth {\MakeUppercase []{List of Algorithms}}{\MakeUppercase []{List of Algorithms}}}{77}{chapter*.48}%

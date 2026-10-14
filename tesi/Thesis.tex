@@ -126,7 +126,7 @@
 
 \newcommand{\cmark}{\textcolor{green!60!black}{\ding{51}}}
 \newcommand{\xmark}{\textcolor{red}{\ding{55}}}
-\newcommand{\nd}{\textcolor{gray!50!black}{--}}
+\newcommand{\nd}{\textcolor{gray}{\rule[0.5ex]{0.6em}{0.8pt}}}
 
 \usepackage{array}
 \newcommand{\thickhline}{\noalign{\hrule height 1.2pt}}
@@ -209,20 +209,6 @@
 \thispagestyle{empty}
 \cleardoublepage
 
-%-------------------------------------------------------------------------
-%	THESIS MAIN TEXT
-%-------------------------------------------------------------------------
-% In the main text of your thesis you can write the chapters in two different ways:
-%
-%(1) As presented in this template you can write:
-%    \chapter{Title of the chapter}
-%    *body of the chapter*
-%
-%(2) You can write your chapter in a separated .tex file and then include it in the main file with the following command:
-%    \chapter{Title of the chapter}
-%    \input{chapter_file.tex}
-%
-% Especially for long thesis, we recommend you the second option.
 
 \addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
 \mainmatter % Begin numeric (1,2,3...) page numbering
@@ -230,18 +216,21 @@
 % --------------------------------------------------------------------------
 % NUMBERED CHAPTERS % Regular chapters following
 % --------------------------------------------------------------------------
-\chapter{Background and Motivation}
+\chapter{Background and Motivation}\label{chap:background}
 	\input{Chapter1/Background.tex}
 
-\chapter{Approach}
+\chapter{Approach}\label{chap:approach}
     \input{Chapter2/Approach.tex}
 
-\chapter{Implementation}
+\chapter{Implementation}\label{chap:implementation}
     \input{Chapter3/Implementation_Details.tex}
-\chapter{Experiments}
+\chapter{Experiments}\label{chap:experiment}
     \input{Chapter4/Experiments.tex}
-\chapter{Limitations and Future Works}
+\chapter{Limitations and Future Works}\label{chap:limitations}
     \input{Chapter5/Limitations.tex}
+\chapter{Conclusion}\label{chap:conclusion}
+    \input{Chapter6/conclusion.tex}
+
 %-------------------------------------------------------------------------
 %	BIBLIOGRAPHY
 %-------------------------------------------------------------------------

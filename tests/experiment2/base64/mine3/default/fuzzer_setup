@@ -1,0 +1,6 @@
+# environment variables:
+AFL_CUSTOM_INFO_PROGRAM=./base64.mine
+AFL_CUSTOM_INFO_PROGRAM_ARGV=-d
+AFL_CUSTOM_INFO_OUT=./mine3/default
+# command line:
+'/home/tecnico/TESI_test/AFLplusplus/afl-fuzz' '-i' '/home/tecnico/TESI_test/testbench/LAVA-M-testbench/base64/inputs/' '-o' './mine3' '-V' '86400' '--' './base64.mine' '-d'

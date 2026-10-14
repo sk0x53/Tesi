@@ -21,7 +21,7 @@ It depends on how many registers the callee wants to save on the stack, how many
 In general, the first \gls{IP} lies in the first \gls{BB} of the main function.\\
 All the other \gls{IP}s are found with a \gls{DFS} starting from the initial main \gls{BB}, searching among the 
 successor \gls{BB}s of the current one.
-Specifically, once a \gls{BB} is found and has not already been analyzed or discovered before, it is added to a queue.
+Specifically, once a \gls{BB} is found and has not already been analyzed or discovered before, it is added to a stack.
 \begin{algorithm}[ht]
     \caption{Instrumentation point search with DFS algorithm}
     \label{alg:ip_search_dfs}
@@ -50,9 +50,8 @@ Specifically, once a \gls{BB} is found and has not already been analyzed or disc
 \end{algorithm}
 The \gls{IP}s discovery procedure can be seen in \cref{alg:ip_search_dfs}.\\
 Two different lists must be used in order to distinguish between found basic blocks and basic blocks to be instrumented.
-Moreover, if a basic block ends with a call, the next \gls{BB} it is not instrumented.
-This is done because, although some change could occur (i.e. different calling basic blocks, different return point), 
-most of the times a function is called from a single point and has only 1 returning point.
+Moreover, if a basic block ends with a call, the next \gls{BB}s are not instrumented.
+This is done in order to reduce the number of \gls{IP}s found and so reduce the overheads of the instrumentation.
 For this reason I have choose to avoid instrumenting the calls, loosing only little informations, but gaining performances.\\
 The \textsc{ExtractSuccessors} function will find all the successors of a \gls{BB}, excluding :
 \begin{itemize}

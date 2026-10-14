@@ -1,0 +1,90 @@
+This work had investigated the possibility to implement an inline edge coverage instrumentation for binary only 
+grey-box fuzzing that uses GRAPE binary rewriter framework to add instructions to the binaries.
+The instrumentation added is compatible with AFL and AFL++ and require no access to the source code.
+The following chapter summarize the work discussed in the previous chapters, asseses to which of the goals 
+in \cref{sec:goals} were achieved and close with some final remarks.
+The limitations of the vurrent implementation have been already discussed in \cref{chap:limitations} and so are not 
+repeated here.
+
+\section{Summary of the work}\label{sec:summary}
+
+    Coverage-guided grey-box fuzzing use the coverage feedback obtained through instructions instrumented inside the binary. 
+    Dynamic approached such as AFL++ in QEMU or FRIDA mode, DynamoRIO \dots insert the coverage tracing instruction 
+    dynamically within each \gls{BB}. This approach is easy to deploy but costly in terms of overheads.
+    Static approaches, such the one implemented in this work, statically rewrites the binary introducing 
+    the coverage tracing instruction, making the instrumented binary quite fast in term of overheads but with 
+    difficulty in maintain correctness.
+
+    The presented approach is based on the injection of a shared object (\texttt{libforkserver.so}) that implement 
+    the communication protocol with the fuzzer, implement the forkserver logic and attach the shared memory to the process.
+    In order to inject the shared object a \texttt{DT\_NEEDED} dependency is added to the binary, alongside with 
+    some relocation entries and some new sections, used as a support to the instrumentation. 
+    This has been implemented in the \texttt{instrument.py} file, togheter with the Instrument point search and the instrumntation.
+    The binary modification and the actual instrumentation are made available thanks to two libraries.
+    The binary modification (add dynamic dependency, relocations and sections) is done with LIEF python library.
+    The actual instrumentation is made with the GRAPE binary rewriting framework.
+
+\section{Assessment of the goals}\label{sec:goal_assesment}
+
+    \begin{center}
+        \textbf{Goal I - behavior preservation}
+    \end{center} 
+    The Experiment I was performed on five stripped binaries taken from the ZAFL dataset.
+    Among these, only two of them (\texttt{bsdtar} and \texttt{sfconvert}) preserve their behavior on all the tested 
+    input (34 out of 34 for \texttt{bsdtar} and 52 out of 52 for \texttt{sfconvert}).
+    \texttt{readelf} was instrumented but fails to maintain the behavior. The cause has been found to be the \gls{ELF} 
+    layout modification made automatically by LIEF that change the address in which some segments are loaded without 
+    changin the instructions that reference these segments.
+    This cause a segmentation fault each time an instruction try to access the old memory address.
+    \texttt{readelf} pass 4 out of 54. The result is given by the fact that also the original binary terminate with a non-zero 
+    exit code and the behavior of the original and the instrumneted is erroneously considered to be the same.
+    Moreove, Experiment II reveal one additional failure on \texttt{who}, caused by an error on the instrumentation itself 
+    that still has to be investigated.
+    For all these reason, Goal I is considered only partially achieved. Infact the robustness of the pipeline presented 
+    in not sufficiently strong to address any binary in the general case
+
+    \begin{center}
+        \textbf{Goal II - compatibility with AFL}
+    \end{center} 
+    Experiment II shown that forkserver injected into the binary can correctly communicate with AFL++ over 24-hours 
+    fuzzing campaign.
+    Both the forkserver handshake, the shared memory update and the collection of the exit status of the target 
+    works correctly in each repetition  on \texttt{base64} and \texttt{uniq}.
+
+    \begin{center}
+        \textbf{Goal III -  overhead with respect to other binary-only approaches.}
+    \end{center} 
+    On the two correctly instrumented LAVA-M binaries (\texttt{base64} and \texttt{uniq}), the version instrumneted 
+    with the tool presented in this thesis sustain on average about 1760 and 1670 executions per second respectively, 
+    which is between 2.9 and 4.4 times the throughput of AFL++ in QEMU mode (which has about 400 and 570 executions per second 
+    rispectively).
+    With respect to ZAFL instrumnetation method, the throughput is of the same order and the difference is smaller than the 
+    variation observed between repetitions of the same configuration.
+    So neither an improvement nor a deterioration of the perfomrance could be claimed.
+    Two caveat must be kept in mind while these results are read : 
+    first of all the number of edges that, in the case of the tool discussed in this 
+    work is considerably smaller with respect to AFL++ in QEMU mode and ZAFL.
+    I had suppose that this is due to the choice to not instrument the calls, reducing the number of edges of the \gls{CFG} 
+    that are actually been instrumented.
+    The second is that the evaluation done rely on small number of binaries and does not include a baseline 
+    for compile-time instrumentation, so the overheads could not be quantified in absolute terms.
+    Therefore Goal III is achieved with respect to Dynamic Binary Instrumentation. 
+    For the competitivity with other Static Binary Instrumentation methods the Goal III remains partially achieved.
+    Infact the achieved performance are comparable with ZAFL but the fact that this last tool preserve the behavior 
+    in more casesmake the developed tool not competitive for the moment with the state-of-the-art.
+
+\section{Final remarks}
+
+    In the end I have showed that an inline, stack-free edge coverage instrumentation build on GRAPE is feasible 
+    and the obtained executions per second in a fuzzing campaign are well above \gls{DBI} and in average comparable 
+    with the throughput of other \gls{SBI}.
+    The experiments shows that the approach is currently weak. 
+    Infact, although most of the failures does not originate from the instrumentation logic itself but from the 
+    infrastructure around it, the modification of a binary adding relocations, sections and dependencies without 
+    modify \gls{ELF} layout remain a problem with the proposed approach.
+    This could be solved scanning the instructions searching the one that reference the old sections 
+    and update their offset, in order to reference the same location of the new section.
+
+    For all these reason, the developed tool should be consider a working prototype and a proof of concept 
+    of the approach, rather than a general porpouse rewriter.
+    Its performance results are promising but preliminary given the small number of binary on which has been tested.

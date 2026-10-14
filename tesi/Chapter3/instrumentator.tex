@@ -2,7 +2,7 @@ In this case the discussion will vert on the \textbf{instrument.py} file.
 This is the file capable of actually instrumenting the target binary.
 It uses two libraries:
 \begin{itemize}
-    \item \textbf{lief}: a python library used mainly to add the dynamic dependency, the new sections and the relocation entries.
+    \item \textbf{lief} \cite{lief}: a python library used mainly to add the dynamic dependency, the new sections and the relocation entries.
         This library is used for the Binary Modification phase.
     \item \textbf{GRAPE}: a binary rewriting framework used to instrument every \gls{IP} found.
         This framework is used in the Instrumentation Phase.
@@ -104,29 +104,23 @@ According to my implementation, this section will contain different pieces of in
 The section's type and flags are the same as the previous discussed section. The alignment has been set to 0x1000.
 The content of this section is all initialize to 0 with a size of 0x10000. This is done because the \gls{SHM} dimension is 
 65536=0x10000 as previously stated in \cref{sec:state_of_the_art}.\\
-As already seen in \cref{sec:dummy_shm} the address of the \textit{.dummy\_shm} must be written in \textit{.mydata+0x20}, and this 
-write depends on the fact that the binarty is \gls{PIE} or not.
+As already seen in \cref{sec:dummy_shm} the address of the \textit{.dummy\_shm} must be written in \textit{.mydata+0x20}.
+In the general case, current systems uses \gls{ASLR} and this make impossible to know the actual address in which 
+\textit{.dummy\_shm} will be loaded.
+So a relocation must be added. This relocation is different from the previous because 
+there is not an explicit symbol to be resolved.
 \begin{itemize}
-    \item \textbf{\gls{PIE}} : In this case a relocation must be added. This relocation is different from the previous because 
-        there is not an explicit symbol to be resolved.
-        \begin{itemize}
-            \item \textit{target address of relocation}: where the resolved value will be written (\textit{.mydata+0x20})
-            \item \textit{relocation type}: X86\_64\_RELATIVE. This is a relocation relative to the base address in which 
-                the binary will be loaded and does not require the resolution of a symbol.
-                Explicitly the formulae used by the loader is $*P = B + A$ where P is the  \textit{target address}, B is the 
-                \textit{Base Address}, A is the \textit{addend}. So will write inside P the result of the address in which 
-                the binary will be loaded plus the addend
-            \item \textit{relocation encoding}: RELA encoding is used, which consists in explicitly specifying the addend
-            \item \textit{relocation purpose}: DYNAMIC 
-            \item \textit{addend = .dummy\_shm address}. Since the idea is to write the rebased virtual address of the \textit{.dummy\_shm} 
-                the addend must be the non rebased address
-        \end{itemize}
-    \item \textbf{non-\gls{PIE}}: In this case the address of the \textit{.dummy\_shm} known before the execution, will also be 
-        its final address during the execution. So this address is written directly inside 
-        \textit{.mydata} at offset +0x20.
+    \item \textit{target address of relocation}: where the resolved value will be written (\textit{.mydata+0x20})
+    \item \textit{relocation type}: X86\_64\_RELATIVE. This is a relocation relative to the base address in which 
+        the binary will be loaded and does not require the resolution of a symbol.
+        Explicitly the formulae used by the loader is $*P = B + A$ where P is the  \textit{target address}, B is the 
+        \textit{Base Address}, A is the \textit{addend}. So will write inside P the result of the address in which 
+        the binary will be loaded plus the addend
+    \item \textit{relocation encoding}: RELA encoding is used, which consists in explicitly specifying the addend
+    \item \textit{relocation purpose}: DYNAMIC 
+    \item \textit{addend = .dummy\_shm address}. Since the idea is to write the rebased virtual address of the \textit{.dummy\_shm} 
+        the addend must be the non rebased address
 \end{itemize}
-
-
 
 
 At the end of the \textbf{Binary Modification phase}, the modified binary is saved to the filesystem.
@@ -244,8 +238,7 @@ call rax
 pop rdi
 pop rsi
 mov WORD PTR[rip + offset_to_previous_saved_ID], random_int
-lea rax, [rip + offset_to_relocated__afl_area_ptr]
-mov rax, QWORD PTR [rax]
+mov rax, [rip + offset_to_relocated__afl_area_ptr]
 mov rax, QWORD PTR [rax]
 mov QWORD PTR[rip + offset_to_saved_shared_memory_address], rax
 \end{lstlisting}

@@ -10,3 +10,4 @@
 \contentsline {table}{\numberline {4.3}{\ignorespaces Fuzzing statistics over a 24-hour fuzzing campaign on the LAVA-M dataset using AFL++ in QEMU mode, ZAFL instrumentation + AFL++ fuzzer, and my instrumentation + AFL++ fuzzer}}{59}{table.caption.34}%
 \contentsline {table}{\numberline {4.4}{\ignorespaces Instrumented binaries statistics}}{60}{table.caption.35}%
 \addvspace {10\p@ }
+\addvspace {10\p@ }

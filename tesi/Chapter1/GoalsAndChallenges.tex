@@ -9,9 +9,9 @@ Moreover, the tool must be compatible with the already existing AFL++ fuzzer.
 This means implementing the forkserver communication protocol inside the target binary without recompiling it.
 This has created no small number of problems, mainly regarding the preservation of the ELF layout after adding new sections.
 
-The implemented approach drastically increases the size of the file, causing many instruction repetitions 
-(since the \gls{SHM} instructions are always the same), but was chosen because it does not cause a context switch 
-at each \gls{BB}.
+The implemented approach drastically increases the size of the file, caused by either instruction repetitions 
+(since the \gls{SHM} instructions are always the same), and a constant factor given by the new added sections, 
+but was chosen because placing instructions inline it cause less overheads with respect to a call.
 In fact, in order to call a function, the state of the registers must be saved and restored. Moreover, the stack must be allocated,
 and the callee's RIP must be saved on the stack alongside the old base pointer of the stack.
 Performing all these operations at each \gls{BB} would introduce significant overhead.

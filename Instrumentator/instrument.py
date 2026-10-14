@@ -180,22 +180,21 @@ class FunctionAdder:
         shared_memory_addr=self.my_data_addr+0x20
         dummy_shm_address=elf.get_section(".dummy_shm").virtual_address
 
-        if elf.is_pie:
+        reloc = lief.ELF.Relocation(
+            shared_memory_addr,
+            lief.ELF.Relocation.TYPE.X86_64_RELATIVE,
+            lief.ELF.Relocation.ENCODING.RELA,
+        )
+        reloc.addend = dummy_shm_address
+        reloc.purpose = lief.ELF.Relocation.PURPOSE.DYNAMIC
+        elf.add_dynamic_relocation(reloc)
+       #else:
+       #    print("NON-PIE")
+       #    mydata_section=elf.get_section(".mydata")
+       #    mydata_content = bytearray(bytes(mydata_section.content))
 
-            reloc = lief.ELF.Relocation(
-                shared_memory_addr,
-                lief.ELF.Relocation.TYPE.X86_64_RELATIVE,
-                lief.ELF.Relocation.ENCODING.RELA,
-            )
-            reloc.addend = dummy_shm_address
-            reloc.purpose = lief.ELF.Relocation.PURPOSE.DYNAMIC
-            elf.add_dynamic_relocation(reloc)
-        else:
-            mydata_section=elf.get_section(".mydata")
-            mydata_content = bytearray(bytes(mydata_section.content))
-
-            mydata_content[shared_memory_addr: shared_memory_addr + 8] = dummy_shm_address.to_bytes(8, "little")
-            mydata_section.content = list(mydata_content)
+       #    mydata_content[shared_memory_addr: shared_memory_addr + 8] = dummy_shm_address.to_bytes(8, "little")
+       #    mydata_section.content = list(mydata_content)
 
     
 #########################################################################################################

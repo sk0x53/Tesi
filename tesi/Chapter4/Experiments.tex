@@ -1,12 +1,12 @@
 This chapter presents the objectives of this thesis, the dataset used to verify whether these objectives are achieved, 
 the experimental setup in which the tests are executed, and the tests performed, together with their results.
 
-\section{Goals}
+\section{Goals} \label{sec:goals}
     In order to prove that the instrumentation approach is valid, I have chosen three main goals:
     \begin{itemize}
         \item \textbf{Goal I} : The instrumented binary must be compatible with the original one.
             This means that the behavior of the program must be preserved after the instrumentation.
-        \item \textbf{Goal II} : The instrumented binary must be compatible with the AFL and AFL++ communication protocol.
+        \item \textbf{Goal II} : The instrumented binary must be compatible with AFL++ communication protocol.
         \item \textbf{Goal III} : Show that the instrumentation overhead is competitive with other binary-only rewriters 
                 and lower than that of dynamic binary translators.
     \end{itemize}
@@ -25,7 +25,7 @@ the experimental setup in which the tests are executed, and the tests performed,
         The chosen fuzzer is AFL++. This test aims to prove Goal II and Goal III.
     \end{itemize}
 
-\section{Datasets and Experiment Setup}
+\section{Datasets and Experiment Setup}\label{sec:datasets_setup}
     \begin{center}
         \textbf{Experiment I}
     \end{center}
@@ -90,7 +90,7 @@ the experimental setup in which the tests are executed, and the tests performed,
     \end{itemize}
 
     
-\section{Experiment I}
+\section{Experiment I}\label{sec:experiment1}
 Among the binaries listed in \cref{tab:experiment1Dataset}, 
 \textit{tcpdump} and \textit{unrtf} could not be instrumented: the failure occurs 
 during the GRAPE \gls{CFG} reconstruction (specifically during \texttt{Angr} CFG analysis).\\
@@ -123,20 +123,40 @@ The results of the experiment are shown in \cref{tab:experiment1}.\\
     when new sections and segments are added to the binary, the \textbf{lief} library automatically reorganizes the \gls{ELF} layout, 
     causing some sections (e.g. \textit{.bss}) to be shifted. The instructions that referenced these sections 
     will, after the layout change, reference wrong addresses, causing a \texttt{SIGSEGV} when they try to access them.\\
-    With regard to \textit{sfconvert} instead, a corruption of the Data Format recognizer had happend.
-    Specifically the instrumented binary could not recognize the Data Format of the audio file anymore after the instrumntation.
-
+    The 4 test passed by readelf are 4 inputs that in the original binary causes the execution to stop with an exit code 
+    different from 0. These inputs does not cause a \texttt{SIGSEGV} in the original as in the instrumented file, but 
+    ``pass'' the test because in both case the exit code is different from 0. 
     A possible reason for the difficulty encountered in instrumenting this dataset could be the fact that this binaries are 
     stripped. The absence of symbols could create more problems in \gls{CFG} reconstruction.
 
-\section{Experiment II}
+\section{Experiment II}\label{sec:experiment2}
     Among the four LAVA-M binaries, none fails during the instrumentation phase.
     However, two of them (i.e. \textit{md5sum} and \textit{who}) result in an incorrect instrumentation:
     \textit{md5sum} was already corrupted, as stated before, while \textit{who} was incorrectly instrumented by the tool.
     The results of the experiment are shown in \cref{table:fuzzingStats}.
     The runs marked as not done were not executed: since the tool discussed in this thesis produced no valid result for these binaries, 
     there was nothing to compare against.
-    \begin{table}[ht]
+    \Cref{table:fuzzingStats} is divided into four subtables, one per fuzzed binary.
+    Each table reports some parameters obtained for each of the three runs performed.\\
+    As can be seen, the tool developed in this thesis finds a considerably smaller number of edges than the other tested methods.
+    This could be caused by a different edge instrumentation method (for example, because the tool does not instrument 
+    function calls).\\
+    Moreover, ZAFL is the only tool capable of executing \textit{md5sum} with the \texttt{-c} option but the high number 
+    of crashes if probably given by errors of the binary.
+    Infact none of the found uniq crashes actually trigger a LAVA Bug, but trigger SIGSEGV errors that make the entire statistic 
+    of md5sum unreliable.
+
+    \Cref{tab:binariesStats} shows the size of the instrumented files in MBytes and the average executions per 
+    second obtained from \cref{table:fuzzingStats}.
+    As already discussed, the tool developed in this thesis produces larger binaries, because the \gls{SHM} update 
+    is instrumented inline. As shown in \cref{tab:binariesStats} the size of all the instrumented binaries is similar 
+    regardless of how many locations have been instrumented.
+    This could be a sign of a fixed dimension incremention given by the added section.
+    The average execution speed is only slightly higher than that of ZAFL.
+    Since the tool execution speed, as can be seen in \cref{table:fuzzingStats}, is not always higher with respect to 
+    the ZAFL execution speed, and only slightly higher in average, it is not possible to conclude an actual improvement in the execution speed.\\
+    
+    \begin{table}[H]
         \centering
         \setlength{\tabcolsep}{3pt}
         \newcolumntype{L}{>{\raggedright\arraybackslash}p{2.6cm}}
@@ -148,7 +168,7 @@ The results of the experiment are shown in \cref{tab:experiment1}.\\
             \resizebox{\linewidth}{!}{%
             \begin{tabular}{|L!{\vrule width 1.2pt}C|C|C!{\vrule width 1.2pt}C|C|C!{\vrule width 1.2pt}C|C|C|}
                 \hline
-                & \multicolumn{3}{c!{\vrule width 1.2pt}}{afl} & \multicolumn{3}{c!{\vrule width 1.2pt}}{mine} & \multicolumn{3}{c|}{zafl} \\
+                & \multicolumn{3}{c!{\vrule width 1.2pt}}{AFL++ QEMU mode} & \multicolumn{3}{c!{\vrule width 1.2pt}}{mine} & \multicolumn{3}{c|}{ZAFL} \\
                 \hline
                 & run1 & run2 & run3 & run1 & run2 & run3 & run1 & run2 & run3 \\
                 \thickhline
@@ -170,7 +190,7 @@ The results of the experiment are shown in \cref{tab:experiment1}.\\
             \resizebox{\linewidth}{!}{%
             \begin{tabular}{|L!{\vrule width 1.2pt}C|C|C!{\vrule width 1.2pt}C|C|C!{\vrule width 1.2pt}C|C|C|}
                 \hline
-                & \multicolumn{3}{c!{\vrule width 1.2pt}}{afl} & \multicolumn{3}{c!{\vrule width 1.2pt}}{mine} & \multicolumn{3}{c|}{zafl} \\
+                & \multicolumn{3}{c!{\vrule width 1.2pt}}{AFL++ QEMU mode} & \multicolumn{3}{c!{\vrule width 1.2pt}}{mine} & \multicolumn{3}{c|}{ZAFL} \\
                 \hline
                 & run1 & run2 & run3 & run1 & run2 & run3 & run1 & run2 & run3 \\
                 \thickhline
@@ -192,7 +212,7 @@ The results of the experiment are shown in \cref{tab:experiment1}.\\
             \resizebox{\linewidth}{!}{%
             \begin{tabular}{|L!{\vrule width 1.2pt}C|C|C!{\vrule width 1.2pt}C|C|C!{\vrule width 1.2pt}C|C|C|}
                 \hline
-                & \multicolumn{3}{c!{\vrule width 1.2pt}}{afl} & \multicolumn{3}{c!{\vrule width 1.2pt}}{mine} & \multicolumn{3}{c|}{zafl} \\
+                & \multicolumn{3}{c!{\vrule width 1.2pt}}{AFL++ QEMU mode} & \multicolumn{3}{c!{\vrule width 1.2pt}}{mine} & \multicolumn{3}{c|}{ZAFL} \\
                 \hline
                 & run1 & run2 & run3 & run1 & run2 & run3 & run1 & run2 & run3 \\
                 \thickhline
@@ -214,7 +234,7 @@ The results of the experiment are shown in \cref{tab:experiment1}.\\
             \resizebox{\linewidth}{!}{%
             \begin{tabular}{|L!{\vrule width 1.2pt}C|C|C!{\vrule width 1.2pt}C|C|C!{\vrule width 1.2pt}C|C|C|}
                 \hline
-                & \multicolumn{3}{c!{\vrule width 1.2pt}}{afl} & \multicolumn{3}{c!{\vrule width 1.2pt}}{mine} & \multicolumn{3}{c|}{zafl} \\
+                & \multicolumn{3}{c!{\vrule width 1.2pt}}{AFL++ QEMU mode} & \multicolumn{3}{c!{\vrule width 1.2pt}}{mine} & \multicolumn{3}{c|}{ZAFL} \\
                 \hline
                 & run1 & run2 & run3 & run1 & run2 & run3 & run1 & run2 & run3 \\
                 \thickhline
@@ -228,30 +248,15 @@ The results of the experiment are shown in \cref{tab:experiment1}.\\
                 \hline
             \end{tabular}}
         \end{subtable}
-    
+        
         \caption{Fuzzing statistics over a 24-hour fuzzing campaign on the LAVA-M dataset using AFL++ in QEMU mode, ZAFL instrumentation + AFL++ fuzzer, and my instrumentation + AFL++ fuzzer}
         \label{table:fuzzingStats}
+         \vspace{2mm}
+        \footnotesize
+        \textit{Legend:}\\\xmark means that the program crash for each input and so it is impossible to fuzz\\
+                        \nd means that the experiment was not conducted, given the impossibility of comparing it with other results.
     \end{table}
-    \Cref{table:fuzzingStats} is divided into four subtables, one per fuzzed binary.
-    Each table reports some parameters obtained for each of the three runs performed.\\
-    As can be seen, the tool developed in this thesis finds a considerably smaller number of edges than the other tested methods.
-    This could be caused by a different edge instrumentation method (for example, because the tool does not instrument 
-    function calls).\\
-    Moreover, ZAFL is the only tool capable of executing \textit{md5sum} with the \texttt{-c} option but the high number 
-    of crashes if probably given by errors of the binary.
-    Infact none of the found uniq crashes actually trigger a LAVA Bug, but trigger SIGSEGV errors that make the entire statistic 
-    of md5sum unreliable.
-
-    \Cref{tab:binariesStats} shows the size of the instrumented files in MBytes and the average executions per 
-    second obtained from \cref{table:fuzzingStats}.
-    As already discussed, the tool developed in this thesis produces larger binaries, because the \gls{SHM} update 
-    is instrumented inline. As shown in \cref{tab:binariesStats} the size of all the instrumented binaries is similar 
-    regardless of how many locations have been instrumented.
-    This could be a sign of a fixed dimension incremention given by the added section
-    The average execution speed is only slightly higher than that of ZAFL.
-    Since the tool execution speed, as can be seen in \cref{table:fuzzingStats}, is not always higher with respect to 
-    the ZAFL execution speed, and only slightly higher in average, it is not possible to conclude an actual 
-    improvement in the execution speed.
+    \vspace{0.5cm}
     Worth mention that ZAFL perform an optimization of the Intermediate Representation, that surely speed up the instrumented 
     binary execution. With inline instrumentation is possible to reach performance that are comparable to the one 
     obtained by ZAFL, without an actual optimization.

@@ -1,4 +1,4 @@
-\begin{thebibliography}{34}
+\begin{thebibliography}{35}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -145,6 +145,12 @@ M.~Heuse.
 \newblock {AFL-PIN}.
 \newblock \url{https://github.com/vanhauser-thc/afl-pin}, 2018{\natexlab{b}}.
 \newblock Accessed: 2026-09-13.
+
+\bibitem[{LIEF}()]{lief}
+{LIEF}.
+\newblock {LIEF}: Library to instrument executable formats.
+\newblock \url{https://github.com/lief-project/LIEF}.
+\newblock Accessed: 2026-10-12.
 
 \bibitem[{LLVM Project}()]{libfuzzer}
 {LLVM Project}.
