@@ -134,15 +134,21 @@ The results of the experiment are shown in \cref{tab:experiment1}.\\
     However, two of them (i.e. \textit{md5sum} and \textit{who}) result in an incorrect instrumentation:
     \textit{md5sum} was already corrupted, as stated before, while \textit{who} was incorrectly instrumented by the tool.
     The results of the experiment are shown in \cref{table:fuzzingStats}.
-    The runs marked as not done were not executed: since the tool discussed in this thesis produced no valid result for these binaries, 
-    there was nothing to compare against.
-    \Cref{table:fuzzingStats} is divided into four subtables, one per fuzzed binary.
+    The AFL++ in QEMU mode run and the ZAFL run of the \texttt{md5sum} and \texttt{who} are not shown in \cref{table:fuzzingStats} 
+    because is impossible to compare those runs with the tool discussed in this thesis.
+    \Cref{table:fuzzingStats} is therefore divided into two subtables, one per fuzzed binary.
     Each table reports some parameters obtained for each of the three runs performed.\\
     As can be seen, the tool developed in this thesis finds a considerably smaller number of edges than the other tested methods.
     This could be caused by a different edge instrumentation method (for example, because the tool does not instrument 
     function calls).\\
-    Moreover, ZAFL is the only tool capable of executing \textit{md5sum} with the \texttt{-c} option but the high number 
-    of crashes if probably given by errors of the binary.
+    Since each binary has been injected with LAVA synthetic bugs, the \textit{``uniq\_bugs''} contains the number of uniq bugs 
+    triggered by the run.
+    The id of each uniq bug are reported in \cref{tab:uniq_bugs_ids}.
+    The number of uniq bugs triggered is always less or equal to the number of uniq crashes because different 
+    crashes could trigger the same bug.
+        
+    ZAFL is the only tool capable of executing \textit{md5sum} with the \texttt{-c} option but the high number 
+    of crashes if given by errors of the binary.
     Infact none of the found uniq crashes actually trigger a LAVA Bug, but trigger SIGSEGV errors that make the entire statistic 
     of md5sum unreliable.
 
@@ -155,7 +161,13 @@ The results of the experiment are shown in \cref{tab:experiment1}.\\
     The average execution speed is only slightly higher than that of ZAFL.
     Since the tool execution speed, as can be seen in \cref{table:fuzzingStats}, is not always higher with respect to 
     the ZAFL execution speed, and only slightly higher in average, it is not possible to conclude an actual improvement in the execution speed.\\
-    
+    Moreover is present the speedup with respect to QEMU mode.
+    The speedup is obtained dividing the average execution per second obtained with mine instrumentation and ZAFL by the 
+    average executions per second obtanied with AFL++ in QEMU mode.
+
+    Worth mention that ZAFL perform an optimization of the Intermediate Representation, that surely speed up the instrumented 
+    binary execution. With inline instrumentation is possible to reach performance that are comparable to the one 
+    obtained by ZAFL, without an actual optimization.
     \begin{table}[H]
         \centering
         \setlength{\tabcolsep}{3pt}
@@ -172,35 +184,17 @@ The results of the experiment are shown in \cref{tab:experiment1}.\\
                 \hline
                 & run1 & run2 & run3 & run1 & run2 & run3 & run1 & run2 & run3 \\
                 \thickhline
-                execs\_per\_sec & 398.49 & 444.98 & 351.77 & 1703.45 & 1738.99 & 1842.27 & 1577.45 & 1792.35 & 1749.11 \\
+                execs/s & 398 & 445 & 352 & 1706 & 1860 & 1776 & 1577 & 1792 & 1749 \\
                 \hline
-                execs\_done     & 34429329 & 38446221 & 30392855 & 147177902 & 150249117 & 159172058 & 136291378 & 154859292 & 151123034 \\
+                edges\_found & 690 & 690 & 690 & 362 & 386 & 362 & 640 & 672 & 672 \\
                 \hline
-                edges\_found    & 690 & 690 & 690 & 358 & 370 & 358 & 640 & 672 & 672 \\
+                corpus\_count & 162 & 169 & 178 & 151 & 214 & 149 & 143 & 205 & 201 \\
                 \hline
-                saved\_crashes  & 7 & 3 & 2 & 12 & 41 & 11 & 10 & 115 & 118 \\
+                stability & 100\% & 100\% & 100\% & 100\% & 100\% & 100\% & 100\% & 100\% & 100\% \\
                 \hline
-            \end{tabular}}
-        \end{subtable}
-        \bigskip
-        \begin{subtable}{\linewidth}
-            \centering
-            \caption{\textmd{\texttt{md5sum}}}
-            \label{table:fuzzingStats:md5sum}
-            \resizebox{\linewidth}{!}{%
-            \begin{tabular}{|L!{\vrule width 1.2pt}C|C|C!{\vrule width 1.2pt}C|C|C!{\vrule width 1.2pt}C|C|C|}
+                saved\_crashes & 7 & 3 & 2 & 5 & 102 & 13 & 10 & 115 & 118 \\
                 \hline
-                & \multicolumn{3}{c!{\vrule width 1.2pt}}{AFL++ QEMU mode} & \multicolumn{3}{c!{\vrule width 1.2pt}}{mine} & \multicolumn{3}{c|}{ZAFL} \\
-                \hline
-                & run1 & run2 & run3 & run1 & run2 & run3 & run1 & run2 & run3 \\
-                \thickhline
-                execs\_per\_sec & \xmark & \xmark & \xmark & \xmark & \xmark & \xmark & 515.09 & \nd & \nd\\
-                \hline
-                execs\_done     & \xmark & \xmark & \xmark & \xmark & \xmark & \xmark & 44503697 & \nd & \nd\\
-                \hline
-                edges\_found    & \xmark & \xmark & \xmark & \xmark & \xmark & \xmark & 9 & \nd & \nd\\
-                \hline
-                saved\_crashes  & \xmark & \xmark & \xmark & \xmark & \xmark & \xmark & 846 & \nd & \nd\\
+                uniq\_bugs & 3 & 3 & 2 & 5 & 46 & 7 & 7 & 48 & 48 \\
                 \hline
             \end{tabular}}
         \end{subtable}
@@ -216,78 +210,127 @@ The results of the experiment are shown in \cref{tab:experiment1}.\\
                 \hline
                 & run1 & run2 & run3 & run1 & run2 & run3 & run1 & run2 & run3 \\
                 \thickhline
-                execs\_per\_sec & 567.81 & 576.57 & 577.17 & 1758.61 & 1399.39 & 1864.43 & 1773.92 & 1559.98 & 1605.66 \\
+                execs/s & 568 & 577 & 577 & 1751 & 1713 & 1783 & 1774 & 1560 & 1606 \\
                 \hline
-                execs\_done     & 49058377 & 49815928 & 49867759 & 151943556 & 120907581 & 161086939 & 153267103 & 134782333 & 138729055 \\
+                edges\_found & 473 & 473 & 473 & 242 & 242 & 242 & 443 & 443 & 443 \\
                 \hline
-                edges\_found    & 473 & 473 & 473 & 242 & 242 & 242 & 443 & 443 & 443 \\
+                corpus\_count & 97 & 101 & 100 & 86 & 88 & 87 & 90 & 89 & 85 \\
                 \hline
-                saved\_crashes  & 2 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+                stability & 100\% & 100\% & 100\% & 100\% & 100\% & 100\% & 100\% & 100\% & 100\% \\
+                \hline
+                saved\_crashes & 2 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+                \hline
+                uniq\_bugs & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
                 \hline
             \end{tabular}}
         \end{subtable}
         \bigskip
-        \begin{subtable}{\linewidth}
-            \centering
-            \caption{\textmd{\texttt{who}}}
-            \label{table:fuzzingStats:who}
-            \resizebox{\linewidth}{!}{%
-            \begin{tabular}{|L!{\vrule width 1.2pt}C|C|C!{\vrule width 1.2pt}C|C|C!{\vrule width 1.2pt}C|C|C|}
-                \hline
-                & \multicolumn{3}{c!{\vrule width 1.2pt}}{AFL++ QEMU mode} & \multicolumn{3}{c!{\vrule width 1.2pt}}{mine} & \multicolumn{3}{c|}{ZAFL} \\
-                \hline
-                & run1 & run2 & run3 & run1 & run2 & run3 & run1 & run2 & run3 \\
-                \thickhline
-                execs\_per\_sec & 225.11 & \nd & \nd & \xmark & \xmark & \xmark & 456.42 & \nd & \nd\\
-                \hline
-                execs\_done     & 19449595 & \nd & \nd& \xmark & \xmark & \xmark & 39434809 & \nd & \nd \\
-                \hline
-                edges\_found    & 13770 & \nd & \nd & \xmark & \xmark & \xmark & 14044 & \nd & \nd \\
-                \hline
-                saved\_crashes  & 0 & \nd & \nd & \xmark & \xmark & \xmark & 2 & \nd & \nd \\
-                \hline
-            \end{tabular}}
-        \end{subtable}
         
         \caption{Fuzzing statistics over a 24-hour fuzzing campaign on the LAVA-M dataset using AFL++ in QEMU mode, ZAFL instrumentation + AFL++ fuzzer, and my instrumentation + AFL++ fuzzer}
         \label{table:fuzzingStats}
-         \vspace{2mm}
+        \vspace{2mm}
         \footnotesize
-        \textit{Legend:}\\\xmark means that the program crash for each input and so it is impossible to fuzz\\
-                        \nd means that the experiment was not conducted, given the impossibility of comparing it with other results.
+        The results for \texttt{md5sum} and \texttt{who} are not presented here because the comparison with the tool 
+        discussed in this thesis is not possible    
     \end{table}
     \vspace{0.5cm}
-    Worth mention that ZAFL perform an optimization of the Intermediate Representation, that surely speed up the instrumented 
-    binary execution. With inline instrumentation is possible to reach performance that are comparable to the one 
-    obtained by ZAFL, without an actual optimization.
+    
+
+
+    \begin{table}[htbp]
+        \centering
+        \begin{subtable}[t]{0.48\textwidth}
+            \centering
+            \caption{LAVA-M uniq bugs triggered by the runs in \textmd{\texttt{base64}}}
+            \label{tab:uniq_base64}
+            \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}p{1.5cm}|X|}
+                \hline
+                run name & uniq bugs IDs \\
+                \hline
+                afl1 & ['784', '792', '804']\\
+                \hline
+                afl2 & ['276', '792', '804']\\
+                \hline
+                afl3 & ['276', '790']\\
+                \hline
+                mine1 & ['784', '788', '792', '804', '815']\\
+                \hline
+                mine2 & [798', '804', '805', '806', '815', '817', '831', '835', '841', '842', '843']\\
+                \hline
+                mine3 & ['778', '782', '784', '788', '792', '804', '817']\\
+                \hline
+                zafl1 & ['253', '276', '560', '774', '778', '782', '792']\\
+                \hline
+                zafl2 & ['1', '222', '235', '253', '255', '274', '276', '278', '284', '386', '521', '526', '527', '554', '556', '558', '560', '562', '566', '572', '573', '576', '582', '583', '584', '774', '776', '778', '780', '782', '784', '786', '788', '790', '792', '798', '804', '805', '806', '813', '815', '817', '831', '832', '835', '841', '842', '843']\\
+                \hline
+                zafl3 & ['1', '222', '235', '253', '255', '274', '276', '278', '284', '386', '521', '526', '527', '554', '556', '558', '560', '562', '566', '572', '573', '576', '582', '583', '584', '774', '776', '778', '780', '782', '784', '786', '788', '790', '792', '798', '804', '805', '806', '813', '815', '817', '831', '832', '835', '841', '842', '843']\\
+                \hline
+            \end{tabularx}
+        \end{subtable}
+        \hfill
+        \begin{subtable}[t]{0.48\textwidth}
+            \centering
+            \caption{LAVA-M uniq bugs triggered by the runs in \textmd{\texttt{uniq}}}
+            \label{tab:uniq_uniq}
+            \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}p{1.5cm}|X|}
+                \hline
+                run name & uniq bugs IDs \\
+                \hline
+                afl1 & []\\
+                \hline
+                afl2 & []\\
+                \hline
+                afl3 & []\\
+                \hline
+                mine1 & []\\
+                \hline
+                mine2 & []\\
+                \hline
+                mine3 & []\\
+                \hline
+                zafl1 & []\\
+                \hline
+                zafl2 & [472]\\
+                \hline
+                zafl3 & []\\
+                \hline
+            \end{tabularx}
+        \end{subtable}
+
+        \caption{LAVA-M uniq bugs triggered by the runs performed in \cref{table:fuzzingStats}}
+        \label{tab:uniq_bugs_ids}
+    \end{table}
 
     \begin{table}[ht]
         \centering
-        \begin{tabular}{|c|c!{\vrule width 1.2pt}c|c|}
+        \begin{tabular}{|c|c!{\vrule width 1.2pt}c|c!{\vrule width 1.2pt}c|}
             \hline
-            &  & file\_size[MByte] & avg execs/sec \\
+            &  & file\_size[MByte] & avg execs/sec & speedup w.r.t. AFL++ in QEMU mode\\
             \thickhline
             \multirow{2}{*}{base64}
-            & mine & 8,25228  & 1761.57 \\
-            \cline{2-4}
-            & zafl & 0,137459 & 1706.3  \\
+            & mine & 8,32  & 1781 & 4,47\\
+            \cline{2-5}
+            & zafl & 0,14 & 1706  & 4,28\\
             \thickhline
             \multirow{2}{*}{md5sum}
-            & mine & 8,256376 & \xmark  \\
-            \cline{2-4}
-            & zafl & 0,145651 & 515.09  \\
+            & mine & 8,32 & \xmark & \nd \\
+            \cline{2-5}
+            & zafl & 0,15 & 515 & \nd \\
             \thickhline
             \multirow{2}{*}{uniq}
-            & mine & 8,256376 & 1674.14 \\
-            \cline{2-4}
-            & zafl & 0,149747 & 1646.52 \\
+            & mine & 8,32 & 1749 & 3,04\\
+            \cline{2-5}
+            & zafl & 0,15 & 1647 & 2,87\\
             \thickhline
             \multirow{2}{*}{who}
-            & mine & 8,62092  & \xmark  \\
-            \cline{2-4}
-            & zafl & 1,718515 & 456.42  \\
+            & mine & 10,78  & \xmark & \nd \\
+            \cline{2-5}
+            & zafl & 1,72 & 456 & \nd \\
             \hline
         \end{tabular}
         \caption{Instrumented binaries statistics}
         \label{tab:binariesStats}
+        \footnotesize
+        \textit{Legend:}
+        The ``\nd'' symbol is placed on that binaries where the comparison can not be done
     \end{table}

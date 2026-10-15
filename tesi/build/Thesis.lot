@@ -8,6 +8,7 @@
 \contentsline {table}{\numberline {4.1}{\ignorespaces Binaries extracted from ZAFL \textit {real-world software} dataset}}{56}{table.caption.32}%
 \contentsline {table}{\numberline {4.2}{\ignorespaces Results of experiment I}}{57}{table.caption.33}%
 \contentsline {table}{\numberline {4.3}{\ignorespaces Fuzzing statistics over a 24-hour fuzzing campaign on the LAVA-M dataset using AFL++ in QEMU mode, ZAFL instrumentation + AFL++ fuzzer, and my instrumentation + AFL++ fuzzer}}{59}{table.caption.34}%
-\contentsline {table}{\numberline {4.4}{\ignorespaces Instrumented binaries statistics}}{60}{table.caption.35}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces LAVA-M uniq bugs triggered by the runs performed in \cref {table:fuzzingStats}}}{60}{table.caption.35}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Instrumented binaries statistics}}{61}{table.caption.36}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }

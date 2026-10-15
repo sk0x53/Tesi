@@ -15,7 +15,7 @@
 		\setentrycounter[]{page}\glsnumberformat{39}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{46}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{48\delimR 52}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{61\delimR 63}}}\glsgroupskip
+		\setentrycounter[]{page}\glsnumberformat{63\delimR 65}}}\glsgroupskip
 \glsgroupheading{C}\relax \glsresetentrylist %
 \glossentry{CFG}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{2}\delimN 
@@ -24,13 +24,13 @@
 		\setentrycounter[]{page}\glsnumberformat{31}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{47\delimN 48}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{57\delimN 58}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{64}}}\glsgroupskip
+		\setentrycounter[]{page}\glsnumberformat{66}}}\glsgroupskip
 \glsgroupheading{D}\relax \glsresetentrylist %
 \glossentry{DBI}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{3\delimN 4}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{16\delimR 18}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{22}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{65}}}%
+		\setentrycounter[]{page}\glsnumberformat{67}}}%
 \glossentry{DFS}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{30}}}\glsgroupskip
 \glsgroupheading{E}\relax \glsresetentrylist %
@@ -40,8 +40,8 @@
 		\setentrycounter[]{page}\glsnumberformat{44\delimR 46}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{52\delimN 53}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{57}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{61\delimN 62}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{64\delimN 65}}}\glsgroupskip
+		\setentrycounter[]{page}\glsnumberformat{63\delimN 64}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{66\delimN 67}}}\glsgroupskip
 \glsgroupheading{G}\relax \glsresetentrylist %
 \glossentry{GOT}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{8\delimN 9}\delimN 
@@ -76,7 +76,7 @@
 		\setentrycounter[]{page}\glsnumberformat{3}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{16\delimR 18}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{22}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{65}}}%
+		\setentrycounter[]{page}\glsnumberformat{67}}}%
 \glossentry{SHM}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{19\delimN 20}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{23}\delimN 
@@ -86,7 +86,7 @@
 		\setentrycounter[]{page}\glsnumberformat{46\delimN 47}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{49\delimN 50}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{58}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{62}}}%
+		\setentrycounter[]{page}\glsnumberformat{64}}}%
 \glossentry{SO}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{8\delimN 9}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{11\delimN 12}\delimN 
